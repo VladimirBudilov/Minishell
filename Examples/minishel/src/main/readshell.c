@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
+
 
 void	read_shell(t_minishell *shell, char *user_input, char *input_cpy)
 {

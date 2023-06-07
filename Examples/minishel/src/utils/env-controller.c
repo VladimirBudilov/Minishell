@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
+
 
 void	env_controller(t_minishell *shell, char **envp)
 {

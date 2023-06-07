@@ -12,7 +12,7 @@
 
 #ifndef SHELL_H
 # define SHELL_H
-
+#include "minishell.h"
 // main for one check global
 // parent to go deeper in one line
 // child to get how many childs have one parent

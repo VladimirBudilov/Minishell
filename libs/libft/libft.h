@@ -44,9 +44,6 @@ int				ft_memcmp(const void *s1, const void *s2, size_t max_len);
 char			*ft_strdup(const char *s1);
 void			*ft_calloc(size_t count, size_t size);
 
-size_t			ft_strlen(const char *s);
-char			*ft_strchr(const char *s, int c);
-char			*ft_strrchr(const char *input_str, int ch);
 char			*ft_strnstr(const char *haystack, const char *needle,
 					size_t max_size);
 int				ft_strcmp(const char *s1, const char *s2);
@@ -59,7 +56,6 @@ size_t			ft_strlcat(char *dst, const char *src, size_t max_size);
 
 char			*ft_substr(char const *string, unsigned int start,
 					size_t len_for_new_string);
-char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *str, char const *trim_char);
 char			**ft_split(char const *s1, char separator);
 char			*ft_strmapi(char const *string,

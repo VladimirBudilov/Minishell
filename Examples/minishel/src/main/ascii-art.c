@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	print_header(void)
+void	welcome_message(void)
 {
 	printf("*****************************************\n");
 	printf("            _       _     _          _ _ \n");

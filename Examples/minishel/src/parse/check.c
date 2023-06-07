@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
+
 
 int	check_cmd_line(t_minishell *shell, char *line, int sg_quote, int db_quote)
 {

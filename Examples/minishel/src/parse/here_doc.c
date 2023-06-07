@@ -9,8 +9,8 @@
 /*   Updated: 2023/04/30 21:28:24 by armartir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../includes/minishell.h"
 
-#include "minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 

@@ -9,8 +9,8 @@
 /*   Updated: 2023/04/30 21:26:19 by armartir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../includes/minishell.h"
 
-#include "minishell.h"
 
 void	*free_single(void **addr)
 {

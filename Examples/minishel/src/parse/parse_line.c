@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
+
 
 char	**start_parse_cmds(char *line, int sg_quote, int db_quote)
 {

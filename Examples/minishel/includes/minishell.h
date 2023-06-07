@@ -44,7 +44,7 @@
 extern int	g_exit_code;
 
 // Printf Minishell header on start
-void	print_header(void);
+void	welcome_message(void);
 
 // Work with readline
 void	read_shell(t_minishell *shell, char *user_input, char *input_cpy);
