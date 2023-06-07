@@ -38,7 +38,7 @@ TCAPS = -ltermcap
 
 READLINE = -lreadline -lncurses
 
-LIBFT = libraries/libft
+LIBFT = ./libft
 
 FLAGS = -L $(LIBFT) -lft $(READLINE)
 
