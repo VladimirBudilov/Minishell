@@ -22,9 +22,6 @@ int main()
             free(info.input);
         else
         {
-            
-
-            printf("%s", info.input);
             int i = 0;
             info.for_built_in = ft_split(info.input, ' ');
             while(info.for_built_in[i])
