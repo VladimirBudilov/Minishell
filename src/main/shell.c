@@ -1,4 +1,4 @@
-#include "../includes/minishell_structs.h"
+#include "../../includes/minishell_structs.h"
 
 void welcome_message()
 {

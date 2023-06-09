@@ -4,16 +4,26 @@
 #define MAX_PATH 4096
 
 #include "minishell_funk.h"
-#include "../libs/libft/libft.h"
+#include "../libft/libft.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-
+typedef struct s_token
+{
+    enum e_type *type;
+    int flag;
+    char *data;
+    struct s_token *next;
+}   t_token;
 
 typedef struct s_minishell
 {
     ArrayList *env;
+    ArrayList *tokens_array;
     char **from_readline;
-    ArrayList *tokens;
+    t_token *tokens;
+    char *input;
+    char **cmd;
 
 	int			error_status;
 }				t_shell;

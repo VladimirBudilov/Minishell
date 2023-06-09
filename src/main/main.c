@@ -1,46 +1,86 @@
 #include "../../includes/minishell.h"
 
+void parse_tokens(char *input, ArrayList *tokens);
 
-int main() 
+int main(int argc, char **argv, char **envp)
 {
-    t_info info;
-    t_token *token;
+    (void) argv;
+    t_shell *minishell;
 
+    if (argc > 1)
+        exit(1);
+    minishell = create_shell();
+    welcome_message();
+    minishell->env = add_env(envp);
     rl_catch_signals = 0;
+
     while (1)
     {
-        signal(SIGINT, signal_handler);
-		signal(SIGQUIT, SIG_IGN);
-        info.input = readline("$> ");
-
-        if(!info.input)
-        {
-            printf("\033[1A\033[3Cexit\n");
-            break;
-        }
-        else if (*info.input == '\0')
-            free(info.input);
-        else
-        {
-            int i = 0;
-            info.cmd = ft_split(info.input, ' ');
-            while(info.cmd[i])
-            {
-                ft_lstadd_back_token(&token, ft_lstnew_token(info.cmd[i]));
-                i++;
-            }
-            if (!ft_strncmp(info.cmd[0], "echo", 4))
-            {
-                echo_func(&token);
-                ft_lstclear_token(&token, (*del_token));
-            }
-            // else if (!ft_strncmp(info.cmd[0], "cd", cd))
-            // {
-            //     cd_func(&token);
-            //     ft_lstclear_token(&token, (*del_token));
-            // }
-        }
-
+        parse_readline(minishell);
     }
     return 0;
+}
+
+void parse_readline(t_shell *minishell)
+{
+    get_line(minishell);
+    add_tokens(minishell);
+}
+
+void add_tokens(t_shell *minishell)
+{
+    ArrayList *tokens;
+
+    tokens = createArrayList();
+    parse_tokens(minishell->input, tokens);
+}
+
+void parse_tokens(char *input, ArrayList *tokens)
+{
+    int i;
+    int j;
+    char *token;
+
+    i = 0;
+    j = 0;
+    token = (char *)malloc(sizeof(char) * 4096);
+    while (input[i])
+    {
+        if (input[i] == ' ')
+        {
+            token[j] = '\0';
+            add_element(tokens, token);
+            token = (char *)malloc(sizeof(char) * 4096);
+            j = 0;
+        }
+        else
+        {
+            token[j] = input[i];
+            j++;
+        }
+        i++;
+    }
+    token[j] = '\0';
+    add_element(tokens, token);
+    i = 0;
+    while (i < tokens->size)
+    {
+        printf("%s\n", tokens->array[i]);
+        i++;
+    }
+}
+
+void get_line(t_shell *minishell)
+{
+    signal(SIGINT, signal_handler);
+    signal(SIGQUIT, SIG_IGN);
+    minishell->input = readline("$> ");
+
+    if(!minishell->input)
+    {
+        printf("\033[1A\033[3Cexit\n");
+        exit(1);
+    }
+    else if (*minishell->input == '\0')
+        free(minishell->input);
 }

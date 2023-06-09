@@ -7,19 +7,29 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "minishell_structs.h"
+#include "minishell_funk.h"
 
-typedef struct s_token
+
+
+typedef enum e_token
 {
-    char *token;
-    struct s_token *next;
-}   t_token;
+    ft_echo,
+    ft_command,
+    ft_argument,
+    ft_redirection,
+    ft_pipe,
+    ft_semicolon,
+    ft_space,
+    ft_dollar,
+    ft_quote,
+    ft_double_quote,
+    ft_backslash,
+    ft_newline,
+    ft_eof,
+    ft_error
 
-typedef struct s_info
-{
-    char *input;
-    char **cmd;
-} t_info;
-
+}  e_type;
 
 // ================= UTILS LISTS TOKENS ===============
 

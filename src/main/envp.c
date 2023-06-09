@@ -1,4 +1,4 @@
-#include "../includes/minishell_structs.h"
+#include "../../includes/minishell_structs.h"
 
 void print_env_from_arraylist(ArrayList *env) {
     int i;
@@ -11,7 +11,7 @@ void print_env_from_arraylist(ArrayList *env) {
     }
 }
 
-ArrayList *add_env(t_shell *minishell, char **envp)
+ArrayList *add_env(char **envp)
 {
     int i;
     i = 0;

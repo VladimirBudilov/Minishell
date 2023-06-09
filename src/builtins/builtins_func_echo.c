@@ -2,6 +2,7 @@
  
 
 
+/*
 void print_echo(char *str)
 {
     int i;
@@ -39,4 +40,4 @@ void echo_func(t_token **token)
     }
     if (!check_n)
         write(1, "\n", 1);
-}
+}*/
