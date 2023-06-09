@@ -25,14 +25,14 @@ void echo_func(t_token **token)
     check_n = 0;
     tmp = *token;
     tmp = tmp->next;
-    if (!(ft_strncmp(tmp->token, "-n", 2)))
+    if (!(ft_strncmp(tmp->data, "-n", 2)))
     {
         check_n = 1;
         tmp = tmp->next;
     }
     while(tmp)
     {
-        print_echo(tmp->token);
+        print_echo(tmp->data);
         if(tmp->next != NULL)
             write(1, " ", 1);
         tmp = tmp->next;

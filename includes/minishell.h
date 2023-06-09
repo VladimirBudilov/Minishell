@@ -10,7 +10,7 @@
 
 typedef struct s_token
 {
-    char *token;
+    char *data;
     struct s_token *next;
 }   t_token;
 
@@ -34,6 +34,11 @@ void	ft_lstclear_token(t_token **lst, void (*del)(char *));
 
 
 void	signal_handler(int signal);
+
+// =================BIULT IN FUNC =====================
+
 void echo_func(t_token **token);
+void cd_func(t_token **token);
+
 
 #endif

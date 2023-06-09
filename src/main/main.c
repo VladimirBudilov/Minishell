@@ -34,11 +34,11 @@ int main()
                 echo_func(&token);
                 ft_lstclear_token(&token, (*del_token));
             }
-            // else if (!ft_strncmp(info.cmd[0], "cd", cd))
-            // {
-            //     cd_func(&token);
-            //     ft_lstclear_token(&token, (*del_token));
-            // }
+            else if (!ft_strncmp(info.cmd[0], "cd", 2))
+            {
+                cd_func(&token);
+                ft_lstclear_token(&token, (*del_token));
+            }
         }
 
     }

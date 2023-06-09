@@ -2,15 +2,16 @@
 
 
 
-// void cd_func(t_token **token)
-// {
-//     if (ft_lstsize((t_list *)*token) != 2) {
-//         printf("Использование: cd <директория>\n");
-//         return ;
-//     }
+void cd_func(t_token **token)
+{
+    // printf("%s\n", (*token)->next->data);
+    if (((*token)->next != NULL)) {
+        printf("Использование: cd <директория>\n");
+        return ;
+    }
 
-//     if (chdir(token->token->next) != 0) {
-//         printf("Ошибка: не удалось изменить текущий каталог\n");
-//         return ;
-//     }
-// }
+    // if (chdir(*(token)->next->data) != 0) {
+    //     printf("Ошибка: не удалось изменить текущий каталог\n");
+    //     return ;
+    // }
+}

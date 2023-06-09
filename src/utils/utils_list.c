@@ -7,7 +7,7 @@ void read_list_token(t_token **list)
     tmp = *list;
     while(tmp)
     {
-        printf("%s\n", tmp->token);
+        printf("%s\n", tmp->data);
         tmp = tmp->next;
     }
 }
@@ -21,7 +21,7 @@ t_token	*ft_lstnew_token(char *token)
 	{
 		return (0);
 	}
-	new->token = token;
+	new->data = token;
 	new->next = NULL;
 	return (new);
 }
@@ -64,7 +64,7 @@ void	ft_lstdelone_token(t_token *lst, void (*del)(char *))
 {
 	if (!lst)
 		return ;
-	(*del)(lst->token);
+	(*del)(lst->data);
 	free(lst);
 }
 
@@ -83,3 +83,4 @@ void	ft_lstclear_token(t_token **lst, void (*del)(char *))
 	}
 	*lst = 0;
 }
+
