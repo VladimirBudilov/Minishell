@@ -6,11 +6,17 @@
 #define MINI_MINISHELL_FUNK_H
 
 #include "minishell_structs.h"
+#include "ArrayList.h"
 
-typedef struct s_minishell	t_minishell;
+typedef struct s_minishell	t_shell;
 
-t_minishell *create_minishell();
+t_shell *create_shell();
 
 void welcome_message();
+
+void print_env(char **envp);
+
+ArrayList *add_env(t_shell *minishell, char **envp);
+
 
 #endif //MINI_MINISHELL_FUNK_H

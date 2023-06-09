@@ -5,29 +5,19 @@
 
 #include "minishell_funk.h"
 #include "../libs/libft/libft.h"
-#include "../libs/get_next_line/get_next_line.h"
 #include <stdio.h>
 
-typedef struct t_hashmap
-{
-	char	*key;
-	char	*value;
-}				t_hashmap;
+
 
 typedef struct s_minishell
 {
-	t_hashmap	*env;
-	t_hashmap	*local_vars;
+    ArrayList *env;
+    char **from_readline;
+    ArrayList *tokens;
+
 	int			error_status;
-}				t_minishell;
+}				t_shell;
 
-typedef struct s_token
-{
-	char	*content;
-	int		type;
-}				t_token;
-
-
-
+typedef struct s_token t_token;
 
 #endif //MINI_MINISHELL_STRUCTS_H
