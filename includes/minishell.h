@@ -17,7 +17,7 @@ typedef struct s_token
 typedef struct s_info
 {
     char *input;
-    char **for_built_in;
+    char **cmd;
 } t_info;
 
 

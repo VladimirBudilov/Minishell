@@ -23,17 +23,22 @@ int main()
         else
         {
             int i = 0;
-            info.for_built_in = ft_split(info.input, ' ');
-            while(info.for_built_in[i])
+            info.cmd = ft_split(info.input, ' ');
+            while(info.cmd[i])
             {
-                ft_lstadd_back_token(&token, ft_lstnew_token(info.for_built_in[i]));
+                ft_lstadd_back_token(&token, ft_lstnew_token(info.cmd[i]));
                 i++;
             }
-            if (!ft_strncmp(info.for_built_in[0], "echo", 4))
+            if (!ft_strncmp(info.cmd[0], "echo", 4))
             {
                 echo_func(&token);
                 ft_lstclear_token(&token, (*del_token));
             }
+            // else if (!ft_strncmp(info.cmd[0], "cd", cd))
+            // {
+            //     cd_func(&token);
+            //     ft_lstclear_token(&token, (*del_token));
+            // }
         }
 
     }
