@@ -7,19 +7,13 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
-typedef struct s_token
-{
-    char *data;
-    struct s_token *next;
-}   t_token;
-
-typedef struct s_info
-{
-    char *input;
-    char **cmd;
-} t_info;
-
+#include "minishell_structs.h"
+#include "minishell_funk.h"
+#include "parser_structs.h"
+#include "parser_funk.h"
+#include <assert.h>
+#include <string.h>
+#include "ArrayList.h"
 
 // ================= UTILS LISTS TOKENS ===============
 

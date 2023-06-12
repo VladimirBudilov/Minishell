@@ -288,7 +288,7 @@ int _rl_keyseq_timeout = 500;
 /*								    */
 /* **************************************************************** */
 
-/* Non-zero means do not parse any lines other than comments and
+/* Non-zero means do not parser any lines other than comments and
    parser directives. */
 unsigned char _rl_parsing_conditionalized_out = 0;
 

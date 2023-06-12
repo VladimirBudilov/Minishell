@@ -354,7 +354,7 @@ _rl_find_prev_mbchar_internal (char *string, int seed, int find_non_zero)
    at src, if a non-L'\0' wide character was recognized. It returns 0, 
    if a L'\0' wide character was recognized. It  returns (size_t)(-1), 
    if an invalid multibyte sequence was encountered. It returns (size_t)(-2) 
-   if it couldn't parse a complete  multibyte character.  */
+   if it couldn't parser a complete  multibyte character.  */
 int
 _rl_get_char_len (char *src, mbstate_t *ps)
 {

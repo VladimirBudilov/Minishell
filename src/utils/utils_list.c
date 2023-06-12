@@ -1,5 +1,4 @@
-#include "../../includes/minishell.h"
-
+/*
 void read_list_token(t_token **list)
 {
     t_token *tmp;
@@ -83,4 +82,5 @@ void	ft_lstclear_token(t_token **lst, void (*del)(char *))
 	}
 	*lst = 0;
 }
+*/
 
