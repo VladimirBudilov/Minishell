@@ -4,14 +4,16 @@
 
 void cd_func(t_token **token)
 {
-    // printf("%s\n", (*token)->next->data);
-    if (((*token)->next != NULL)) {
-        printf("Использование: cd <директория>\n");
-        return ;
-    }
+    if (!(*token)->next == NULL)
+    {
 
-    // if (chdir(*(token)->next->data) != 0) {
-    //     printf("Ошибка: не удалось изменить текущий каталог\n");
-    //     return ;
-    // }
+    }
+    else if (!(ft_strncmp((*token)->next->data), "-", 1))
+    {
+
+    }
+    else
+    {
+        
+    }
 }
