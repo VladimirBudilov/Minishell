@@ -1698,7 +1698,7 @@ input_file_name_decode ()
 {
   case $command_line_filename in
     *\\input{*}*)
-      # Let AUC-TeX error parser deal with line numbers.
+      # Let AUC-TeX error parse deal with line numbers.
       line_error=false
       command_line_filename=`\
         expr X"$command_line_filename" : X'.*input{\([^}]*\)}'`

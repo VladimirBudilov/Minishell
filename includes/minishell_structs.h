@@ -20,6 +20,7 @@ typedef struct s_minishell
 {
     ArrayList *env;
     ArrayList *tokens_array;
+    ArrayList *arguments_array;
     char **from_readline;
     t_token *tokens;
     char *input;

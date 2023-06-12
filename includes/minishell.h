@@ -9,7 +9,9 @@
 #include <readline/history.h>
 #include "minishell_structs.h"
 #include "minishell_funk.h"
-
+#include "minishell_parser.h"
+#include <assert.h>
+#include <string.h>
 
 
 typedef enum e_token
