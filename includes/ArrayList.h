@@ -10,11 +10,13 @@ typedef struct s_hashmap
     char *value;
 }				t_hashmap;
 
-typedef struct {
+typedef struct s_arrayList
+{
     void **array;
     int size;
     int capacity;
 } ArrayList;
+
 
 ArrayList* createArrayList();
 void add_element(ArrayList* list, void *element);

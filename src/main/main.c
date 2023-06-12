@@ -1,6 +1,5 @@
 #include "../../includes/minishell.h"
 
-
 int main(int argc, char **argv, char **envp)
 {
     (void) argv;
@@ -11,11 +10,11 @@ int main(int argc, char **argv, char **envp)
     minishell = create_shell();
     welcome_message();
     minishell->env = add_env(envp);
-    rl_catch_signals = 0;
+	rl_catch_signals = 0;
 
     while (1)
     {
-        parse_readline(minishell);
+		parse_readline(minishell);
     }
     return 0;
 }

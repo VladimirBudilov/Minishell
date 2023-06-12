@@ -60,7 +60,7 @@ struct bin_str
   };
 
 /* file type indicators (dir, sock, fifo, ...)
-   Default value is initialized in parse-colors.c.
+   Default value is initialized in parser-colors.c.
    It is then modified from the values of $LS_COLORS. */
 extern struct bin_str _rl_color_indicator[];
 

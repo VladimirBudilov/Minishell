@@ -1,7 +1,6 @@
-#include <tclDecls.h>
 #include "../../includes/minishell.h"
 
-_Bool is_breaking_character(char c)
+int is_breaking_character(char c)
 {
 	char breaking_characters[] = "'\"<>|$ \n\t"; // & if bonus.
 
@@ -25,18 +24,6 @@ struct tokenizer_output tokenize_white_space(char *input)
 					.type = WHITE_SPACE,
 			},
 	};
-}
-
-void error(char *message)
-{
-	fprintf(stderr, "Error. %s\n", message);
-	exit(1);
-}
-
-void bug(char *message)
-{
-	fprintf(stderr, "Bug. %s\n", message);
-	exit(2);
 }
 
 struct tokenizer_output tokenize_single_quote(char *input)
@@ -63,6 +50,9 @@ struct tokenizer_output tokenize_single_quote(char *input)
 
 struct tokenizer_output tokenize_bare_word(char *input)
 {
+	t_tokenizer_output po;
+	t_token *t;
+
 	if (is_breaking_character(*input))
 		bug("Expected a bare word, but found a breaking character.");
 
@@ -70,23 +60,25 @@ struct tokenizer_output tokenize_bare_word(char *input)
 
 	while (input[i] && !is_breaking_character(input[i]))
 		i++;
-
+	t= malloc(sizeof(t_token*));
 	char *content = strndup(input, i);
-	assert(content);
-	// printf("Content: %s\n", content);
-	return (struct tokenizer_output) {
-			.string = input + i,
-			.token = (struct token) {
-					.type = STRING,
-					.content = content,
-			},
-	};
+
+	t->type = STRING;
+	t->content = content;
+
+	po.string = input + i;
+	po.token = *t;
+
+	return po;
 }
 
 
-void add_token(struct token t, t_shell *shell)
+char *add_token(t_shell *shell, struct tokenizer_output po, char *input)
 {
-	add_element(shell->tokens_array, &t);
+	 po = tokenize_white_space(input);
+
+	add_element(shell->tokens_array, &po.token);
+	return po.string;
 }
 
 void tokenize(t_shell *shell)
@@ -97,31 +89,32 @@ void tokenize(t_shell *shell)
 	{
 		if(*input == ' ')
 		{ // White space.
-			struct tokenizer_output po = tokenize_white_space(input);
-			input = po.string;
-			add_token(po.token, shell);
+			printf("white space\n");
+			input = add_token(shell, (tokenize_white_space(input)), input);
 		}
 		else if(*input == '\'')
 		{ // Single quote.
-			struct tokenizer_output po = tokenize_single_quote(input);
-			input = po.string;
-			add_token(po.token, shell);
+			input = add_token(shell, (tokenize_single_quote(input)), input);
 		}
 
-		// case '<': {
-		// 	if (input[1] && input[1] == '<')
-		// 		tokenize_less_less(...)
-		// 	else
-		// 		tokenize_less(...)
-		// }
+		/*if(*input == '<')
+		{
+		 	if (*(input+1) && *(input+1) == '<')
+		 		tokenize_less_less()
+		 	else
+		 		tokenize_less()
+		}*/
 		else if(ft_isascii(*input) && !is_breaking_character(*input))
 		{ // Bare word.
-			struct tokenizer_output po = tokenize_bare_word(input);
-			input = po.string;
-			add_token(po.token, shell);
+			input = add_token(shell, (tokenize_bare_word(input)), input);
+			printf("bare word\n");
+			printf("input: %s\n", input);
+			printf("token: %s\n", ((((t_token*)shell->tokens_array)>array[0])->content);
 		}
+		else
+			break;
 	}
-	add_token((struct token) {.type = END}, shell);
+	//add_token((struct token) {.type = END}, shell);
 }
 
 

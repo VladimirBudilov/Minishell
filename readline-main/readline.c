@@ -288,8 +288,8 @@ int _rl_keyseq_timeout = 500;
 /*								    */
 /* **************************************************************** */
 
-/* Non-zero means do not parse any lines other than comments and
-   parse directives. */
+/* Non-zero means do not parser any lines other than comments and
+   parser directives. */
 unsigned char _rl_parsing_conditionalized_out = 0;
 
 /* Non-zero means to convert characters with the meta bit set to
@@ -1280,7 +1280,7 @@ readline_initialize_everything (void)
      it on terminals that support it. */
   bind_bracketed_paste_prefix ();
 
-  /* If the completion parse's default word break characters haven't
+  /* If the completion parser's default word break characters haven't
      been set yet, then do so now. */
   if (rl_completer_word_break_characters == (char *)NULL)
     rl_completer_word_break_characters = (char *)rl_basic_word_break_characters;

@@ -5,7 +5,7 @@
 #ifndef MINI_PARSER_H
 #define MINI_PARSER_H
 
-#include "minishell_structs.h"
+#include "minishell.h"
 
 enum token_type {
 	END,
@@ -21,14 +21,14 @@ enum token_type {
 	DOUBLE_QUOTES,
 };
 
-struct token {
+typedef struct token {
 	enum token_type type;
 	void *content;
-};
+} t_token;
 
-struct tokenizer_output {
+typedef struct tokenizer_output {
 	char *string;
 	struct token token;
-};
+} t_tokenizer_output;
 
 #endif //MINI_PARSER_H

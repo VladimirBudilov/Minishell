@@ -302,7 +302,7 @@ void _rl_parse_colors(void)
 #if defined (COLOR_SUPPORT)
   const char *p;		/* Pointer to character being parsed */
   char *buf;			/* color_buf buffer pointer */
-  int state;			/* State of parse */
+  int state;			/* State of parser */
   int ind_no;			/* Indicator number */
   char label[3];		/* Indicator label */
   COLOR_EXT_TYPE *ext;		/* Extension we are working on */

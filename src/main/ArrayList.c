@@ -42,6 +42,22 @@ t_hashmap *find_element_by_key(ArrayList* list, char *key)
     return NULL;
 }
 
+// change value by key
+void change_value_by_key(ArrayList* list, char *key, char *value)
+{
+	int i;
+	i = 0;
+	while (i < list->size)
+	{
+		if (ft_strcmp(((t_hashmap *)list->array[i])->key, key) == 0)
+		{
+			((t_hashmap *)list->array[i])->value = value;
+			return;
+		}
+		i++;
+	}
+}
+
 void *find_element_by_index(ArrayList* list, int index)
 {
     if (index >= list->size) {

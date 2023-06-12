@@ -1035,7 +1035,7 @@ _rl_read_init_file (const char *filename, int include_level)
 	  i--;
         }
 
-      /* If the line is not a comment, then parse it. */
+      /* If the line is not a comment, then parser it. */
       if (*line && *line != '#')
 	rl_parse_and_bind (line);
 
@@ -1164,7 +1164,7 @@ static unsigned char *if_stack = (unsigned char *)NULL;
 static int if_stack_depth;
 static int if_stack_size;
 
-/* Push _rl_parsing_conditionalized_out, and set parse state based
+/* Push _rl_parsing_conditionalized_out, and set parser state based
    on ARGS. */
 static int
 parser_if (char *args)
@@ -1173,7 +1173,7 @@ parser_if (char *args)
 
   boolvar = strvar = -1;
 
-  /* Push parse state. */
+  /* Push parser state. */
   if (if_stack_depth + 1 >= if_stack_size)
     {
       if (!if_stack)
@@ -1369,7 +1369,7 @@ parser_if (char *args)
   return 0;
 }
 
-/* Invert the current parse state if there is anything on the stack. */
+/* Invert the current parser state if there is anything on the stack. */
 static int
 parser_else (char *args)
 {
@@ -1448,7 +1448,7 @@ static const struct {
   { (char *)0x0, (_rl_parser_func_t *)0x0 }
 };
 
-/* Handle a parse directive.  STATEMENT is the line of the directive
+/* Handle a parser directive.  STATEMENT is the line of the directive
    without any leading `$'. */
 static int
 handle_parser_directive (char *statement)
@@ -1480,8 +1480,8 @@ handle_parser_directive (char *statement)
 	return (0);
       }
 
-  /* display an error message about the unknown parse directive */
-  _rl_init_file_error ("%s: unknown parse directive", directive);
+  /* display an error message about the unknown parser directive */
+  _rl_init_file_error ("%s: unknown parser directive", directive);
   return (1);
 }
 
@@ -1532,7 +1532,7 @@ rl_parse_and_bind (char *string)
   if (string == 0 || *string == 0 || *string == '#')
     return 0;
 
-  /* If this is a parse directive, act on it. */
+  /* If this is a parser directive, act on it. */
   if (*string == '$')
     {
       handle_parser_directive (&string[1]);

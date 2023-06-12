@@ -17,5 +17,8 @@ t_shell *create_shell()
     if (!minishell)
         return (NULL);
     minishell->env = NULL;
+	minishell->input = NULL;
+	minishell->tokens_array = createArrayList();
+	minishell->arguments_array = createArrayList();
     return minishell;
 }

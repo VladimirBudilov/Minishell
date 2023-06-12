@@ -9,29 +9,11 @@
 #include <readline/history.h>
 #include "minishell_structs.h"
 #include "minishell_funk.h"
-#include "minishell_parser.h"
+#include "parser_structs.h"
+#include "parser_funk.h"
 #include <assert.h>
 #include <string.h>
-
-
-typedef enum e_token
-{
-    ft_echo,
-    ft_command,
-    ft_argument,
-    ft_redirection,
-    ft_pipe,
-    ft_semicolon,
-    ft_space,
-    ft_dollar,
-    ft_quote,
-    ft_double_quote,
-    ft_backslash,
-    ft_newline,
-    ft_eof,
-    ft_error
-
-}  e_type;
+#include "ArrayList.h"
 
 // ================= UTILS LISTS TOKENS ===============
 

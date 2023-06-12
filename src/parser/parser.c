@@ -1,7 +1,8 @@
+/*
 #include "../../includes/minishell.h"
 
 
-void add_argument(char *s)
+void add_argument(t_shell *shell)
 {
 	add_element()
 }
@@ -20,7 +21,9 @@ char *concatenate(char *s1, char *s2)
 // 	variables
 // }
 
-char **parse(/* struct state *s, */ t_shell *shell)
+char **parse(*/
+/* struct state *s, *//*
+ t_shell *shell)
 {
 	int i = 0;
 
@@ -56,4 +59,5 @@ char **parse(/* struct state *s, */ t_shell *shell)
 
 	return arguments;
 }
+*/
 
