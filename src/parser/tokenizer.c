@@ -15,37 +15,53 @@ int is_breaking_character(char c)
 
 struct tokenizer_output tokenize_white_space(char *input)
 {
-	int i = 0;
+	t_tokenizer_output po;
+	int i;
+
+	i = 0;
 	while (input[i] && input[i] == ' ')
 		i++;
-	return (struct tokenizer_output) {
-			.string = input + i,
-			.token = (struct token) {
-					.type = WHITE_SPACE,
-			},
-	};
+	po.string = input + i;
+	po.token.type = WHITE_SPACE;
+	return po;
 }
 
 struct tokenizer_output tokenize_single_quote(char *input)
 {
-	int i = 0;
+	int i;
+	t_tokenizer_output po;
 
+	i = 0;
 	input++;
 
 	while (input[i] && input[i] != '\'')
 		i++;
-
 	if (input[i] == 0)
 		error("Unclosed single quote."); // Maybe can read line here instead.
-
 	char *content = strndup(input, i);
-	return (struct tokenizer_output) {
-			.string = input + i + 1 /* For closing single quote. */,
-			.token = (struct token) {
-					.type = STRING,
-					.content = content,
-			},
-	};
+	po.string = input + i + 1;
+	po.token.type = STRING;
+	po.token.content = content;
+	return po;
+}
+
+struct tokenizer_output tokenize_double_quote(char *input)
+{
+	int i;
+	t_tokenizer_output po;
+
+	i = 0;
+	input++;
+
+	while (input[i] && input[i] != '\"')
+		i++;
+	if (input[i] == 0)
+		error("Unclosed single quote."); // Maybe can read line here instead.
+	char *content = strndup(input, i);
+	po.string = input + i + 1;
+	po.token.type = STRING;
+	po.token.content = content;
+	return po;
 }
 
 struct tokenizer_output tokenize_bare_word(char *input)
@@ -94,15 +110,34 @@ void tokenize(t_shell *shell)
 		{ // Single quote.
 			input = add_token(shell, (tokenize_single_quote(input)));
 		}
+		else if(*input == '\"')
+		{ // Single quote.
+			input = add_token(shell, (tokenize_double_quote(input)));
+		}
 
-		/*if(*input == '<')
+		if(*input == '<')
 		{
 		 	if (*(input+1) && *(input+1) == '<')
-		 		tokenize_less_less()
+				input = add_token(shell, (tokenize_less_less(input)));
 		 	else
-		 		tokenize_less()
-		}*/
-		else if(ft_isalpha(*input) && !is_breaking_character(*input))
+				input = add_token(shell, (tokenize_less(input)));
+		}
+		else if(*input == '>')
+		{
+		 	if (*(input+1) && *(input+1) == '>')
+				input = add_token(shell, (tokenize_greater_greater(input)));
+		 	else
+				input = add_token(shell, (tokenize_greater(input)));
+		}
+		else if(*input == '|')
+		{ // Pipe.
+			input = add_token(shell, (tokenize_pipe(input)));
+		}
+		else if(*input == '$')
+		{ // Dollar.
+			input = add_token(shell, (tokenize_dollar(input)));
+		}
+		else if(ft_isascii(*input) && !is_breaking_character(*input))
 		{ // Bare word.
 			input = add_token(shell, (tokenize_bare_word(input)));
 		}
