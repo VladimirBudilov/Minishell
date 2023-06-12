@@ -73,11 +73,10 @@ struct tokenizer_output tokenize_bare_word(char *input)
 }
 
 
-char *add_token(t_shell *shell, struct tokenizer_output po, char *input)
+char *add_token(t_shell *shell, struct tokenizer_output po)
 {
-	 po = tokenize_white_space(input);
-
 	add_element(shell->tokens_array, &po.token);
+	printf("Content: %s\n", (char *)po.token.content);
 	return po.string;
 }
 
@@ -89,12 +88,11 @@ void tokenize(t_shell *shell)
 	{
 		if(*input == ' ')
 		{ // White space.
-			printf("white space\n");
-			input = add_token(shell, (tokenize_white_space(input)), input);
+			input = add_token(shell, (tokenize_white_space(input)));
 		}
 		else if(*input == '\'')
 		{ // Single quote.
-			input = add_token(shell, (tokenize_single_quote(input)), input);
+			input = add_token(shell, (tokenize_single_quote(input)));
 		}
 
 		/*if(*input == '<')
@@ -104,12 +102,9 @@ void tokenize(t_shell *shell)
 		 	else
 		 		tokenize_less()
 		}*/
-		else if(ft_isascii(*input) && !is_breaking_character(*input))
+		else if(ft_isalpha(*input) && !is_breaking_character(*input))
 		{ // Bare word.
-			input = add_token(shell, (tokenize_bare_word(input)), input);
-			printf("bare word\n");
-			printf("input: %s\n", input);
-			printf("token: %s\n", ((((t_token*)shell->tokens_array)>array[0])->content);
+			input = add_token(shell, (tokenize_bare_word(input)));
 		}
 		else
 			break;
