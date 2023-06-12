@@ -16,5 +16,11 @@ char *add_token(t_shell *shell, struct tokenizer_output po);
 void tokenize(t_shell *shell);
 void parse_readline(t_shell *minishell);
 void get_line(t_shell *minishell);
+struct tokenizer_output tokenize_greater_greater(char *input);
+struct tokenizer_output tokenize_greater(char *input);
+struct tokenizer_output tokenize_pipe(char *input);
+struct tokenizer_output tokenize_less(char *input);
+struct tokenizer_output tokenize_less_less(char *input);
+
 
 #endif //MINI_PARSER_FUNK_H

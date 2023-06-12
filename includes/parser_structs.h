@@ -14,6 +14,7 @@ enum token_type {
 	LESS_THAN_LESS_THAN,
 	LESS_THAN,
 	DOLLAR, // Content.
+	PIPE,
 	GREATER_THAN,
 	GREATER_THAN_GREATER_THAN,
 	BARE_WORD,
@@ -30,5 +31,51 @@ typedef struct tokenizer_output {
 	char *string;
 	struct token token;
 } t_tokenizer_output;
+
+/*
+struct token_inside_double_quotes {
+	_Bool is_dollar;
+	char *string;
+};
+
+// "abc $?$$foo$kek$/something$"
+(token){
+	.type = DOUBLE_QUOTES,
+	.content = (struct token_inside_double_quotes[]){
+		{
+			.is_dollar = 0,
+			.string = "abc ",
+		},
+		{
+			.is_dollar = 1,
+			.string = "?"
+		},
+		{
+			.is_dollar = 1,
+			.string = "",
+		},
+		{
+			.is_dollar = 1,
+			.string = "foo",
+		},
+		{
+			.is_dollar = 1,
+			.string = "kek"
+		},
+		{
+			.is_dollar = 1,
+			.string = "",
+		},
+		{
+			.is_dollar = 0,
+			.string = "/something",
+		},
+		{
+			.is_dollar = 1,
+			.string = "",
+		}
+	}
+};
+*/
 
 #endif //MINI_PARSER_H
