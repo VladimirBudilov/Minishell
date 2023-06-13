@@ -15,7 +15,7 @@ void tokenize(t_shell *shell) {
         }
         else if(*input == '\"')
         { // Single quote.
-            input = add_token(shell, (tokenize_double_quote(input)));
+            input = add_token(shell, (tokenize_double_quote(input, shell)));
         }
         else if(*input == '<')
         {
@@ -62,7 +62,7 @@ char *ft_strndup(char *str, int n)
 }
 
 int is_breaking_character(char c) {
-    char breaking_characters[] = "'\"<>|$ \n\t"; // & if bonus.
+    char breaking_characters[] = "\'\"<>|$ \n\t"; // & if bonus.
 
     int size = sizeof breaking_characters / sizeof *breaking_characters - 1;
     for (int i = 0; i < size; i++) {

@@ -42,14 +42,14 @@ void delete_element(ArrayList* list, int index)
     list->size--;
 }
 
-t_hashmap *find_element_by_key(ArrayList* list, char *key)
+char *find_element_by_key(ArrayList* list, char *key)
 {
     int i;
     i = 0;
     while (i < list->size)
     {
         if (ft_strcmp(((t_hashmap *)list->array[i])->key, key) == 0)
-            return list->array[i];
+            return ((t_hashmap *)list->array[i])->value;
         i++;
     }
     return NULL;
