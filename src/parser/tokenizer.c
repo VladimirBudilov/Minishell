@@ -32,21 +32,35 @@ struct tokenizer_output tokenize_single_quote(char *input)
 	t_tokenizer_output po;
 
 	i = 0;
-
 	input++;
 
 	while (input[i] && input[i] != '\'')
 		i++;
-
 	if (input[i] == 0)
 		error("Unclosed single quote."); // Maybe can read line here instead.
-
 	char *content = strndup(input, i);
 	po.string = input + i + 1;
 	po.token.type = STRING;
 	po.token.content = content;
 	return po;
+}
 
+struct tokenizer_output tokenize_double_quote(char *input)
+{
+	int i;
+	t_tokenizer_output po;
+
+	i = 0;
+	input++;
+	while (input[i] && input[i] != '\"')
+		i++;
+	if (input[i] == 0)
+		error("Unclosed single quote."); // Maybe can read line here instead.
+	char *content = strndup(input, i);
+	po.string = input + i + 1;
+	po.token.type = STRING;
+	po.token.content = content;
+	return po;
 }
 
 struct tokenizer_output tokenize_double_quote(char *input)
@@ -92,13 +106,48 @@ struct tokenizer_output tokenize_bare_word(char *input)
 	return po;
 }
 
-
-char *add_token(t_shell *shell, struct tokenizer_output po)
+struct tokenizer_output tokenize_less(char *input)
 {
-	add_element(shell->tokens_array, &po.token);
-	//printf("Content: %s\n", (char *)po.token.content);
-	//printf("%s\n", po.string);
-	return po.string;
+	struct tokenizer_output result;
+
+	if (*(input+1) && *(input+1) == '<')
+	{
+		result.token.type = LESS_THAN_LESS_THAN;
+		result.token.content = 0;
+		result.string = input + 2;
+		return result;
+	}
+	result.token.type = LESS_THAN;
+	result.token.content = 0;
+	result.string = input + 1;
+	return result;
+}
+
+struct tokenizer_output tokenize_pipe(char *input)
+{
+	struct tokenizer_output result;
+
+	result.token.type = PIPE;
+	result.token.content = 0;
+	result.string = input + 1;
+	return result;
+}
+
+struct tokenizer_output tokenize_greater(char *input)
+{
+	struct tokenizer_output result;
+
+	if(*(input + 1) == '>')
+	{
+		result.token.type = GREATER_THAN_GREATER_THAN;
+		result.token.content = 0;
+		result.string = input + 2;
+		return result;
+	}
+	result.token.type = GREATER_THAN;
+	result.token.content = 0;
+	result.string = input + 1;
+	return result;
 }
 
 void tokenize(t_shell *shell)
@@ -116,15 +165,27 @@ void tokenize(t_shell *shell)
 		{ // Single quote.
 			input = add_token(shell, (tokenize_single_quote(input)));
 		}
-
-		/*if(*input == '<')
+		else if(*input == '\"')
+		{ // Single quote.
+			input = add_token(shell, (tokenize_double_quote(input)));
+		}
+		else if(*input == '<')
 		{
-		 	if (*(input+1) && *(input+1) == '<')
-		 		tokenize_less_less()
-		 	else
-		 		tokenize_less()
+			input = add_token(shell, (tokenize_less(input)));
+		}
+		else if(*input == '>')
+		{
+			input = add_token(shell, (tokenize_greater(input)));
+		}
+		else if(*input == '|')
+		{ // Pipe.
+			input = add_token(shell, (tokenize_pipe(input)));
+		}
+		/*else if(*input == '$')
+		{ // Dollar.
+			input = add_token(shell, (tokenize_dollar(input)));
 		}*/
-		else if(ft_isalpha(*input) && !is_breaking_character(*input))
+		else if(ft_isascii(*input) && !is_breaking_character(*input))
 		{ // Bare word.
 			printf("1\n");
 			input = add_token(shell, (tokenize_bare_word(input)));
@@ -133,8 +194,18 @@ void tokenize(t_shell *shell)
 		else
 			break;
 	}
-	//add_token((struct token) {.type = END}, shell);
+	add_element(shell->tokens_array, NULL);
 }
+
+
+
+char *add_token(t_shell *shell, struct tokenizer_output po)
+{
+	add_element(shell->tokens_array, &po.token);
+	printf("Content: %s\n", (char *)po.token.content);
+	return po.string;
+}
+
 
 
 // char* cmd[] = {"echo", "\"hello\"", "worldquote"};
