@@ -18,7 +18,8 @@ int main(int argc, char **argv, char **envp)
     while (1)
     {
 		parse_readline(minishell);
-        print_all_tokens_arraylist(minishell->tokens_array);
+        //print_all_tokens_arraylist(minishell->tokens_array);
+        command_func(minishell);
         clean_array(minishell);
 
     }

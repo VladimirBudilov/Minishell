@@ -161,7 +161,7 @@ void tokenize(t_shell *shell) {
     while (*input) {
 
         if (*input == ' ') {// White space.
-            printf("White space.\n");
+            // printf("White space.\n");
             input = add_token(shell, (tokenize_white_space(input)));
         }
         else if(*input == '\'')
