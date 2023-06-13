@@ -13,12 +13,13 @@ void welcome_message()
 t_shell *create_shell()
 {
     t_shell *minishell;
+
     minishell = (t_shell *)malloc(sizeof(t_shell));
     if (!minishell)
         return (NULL);
     minishell->env = NULL;
 	minishell->input = NULL;
 	minishell->tokens_array = createArrayList();
-	minishell->arguments_array = createArrayList();
+	//minishell->arguments_array = createArrayList();
     return minishell;
 }

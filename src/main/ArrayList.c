@@ -8,13 +8,26 @@ ArrayList* createArrayList() {
     return list;
 }
 
-void add_element(ArrayList* list, void *element) {
-    if (list->size >= list->capacity) {
+void add_element(ArrayList* list, void *element)
+{
+    if (list->size == list->capacity) {
         list->capacity *= 2;
-        list->array = (void **)realloc(list->array, list->capacity * sizeof(void *));
+        list->array = realloc(list->array, list->capacity * sizeof(void *));
     }
     list->array[list->size] = element;
     list->size++;
+}
+
+void print_all_tokens_arraylist(ArrayList *list)
+{
+    int i;
+    i = 0;
+    while (i < list->size)
+    {
+        printf("%d\n", ((int)((t_token *)list->array[i])->type));
+        printf("%s\n", ((t_token *)list->array[i])->content);
+        i++;
+    }
 }
 
 void delete_element(ArrayList* list, int index)
@@ -42,7 +55,6 @@ t_hashmap *find_element_by_key(ArrayList* list, char *key)
     return NULL;
 }
 
-// change value by key
 void change_value_by_key(ArrayList* list, char *key, char *value)
 {
 	int i;
