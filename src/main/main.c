@@ -15,6 +15,8 @@ int main(int argc, char **argv, char **envp)
     while (1)
     {
 		parse_readline(minishell);
+        // printf("%s\n", ((t_token *)minishell->tokens_array->array[0])->content);
+        // printf("%s\n", ((t_token *)minishell->tokens_array->array[2])->content);
         //command_func(minishell);
     }
     return 0;

@@ -22,6 +22,7 @@ struct tokenizer_output tokenize_white_space(char *input)
 	while (input[i] && input[i] == ' ')
 		i++;
 	po.string = input + i;
+	printf("po.string = %s\n", po.string);
 	po.token.type = WHITE_SPACE;
 	return po;
 }
@@ -45,23 +46,6 @@ struct tokenizer_output tokenize_single_quote(char *input)
 	return po;
 }
 
-struct tokenizer_output tokenize_double_quote(char *input)
-{
-	int i;
-	t_tokenizer_output po;
-
-	i = 0;
-	input++;
-	while (input[i] && input[i] != '\"')
-		i++;
-	if (input[i] == 0)
-		error("Unclosed single quote."); // Maybe can read line here instead.
-	char *content = strndup(input, i);
-	po.string = input + i + 1;
-	po.token.type = STRING;
-	po.token.content = content;
-	return po;
-}
 
 struct tokenizer_output tokenize_double_quote(char *input)
 {
@@ -94,15 +78,15 @@ struct tokenizer_output tokenize_bare_word(char *input)
 
 	while (input[i] && !is_breaking_character(input[i]))
 		i++;
-	t= malloc(sizeof(t_token*));
+	t = malloc(sizeof(t_token*));
 	char *content = strndup(input, i);
-
 	t->type = STRING;
 	t->content = content;
 
 	po.string = input + i;
 	po.token = *t;
-
+	// printf("string = %s\n", po.string);
+	// printf("content lol = %s\n", po.token.content);
 	return po;
 }
 
@@ -187,16 +171,14 @@ void tokenize(t_shell *shell)
 		}*/
 		else if(ft_isascii(*input) && !is_breaking_character(*input))
 		{ // Bare word.
-			printf("1\n");
 			input = add_token(shell, (tokenize_bare_word(input)));
-			printf("%s\n", input);
 		}
 		else
 			break;
 	}
-	add_element(shell->tokens_array, NULL);
-}
+	//add_element(shell->tokens_array, NULL);
 
+}
 
 
 char *add_token(t_shell *shell, struct tokenizer_output po)
