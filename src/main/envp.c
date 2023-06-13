@@ -1,16 +1,5 @@
 #include "../../includes/minishell_structs.h"
 
-void print_env_from_arraylist(ArrayList *env) {
-    int i;
-    i = 0;
-    while (i < env->size)
-    {
-        printf("%s\n", ((t_hashmap *)env->array[i])->key);
-        printf("%s\n", ((t_hashmap *)env->array[i])->value);
-        i++;
-    }
-}
-
 ArrayList *add_env(char **envp)
 {
     int i;

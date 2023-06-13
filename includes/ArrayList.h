@@ -24,8 +24,9 @@ void delete_element(ArrayList* list, int index);
 t_hashmap *find_element_by_key(ArrayList* list, char *key);
 void free_arrayList(ArrayList* list);
 t_hashmap *create_hashmap(char *string);
-void print_env_from_arraylist(ArrayList *env);
+void print_all_tokens_arraylist(ArrayList *list);
 int				ft_strcmp(const char *s1, const char *s2);
+void *find_element_by_index(ArrayList* list, int index);
 
 
 #endif //MINI_ARRAYLIST_H

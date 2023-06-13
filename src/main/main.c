@@ -1,8 +1,11 @@
 #include "../../includes/minishell.h"
 
+void clean_array(t_shell *minishell);
+
 int main(int argc, char **argv, char **envp)
 {
     (void) argv;
+    (void) envp;
     t_shell *minishell;
 
     if (argc > 1)
@@ -15,9 +18,13 @@ int main(int argc, char **argv, char **envp)
     while (1)
     {
 		parse_readline(minishell);
-        // printf("%s\n", ((t_token *)minishell->tokens_array->array[0])->content);
-        // printf("%s\n", ((t_token *)minishell->tokens_array->array[2])->content);
-        //command_func(minishell);
+        print_all_tokens_arraylist(minishell->tokens_array);
+        clean_array(minishell);
+
     }
     return 0;
+}
+
+void clean_array(t_shell *minishell) {
+    minishell->tokens_array->size = 0;
 }
