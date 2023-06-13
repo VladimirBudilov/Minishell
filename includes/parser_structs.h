@@ -23,7 +23,7 @@ enum token_type {
 
 typedef struct token {
 	enum token_type type;
-	void *content;
+	char *content;
 } t_token;
 
 typedef struct tokenizer_output {

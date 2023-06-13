@@ -1,10 +1,8 @@
 #include "../../includes/minishell.h"
  
-
-
-/*
-void print_echo(char *str)
+void print_echo(void *content)
 {
+    char *str = (char *)content;
     int i;
 
     i = 0;
@@ -16,28 +14,31 @@ void print_echo(char *str)
     }
 }
 
-void echo_func(t_token **token)
+void echo_func(t_token *arr)
 {
+
     //надо решить вопрос с << >> < >
-    
     t_token *tmp;
     int check_n;
-
+    int i = 0;
     check_n = 0;
-    tmp = *token;
-    tmp = tmp->next;
-    if (!(ft_strncmp(tmp->data, "-n", 2)))
+    tmp = arr;
+    
+    i++;
+
+    if (!(ft_strncmp((char *)tmp[i].content, "-n", 2)))
     {
         check_n = 1;
-        tmp = tmp->next;
+        i++;
     }
-    while(tmp)
+    while(tmp[i].type != END)
     {
-        print_echo(tmp->data);
-        if(tmp->next != NULL)
+        printf("1\n");
+        print_echo(tmp[i].content);
+        if(tmp[i + 1].content != NULL)
             write(1, " ", 1);
-        tmp = tmp->next;
+        i++;
     }
     if (!check_n)
         write(1, "\n", 1);
-}*/
+}

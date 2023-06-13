@@ -61,3 +61,9 @@ char **parse(*/
 }
 */
 
+
+/*
+
+minishell->token_array->array[] = {el1, el2, el3, el4, el5}
+minishell->token_array->array->token - токен
+*/

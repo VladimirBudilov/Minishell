@@ -15,20 +15,23 @@ int is_breaking_character(char c)
 
 struct tokenizer_output tokenize_white_space(char *input)
 {
-	int i = 0;
+	t_tokenizer_output po;
+	int i;
+
+	i = 0;
 	while (input[i] && input[i] == ' ')
 		i++;
-	return (struct tokenizer_output) {
-			.string = input + i,
-			.token = (struct token) {
-					.type = WHITE_SPACE,
-			},
-	};
+	po.string = input + i;
+	po.token.type = WHITE_SPACE;
+	return po;
 }
 
 struct tokenizer_output tokenize_single_quote(char *input)
 {
-	int i = 0;
+	int i;
+	t_tokenizer_output po;
+
+	i = 0;
 
 	input++;
 
@@ -39,13 +42,30 @@ struct tokenizer_output tokenize_single_quote(char *input)
 		error("Unclosed single quote."); // Maybe can read line here instead.
 
 	char *content = strndup(input, i);
-	return (struct tokenizer_output) {
-			.string = input + i + 1 /* For closing single quote. */,
-			.token = (struct token) {
-					.type = STRING,
-					.content = content,
-			},
-	};
+	po.string = input + i + 1;
+	po.token.type = STRING;
+	po.token.content = content;
+	return po;
+
+}
+
+struct tokenizer_output tokenize_double_quote(char *input)
+{
+	int i;
+	t_tokenizer_output po;
+
+	i = 0;
+	input++;
+
+	while (input[i] && input[i] != '\"')
+		i++;
+	if (input[i] == 0)
+		error("Unclosed single quote."); // Maybe can read line here instead.
+	char *content = strndup(input, i);
+	po.string = input + i + 1;
+	po.token.type = STRING;
+	po.token.content = content;
+	return po;
 }
 
 struct tokenizer_output tokenize_bare_word(char *input)
@@ -76,7 +96,8 @@ struct tokenizer_output tokenize_bare_word(char *input)
 char *add_token(t_shell *shell, struct tokenizer_output po)
 {
 	add_element(shell->tokens_array, &po.token);
-	printf("Content: %s\n", (char *)po.token.content);
+	//printf("Content: %s\n", (char *)po.token.content);
+	//printf("%s\n", po.string);
 	return po.string;
 }
 
@@ -88,6 +109,7 @@ void tokenize(t_shell *shell)
 	{
 		if(*input == ' ')
 		{ // White space.
+			
 			input = add_token(shell, (tokenize_white_space(input)));
 		}
 		else if(*input == '\'')
@@ -104,7 +126,9 @@ void tokenize(t_shell *shell)
 		}*/
 		else if(ft_isalpha(*input) && !is_breaking_character(*input))
 		{ // Bare word.
+			printf("1\n");
 			input = add_token(shell, (tokenize_bare_word(input)));
+			printf("%s\n", input);
 		}
 		else
 			break;

@@ -15,6 +15,7 @@ int main(int argc, char **argv, char **envp)
     while (1)
     {
 		parse_readline(minishell);
+        //command_func(minishell);
     }
     return 0;
 }

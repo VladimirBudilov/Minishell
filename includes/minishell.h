@@ -31,8 +31,9 @@ void	signal_handler(int signal);
 
 // =================BIULT IN FUNC =====================
 
-void echo_func(t_token **token);
-void cd_func(t_token **token);
+void command_func(t_shell *minishell);
+void echo_func(t_token *arr);
+// void cd_func(t_token **token);
 
 
 #endif

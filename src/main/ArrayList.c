@@ -8,6 +8,8 @@ ArrayList* createArrayList() {
     return list;
 }
 
+
+
 void add_element(ArrayList* list, void *element) {
     if (list->size >= list->capacity) {
         list->capacity *= 2;
