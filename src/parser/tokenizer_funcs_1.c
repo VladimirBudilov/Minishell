@@ -1,0 +1,78 @@
+#include "../../includes/minishell.h"
+
+t_tokenizer_output *tokenize_white_space(char *input) {
+    t_tokenizer_output *po;
+    t_token *t;
+    int i;
+
+    t = malloc(sizeof(t_token));
+    po = malloc(sizeof(t_tokenizer_output));
+    i = 0;
+    while (input[i] && input[i] == ' ')
+        i++;
+    po->string = (input + i);
+    t->type = WHITE_SPACE;
+    t->content = " ";
+    po->token = *t;
+    return po;
+}
+
+t_tokenizer_output * tokenize_single_quote(char *input) {
+    int i;
+    t_tokenizer_output *po;
+    t_token *t;
+
+    t = malloc(sizeof(t_token));
+    po = malloc(sizeof(t_tokenizer_output));
+    i = 0;
+    input++;
+    while (input[i] && input[i] != '\'')
+        i++;
+    if (input[i] == 0)
+        error("Unclosed single quote.");
+    po->string = input + i + 1;
+    t->type = SINGLE_QUOTES;
+    t->content = ft_strndup(input, i);
+    po->token = *t;
+    return po;
+}
+
+t_tokenizer_output *tokenize_double_quote(char *input) {
+    int i;
+    t_tokenizer_output *po;
+    t_token *t;
+
+    t = malloc(sizeof(t_token));
+    po = malloc(sizeof(t_tokenizer_output));
+    i = 0;
+    input++;
+    while (input[i] && input[i] != '\"')
+        i++;
+    if (input[i] == 0)
+        error("Unclosed double quote.");
+    po->string = input + i + 1;
+    t->type = DOUBLE_QUOTES;
+    t->content = ft_strndup(input, i);
+    po->token = *t;
+    return po;
+}
+
+t_tokenizer_output *tokenize_bare_word(char *input) {
+    t_tokenizer_output *po;
+    t_token *t;
+
+    if (is_breaking_character(*input))
+        bug("Expected a bare word, but found a breaking character.");
+    int i = 0;
+
+    while (input[i] && !is_breaking_character(input[i]))
+        i++;
+    t = malloc(sizeof(t_token));
+    po = malloc(sizeof(t_tokenizer_output));
+    t->type = BARE_WORD;
+    t->content = ft_strndup(input, i);
+    po->string = input + i;
+    po->token = *t;
+
+    return po;
+}
