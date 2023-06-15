@@ -14,6 +14,7 @@ typedef struct s_minishell
     char **from_readline;
     char *input;
     char **cmd;
+    int exit_code;
 
 	int			error_status;
 }				t_shell;

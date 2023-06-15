@@ -10,7 +10,7 @@ void error(char *message);
 void bug(char *message);
 t_tokenizer_output *tokenize_single_quote(char *input);
 t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell);
-t_tokenizer_output * tokenize_dollar(char *input);
+t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell);
 t_tokenizer_output * tokenize_bare_word(char *input);
 char *add_token(t_shell *shell, struct tokenizer_output *po);
 void tokenize(t_shell *shell);
@@ -22,6 +22,8 @@ t_tokenizer_output * tokenize_pipe(char *input);
 t_tokenizer_output * tokenize_less(char *input);
 struct tokenizer_output tokenize_less_less(char *input);
 char *ft_strndup(char *str, int n);
+char *open_dollar(char *input, t_shell *shell, t_token *t);
+
 
 
 #endif //MINI_PARSER_FUNK_H

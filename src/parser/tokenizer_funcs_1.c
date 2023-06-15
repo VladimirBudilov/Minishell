@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-char *open_dollar(char *input, t_shell *shell);
-
 t_tokenizer_output *tokenize_white_space(char *input) {
     t_tokenizer_output *po;
     t_token *t;
@@ -39,20 +37,6 @@ t_tokenizer_output * tokenize_single_quote(char *input) {
     return po;
 }
 
-char *open_dollar(char *input, t_shell *shell) {
-    int i;
-    char *env;
-
-    i = 0;
-    input++;
-    while (input[i] && !is_breaking_character(input[i]))
-        i++;
-    printf("input %s\n", ft_strndup(input, i));
-    env = (char *)find_element_by_key(shell->env, ft_strndup(input, i));
-    printf("env %s\n", env);
-    return input + i;
-}
-
 t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell) {
     int i;
     t_tokenizer_output *po;
@@ -60,19 +44,28 @@ t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell) {
 
     t = malloc(sizeof(t_token));
     po = malloc(sizeof(t_tokenizer_output));
+	input++;
     i = 0;
-    input++;
+	while(input[i] && input[i] != '\"')
+		i++;
+	if (input[i] == 0)
+		error("Unclosed double quote.");
+	i = 0;
+	t->content = ft_strdup("");
     while (input[i] && input[i] != '\"')
     {
-        if(input[i] == '$' && input[i + 1] && !is_breaking_character(input[i + 1]))
-            input = open_dollar(input, shell );
+        if(input[i] == '$' && input[i + 1] != '\"' && input[i + 1] != '$' && input[i + 1] != ' ')
+		{
+			t->content = ft_strjoin(t->content, ft_strndup(input, i));
+			input = open_dollar(input + i + 1, shell, t);
+			i = 0;
+            continue;
+		}
         i++;
     }
-    if (input[i] == 0)
-        error("Unclosed double quote.");
     po->string = input + i + 1;
     t->type = DOUBLE_QUOTES;
-    t->content = ft_strndup(input, i);
+    t->content = ft_strjoin(t->content, ft_strndup(input, i));
     po->token = *t;
     return po;
 }
