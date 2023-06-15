@@ -30,7 +30,7 @@ char *open_dollar(char *input, t_shell *shell, t_token *t)
         }
         i++;
     }
-    return input + i - 1;
+    return input + i;
 }
 
 char *ft_strndup(char *str, int n)

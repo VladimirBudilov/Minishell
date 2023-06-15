@@ -563,7 +563,7 @@ xfree.o: $(srcdir)/xfree.c
 xmalloc.o: $(srcdir)/xmalloc.c
 
 colors.o: $(srcdir)/parse-colors.c
-parse-colors.o: $(srcdir)/parse_tokens-colors.c
+parse-colors.o: $(srcdir)/parse-colors.c
 
 histexpand.o: $(srcdir)/histexpand.c
 histfile.o: $(srcdir)/histfile.c

@@ -75,6 +75,14 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
         po->token = *t;
         return po;
     }
+    if(is_breaking_character(*input))
+    {
+        t->content = "$";
+        t->type = DOLLAR;
+        po->string = input + 1;
+        po->token = *t;
+        return po;
+    }
     while (input[i] && !is_breaking_character(input[i]))
     {
         if(contain_key(shell->env, ft_strndup(input, i + 1)))
