@@ -12,7 +12,7 @@ t_tokenizer_output *tokenize_white_space(char *input) {
         i++;
     po->string = (input + i);
     t->type = WHITE_SPACE;
-    t->content = " ";
+    t->content = ft_strdup(" ");
     po->token = *t;
     return po;
 }

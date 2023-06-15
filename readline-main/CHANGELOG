@@ -1156,7 +1156,7 @@ Makefile.in,shlib/Makefile.in
 	- check for stdbool.h, define HAVE_STDBOOL_H if found
 
 rldefs.h
-	- COLOR_SUPPORT: if defined, compile in colors.c and parse-colors.c
+	- COLOR_SUPPORT: if defined, compile in colors.c and parse_tokens-colors.c
 	  for color support
 
 				   1/18

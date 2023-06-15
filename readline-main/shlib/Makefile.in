@@ -356,7 +356,7 @@ colors.so: $(topdir)/chardefs.h $(topdir)/tilde.h $(topdir)/rlstdc.h
 colors.so: $(topdir)/ansi_stdlib.h $(topdir)/posixstat.h
 parse-colors.so: $(BUILD_DIR)/config.h $(topdir)/colors.h $(topdir)/parse-colors.h
 parse-colors.so: $(topdir)/rldefs.h $(topdir)/rlconf.h 
-parse-colors.so: $(topdir)/readline.h $(topdir)/keymaps.h $(topdir)/rltypedefs.h
+parse_tokens-colors.so: $(topdir)/readline.h $(topdir)/keymaps.h $(topdir)/rltypedefs.h
 parse-colors.so: $(topdir)/chardefs.h $(topdir)/tilde.h $(topdir)/rlstdc.h
 
 bind.so: $(topdir)/rlprivate.h
