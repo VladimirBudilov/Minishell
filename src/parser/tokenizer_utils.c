@@ -13,7 +13,13 @@ char *open_dollar(char *input, t_shell *shell, t_token *t)
     if(input[i] == '?')
     {
         t->content = ft_strjoin(t->content, ft_itoa(shell->exit_code));
-        return input - 1;
+        return input + 1;
+    }
+    if(is_breaking_character(input[i]))
+    {
+        t->type = DOLLAR;
+        t->content = ft_strjoin(t->content, "$");
+        return input + 1;
     }
     while (input[i] && !(input[i] == '$' && input[i + 1] != '\"'))
     {

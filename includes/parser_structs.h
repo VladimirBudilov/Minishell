@@ -7,7 +7,7 @@
 
 #include "minishell.h"
 
-enum token_type {
+enum lexer_type {
 	END,
 	STRING,
 	WHITE_SPACE,
@@ -23,7 +23,7 @@ enum token_type {
 };
 
 typedef struct token {
-	enum token_type type;
+	enum lexer_type type;
 	char *content;
 } t_token;
 
@@ -31,6 +31,12 @@ typedef struct tokenizer_output {
 	char *string;
 	struct token token;
 } t_tokenizer_output;
+
+typedef struct dollar_token {
+    _Bool is_dollar;
+    char *string;
+} t_dollar_token;
+
 
 /*
 struct token_inside_double_quotes {

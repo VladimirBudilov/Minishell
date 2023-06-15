@@ -1,29 +1,12 @@
 /*
+
 #include "../../includes/minishell.h"
-
-
-void add_argument(t_shell *shell)
-{
-	add_element()
-}
-
-char *concatenate(char *s1, char *s2)
-{
-	int len = ft_strlen(s1) + strlen(s2) + 1;
-	char *res = malloc(len);
-	*res = 0;
-	strcat(res, s1);
-	strcat(res + strlen(s1), s2);
-	return res;
-}
 
 // struct state {
 // 	variables
 // }
 
-char **parse(*/
-/* struct state *s, *//*
- t_shell *shell)
+char **parse( struct state *s, t_shell *shell)
 {
 	int i = 0;
 

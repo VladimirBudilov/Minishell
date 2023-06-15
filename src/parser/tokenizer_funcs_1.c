@@ -54,7 +54,7 @@ t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell) {
 	t->content = ft_strdup("");
     while (input[i] && input[i] != '\"')
     {
-        if(input[i] == '$' && input[i + 1] != '\"' && input[i + 1] != '$' && input[i + 1] != ' ')
+        if(input[i] == '$')
 		{
 			t->content = ft_strjoin(t->content, ft_strndup(input, i));
 			input = open_dollar(input + i + 1, shell, t);
