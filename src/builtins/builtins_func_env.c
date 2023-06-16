@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+//првоерить по тест кейсам
+
 int check_first_start(t_hashmap *hashmap_key)
 {
     if (!ft_strncmp(hashmap_key->key, "OLDPWD", 6))

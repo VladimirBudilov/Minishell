@@ -3,6 +3,7 @@
 void parse_readline(t_shell *minishell)
 {
 	get_line(minishell);
+	add_history(minishell->input);
 	tokenize(minishell);
     parse_tokens(minishell);
 }

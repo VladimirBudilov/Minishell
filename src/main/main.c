@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **envp)
     {
 		parse_readline(minishell);
         command_func(minishell);
-        print_all_args(minishell->args_array);
+        //print_all_args(minishell->args_array);
         clean_array(minishell);
 
     }

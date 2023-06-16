@@ -95,8 +95,8 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
     }
     t->type = DOLLAR;
     po->string = input + i;
-    printf("t->content: %s\n", t->content);
-    printf("po->string: %s\n", po->string);
+    // printf("t->content: %s\n", t->content);
+    // printf("po->string: %s\n", po->string);
     po->token = *t;
     return po;
 }

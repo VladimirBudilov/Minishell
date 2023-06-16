@@ -25,6 +25,7 @@ void command_func(t_shell *minishell);
 void echo_func(t_token **token_key, int size);
 void env_func(t_hashmap **hashmap_key, t_token **token_key, int size);
 void cd_func(t_hashmap **hashmap_key, t_token **token_key, int size);
+void pwd_func(void);
 
 
 #endif

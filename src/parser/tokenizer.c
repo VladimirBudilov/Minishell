@@ -2,7 +2,6 @@
 
 void tokenize(t_shell *shell) {
     char *input = shell->input;
-
     while (*input) {
         if (*input == ' ')
             input = add_token(shell, (tokenize_white_space(input)));

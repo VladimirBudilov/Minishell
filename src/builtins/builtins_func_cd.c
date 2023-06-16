@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+//првоерить по тест кейсам
+
 void change_path(t_hashmap **hashmap_key, char *path)
 {
     char *pwd;
@@ -75,13 +77,11 @@ void cd_func(t_hashmap **hashmap_key, t_token **token_key, int size)
 
     if (size <= 2 || !ft_strncmp(token_key[2]->content, "~", 2))
     {
-        printf("0\n");
         to_home(hashmap_key);
         return ;
     }
     else if (!ft_strncmp(token_key[2]->content, "-", 2))
     {
-        printf("2\n");
         path = ft_strdup(find_path(hashmap_key, 2));
         if (path == NULL)
         {
