@@ -2,6 +2,8 @@
 
 void clean_array(t_shell *minishell);
 
+void print_all_args(ArrayList *list);
+
 int main(int argc, char **argv, char **envp)
 {
     (void) argv;
@@ -18,14 +20,26 @@ int main(int argc, char **argv, char **envp)
     while (1)
     {
 		parse_readline(minishell);
-        //print_all_tokens_arraylist(minishell->tokens_array);
         command_func(minishell);
+        print_all_args(minishell->args_array);
         clean_array(minishell);
 
     }
     return 0;
 }
 
+void print_all_args(ArrayList *list) {
+    int i;
+    i = 0;
+    while (i < list->size) {
+        //printf("%d\n", ((int) ((t_parser_output *) list->array[i])->main_type));
+        printf("%s", ((t_parser_output *) list->array[i])->content);
+        i++;
+    }
+    printf("\n");
+}
+
 void clean_array(t_shell *minishell) {
     minishell->tokens_array->size = 0;
+    minishell->args_array->size = 0;
 }

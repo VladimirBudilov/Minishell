@@ -1,65 +1,34 @@
-/*
 #include "../../includes/minishell.h"
 
+void parse_tokens(t_shell *shell) {
+    t_token **tokens;
+    ArrayList *args;
+    int size;
+    int i;
 
-void add_argument(t_shell *shell)
-{
-	add_element()
+    i = 0;
+    tokens = (t_token **) shell->tokens_array->array;
+    args = shell->args_array;
+    size = shell->tokens_array->size;
+    if (size == 0)
+        return;
+    while (i < size) {
+        if (tokens[i]->type == BARE_WORD || tokens[i]->type == SINGLE_QUOTES || tokens[i]->type == DOUBLE_QUOTES ||
+            tokens[i]->type == WHITE_SPACE) {
+            add_element(args, create_token(WORDLIST, tokens[i]->content));
+        }
+        i++;
+    }
 }
 
-char *concatenate(char *s1, char *s2)
-{
-	int len = ft_strlen(s1) + strlen(s2) + 1;
-	char *res = malloc(len);
-	*res = 0;
-	strcat(res, s1);
-	strcat(res + strlen(s1), s2);
-	return res;
+t_parser_output *create_token(enum parser_type type, char *content){
+    t_parser_output *token;
+
+    token = malloc(sizeof(t_parser_output));
+    token->main_type = type;
+    token->content = ft_strdup(content);
+    return token;
 }
-
-// struct state {
-// 	variables
-// }
-
-char **parse(*/
-/* struct state *s, *//*
- t_shell *shell)
-{
-	int i = 0;
-
-	while ((t_token *)shell->tokens_array->array[i] != END)
-	{
-		struct token t = *shell;
-
-		switch (t.type)
-		{
-			// case DOLLAR:
-			case STRING:
-			{
-				// parse_strings
-				char *final_string = strdup("");
-				while (shell->type == STRING)
-				{ // May be wrong because of DOLLAR.
-					char *new = concatenate(final_string, shell->content);
-					free(final_string);
-					final_string = new;
-					shell++;
-				}
-				add_argument(final_string);
-			}
-				break;
-			case WHITE_SPACE:
-				// Skip.
-				shell++;
-				break;
-			default:
-				assert(0);
-		}
-	}
-
-	return arguments;
-}
-*/
 
 
 /*

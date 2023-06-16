@@ -20,6 +20,6 @@ t_shell *create_shell()
     minishell->env = NULL;
 	minishell->input = NULL;
 	minishell->tokens_array = createArrayList();
-	//minishell->arguments_array = createArrayList();
+	minishell->args_array = createArrayList();
     return minishell;
 }

@@ -4,6 +4,7 @@ void parse_readline(t_shell *minishell)
 {
 	get_line(minishell);
 	tokenize(minishell);
+    parse_tokens(minishell);
 }
 
 void get_line(t_shell *minishell)
