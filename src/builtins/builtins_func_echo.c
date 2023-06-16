@@ -16,11 +16,11 @@ void print_echo(char *str)
     }
 }
 
-void echo_func(t_token **token)
+void echo_func(t_lexer_token **token)
 {
     //надо решить вопрос с << >> < >
     
-    t_token *tmp;
+    t_lexer_token *tmp;
     int check_n;
 
     check_n = 0;

@@ -4,8 +4,6 @@
 #include "minishell.h"
 
 enum lexer_type {
-	END,
-	STRING,
 	WHITE_SPACE,
 	LESS_THAN_LESS_THAN,
 	LESS_THAN,
@@ -34,12 +32,12 @@ typedef struct parser {
     enum parser_type sub_type;
     int flags;
     char *content;
-} t_parser_output;
+} t_parser_token;
 
 typedef struct token {
 	enum lexer_type type;
 	char *content;
-} t_token;
+} t_lexer_token;
 
 typedef struct tokenizer_output {
 	char *string;

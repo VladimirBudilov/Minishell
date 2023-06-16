@@ -2,10 +2,10 @@
 
 t_tokenizer_output *tokenize_white_space(char *input) {
     t_tokenizer_output *po;
-    t_token *t;
+    t_lexer_token *t;
     int i;
 
-    t = malloc(sizeof(t_token));
+    t = malloc(sizeof(t_lexer_token));
     po = malloc(sizeof(t_tokenizer_output));
     i = 0;
     while (input[i] && input[i] == ' ')
@@ -20,9 +20,9 @@ t_tokenizer_output *tokenize_white_space(char *input) {
 t_tokenizer_output * tokenize_single_quote(char *input) {
     int i;
     t_tokenizer_output *po;
-    t_token *t;
+    t_lexer_token *t;
 
-    t = malloc(sizeof(t_token));
+    t = malloc(sizeof(t_lexer_token));
     po = malloc(sizeof(t_tokenizer_output));
     i = 0;
     input++;
@@ -40,9 +40,9 @@ t_tokenizer_output * tokenize_single_quote(char *input) {
 t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell) {
     int i;
     t_tokenizer_output *po;
-    t_token *t;
+    t_lexer_token *t;
 
-    t = malloc(sizeof(t_token));
+    t = malloc(sizeof(t_lexer_token));
     po = malloc(sizeof(t_tokenizer_output));
 	input++;
     i = 0;
@@ -72,7 +72,7 @@ t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell) {
 
 t_tokenizer_output *tokenize_bare_word(char *input) {
     t_tokenizer_output *po;
-    t_token *t;
+    t_lexer_token *t;
 
     if (is_breaking_character(*input))
         bug("Expected a bare word, but found a breaking character.");
@@ -80,7 +80,7 @@ t_tokenizer_output *tokenize_bare_word(char *input) {
 
     while (input[i] && !is_breaking_character(input[i]))
         i++;
-    t = malloc(sizeof(t_token));
+    t = malloc(sizeof(t_lexer_token));
     po = malloc(sizeof(t_tokenizer_output));
     t->type = BARE_WORD;
     t->content = ft_strndup(input, i);

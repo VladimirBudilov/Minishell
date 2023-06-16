@@ -2,10 +2,10 @@
 
 t_tokenizer_output *tokenize_less(char *input) {
     t_tokenizer_output *po;
-    t_token *t;
+    t_lexer_token *t;
 
     po = malloc(sizeof(t_tokenizer_output));
-    t = malloc(sizeof(t_token));
+    t = malloc(sizeof(t_lexer_token));
     if (*(input + 1) && *(input + 1) == '<') {
         t->type = LESS_THAN_LESS_THAN;
         t->content = "<<";
@@ -22,10 +22,10 @@ t_tokenizer_output *tokenize_less(char *input) {
 
 t_tokenizer_output *tokenize_pipe(char *input) {
     t_tokenizer_output *po;
-    t_token *t;
+    t_lexer_token *t;
 
     po = malloc(sizeof(t_tokenizer_output));
-    t = malloc(sizeof(t_token));
+    t = malloc(sizeof(t_lexer_token));
     t->type = PIPE;
     t->content = "|";
     po->string = input + 1;
@@ -35,10 +35,10 @@ t_tokenizer_output *tokenize_pipe(char *input) {
 
 t_tokenizer_output *tokenize_greater(char *input) {
     t_tokenizer_output *po;
-    t_token *t;
+    t_lexer_token *t;
 
     po = malloc(sizeof(t_tokenizer_output));
-    t = malloc(sizeof(t_token));
+    t = malloc(sizeof(t_lexer_token));
     if (*(input + 1) && *(input + 1) == '>') {
         t->type = GREATER_THAN_GREATER_THAN;
         t->content = ">>";
@@ -59,12 +59,12 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
 
     int i;
     t_tokenizer_output *po;
-    t_token *t;
+    t_lexer_token *t;
 
     i = 0;
     input++;
     po = malloc(sizeof(t_tokenizer_output));
-    t = malloc(sizeof(t_token));
+    t = malloc(sizeof(t_lexer_token));
 
     t->content = ft_strdup("");
     if(*input == '?')
@@ -75,11 +75,11 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
         po->token = *t;
         return po;
     }
-    if(is_breaking_character(*input))
+    if(is_breaking_character(*input) || *input == '\0')
     {
-        t->content = "$";
+        t->content = ft_strdup("$");
         t->type = DOLLAR;
-        po->string = input + 1;
+        po->string = input;
         po->token = *t;
         return po;
     }
