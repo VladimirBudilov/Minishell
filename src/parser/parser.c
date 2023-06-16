@@ -2,6 +2,8 @@
 #include "../../includes/minishell.h"
 
 
+void add_white_space(ArrayList *parser_tokens);
+
 /*
  Open quote
  redo arraylist
@@ -9,7 +11,7 @@
  check func in bin(execver)
  check pipe
  check redir
- 
+
 */
 
 void parse_tokens(t_shell *shell) {
@@ -27,15 +29,35 @@ void parse_tokens(t_shell *shell) {
     while (i < size)
     {
         if(is_joinable(lexer_tokens[i]->type))
-    /*        open_quotes(lexer_tokens, parser_tokens, &i, size);
-        if(is_build_in(lexer_tokens[i]->content))
-            add_build_in(lexer_tokens, parser_tokens, &i, size);
+            open_quotes(lexer_tokens, parser_tokens, &i, size);
+        if(lexer_tokens[i]->type == WHITE_SPACE)
+            add_white_space(parser_tokens);
+        if(lexer_tokens[i]->type == LESS_THAN)
+            add_input_redirect(lexer_tokens, parser_tokens, &i, size);
+        if(lexer_tokens[i]->type == LESS_THAN_LESS_THAN)
+            add_input_redirect(lexer_tokens, parser_tokens, &i, size);
+        if(lexer_tokens[i]->type == LESS_THAN)
+            add_input_redirect(lexer_tokens, parser_tokens, &i, size);
+        if(lexer_tokens[i]->type == LESS_THAN)
+            add_input_redirect(lexer_tokens, parser_tokens, &i, size);
         if(is_execver(lexer_tokens[i]->content))
             add_execver(lexer_tokens, parser_tokens, &i, size);
         if(is_pipe(lexer_tokens[i]->content))
-            add_pipe(lexer_tokens, parser_tokens, &i, size);*/
+            add_pipe(lexer_tokens, parser_tokens, &i, size);
         i++;
     }
+    find_build_in(parser_tokens);
+    find_execver(parser_tokens);
+    validate_tokens(parser_tokens);
+
+}
+
+void add_white_space(ArrayList *parser_tokens) {
+
+    t_parser_token *token;
+
+    token = create_token(WHITE_SPACE, " ");
+    add_element(parser_tokens, token);
 
 }
 
@@ -47,10 +69,8 @@ int is_joinable(enum lexer_type type) {
 
 void open_quotes(t_lexer_token **lexer_tokens, ArrayList *parser_tokens, int *i, int size) {
 
-    int flag;
     t_parser_token *token;
 
-    flag = 0;
     token = create_token(WORDLIST, lexer_tokens[*i]->content);
     add_element(parser_tokens, token);
     *i += 1;

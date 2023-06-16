@@ -17,6 +17,8 @@ enum lexer_type {
 };
 
 enum parser_type {
+
+    SPACE,
     WORDLIST,
     PIPELINE,
     SEQUENCE,
