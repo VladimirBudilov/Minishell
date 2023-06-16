@@ -1,37 +1,5 @@
 #include "../../includes/minishell.h"
 
-
-
-void save_old_pwd_path(t_hashmap **hashmap_key)
-{
-    int i;
-    char *pwd_key;
-
-    i = -1;
-    while (hashmap_key[++i])
-        if (!ft_strncmp (hashmap_key[i]->key, "PWD", 3))
-            pwd_key = hashmap_key[i]->value;
-    i = -1;
-    while (hashmap_key[++i])
-    {
-        if (!ft_strncmp (hashmap_key[i]->key, "OLDPWD", 6))
-        {
-            if (hashmap_key[i]->value == NULL)
-            {
-                hashmap_key[i]->value = calloc(1, 1);
-                hashmap_key[i]->value = ft_strdup(pwd_key);
-            }
-            else
-            {
-                free(hashmap_key[i]->value);
-                hashmap_key[i]->value = ft_strdup(pwd_key);
-            }
-        }
-    }
-}
-
-
-
 void change_path(t_hashmap **hashmap_key, char *path)
 {
     char *pwd;
@@ -40,15 +8,10 @@ void change_path(t_hashmap **hashmap_key, char *path)
 
     i = 0;
     pwd = getcwd(buf, PATH_MAX);
-    printf("pwd = %s\n", pwd);
     while(hashmap_key[i])
     {
         if (!ft_strncmp(hashmap_key[i]->key, "OLDPWD", 6))
-        {
-            //free(hashmap_key[i]->value);
-            hashmap_key[i]->value = pwd;
-            free(pwd);
-        }
+            hashmap_key[i]->value = ft_strdup(pwd);
         i++;
     }    
     if (chdir(path) != 0)
@@ -58,18 +21,13 @@ void change_path(t_hashmap **hashmap_key, char *path)
         ft_putstr_fd(": No such file or directory\n", 2);
     }
     pwd = getcwd(buf, PATH_MAX);
-    printf("pwd 2 = %s\n", pwd);
+    i = 0;
     while(hashmap_key[i])
     {
         if (!ft_strncmp(hashmap_key[i]->key, "PWD", 3))
-        {
-            //free(hashmap_key[i]->value);
-            hashmap_key[i]->value = pwd;
-            free(pwd);
-        }
+            hashmap_key[i]->value = ft_strdup(pwd);
         i++;
     }  
-
 }
 
 char *find_path(t_hashmap **hashmap_key, int task)
@@ -103,17 +61,45 @@ void to_home(t_hashmap **hashmap_key)
     change_path(hashmap_key, path);
 }
 
+void change_old_path(t_hashmap **hashmap_key, char *path)
+{
+    ft_putstr_fd(path, 1);
+    write(1, "\n", 1);
+    change_path(hashmap_key, path);
+}
+
 
 void cd_func(t_hashmap **hashmap_key, t_token **token_key, int size)
 {
+    char *path;
 
-   // char *path;
-
-    if (size <= 2 || token_key[3]->content[0] == '~')
+    if (size <= 2 || !ft_strncmp(token_key[2]->content, "~", 2))
     {
+        printf("0\n");
         to_home(hashmap_key);
         return ;
     }
-
-    //save_old_pwd_path(hashmap_key);
+    else if (!ft_strncmp(token_key[2]->content, "-", 2))
+    {
+        printf("2\n");
+        path = ft_strdup(find_path(hashmap_key, 2));
+        if (path == NULL)
+        {
+            ft_putstr_fd("cd: OLDPWD not set\n", 2);
+            return ;
+        }
+        change_old_path(hashmap_key, path);
+    }
+    else
+    {
+        if (ft_strchr(token_key[2]->content, '~'))
+        {
+            path = ft_strdup(find_path(hashmap_key, 3));
+            path = ft_strjoin(path, ft_strchr(token_key[2]->content, '/'));
+        }
+        else
+            path = ft_strdup(token_key[2]->content);
+        change_path(hashmap_key, path);
+    }
+    free(path);
 }

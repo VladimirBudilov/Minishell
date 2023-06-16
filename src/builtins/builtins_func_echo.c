@@ -19,10 +19,15 @@ void echo_func(t_token **token_key, int size)
     //надо решить вопрос с << >> < >
     //кавычки
     //проверить в конце перенос строки с кэт е когда подкдючим
+    //првоерить по тест кейсам
     int check_n;
     int i = 2;
     check_n = 0;
-
+    if(size <= 2)
+    {
+        write(1, "\n", 1);
+        return ;
+    }
     if (!(ft_strncmp(token_key[i]->content, "-n", 2)))
     {
         check_n = 1;
