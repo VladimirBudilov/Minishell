@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+//проверить по тесткейсам
+
 void pwd_func(void)
 {
     char *pwd;

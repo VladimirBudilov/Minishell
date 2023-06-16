@@ -1,6 +1,7 @@
 #include "../../includes/minishell.h"
 
 //првоерить по тест кейсам
+//зафришить
 
 void change_path(t_hashmap **hashmap_key, char *path)
 {
@@ -18,7 +19,7 @@ void change_path(t_hashmap **hashmap_key, char *path)
     }    
     if (chdir(path) != 0)
     {
-        ft_putstr_fd("cd: ", 2);
+        ft_putstr_fd("minishell: cd: ", 2);
         ft_putstr_fd(path, 2);
         ft_putstr_fd(": No such file or directory\n", 2);
     }
@@ -57,7 +58,7 @@ void to_home(t_hashmap **hashmap_key)
     path = ft_strdup(find_path(hashmap_key, 3));
     if (path == NULL)
     {
-        ft_putstr_fd("cd: HOME not set\n", 2);
+        ft_putstr_fd("minishell: cd: HOME not set\n", 2);
         free(path);
     }
     change_path(hashmap_key, path);
@@ -85,7 +86,7 @@ void cd_func(t_hashmap **hashmap_key, t_token **token_key, int size)
         path = ft_strdup(find_path(hashmap_key, 2));
         if (path == NULL)
         {
-            ft_putstr_fd("cd: OLDPWD not set\n", 2);
+            ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
             return ;
         }
         change_old_path(hashmap_key, path);

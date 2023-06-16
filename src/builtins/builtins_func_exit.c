@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 
+//проверить по тесткейсам
 //зафришить
 
 void exit_func(t_token **token_key, int size)

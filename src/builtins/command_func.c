@@ -26,8 +26,15 @@ void command_func(t_shell *minishell)
         pwd_func();
     else if(!(ft_strncmp(token_key[0]->content, "exit", 4)))
         exit_func(token_key, size);
+    else if(!(ft_strncmp(token_key[0]->content, "export", 4)))
+        export_func(hashmap_key, token_key, size);
     else
+    {
+        ft_putstr_fd("minishell: ", 2);
+        ft_putstr_fd(token_key[0]->content, 2);
+        ft_putstr_fd(": command not found\n", 2);
         return ;
+    }
 
 
 }

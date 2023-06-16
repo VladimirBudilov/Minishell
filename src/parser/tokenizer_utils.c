@@ -23,7 +23,7 @@ char *open_dollar(char *input, t_shell *shell, t_token *t)
     }
     while (input[i] && !(input[i] == '$' && input[i + 1] != '\"'))
     {
-        if(contain_key(shell->env, ft_strndup(input, i + 1)))
+        if(contain_key(shell->env, ft_strndup(input, i + 1)) && !ft_isalnum(input[i + 1]))
         {
             t->content = ft_strjoin(t->content, get_element_by_key(shell->env, ft_strndup(input, i + 1)));
             return input + i + 1;
