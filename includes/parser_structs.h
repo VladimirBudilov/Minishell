@@ -18,8 +18,11 @@ enum lexer_type {
 
 enum parser_type {
 
-    SPACE,
+    NEW_SPACE,
     WORDLIST,
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	REDIRECT_APPEND_OUTPUT,
     PIPELINE,
     SEQUENCE,
     PIPELINE_COMMAND,
