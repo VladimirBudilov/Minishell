@@ -23,6 +23,7 @@ void delete_element(ArrayList* list, int index)
     if (index >= list->size) {
         return;
     }
+    free(list->array[index]);
     while(index < list->size - 1) {
         list->array[index] = list->array[index + 1];
         index++;

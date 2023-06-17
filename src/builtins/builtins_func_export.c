@@ -5,14 +5,16 @@
 //не записывать повторяющиеся аргументы
 
 
-void print_command_export(t_hashmap **hashmap_key, int size)
+
+void print_command_export(t_hashmap **hashmap_key, int size, t_shell *minishell)
 {
     int i;
-    
+
     i = 0;
+    
     if (size <= 2)
     {
-        while(hashmap_key[i])
+        while(i < minishell->env->size)
         {
 
             ft_putstr_fd("declare -x ", 1);
@@ -54,10 +56,7 @@ void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key,
         {
             if (token_key[i]->main_type != NEW_SPACE)
                 if(!check_key(token_key[i]->content, hashmap_key))
-                {
-                    printf("content %s\n", token_key[i]->content);
                     add_element(minishell->env, create_hashmap(token_key[i]->content));
-                }
             i++;
         }
     }
@@ -67,7 +66,7 @@ void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key,
 
 void export_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell)
 {
-    print_command_export(hashmap_key, size);
+    print_command_export(hashmap_key, size, minishell);
     if(!check_valid_arguments(token_key, size))
         return ;
     check_double_arguments(hashmap_key, token_key, size, minishell);
