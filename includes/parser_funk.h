@@ -14,6 +14,24 @@ t_parser_token *create_token(enum parser_type type, char *content);
 void join_words(t_lexer_token *lexer_token, t_parser_token *token);
 void open_quotes(t_lexer_token **lexer_tokens, ArrayList *parser_tokens, int *i, int size);
 int is_joinable(enum lexer_type type);
+void add_white_space(ArrayList *parser_tokens);
+void add_input_redirect(ArrayList *parser_tokens);
+void add_output_redirect(ArrayList *parser_tokens);
+void add_herdoc(ArrayList *parser_tokens);
+void add_append_output(ArrayList *parser_tokens);
+void add_pipe(ArrayList *parser_tokens);
+void find_build_in(ArrayList *parser_tokens);
+void find_execver(ArrayList *parser_tokens);
+void validate_tokens(ArrayList *parser_tokens);
+void create_parser_tokens(t_lexer_token **lexer_tokens, ArrayList *parser_tokens, int size);
+char * ft_str_to_lower(char *content);
+void add_echo(t_parser_token *token);
+void add_cd(t_parser_token *token);
+void add_pwd(t_parser_token *token);
+void add_exprt(t_parser_token *token);
+void add_unset(t_parser_token *pParser);
+void add_envp(t_parser_token *token);
+void add_exit(t_parser_token *token);
 
 /*TOKENIZER*/
 t_tokenizer_output * tokenize_greater(char *input);
