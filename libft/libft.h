@@ -32,7 +32,7 @@ int				ft_ispunct(int c);
 int				ft_islower(int c);
 int				ft_isupper(int c);
 
-int				ft_tolower(int c);
+char ft_tolower(char argument);
 int				ft_toupper(int c);
 
 void			ft_bzero(void *s, size_t n);
