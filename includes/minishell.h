@@ -22,11 +22,11 @@
 void signal_handler(int signal);
 
 void command_func(t_shell *minishell);
-void echo_func(t_token **token_key, int size);
-void env_func(t_hashmap **hashmap_key, t_token **token_key, int size);
-void cd_func(t_hashmap **hashmap_key, t_token **token_key, int size);
+void echo_func(t_parser_token **token_key, int size);
+void env_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size);
+void cd_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size);
 void pwd_func(void);
-void exit_func(t_token **token_key, int size);
-void export_func(t_hashmap **hashmap_key, t_token **token_key, int size);
+void exit_func(t_parser_token **token_key, int size);
+void export_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell);
 
 #endif

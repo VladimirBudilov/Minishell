@@ -8,7 +8,6 @@
 typedef struct s_minishell
 {
     ArrayList *env;
-    ArrayList *export;
     ArrayList *lexer_tokens_array;
     ArrayList *parser_tokens_array;
     char **from_readline;

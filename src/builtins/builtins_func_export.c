@@ -24,29 +24,26 @@ void print_command_export(t_hashmap **hashmap_key, int size)
     }
 }
 
-void add_string_to_export(t_hashmap **hashmap_key, t_token **token_key, int size)
+void add_string_to_export(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell)
 {
     int i;
-    char **exp;
+    (void)hashmap_key;
     i = 2;
     if (size > 2)
     {
         while(token_key[i])
         {
-            if(token_key[i]->type != WHITE_SPASE)
-                if (ft_strchr(token_key[i]->content, '='))
-                {
-                    save_hashmap()
-                }
-                else
+            if(token_key[i]->main_type != NEW_SPACE)
+                add_element(minishell->env, create_hashmap(token_key[i]->content));
+            i++;
         }
     }
 }
 
 
 
-void export_func(t_hashmap **hashmap_key, t_token **token_key, int size)
+void export_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell)
 {
     print_command_export(hashmap_key, size);
-    add_string_to_export(hashmap_key, token_key, size);
+    add_string_to_export(hashmap_key, token_key, size, minishell);
 }

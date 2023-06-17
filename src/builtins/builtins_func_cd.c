@@ -72,7 +72,7 @@ void change_old_path(t_hashmap **hashmap_key, char *path)
 }
 
 
-void cd_func(t_hashmap **hashmap_key, t_token **token_key, int size)
+void cd_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size)
 {
     char *path;
 

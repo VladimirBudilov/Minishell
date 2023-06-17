@@ -19,7 +19,7 @@ void print_echo(char *str)
     }
 }
 
-void echo_func(t_token **token_key, int size)
+void echo_func(t_parser_token **token_key, int size)
 {
     int check_n;
     int i = 2;

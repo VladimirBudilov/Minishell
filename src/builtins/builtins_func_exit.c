@@ -3,7 +3,7 @@
 //проверить по тесткейсам
 //зафришить
 
-void exit_func(t_token **token_key, int size)
+void exit_func(t_parser_token **token_key, int size)
 {
     ft_putstr_fd("exit\n", 1);
     if (size >= 2)

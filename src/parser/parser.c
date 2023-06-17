@@ -159,8 +159,8 @@ void open_quotes(t_lexer_token **lexer_tokens, ArrayList *parser_tokens, int *i,
 
 void join_words(t_lexer_token *lexer_token, t_parser_token *token)
 {
-        token->content = ft_strjoin(token->content, ft_strdup(lexer_token->content));
-    printf("token->content = %s\n", token->content);
+    token->content = ft_strjoin(token->content, ft_strdup(lexer_token->content));
+    //printf("token->content = %s\n", token->content);
 }
 
 t_parser_token *create_token(enum parser_type type, char *content){
