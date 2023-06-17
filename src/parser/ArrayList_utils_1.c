@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-char *get_element_by_key(ArrayList* list, char *key)
+char *get_value_by_key(ArrayList* list, char *key)
 {
     int i;
     i = 0;
@@ -40,3 +40,4 @@ void change_value_by_key(ArrayList* list, char *key, char *value)
         i++;
     }
 }
+

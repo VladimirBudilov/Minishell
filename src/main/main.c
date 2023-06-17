@@ -33,7 +33,7 @@ void print_all_args(ArrayList *list) {
     i = 0;
     while (i < list->size) {
         //printf("%d\n", ((int) ((t_parser_token *) list->array[i])->main_type));
-        printf("parser content : %s\n", ((t_parser_token *) list->array[i])->content);
+        printf("parser type %d parser content : %s\n",((t_parser_token *) list->array[i])->main_type ,((t_parser_token *) list->array[i])->content);
         i++;
     }
     printf("\n");

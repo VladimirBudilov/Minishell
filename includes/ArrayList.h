@@ -24,7 +24,7 @@ void delete_element(ArrayList* list, int index);
 void free_arrayList(ArrayList* list);
 
 /*HELPERS*/
-char *get_element_by_key(ArrayList* list, char *key);
+char *get_value_by_key(ArrayList* list, char *key);
 void print_all_tokens(ArrayList *list);
 void *find_element_by_index(ArrayList* list, int index);
 int contain_key(ArrayList* list, char *key);

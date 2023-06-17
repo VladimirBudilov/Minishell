@@ -21,7 +21,7 @@ void add_herdoc(ArrayList *parser_tokens);
 void add_append_output(ArrayList *parser_tokens);
 void add_pipe(ArrayList *parser_tokens);
 void find_build_in(ArrayList *parser_tokens);
-void find_execver(ArrayList *parser_tokens);
+void find_execver(ArrayList *parser_tokens_array, t_shell *shell);
 void validate_tokens(ArrayList *parser_tokens);
 void create_parser_tokens(t_lexer_token **lexer_tokens, ArrayList *parser_tokens, int size);
 char * ft_str_to_lower(char *content);

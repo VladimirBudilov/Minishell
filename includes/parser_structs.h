@@ -34,6 +34,7 @@ enum parser_type {
     UNSET,
     EXIT,
     EXECUTABLE,
+    DIRECTORY,
     SEQUENCE,
     PIPELINE_COMMAND,
     SEQUENCE_COMMAND,
