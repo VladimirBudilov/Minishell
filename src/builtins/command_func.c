@@ -28,6 +28,8 @@ void command_func(t_shell *minishell)
         exit_func(token_key, size);
     else if(!(ft_strncmp(token_key[0]->content, "export", 4)))
         export_func(hashmap_key, token_key, size, minishell);
+    else if(!(ft_strncmp(token_key[0]->content, "unset", 4)))
+        unset_func(hashmap_key, token_key, size, minishell);
     else
     {
         ft_putstr_fd("minishell: ", 2);

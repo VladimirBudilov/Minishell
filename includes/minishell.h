@@ -18,7 +18,6 @@
 
 
 
-
 void signal_handler(int signal);
 
 void command_func(t_shell *minishell);
@@ -28,5 +27,9 @@ void cd_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size);
 void pwd_func(void);
 void exit_func(t_parser_token **token_key, int size);
 void export_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell);
+void unset_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell);
 
+
+int valid_token(char *str);
+int check_valid_arguments(t_parser_token **token_key, int size);
 #endif
