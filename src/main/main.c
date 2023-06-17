@@ -32,14 +32,14 @@ void print_all_args(ArrayList *list) {
     int i;
     i = 0;
     while (i < list->size) {
-        //printf("%d\n", ((int) ((t_parser_output *) list->array[i])->main_type));
-        printf("%s", ((t_parser_output *) list->array[i])->content);
+        //printf("%d\n", ((int) ((t_parser_token *) list->array[i])->main_type));
+        printf("parser content : %s\n", ((t_parser_token *) list->array[i])->content);
         i++;
     }
     printf("\n");
 }
 
 void clean_array(t_shell *minishell) {
-    minishell->tokens_array->size = 0;
-    minishell->args_array->size = 0;
+    minishell->lexer_tokens_array->size = 0;
+    minishell->parser_tokens_array->size = 0;
 }

@@ -1,11 +1,11 @@
 #include "../../includes/minishell.h"
 
 char *add_token(t_shell *shell, struct tokenizer_output *po) {
-    add_element(shell->tokens_array, &po->token);
+    add_element(shell->lexer_tokens_array, &po->token);
     return po->string;
 }
 
-char *open_dollar(char *input, t_shell *shell, t_token *t)
+char *open_dollar(char *input, t_shell *shell, t_lexer_token *t)
 {
     int i;
 
@@ -15,11 +15,11 @@ char *open_dollar(char *input, t_shell *shell, t_token *t)
         t->content = ft_strjoin(t->content, ft_itoa(shell->exit_code));
         return input + 1;
     }
-    if(is_breaking_character(input[i]))
+    if(is_breaking_character(*input) || *input == '\0')
     {
         t->type = DOLLAR;
         t->content = ft_strjoin(t->content, "$");
-        return input + 1;
+        return input;
     }
     while (input[i] && !(input[i] == '$' && input[i + 1] != '\"'))
     {

@@ -11,8 +11,8 @@ void print_all_tokens(ArrayList *list) {
     int i;
     i = 0;
     while (i < list->size) {
-        printf("%d\n", ((int) ((t_token *) list->array[i])->type));
-        printf("%s\n", ((t_token *) list->array[i])->content);
+        //printf("%d\n", ((int) ((t_lexer_token *) list->array[i])->type));
+        printf("lexer content : %s\n", ((t_lexer_token *) list->array[i])->content);
         i++;
     }
 }
