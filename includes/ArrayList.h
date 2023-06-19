@@ -28,6 +28,7 @@ char *get_value_by_key(ArrayList* list, char *key);
 void print_all_tokens(ArrayList *list);
 void *find_element_by_index(ArrayList* list, int index);
 int contain_key(ArrayList* list, char *key);
+void change_value_by_key(ArrayList* list, char *key, char *value);
 
 /*UTILS*/
 int	ft_strcmp(const char *s1, const char *s2);
