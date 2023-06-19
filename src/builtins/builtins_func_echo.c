@@ -19,12 +19,12 @@ void print_echo(char *str)
     }
 }
 
-void echo_func(t_parser_token **token_key, int size)
+void echo_func(t_parser_token **token_key, t_shell *shell)
 {
     int check_n;
     int i = 2;
     check_n = 0;
-    if(size <= 2)
+    if(shell->parser_tokens_array->size <= 2)
     {
         write(1, "\n", 1);
         return ;
@@ -34,7 +34,7 @@ void echo_func(t_parser_token **token_key, int size)
         check_n = 1;
         i++;
     }
-    while(i < size)
+    while(i < shell->parser_tokens_array->size)
     {
         print_echo(token_key[i]->content);
         i++;

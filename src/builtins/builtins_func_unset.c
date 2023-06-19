@@ -3,12 +3,12 @@
 // get_position изменить
 //првоерить тест кейсы
 
-int get_position_of_element(t_hashmap **hashmap_key, char *key)
+int get_position_of_element(t_hashmap **hashmap_key, char *key, t_shell *shell)
 {
     int i;
 
     i = 0;
-    while(hashmap_key[i])
+    while(i < shell->env->size)
     {
         if (!ft_strncmp(hashmap_key[i]->key, key, ft_strlen(key)))
         {
@@ -20,24 +20,22 @@ int get_position_of_element(t_hashmap **hashmap_key, char *key)
 }
 
 
-void unset_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell)
+void unset_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
 {
     int i;
     
     i = 2;
-    (void)hashmap_key;
-    (void)size;
-    while (i < size)
+    if (!check_valid_arguments(token_key, shell))
+		return ;
+    while (i < shell->parser_tokens_array->size)
     {
         if (token_key[i]->main_type != NEW_SPACE)
         {
-            
-            if(contain_key(minishell->env, token_key[i]->content))
+            if(contain_key(shell->env, token_key[i]->content))
             {
-                delete_element(minishell->env, get_position_of_element(hashmap_key, token_key[i]->content));
+                delete_element(shell->env, get_position_of_element(hashmap_key, token_key[i]->content, shell));
             }
         }
         i++;
     }
-    // printf("size posle %d\n", minishell->env->size);
 }

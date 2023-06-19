@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-int valid_token_for_unset(char *str)
+int valid_token_for_unset(const char *str)
 {
     int i;
 
@@ -45,7 +45,7 @@ int valid_token_for_export(char *str)
 
 }
 
-int check_valid_arguments(t_parser_token **token_key, int size)
+int check_valid_arguments(t_parser_token **token_key, t_shell *shell)
 {
     int check_token;
     int i;
@@ -53,9 +53,9 @@ int check_valid_arguments(t_parser_token **token_key, int size)
     i = 2;
     check_token = 0;
 
-    if(size > 2)
+    if(shell->parser_tokens_array->size > 2)
     {
-        while(token_key[i] && !check_token)
+        while(i < shell->parser_tokens_array->size && !check_token)
         {
             if(token_key[i]->main_type != NEW_SPACE)
             {
@@ -78,5 +78,4 @@ int check_valid_arguments(t_parser_token **token_key, int size)
         }
     }
     return 1;
-
 }

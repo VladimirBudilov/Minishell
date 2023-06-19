@@ -1,42 +1,39 @@
 #include "../../includes/minishell.h"
 
 
-void command_func(t_shell *minishell)
+void command_func(t_shell *shell)
 {
 
-    int size;
     t_parser_token **token_key;
     t_hashmap **hashmap_key;
 
-    if (minishell->input == NULL)
+    if (shell->input == NULL)
         return ;
 
-    size = minishell->parser_tokens_array->size;
-    token_key = (t_parser_token **)minishell->parser_tokens_array->array;
-    hashmap_key = (t_hashmap **)minishell->env->array;
-    // printf("string = %s\n", ((t_token *)minishell->tokens_array->array[0])->content);
 
-    if (!(ft_strncmp(token_key[0]->content, "echo", 4)))
-        echo_func(token_key, size);
-    else if (!(ft_strncmp(token_key[0]->content, "env", 3)))
-        env_func(hashmap_key, token_key, size);
-    else if(!(ft_strncmp(token_key[0]->content, "cd", 2)))
-        cd_func(hashmap_key, token_key, size);
-    else if(!(ft_strncmp(token_key[0]->content, "pwd", 3)))
+    token_key = (t_parser_token **)shell->parser_tokens_array->array;
+    hashmap_key = (t_hashmap **)shell->env->array;
+    // printf("string = %s\n", ((t_token *)shell->tokens_array->array[0])->content);
+
+    if (token_key[0]->sub_type == ECHO)
+        echo_func(token_key, shell);
+    else if (token_key[0]->sub_type == ENVP)
+        env_func(hashmap_key, token_key, shell);
+    else if(token_key[0]->sub_type == CD)
+        cd_func(hashmap_key, token_key, shell);
+    else if(token_key[0]->sub_type == PWD)
         pwd_func();
-    else if(!(ft_strncmp(token_key[0]->content, "exit", 4)))
-        exit_func(token_key, size);
-    else if(!(ft_strncmp(token_key[0]->content, "export", 4)))
-        export_func(hashmap_key, token_key, size, minishell);
-    else if(!(ft_strncmp(token_key[0]->content, "unset", 4)))
-        unset_func(hashmap_key, token_key, size, minishell);
+    else if(token_key[0]->sub_type == EXIT)
+        exit_func(token_key, shell);
+    else if(token_key[0]->sub_type == EXPORT)
+        export_func(hashmap_key, token_key, shell);
+    else if(token_key[0]->sub_type == UNSET)
+        unset_func(hashmap_key, token_key, shell);
     else
     {
-        ft_putstr_fd("minishell: ", 2);
+        ft_putstr_fd("shell: ", 2);
         ft_putstr_fd(token_key[0]->content, 2);
         ft_putstr_fd(": command not found\n", 2);
-        return ;
+        return;
     }
-
-
 }

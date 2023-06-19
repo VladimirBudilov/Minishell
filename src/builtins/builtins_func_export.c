@@ -7,15 +7,15 @@
 
 
 
-void print_command_export(t_hashmap **hashmap_key, int size, t_shell *minishell)
+void print_command_export(t_hashmap **hashmap_key, t_shell *shell)
 {
     int i;
 
     i = 0;
     
-    if (size <= 2)
+    if (shell->parser_tokens_array->size <= 2)
     {
-        while(i < minishell->env->size)
+        while(i < shell->env->size)
         {
 
             ft_putstr_fd("declare -x ", 1);
@@ -32,12 +32,19 @@ void print_command_export(t_hashmap **hashmap_key, int size, t_shell *minishell)
     }
 }
 
-int check_key(char *str, t_hashmap **hashmap_key)
+int check_key(char *str, t_hashmap **hashmap_key, t_shell *shell)
 {
     int i;
-    
+//	char **tmp;
+
     i = 0;
-    while(hashmap_key[i])
+
+//	if(ft_strchr(str, '='))
+//	{
+//		tmp = ft_split(str, '=');
+//	}
+
+    while(i < shell->env->size)
     {
         if(!ft_strncmp(hashmap_key[i]->key, str, ft_strlen(str)))
             return 1;
@@ -46,18 +53,18 @@ int check_key(char *str, t_hashmap **hashmap_key)
     return 0;
 }
 
-void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell)
+void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
 {
     int i;
 
     i = 2;
-    if (size > 2)
+    if (shell->parser_tokens_array->size > 2)
     {
-        while(token_key[i])
+        while(i < shell->parser_tokens_array->size)
         {
             if (token_key[i]->main_type != NEW_SPACE)
-                if(!check_key(token_key[i]->content, hashmap_key))
-                    add_element(minishell->env, create_hashmap(token_key[i]->content));
+                if(!check_key(token_key[i]->content, hashmap_key, shell))
+                    add_element(shell->env, create_hashmap(token_key[i]->content));
             i++;
         }
     }
@@ -65,10 +72,10 @@ void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key,
 
 
 
-void export_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size, t_shell *minishell)
+void export_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
 {
-    print_command_export(hashmap_key, size, minishell);
-    if(!check_valid_arguments(token_key, size))
+    print_command_export(hashmap_key, shell);
+    if(!check_valid_arguments(token_key, shell))
         return ;
-    check_double_arguments(hashmap_key, token_key, size, minishell);
+    check_double_arguments(hashmap_key, token_key, shell);
 }

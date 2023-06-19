@@ -2,12 +2,12 @@
 
 //првоерить по тест кейсам
 
-void env_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size)
+void env_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
 {
     int i;
 
     i = 0;
-    if (size > 2)
+    if (shell->parser_tokens_array->size > 2)
     {
         if (token_key[2]->content[0] != '-')
         {
@@ -25,7 +25,7 @@ void env_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size)
         }
         return ;
     }
-    while(hashmap_key[i])
+    while(i < shell->env->size)
     {
         if (hashmap_key[i]->value != NULL)
         {

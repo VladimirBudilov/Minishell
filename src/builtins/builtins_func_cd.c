@@ -3,7 +3,7 @@
 //првоерить по тест кейсам
 //зафришить
 
-void change_path(t_hashmap **hashmap_key, char *path)
+void change_path(t_hashmap **hashmap_key, char *path, t_shell *shell)
 {
     char *pwd;
     char buf[PATH_MAX];
@@ -11,7 +11,7 @@ void change_path(t_hashmap **hashmap_key, char *path)
 
     i = 0;
     pwd = getcwd(buf, PATH_MAX);
-    while(hashmap_key[i])
+    while(i < shell->env->size)
     {
         if (!ft_strncmp(hashmap_key[i]->key, "OLDPWD", 6))
             hashmap_key[i]->value = ft_strdup(pwd);
@@ -25,21 +25,21 @@ void change_path(t_hashmap **hashmap_key, char *path)
     }
     pwd = getcwd(buf, PATH_MAX);
     i = 0;
-    while(hashmap_key[i])
+    while(i < shell->env->size)
     {
         if (!ft_strncmp(hashmap_key[i]->key, "PWD", 3))
             hashmap_key[i]->value = ft_strdup(pwd);
         i++;
-    }  
+    }
 }
 
-char *find_path(t_hashmap **hashmap_key, int task)
+char *find_path(t_hashmap **hashmap_key, t_shell *shell, int task)
 {
     int i;
     char *path;
 
     i = 0;
-    while(hashmap_key[i])
+    while(i < shell->env->size)
     {
         if (!ft_strncmp(hashmap_key[i]->key, "PWD", 3) && task == 1)
             path = hashmap_key[i]->value;
@@ -52,55 +52,56 @@ char *find_path(t_hashmap **hashmap_key, int task)
     return (path);
 }
 
-void to_home(t_hashmap **hashmap_key)
+void to_home(t_hashmap **hashmap_key, t_shell *shell)
 {
-    char *path;
-    path = ft_strdup(find_path(hashmap_key, 3));
-    if (path == NULL)
-    {
-        ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-        free(path);
-    }
-    change_path(hashmap_key, path);
+    char *home_path;
+	home_path = ft_strdup(find_path(hashmap_key, shell, 3));
+	if (home_path == NULL)
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		free(home_path);
+	} else
+		change_path(hashmap_key, home_path, shell);
+
 }
 
-void change_old_path(t_hashmap **hashmap_key, char *path)
+void change_old_path(t_hashmap **hashmap_key, char *path, t_shell *shell)
 {
     ft_putstr_fd(path, 1);
     write(1, "\n", 1);
-    change_path(hashmap_key, path);
+    change_path(hashmap_key, path, shell);
 }
 
 
-void cd_func(t_hashmap **hashmap_key, t_parser_token **token_key, int size)
+void cd_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
 {
     char *path;
 
-    if (size <= 2 || !ft_strncmp(token_key[2]->content, "~", 2))
+    if (shell->parser_tokens_array->size <= 2 || !ft_strncmp(token_key[2]->content, "~", 2))
     {
-        to_home(hashmap_key);
+        to_home(hashmap_key, shell);
         return ;
     }
     else if (!ft_strncmp(token_key[2]->content, "-", 2))
     {
-        path = ft_strdup(find_path(hashmap_key, 2));
+        path = ft_strdup(find_path(hashmap_key, shell, 2));
         if (path == NULL)
         {
             ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
             return ;
         }
-        change_old_path(hashmap_key, path);
+        change_old_path(hashmap_key, path, shell);
     }
     else
     {
         if (ft_strchr(token_key[2]->content, '~'))
         {
-            path = ft_strdup(find_path(hashmap_key, 3));
+            path = ft_strdup(find_path(hashmap_key, shell, 3));
             path = ft_strjoin(path, ft_strchr(token_key[2]->content, '/'));
         }
         else
             path = ft_strdup(token_key[2]->content);
-        change_path(hashmap_key, path);
+        change_path(hashmap_key, path, shell);
     }
     free(path);
 }
