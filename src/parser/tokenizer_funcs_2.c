@@ -1,12 +1,13 @@
 #include "../../includes/minishell.h"
 
-t_tokenizer_output *tokenize_less(char *input)
+t_tokenizer_output *tokenize_less(char *input, t_shell *shell)
 {
 	t_tokenizer_output *po;
 	t_lexer_token *t;
 
 	po = malloc(sizeof(t_tokenizer_output));
 	t = malloc(sizeof(t_lexer_token));
+	add_element(shell->tokenizer_array, po);
 	if (*(input + 1) && *(input + 1) == '<')
 	{
 		t->type = LESS_THAN_LESS_THAN;
@@ -22,13 +23,14 @@ t_tokenizer_output *tokenize_less(char *input)
 	return po;
 }
 
-t_tokenizer_output *tokenize_pipe(char *input)
+t_tokenizer_output *tokenize_pipe(char *input, t_shell *shell)
 {
 	t_tokenizer_output *po;
 	t_lexer_token *t;
 
 	po = malloc(sizeof(t_tokenizer_output));
 	t = malloc(sizeof(t_lexer_token));
+	add_element(shell->tokenizer_array, po);
 	t->type = PIPE;
 	t->content = "|";
 	po->string = input + 1;
@@ -36,13 +38,14 @@ t_tokenizer_output *tokenize_pipe(char *input)
 	return po;
 }
 
-t_tokenizer_output *tokenize_greater(char *input)
+t_tokenizer_output *tokenize_greater(char *input, t_shell *shell)
 {
 	t_tokenizer_output *po;
 	t_lexer_token *t;
 
 	po = malloc(sizeof(t_tokenizer_output));
 	t = malloc(sizeof(t_lexer_token));
+	add_element(shell->tokenizer_array, po);
 	if (*(input + 1) && *(input + 1) == '>')
 	{
 		t->type = GREATER_THAN_GREATER_THAN;
@@ -70,7 +73,7 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
 	input++;
 	po = malloc(sizeof(t_tokenizer_output));
 	t = malloc(sizeof(t_lexer_token));
-
+	add_element(shell->tokenizer_array, po);
 	t->content = ft_strdup("");
 	if (*input == '?')
 	{

@@ -31,6 +31,7 @@ void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, in
 
 		while (j < size_sub)
 		{
+
 			path = ft_strjoin(ft_strjoin(ft_strdup(paths[j]), "/"), parser_tokens[i]->content);
 			if (access(path, X_OK) == 0
 			&& parser_tokens[i]->main_type == WORDLIST)

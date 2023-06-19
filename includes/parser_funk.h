@@ -35,15 +35,19 @@ void add_exit(t_parser_token *token);
 int get_array_size(char **string);
 int is_directory(char *path);
 void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, int size_sub);
+void find_dirs(ArrayList *parser_tokens);
+
 
 /*TOKENIZER*/
-t_tokenizer_output * tokenize_greater(char *input);
-t_tokenizer_output * tokenize_pipe(char *input);
-t_tokenizer_output * tokenize_less(char *input);t_tokenizer_output *tokenize_single_quote(char *input);
+t_tokenizer_output *tokenize_greater(char *input, t_shell *);
+t_tokenizer_output *tokenize_pipe(char *input, t_shell *shell);
+t_tokenizer_output *tokenize_less(char *input, t_shell *shell);
+
+t_tokenizer_output *tokenize_single_quote(char *input, t_shell *shell);
 t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell);
 t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell);
-t_tokenizer_output * tokenize_bare_word(char *input);
-t_tokenizer_output * tokenize_white_space(char *input);
+t_tokenizer_output *tokenize_bare_word(char *input, t_shell *shell);
+t_tokenizer_output *tokenize_white_space(char *input, t_shell *shell);
 
 /*UTILS*/
 char *open_dollar(char *input, t_shell *shell, t_lexer_token *t);

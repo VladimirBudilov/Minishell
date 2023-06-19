@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-t_tokenizer_output *tokenize_white_space(char *input)
+t_tokenizer_output *tokenize_white_space(char *input, t_shell *shell)
 {
 	t_tokenizer_output *po;
 	t_lexer_token *t;
@@ -8,6 +8,7 @@ t_tokenizer_output *tokenize_white_space(char *input)
 
 	t = malloc(sizeof(t_lexer_token));
 	po = malloc(sizeof(t_tokenizer_output));
+	add_element(shell->tokenizer_array, po);
 	i = 0;
 	while (input[i] && input[i] == ' ')
 		i++;
@@ -18,7 +19,7 @@ t_tokenizer_output *tokenize_white_space(char *input)
 	return po;
 }
 
-t_tokenizer_output *tokenize_single_quote(char *input)
+t_tokenizer_output *tokenize_single_quote(char *input, t_shell *shell)
 {
 	int i;
 	t_tokenizer_output *po;
@@ -26,6 +27,7 @@ t_tokenizer_output *tokenize_single_quote(char *input)
 
 	t = malloc(sizeof(t_lexer_token));
 	po = malloc(sizeof(t_tokenizer_output));
+	add_element(shell->tokenizer_array, po);
 	i = 0;
 	input++;
 	while (input[i] && input[i] != '\'')
@@ -47,6 +49,7 @@ t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell)
 
 	t = malloc(sizeof(t_lexer_token));
 	po = malloc(sizeof(t_tokenizer_output));
+	add_element(shell->tokenizer_array, po);
 	input++;
 	i = 0;
 	while (input[i] && input[i] != '\"')
@@ -73,7 +76,7 @@ t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell)
 	return po;
 }
 
-t_tokenizer_output *tokenize_bare_word(char *input)
+t_tokenizer_output *tokenize_bare_word(char *input, t_shell *shell)
 {
 	t_tokenizer_output *po;
 	t_lexer_token *t;
@@ -86,6 +89,8 @@ t_tokenizer_output *tokenize_bare_word(char *input)
 		i++;
 	t = malloc(sizeof(t_lexer_token));
 	po = malloc(sizeof(t_tokenizer_output));
+	add_element(shell->tokenizer_array, po);
+	t->content = ft_strjoin(t->content, ft_strndup(input, i));
 	t->type = BARE_WORD;
 	t->content = ft_strndup(input, i);
 	po->string = input + i;

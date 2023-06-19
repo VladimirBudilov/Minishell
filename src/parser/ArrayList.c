@@ -1,5 +1,6 @@
 #include "../../includes/minishell_structs.h"
 
+
 ArrayList *createArrayList()
 {
 	ArrayList *list = (ArrayList *) malloc(sizeof(ArrayList));
@@ -33,6 +34,21 @@ void delete_element(ArrayList *list, int index)
 	}
 	list->size--;
 }
+
+//free all elements in list
+void free_arrayList(ArrayList *list)
+{
+	int i;
+	i = 0;
+	while (i < list->size)
+	{
+		free(list->array[i]);
+		i++;
+	}
+	free(list->array);
+	free(list);
+}
+
 
 
 

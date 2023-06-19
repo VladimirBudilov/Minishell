@@ -10,6 +10,7 @@ typedef struct s_minishell
     ArrayList *export;
     ArrayList *lexer_tokens_array;
     ArrayList *parser_tokens_array;
+	ArrayList *tokenizer_array;
     char **from_readline;
     char *input;
     char **cmd;

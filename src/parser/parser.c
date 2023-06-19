@@ -1,17 +1,5 @@
 #include "../../includes/minishell.h"
 
-void find_dirs(ArrayList *parser_tokens);
-
-/*
- +Open quote
- +redo arraylist //fix spaces
- +check build in
- +check func in bin(execver) and add dirrtypes
- check pipe
- check redir
-
-*/
-
 void parse_tokens(t_shell *shell)
 {
 	t_lexer_token **lexer_tokens;
