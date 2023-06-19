@@ -14,6 +14,7 @@
 #include <assert.h>
 #include <string.h>
 #include "ArrayList.h"
+#include <sys/stat.h>
 #include <limits.h>
 
 

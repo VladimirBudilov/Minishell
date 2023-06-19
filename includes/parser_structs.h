@@ -17,13 +17,23 @@ enum lexer_type {
 };
 
 enum parser_type {
-
     NEW_SPACE,
     WORDLIST,
 	REDIRECT_INPUT,
 	REDIRECT_OUTPUT,
 	REDIRECT_APPEND_OUTPUT,
+    HEREDOC,
     PIPELINE,
+    BIlD_IN,
+    CD,
+    PWD,
+    ECHO,
+    EXPORT,
+    ENVP,
+    UNSET,
+    EXIT,
+    EXECUTABLE,
+    DIRECTORY,
     SEQUENCE,
     PIPELINE_COMMAND,
     SEQUENCE_COMMAND,

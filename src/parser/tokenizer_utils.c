@@ -15,6 +15,12 @@ char *open_dollar(char *input, t_shell *shell, t_lexer_token *t)
         t->content = ft_strjoin(t->content, ft_itoa(shell->exit_code));
         return input + 1;
     }
+    if(ft_isdigit(*input))
+    {
+        t->type = DOLLAR;
+        t->content = ft_strjoin(t->content, ft_strdup(""));
+        return input + 1;
+    }
     if(is_breaking_character(*input) || *input == '\0')
     {
         t->type = DOLLAR;
@@ -25,7 +31,7 @@ char *open_dollar(char *input, t_shell *shell, t_lexer_token *t)
     {
         if(contain_key(shell->env, ft_strndup(input, i + 1)) && !ft_isalnum(input[i + 1]))
         {
-            t->content = ft_strjoin(t->content, get_element_by_key(shell->env, ft_strndup(input, i + 1)));
+            t->content = ft_strjoin(t->content, get_value_by_key(shell->env, ft_strndup(input, i + 1)));
             return input + i + 1;
         }
         i++;
@@ -50,7 +56,7 @@ char *ft_strndup(char *str, int n)
 }
 
 int is_breaking_character(char c) {
-    char breaking_characters[] = "\'\"<>|$ \n\t"; // & if bonus.
+    char breaking_characters[] = "\'\"<>|$ \n\t";
 
     int size = sizeof breaking_characters / sizeof *breaking_characters - 1;
     for (int i = 0; i < size; i++) {

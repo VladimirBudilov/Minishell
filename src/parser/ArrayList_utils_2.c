@@ -32,3 +32,21 @@ int ft_strcmp(const char *s1, const char *s2) {
     }
     return (0);
 }
+void *ft_realloc(void *ptr, size_t size)
+{
+    void *new_ptr;
+
+    if (!ptr)
+        return (malloc(size));
+    if (size == 0)
+    {
+        free(ptr);
+        return (NULL);
+    }
+    new_ptr = malloc(size);
+    if (!new_ptr)
+        return (NULL);
+    ft_memcpy(new_ptr, ptr, size);
+    free(ptr);
+    return (new_ptr);
+}

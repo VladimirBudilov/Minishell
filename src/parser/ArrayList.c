@@ -12,7 +12,7 @@ void add_element(ArrayList* list, void *element)
 {
     if (list->size == list->capacity) {
         list->capacity *= 2;
-        list->array = realloc(list->array, list->capacity * sizeof(void *));
+        list->array = ft_realloc(list->array, list->capacity * sizeof(void *));
     }
     list->array[list->size] = element;
     list->size++;
