@@ -32,6 +32,9 @@ void add_exprt(t_parser_token *token);
 void add_unset(t_parser_token *pParser);
 void add_envp(t_parser_token *token);
 void add_exit(t_parser_token *token);
+int get_array_size(char **string);
+int is_directory(char *path);
+void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, int size_sub);
 
 /*TOKENIZER*/
 t_tokenizer_output * tokenize_greater(char *input);

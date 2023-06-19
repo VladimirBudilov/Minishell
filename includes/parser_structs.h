@@ -17,7 +17,6 @@ enum lexer_type {
 };
 
 enum parser_type {
-
     NEW_SPACE,
     WORDLIST,
 	REDIRECT_INPUT,

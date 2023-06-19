@@ -17,17 +17,5 @@ void add_echo(t_parser_token *token) {
     }
 }
 
-char * ft_str_to_lower(char *content) {
-    int i;
-    char *str;
 
-    str = ft_strdup(content);
-    i = 0;
-    while (str[i])
-    {
-        str[i] = ft_tolower(str[i]);
-        i++;
-    }
-    return str;
-}
 
