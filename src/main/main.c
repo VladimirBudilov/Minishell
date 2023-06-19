@@ -20,7 +20,7 @@ int main(int argc, char **argv, char **envp)
     while (1)
     {
 		parse_readline(minishell);
-        command_func(minishell);
+        command_func(minishell, envp);
         //print_all_args(minishell->args_array);
         clean_array(minishell);
 

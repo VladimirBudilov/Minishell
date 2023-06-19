@@ -79,3 +79,16 @@ int check_valid_arguments(t_parser_token **token_key, t_shell *shell)
     }
     return 1;
 }
+
+void free_arr(char **arr)
+{
+	int i;
+
+	i = 0;
+	while(arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
