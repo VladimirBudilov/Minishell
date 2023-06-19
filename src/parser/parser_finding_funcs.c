@@ -29,7 +29,8 @@ void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, in
 		j = 0;
 		while (j < size_sub)
 		{
-			if (access(ft_strjoin(ft_strjoin(paths[j], "/"), parser_tokens[i]->content), X_OK) == 0)
+			if (access(ft_strjoin(ft_strjoin(paths[j], "/"), parser_tokens[i]->content), X_OK) == 0
+			&& parser_tokens[i]->main_type == WORDLIST)
 			{
 				stat(ft_strjoin(ft_strjoin(paths[j], "/"), parser_tokens[i]->content), &s);
 				if (S_ISREG(s.st_mode))
@@ -88,20 +89,20 @@ void find_build_in(ArrayList *parser_tokens)
 	int i;
 	t_parser_token **tokens;
 
-	tokens = (t_parser_token **) parser_tokens->array;
-	i = 0;
-	while (i < parser_tokens->size)
-	{
-		if (tokens[i]->main_type == WORDLIST)
-		{
-			add_echo(tokens[i]);
-			add_cd(tokens[i]);
-			add_pwd(tokens[i]);
-			add_exprt(tokens[i]);
-			add_unset(tokens[i]);
-			add_envp(tokens[i]);
-			add_exit(tokens[i]);
-		}
-		i++;
-	}
+    tokens = (t_parser_token **) parser_tokens->array;
+    i = 0;
+    while (i < parser_tokens->size)
+    {
+        if(tokens[i]->main_type == WORDLIST)
+        {
+			add_echo(tokens[i], parser_tokens, i);
+            add_cd(tokens[i]);
+            add_pwd(tokens[i]);
+            add_exprt(tokens[i]);
+            add_unset(tokens[i]);
+            add_envp(tokens[i]);
+            add_exit(tokens[i]);
+        }
+        i++;
+    }
 }

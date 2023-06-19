@@ -25,7 +25,7 @@ void find_execver(ArrayList *parser_tokens_array, t_shell *shell);
 void validate_tokens(ArrayList *parser_tokens);
 void create_parser_tokens(t_lexer_token **lexer_tokens, ArrayList *parser_tokens, int size);
 char * ft_str_to_lower(char *content);
-void add_echo(t_parser_token *token);
+void add_echo(t_parser_token *token, ArrayList *tokens_array, int index);
 void add_cd(t_parser_token *token);
 void add_pwd(t_parser_token *token);
 void add_exprt(t_parser_token *token);

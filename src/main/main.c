@@ -4,6 +4,8 @@ void clean_array(t_shell *minishell);
 
 void print_all_args(ArrayList *list);
 
+void free_arrayList_env(ArrayList *tokens);
+
 int main(int argc, char **argv, char **envp)
 {
     (void) argv;
@@ -23,6 +25,7 @@ int main(int argc, char **argv, char **envp)
         //print_all_tokens(minishell->lexer_tokens_array);
         print_all_args(minishell->parser_tokens_array);
         clean_array(minishell);
+		system("leaks minishell");
 
     }
     return 0;
@@ -40,6 +43,37 @@ void print_all_args(ArrayList *list) {
 }
 
 void clean_array(t_shell *minishell) {
+	free_arrayList_env(minishell->env);
+	//free_arrayList(minishell->lexer_tokens_array);
+	//free_arrayList(minishell->parser_tokens_array);
     minishell->lexer_tokens_array->size = 0;
     minishell->parser_tokens_array->size = 0;
+}
+
+void free_arrayList_env(ArrayList *tokens)
+{
+	int i;
+	i = 0;
+	while (i < tokens->size)
+	{
+		free(((t_hashmap *) tokens->array[i])->key);
+		free(((t_hashmap *) tokens->array[i])->value);
+		free(tokens->array[i]);
+		i++;
+	}
+	free(tokens->array);
+	free(tokens);
+
+}
+
+//free array list
+void free_arrayList(ArrayList *list) {
+	int i;
+	i = 0;
+	while (i < list->size) {
+		free(list->array[i]);
+		i++;
+	}
+	free(list->array);
+	free(list);
 }
