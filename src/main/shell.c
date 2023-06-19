@@ -21,10 +21,7 @@ t_shell *create_shell()
 	minishell->input = NULL;
 	minishell->lexer_tokens_array = createArrayList();
 	minishell->parser_tokens_array = createArrayList();
-<<<<<<< Updated upstream
-	 return minishell;
-=======
 	minishell->tokenizer_array = createArrayList();
     return minishell;
->>>>>>> Stashed changes
+
 }

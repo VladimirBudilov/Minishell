@@ -90,7 +90,6 @@ t_tokenizer_output *tokenize_bare_word(char *input, t_shell *shell)
 	t = malloc(sizeof(t_lexer_token));
 	po = malloc(sizeof(t_tokenizer_output));
 	add_element(shell->tokenizer_array, po);
-	t->content = ft_strjoin(t->content, ft_strndup(input, i));
 	t->type = BARE_WORD;
 	t->content = ft_strndup(input, i);
 	po->string = input + i;

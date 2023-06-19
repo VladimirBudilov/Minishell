@@ -3,6 +3,7 @@
 char *add_token(t_shell *shell, struct tokenizer_output *po)
 {
 	add_element(shell->lexer_tokens_array, &po->token);
+	free(po->token.content);
 	return po->string;
 }
 

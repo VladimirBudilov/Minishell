@@ -68,6 +68,7 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
 	int i;
 	t_tokenizer_output *po;
 	t_lexer_token *t;
+	char *temp;
 
 	i = 0;
 	input++;
@@ -96,16 +97,19 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
 		t->type = DOLLAR;
 		po->string = input;
 		po->token = *t;
+
 		return po;
 	}
 	while (input[i] && !is_breaking_character(input[i]))
 	{
-		if (contain_key(shell->env, ft_strndup(input, i + 1)) && !ft_isalnum(input[i + 1]))
+		temp = ft_strndup(input, i + 1);
+		if (contain_key(shell->env, temp) && !ft_isalnum(input[i + 1]))
 		{
-			t->content = ft_strjoin(t->content, get_value_by_key(shell->env, ft_strndup(input, i + 1)));
+			t->content = ft_strjoin(t->content, get_value_by_key(shell->env, (temp)));
 			i++;
 			break;
 		}
+		free(temp);
 		i++;
 	}
 	t->type = DOLLAR;

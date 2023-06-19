@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 
+void free_lexer_tokens(ArrayList *tokens);
 
 int main(int argc, char **argv, char **envp)
 {
@@ -17,11 +18,10 @@ int main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		parse_readline(minishell);
-		system("leaks minishell");
-		//print_all_tokens(minishell->lexer_tokens_array);
-		print_all_args(minishell->parser_tokens_array);
+		//print_all_args(minishell->parser_tokens_array);
+		print_all_tokens(minishell->lexer_tokens_array);
 		clean_array(minishell);
-
+		system("leaks minishell");
 	}
 	return 0;
 }
@@ -42,7 +42,23 @@ void print_all_args(ArrayList *list)
 
 void clean_array(t_shell *minishell)
 {
-	//free_arrayList(minishell->env);
+	//free_lexer_tokens(minishell->lexer_tokens_array);
 	minishell->lexer_tokens_array->size = 0;
 	minishell->parser_tokens_array->size = 0;
+
+}
+
+void free_lexer_tokens(ArrayList *tokens)
+{
+	int i;
+	t_lexer_token *token;
+
+	i = 0;
+	while (i < tokens->size)
+	{
+		token = find_element_by_index(tokens, i);
+		free(token->content);
+		free(token);
+		i++;
+	}
 }
