@@ -15,6 +15,12 @@ char *open_dollar(char *input, t_shell *shell, t_lexer_token *t)
         t->content = ft_strjoin(t->content, ft_itoa(shell->exit_code));
         return input + 1;
     }
+    if(ft_isdigit(*input))
+    {
+        t->type = DOLLAR;
+        t->content = ft_strjoin(t->content, ft_strdup(""));
+        return input + 1;
+    }
     if(is_breaking_character(*input) || *input == '\0')
     {
         t->type = DOLLAR;

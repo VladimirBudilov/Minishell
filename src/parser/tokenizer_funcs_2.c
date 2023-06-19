@@ -69,7 +69,14 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
     t->content = ft_strdup("");
     if(*input == '?')
     {
-        t->content = ft_itoa(shell->exit_code);
+        t->content = ft_strjoin(t->content, ft_itoa(shell->exit_code));
+        t->type = DOLLAR;
+        po->string = input + 1;
+        po->token = *t;
+        return po;
+    }
+    if(ft_isdigit(*input))
+    {
         t->type = DOLLAR;
         po->string = input + 1;
         po->token = *t;
