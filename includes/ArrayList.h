@@ -32,6 +32,7 @@ int contain_key(ArrayList* list, char *key);
 /*UTILS*/
 int	ft_strcmp(const char *s1, const char *s2);
 t_hashmap *create_hashmap(char *string);
+void *ft_realloc(void *ptr, size_t size);
 
 
 #endif //MINI_ARRAYLIST_H
