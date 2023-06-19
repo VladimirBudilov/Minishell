@@ -20,9 +20,31 @@ t_hashmap *create_hashmap(char *string)
     t_hashmap *hashmap;
     char **array;
 
-    hashmap = (t_hashmap *)malloc(sizeof(t_hashmap));
+    hashmap = malloc(sizeof(t_hashmap));
     array = ft_split(string, '=');
+	if(get_array_size(array) > 2)
+	{
+		hashmap->value = array[1];
+		int i = 2;
+		while(array[i])
+		{
+			hashmap->value = ft_strjoin(hashmap->value, "=");
+			hashmap->value = ft_strjoin(hashmap->value, array[i]);
+			free(array[i]);
+			i++;
+		}
+	}
+	else
+		hashmap->value = array[1];
     hashmap->key = array[0];
-    hashmap->value = array[1];
+
+    if (!ft_strncmp(hashmap->key, "OLDPWD", 6))
+	{
+		free(array[1]);
+		hashmap->value = ft_strdup("");
+	}
+	free(array);
     return hashmap;
 }
+
+

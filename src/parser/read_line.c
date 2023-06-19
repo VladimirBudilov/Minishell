@@ -7,7 +7,7 @@ void parse_readline(t_shell *minishell)
 		return;
 	add_history(minishell->input);
 	tokenize(minishell);
-	parse_tokens(minishell);
+	//parse_tokens(minishell);
 }
 
 void get_line(t_shell *minishell)

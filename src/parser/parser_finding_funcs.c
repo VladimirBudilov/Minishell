@@ -27,12 +27,15 @@ void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, in
 	while (i < size_main)
 	{
 		j = 0;
+		char *path;
+
 		while (j < size_sub)
 		{
-			if (access(ft_strjoin(ft_strjoin(paths[j], "/"), parser_tokens[i]->content), X_OK) == 0
+			path = ft_strjoin(ft_strjoin(ft_strdup(paths[j]), "/"), parser_tokens[i]->content);
+			if (access(path, X_OK) == 0
 			&& parser_tokens[i]->main_type == WORDLIST)
 			{
-				stat(ft_strjoin(ft_strjoin(paths[j], "/"), parser_tokens[i]->content), &s);
+				stat(path, &s);
 				if (S_ISREG(s.st_mode))
 				{
 					parser_tokens[i]->main_type = EXECUTABLE;
@@ -43,6 +46,7 @@ void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, in
 					break;
 				}
 			}
+			free(path);
 			j++;
 		}
 		i++;
