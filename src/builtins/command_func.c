@@ -10,10 +10,8 @@ void command_func(t_shell *shell, char **envp)
     if (shell->input == NULL)
         return ;
 
-
     token_key = (t_parser_token **)shell->parser_tokens_array->array;
     hashmap_key = (t_hashmap **)shell->env->array;
-    // printf("string = %s\n", ((t_token *)shell->tokens_array->array[0])->content);
 
     if (token_key[0]->sub_type == ECHO)
         echo_func(token_key, shell);
@@ -36,6 +34,6 @@ void command_func(t_shell *shell, char **envp)
         ft_putstr_fd("shell: ", 2);
         ft_putstr_fd(token_key[0]->content, 2);
         ft_putstr_fd(": command not found\n", 2);
-        return;
+        return ;
     }
 }
