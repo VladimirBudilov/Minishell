@@ -33,6 +33,7 @@ void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, in
             if (access(ft_strjoin(ft_strjoin(paths[j], "/"), parser_tokens[i]->content), X_OK) == 0)
             {
                 stat(ft_strjoin(ft_strjoin(paths[j], "/"), parser_tokens[i]->content), &s);
+
                 if(S_ISREG(s.st_mode))
                 {
                     parser_tokens[i]->main_type = EXECUTABLE;

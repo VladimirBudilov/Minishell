@@ -27,7 +27,7 @@ void command_func(t_shell *shell, char **envp)
         export_func(hashmap_key, token_key, shell);
     else if (token_key[0]->sub_type == UNSET)
         unset_func(hashmap_key, token_key, shell);
-	else if (token_key[0]->main_type == EXECUTABLE)
+	else if (token_key[0]->main_type == EXECUTABLE || token_key[0]->content[0] == '/' || token_key[0]->content[0] == '.' || token_key[0]->content[0] == '~')
 		ex_func(token_key, shell, envp);
     else
     {
