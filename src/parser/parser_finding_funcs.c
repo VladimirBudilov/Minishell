@@ -38,11 +38,6 @@ void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, in
                     parser_tokens[i]->main_type = EXECUTABLE;
                     break ;
                 }
-                else
-                {
-                    parser_tokens[i]->main_type = DIRECTORY;
-                    break ;
-                }
             }
             j++;
         }
