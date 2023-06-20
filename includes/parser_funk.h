@@ -29,7 +29,7 @@ void add_echo(t_parser_token *token, ArrayList *tokens_array, int index);
 void add_cd(t_parser_token *token);
 void add_pwd(t_parser_token *token);
 void add_exprt(t_parser_token *token);
-void add_unset(t_parser_token *pParser);
+void add_unset(t_parser_token *token);
 void add_envp(t_parser_token *token);
 void add_exit(t_parser_token *token);
 int get_array_size(char **string);
@@ -48,9 +48,10 @@ t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell);
 t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell);
 t_tokenizer_output *tokenize_bare_word(char *input, t_shell *shell);
 t_tokenizer_output *tokenize_white_space(char *input, t_shell *shell);
+void add_parser_token(ArrayList *tokens_array, enum parser_type type, const char *content);
 
 /*UTILS*/
-char *open_dollar(char *input, t_shell *shell, t_lexer_token *t);
+int open_dollar(char *input, t_shell *shell, t_lexer_token *t);
 char *ft_strndup(char *str, int n);
 char *add_token(t_shell *shell, struct tokenizer_output *po);
 int is_breaking_character(char c);

@@ -16,6 +16,7 @@ t_tokenizer_output *tokenize_white_space(char *input, t_shell *shell)
 	t->type = WHITE_SPACE;
 	t->content = ft_strdup(" ");
 	po->token = *t;
+    free(t);
 	return po;
 }
 
@@ -38,41 +39,43 @@ t_tokenizer_output *tokenize_single_quote(char *input, t_shell *shell)
 	t->type = SINGLE_QUOTES;
 	t->content = ft_strndup(input, i);
 	po->token = *t;
+    free(t);
 	return po;
 }
+
 
 t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell)
 {
 	int i;
+    int last_dollar;
 	t_tokenizer_output *po;
 	t_lexer_token *t;
+    char *temp;
 
 	t = malloc(sizeof(t_lexer_token));
 	po = malloc(sizeof(t_tokenizer_output));
 	add_element(shell->tokenizer_array, po);
 	input++;
 	i = 0;
-	while (input[i] && input[i] != '\"')
-		i++;
-	if (input[i] == 0)
-		error("Unclosed double quote.");
-	i = 0;
+    last_dollar = 0;
 	t->content = ft_strdup("");
 	while (input[i] && input[i] != '\"')
 	{
 		if (input[i] == '$')
 		{
-			t->content = ft_strjoin(t->content, ft_strndup(input, i));
-			input = open_dollar(input + i + 1, shell, t);
-			i = 0;
-			continue;
+            i += open_dollar(input + i, shell, t);
+            continue;
 		}
+        t->content = ft_strjoin(t->content, (temp = ft_strndup(input + i, 1)));
+        free(temp);
 		i++;
 	}
+    if (input[0] == 0)
+        error("Unclosed double quote.");
 	po->string = input + i + 1;
 	t->type = DOUBLE_QUOTES;
-	t->content = ft_strjoin(t->content, ft_strndup(input, i));
 	po->token = *t;
+    free(t);
 	return po;
 }
 
@@ -94,6 +97,6 @@ t_tokenizer_output *tokenize_bare_word(char *input, t_shell *shell)
 	t->content = ft_strndup(input, i);
 	po->string = input + i;
 	po->token = *t;
-
+    free(t);
 	return po;
 }

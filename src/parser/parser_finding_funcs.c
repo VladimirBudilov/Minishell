@@ -1,13 +1,17 @@
 #include "../../includes/minishell.h"
 
+void free_array(char **paths);
+
 void find_execver(ArrayList *parser_tokens_array, t_shell *shell)
 {
 	t_parser_token **parser_tokens;
 	char **paths;
 	int size;
+    char *temp;
 
 	parser_tokens = (t_parser_token **) (parser_tokens_array->array);
-	paths = ft_split(ft_strdup(get_value_by_key(shell->env, "PATH")), ':');
+    temp = ft_strdup(get_value_by_key(shell->env, "PATH"));
+	paths = ft_split(temp, ':');
 	size = get_array_size(paths);
 	if (size == 0)
 	{
@@ -15,6 +19,18 @@ void find_execver(ArrayList *parser_tokens_array, t_shell *shell)
 		return;
 	}
 	add_execver(parser_tokens, paths, parser_tokens_array->size, size);
+    free(temp);
+    free_array(paths);
+}
+
+void free_array(char **paths) {
+    int i;
+
+    i = 0;
+    while (paths[i])
+        free(paths[i++]);
+    free(paths);
+
 }
 
 void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, int size_sub)
@@ -39,15 +55,12 @@ void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, in
 				stat(path, &s);
 				if (S_ISREG(s.st_mode))
 				{
+                    free(path);
 					parser_tokens[i]->main_type = EXECUTABLE;
-					break;
-				} else
-				{
-					parser_tokens[i]->main_type = DIRECTORY;
 					break;
 				}
 			}
-			free(path);
+            free(path);
 			j++;
 		}
 		i++;

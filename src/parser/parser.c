@@ -16,7 +16,6 @@ void parse_tokens(t_shell *shell)
 	find_execver(parser_tokens, shell);
 	find_dirs(parser_tokens);
 	//validate_tokens(parser_tokens);
-
 }
 
 

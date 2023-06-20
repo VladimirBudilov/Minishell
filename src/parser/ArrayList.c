@@ -5,7 +5,7 @@ ArrayList *createArrayList()
 {
 	ArrayList *list = (ArrayList *) malloc(sizeof(ArrayList));
 	list->size = 0;
-	list->capacity = 10;
+	list->capacity = 1000;
 	list->array = (void **) malloc(list->capacity * sizeof(void *));
 	return list;
 }
