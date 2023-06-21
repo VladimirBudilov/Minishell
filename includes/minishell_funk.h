@@ -11,5 +11,14 @@ void welcome_message();
 void print_env(char **envp);
 ArrayList *add_env(char **envp);
 void add_tokens(t_shell *minishell);
+void clean_array(t_shell *minishell);
+void print_all_args(ArrayList *list);
+void free_tokenizer_output_array(ArrayList *tokens);
+
+void free_parser_tokens(ArrayList *tokens);
+
+void clean_all(t_shell *shell);
+
+void free_env(ArrayList *tokens);
 
 #endif //MINI_MINISHELL_FUNK_H
