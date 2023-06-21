@@ -2,25 +2,40 @@
 
 void free_array(char **paths);
 
+void add_execver_from_path(t_parser_token **parser_tokens, char **paths, int *i, int *j);
+
+void add_execvere(t_parser_token **parser_tokens, t_shell *shell);
+
 void find_execver(ArrayList *parser_tokens_array, t_shell *shell)
 {
 	t_parser_token **parser_tokens;
-	char **paths;
-	int size;
-    char *temp;
-
 	parser_tokens = (t_parser_token **) (parser_tokens_array->array);
-    temp = ft_strdup(get_value_by_key(shell->env, "PATH"));
-	paths = ft_split(temp, ':');
-	size = get_array_size(paths);
-	if (size == 0)
-	{
-		error("PATH is not set");
-		return;
-	}
-	add_execver(parser_tokens, paths, parser_tokens_array->size, size);
-    free(temp);
-    free_array(paths);
+    parse_execver_from_path(parser_tokens, shell);
+    add_execvere(parser_tokens, shell);
+
+}
+
+void add_execvere(t_parser_token **parser_tokens, t_shell *shell) {
+
+    int size;
+    int i;
+    struct stat s;
+
+    i = 0;
+    size = shell->parser_tokens_array->size;
+    while(i < size)
+    {
+        if (parser_tokens[i]->main_type == WORDLIST) {
+            if (access(parser_tokens[i]->content, X_OK) == 0
+                && parser_tokens[i]->main_type == WORDLIST) {
+                stat(parser_tokens[i]->content, &s);
+                if (S_ISREG(s.st_mode)) {
+                    parser_tokens[i]->main_type = EXECUTABLE;
+                }
+            }
+        }
+        i++;
+    }
 }
 
 void free_array(char **paths) {
@@ -33,38 +48,55 @@ void free_array(char **paths) {
 
 }
 
-void add_execver(t_parser_token **parser_tokens, char **paths, int size_main, int size_sub)
+void parse_execver_from_path(t_parser_token **parser_tokens, t_shell *shell)
 {
-	int i;
-	int j;
-	struct stat s;
+    int i;
+    int j;
+    char **paths;
+    int size_sub;
+    char *temp;
 
+    temp = ft_strdup(get_value_by_key(shell->env, "PATH"));
+    paths = ft_split(temp, ':');
+    size_sub = get_array_size(paths);
+    if (size_sub == 0)
+    {
+        error("PATH is not set");
+        return;
+    }
 	i = 0;
-	while (i < size_main)
+	while (i < shell->parser_tokens_array->size)
 	{
 		j = 0;
-		char *path;
-
 		while (j < size_sub)
 		{
-
-			path = ft_strjoin(ft_strjoin(ft_strdup(paths[j]), "/"), parser_tokens[i]->content);
-			if (access(path, X_OK) == 0
-			&& parser_tokens[i]->main_type == WORDLIST)
-			{
-				stat(path, &s);
-				if (S_ISREG(s.st_mode))
-				{
-                    free(path);
-					parser_tokens[i]->main_type = EXECUTABLE;
-					break;
-				}
-			}
-            free(path);
+            add_execver_from_path(parser_tokens, paths, &i, &j);
 			j++;
 		}
 		i++;
 	}
+    free(temp);
+    free_array(paths);
+}
+
+void add_execver_from_path(t_parser_token **parser_tokens, char **paths, int *i, int *j)
+{
+    char *path;
+    struct stat s;
+
+    path = ft_strjoin(ft_strjoin(ft_strdup(paths[*j]), "/"), parser_tokens[*i]->content);
+    if (access(path, X_OK) == 0
+        && parser_tokens[*i]->main_type == WORDLIST)
+    {
+        stat(path, &s);
+        if (S_ISREG(s.st_mode))
+        {
+            free(path);
+            parser_tokens[*i]->main_type = EXECUTABLE;
+            return;
+        }
+    }
+    free(path);
 }
 
 void find_dirs(ArrayList *parser_tokens)

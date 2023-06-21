@@ -1,6 +1,5 @@
 #include "../../includes/minishell.h"
 
-
 int main(int argc, char **argv, char **envp)
 {
 	(void) argv;
@@ -23,6 +22,5 @@ int main(int argc, char **argv, char **envp)
 
     }
     return 0;
+    clean_all(minishell);
 }
-
-
