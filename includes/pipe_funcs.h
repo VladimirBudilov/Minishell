@@ -1,0 +1,4 @@
+#ifndef MINI_PIPE_FUNCS_H
+#define MINI_PIPE_FUNCS_H
+
+#endif //MINI_PIPE_FUNCS_H

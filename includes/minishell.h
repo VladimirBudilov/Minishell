@@ -16,6 +16,8 @@
 #include "ArrayList.h"
 #include <sys/stat.h>
 #include <limits.h>
+#include "pipe_funcs.h"
+#include "pipe_structs.h"
 
 
 
