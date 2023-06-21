@@ -29,7 +29,7 @@ void echo_func(t_parser_token **token_key, t_shell *shell)
         write(1, "\n", 1);
         return ;
     }
-    if (!(ft_strncmp(token_key[i]->content, "-n", 2)))
+    if (!(ft_strncmp(token_key[i]->content, "-n", 2)) && token_key[i]->content[2] == '\0')
     {
         check_n = 1;
         i++;

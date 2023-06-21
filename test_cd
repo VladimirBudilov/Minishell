@@ -1,0 +1,19 @@
+cd
+cd .
+cd ..
+cd /Users
+cd /
+cd '/'
+cd //////
+cd ./././
+cd ../../..
+cd '/////' >/dev/null
+cd "$PWD/directory"
+cd $PWD/directory
+cd $OLDPWD/directory
+cd "doesntexist"
+cd ?
+cd +
+cd _
+cd woof
+cd bark bark

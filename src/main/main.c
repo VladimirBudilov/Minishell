@@ -17,8 +17,8 @@ int main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		parse_readline(minishell);
+		//print_all_args(minishell->parser_tokens_array);
         command_func(minishell, envp);
-        //print_all_args(minishell->args_array);
         clean_array(minishell);
 
     }

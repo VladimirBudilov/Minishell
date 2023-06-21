@@ -39,7 +39,9 @@ t_hashmap *create_hashmap(char *string)
     hashmap->key = array[0];
     hashmap->value = array[1];
     if (!ft_strncmp(hashmap->key, "OLDPWD", 6))
-        hashmap->value = NULL;
+	{
+		hashmap->value = NULL;
+	}
     return hashmap;
 }
 
