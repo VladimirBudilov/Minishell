@@ -1,6 +1,5 @@
 #include "../../includes/minishell.h"
 
-
 int main(int argc, char **argv, char **envp)
 {
 	(void) argv;
@@ -17,13 +16,8 @@ int main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		parse_readline(minishell);
-		//print_all_tokens(minishell->lexer_tokens_array);
-       // print_all_args(minishell->parser_tokens_array);
 		clean_array(minishell);
-        //system("leaks minishell");
 	}
     clean_all(minishell);
 	return 0;
 }
-
-
