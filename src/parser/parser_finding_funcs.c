@@ -92,7 +92,7 @@ void add_execver_from_path(t_parser_token **parser_tokens, char **paths, int *i,
         if (S_ISREG(s.st_mode))
         {
             free(path);
-            parser_tokens[*i]->main_type = EXECUTABLE;
+            parser_tokens[*i]->main_type = EXECUTABLE_PATH;
             return;
         }
     }

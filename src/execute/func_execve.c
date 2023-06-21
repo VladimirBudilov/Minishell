@@ -10,14 +10,14 @@ void ex_func(t_parser_token **token_key, t_shell *shell, char **envp)
 	int status;
 	int i;
 
-	if (token_key[0]->content[0] == '/')
+	if (token_key[0]->main_type == EXECUTABLE)
 	{
 		argv = ft_split(shell->input, ' ');
 		pid = fork();
 		if(pid == 0)
 		{
 			execve(token_key[0]->content, argv, envp);
-//			free_arr(argv);
+			free_arr(argv);
 			exit(EXIT_FAILURE);
 		}
 		waitpid(pid, &status, 0);
@@ -41,8 +41,8 @@ void ex_func(t_parser_token **token_key, t_shell *shell, char **envp)
 			}
 			i++;
 		}
-//		free_arr(argv);
-//		free_arr(path);
+		free_arr(argv);
+		free_arr(path);
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
