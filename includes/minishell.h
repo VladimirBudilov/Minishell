@@ -33,6 +33,7 @@ void export_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *s
 void unset_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell);
 void ex_func(t_parser_token **token_key, t_shell *shell, char **envp);
 
+void print_all_pipe(ArrayList *pipes_array);
 
 int check_valid_arguments(t_parser_token **token_key, t_shell *shell);
 void free_arr(char **arr);

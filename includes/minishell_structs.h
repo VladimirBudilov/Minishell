@@ -11,6 +11,9 @@ typedef struct s_minishell
     ArrayList *lexer_tokens_array;
     ArrayList *parser_tokens_array;
 	ArrayList *tokenizer_array;
+	ArrayList *pipe_array;
+	int number_of_pipes;
+	int number_of_commands;
     char **from_readline;
     char *input;
     char **cmd;

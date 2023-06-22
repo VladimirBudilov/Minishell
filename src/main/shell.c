@@ -19,9 +19,11 @@ t_shell *create_shell()
         return (NULL);
     minishell->env = NULL;
 	minishell->input = NULL;
+    minishell->number_of_pipes = 0;
 	minishell->lexer_tokens_array = createArrayList();
 	minishell->parser_tokens_array = createArrayList();
 	minishell->tokenizer_array = createArrayList();
+    minishell->pipe_array = createArrayList();
     return minishell;
 
 }

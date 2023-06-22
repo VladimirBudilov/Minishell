@@ -1,16 +1,6 @@
 #include "../../includes/minishell.h"
 
-int ft_is_ascii(char *str)
-{
-    int i = 0;
-    while(str[i])
-    {
-        if(!ft_isascii(str[i]))
-            return (0);
-        i++;
-    }
-    return (1);
-}
+
 
 void parse_readline(t_shell *minishell)
 {
