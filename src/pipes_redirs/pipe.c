@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-void execute_command(t_pipe *pipe);
-
 void create_pipe_list(t_shell *shell)
 {
     int index;
@@ -74,9 +72,9 @@ void execute_pipes(t_shell *shell) {
             dup2(fd_out, 1);
             close(fd[0]);
             close(fd[1]);
-            execute_command(pipes[i]);
+            execute_command_in_pipe(pipes[i]);
         }
-        else
+        /*else
         {
             if (pipes[i]->first == 1)
                 close(fd[1]);
@@ -89,7 +87,7 @@ void execute_pipes(t_shell *shell) {
                 close(fd[0]);
         }
         i++;
-        j++;
+        j++;*/
     }
     i = 0;
     while (i < shell->pipe_array->size)
@@ -100,16 +98,6 @@ void execute_pipes(t_shell *shell) {
 
 }
 
-void execute_command(t_pipe *pipe) {
-
-    if(pipe->is_builtin)
-        execute_builtin(pipe);
-    else if(pipe->is_execve)
-        execute_execve(pipe);
-    else if(pipe->is_redir)
-        execute_redir(pipe);
-
-}
 
 
 

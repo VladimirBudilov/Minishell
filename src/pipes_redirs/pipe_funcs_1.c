@@ -1,10 +1,6 @@
 #include <stdbool.h>
 #include "../../includes/minishell.h"
 
-void add_flags(t_pipe *pipe, t_parser_token *token);
-
-int is_redir(t_parser_token *token);
-
 void add_last_command(t_shell *shell, int *index) {
 
     t_parser_token **parser_tokens;
@@ -15,7 +11,7 @@ void add_last_command(t_shell *shell, int *index) {
     add_element(shell->pipe_array, pipe);
     pipe->commands = createArrayList();
     pipe->last = 1;
-
+    pipe->shell = shell;
     while (*index < shell->parser_tokens_array->size)
     {
         add_element(pipe->commands, parser_tokens[*index]);
@@ -23,7 +19,6 @@ void add_last_command(t_shell *shell, int *index) {
         *index = *index + 1;
     }
 }
-
 void add_flags(t_pipe *pipe, t_parser_token *token) {
 
     if(is_redir(token))
@@ -33,7 +28,6 @@ void add_flags(t_pipe *pipe, t_parser_token *token) {
     if(token->main_type == EXECUTABLE)
         pipe->is_execve = 1;
 }
-
 void add_command(t_shell *shell, const int *index, int *prev) {
     t_parser_token **parser_tokens;
     t_pipe *pipe;
@@ -42,6 +36,7 @@ void add_command(t_shell *shell, const int *index, int *prev) {
     pipe = malloc(sizeof(t_pipe));
     add_element(shell->pipe_array, pipe);
     pipe->commands = createArrayList();
+    pipe->shell = shell;
     if(*prev == 0)
         pipe->first = 1;
     else
