@@ -22,9 +22,7 @@ int main(int argc, char **argv, char **envp)
             execute_pipes(minishell);
         }
         else
-        {
             command_func(minishell, envp);
-        }
         print_all_pipe(minishell->pipe_array);
         clean_array(minishell);
 
@@ -46,9 +44,10 @@ void print_all_pipe(t_array_list *pipes_array) {
         printf("new pipe %d\n", i);
         while(j < pipes[i]->commands->size)
         {
-            printf("command %d : %s\n", j, ((t_parser_token *)pipes[i]->commands->array[j])->content);
+            printf("command  %s   ",((t_parser_token *)pipes[i]->commands->array[j])->content);
             j++;
         }
+        printf("\n\n");
         i++;
     }
 }

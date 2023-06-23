@@ -17,7 +17,7 @@ void command_func(t_shell *shell, char **envp)
         execute_builtin(token_key, shell, i);
     else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
         ex_func(token_key, shell, envp);
-    /*else if(has_redir(shell->parser_tokens_array))
+/*    else if(has_redir(shell->parser_tokens_array))
         execute_redir(token_key, shell, envp);*/
     else
     {

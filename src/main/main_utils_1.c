@@ -38,6 +38,8 @@ void clean_array(t_shell *minishell)
     minishell->lexer_tokens_array->size = 0;
     minishell->parser_tokens_array->size = 0;
     minishell->tokenizer_array->size = 0;
+    minishell->pipe_array->size = 0;
+    minishell->number_of_pipes = 0;
     free(minishell->input);
 
 }

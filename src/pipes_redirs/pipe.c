@@ -44,10 +44,11 @@ void execute_pipes(t_shell *shell) {
     fd_in = 0;
     fd_out = 1;
     pipes = (t_pipe **) shell->pipe_array->array;
-    printf("execute started\n");
+    pipe(fd);
     while (i < shell->pipe_array->size)
     {
         execute_pipe(pipes[i], fd, &fd_in, &fd_out);
+        i++;
     }
     i = 0;
     while (i < shell->pipe_array->size)
@@ -59,32 +60,30 @@ void execute_pipes(t_shell *shell) {
 }
 
 void execute_pipe(t_pipe *pipe_token, int fd[2], int *fd_in, int *fd_out) {
+    /*int pid;
 
-
-    int pid;
-
-    printf("execute pipe\n");
     pid = fork();
-    if (pid == -1)
-        exit(1);
-    if (pid == 0) {
-        if (pipe_token->first == 1) {
+    if(pid == 0)
+    {
+        if(pipe_token->first)
+        {
+            dup2(fd[1], *fd_out);
             *fd_out = fd[1];
-            fd_in = 0;
-        } else if (pipe_token->middle == 1) {
-            *fd_out = fd[1];
-            *fd_in = fd[0];
-        } else if (pipe_token->last == 1) {
-            *fd_out = 1;
-            *fd_in = fd[0];
+            close(fd[1]);
         }
-        dup2(*fd_in, 0);
-        dup2(*fd_out, 1);
-        close(fd[0]);
-        close(fd[1]);
-        printf("execute\n");
+        else if( pipe_token->last)
+        {
+            dup2(fd[0], *fd_in);
+            *fd_in = fd[0];
+            close(fd[0]);
+        }*/
+
+    (void) fd;
+    (void) fd_in;
+    (void) fd_out;
+
         execute_command_in_pipe(pipe_token);
+        exit(0);
     }
 
 
-}
