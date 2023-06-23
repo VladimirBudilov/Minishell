@@ -1,10 +1,10 @@
 #include "../../includes/minishell_structs.h"
 
-ArrayList *add_env(char **envp)
+t_array_list *add_env(char **envp)
 {
     int i;
     i = 0;
-    ArrayList *env;
+    t_array_list *env;
 
     env = createArrayList();
     while(envp[i])

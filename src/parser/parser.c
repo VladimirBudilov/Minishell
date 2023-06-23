@@ -3,7 +3,7 @@
 void parse_tokens(t_shell *shell)
 {
 	t_lexer_token **lexer_tokens;
-	ArrayList *parser_tokens;
+	t_array_list *parser_tokens;
 	int size;
 
 	lexer_tokens = (t_lexer_token **) shell->lexer_tokens_array->array;

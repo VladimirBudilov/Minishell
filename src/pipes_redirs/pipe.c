@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+void execute_command(t_pipe *pipe);
+
 void create_pipe_list(t_shell *shell)
 {
     int index;
@@ -30,6 +32,84 @@ void create_pipe_list(t_shell *shell)
     }
 }
 
+void execute_pipes(t_shell *shell) {
+
+    int pid;
+    int i;
+    int j;
+    int fd[2];
+    int fd_in;
+    int fd_out;
+    int status;
+    t_pipe **pipes;
+
+    i = 0;
+    j = 0;
+    pipes = (t_pipe **) shell->pipe_array->array;
+    while (i < shell->pipe_array->size)
+    {
+        if (pipe(fd) == -1)
+            exit(1);
+        pid = fork();
+        if (pid == -1)
+            exit(1);
+        if (pid == 0)
+        {
+            if (pipes[i]->first == 1)
+            {
+                fd_out = fd[1];
+                fd_in = 0;
+            }
+            else if (pipes[i]->middle == 1)
+            {
+                fd_out = fd[1];
+                fd_in = fd[0];
+            }
+            else if (pipes[i]->last == 1)
+            {
+                fd_out = 1;
+                fd_in = fd[0];
+            }
+            dup2(fd_in, 0);
+            dup2(fd_out, 1);
+            close(fd[0]);
+            close(fd[1]);
+            execute_command(pipes[i]);
+        }
+        else
+        {
+            if (pipes[i]->first == 1)
+                close(fd[1]);
+            else if (pipes[i]->middle == 1)
+            {
+                close(fd[1]);
+                close(fd[0]);
+            }
+            else if (pipes[i]->last == 1)
+                close(fd[0]);
+        }
+        i++;
+        j++;
+    }
+    i = 0;
+    while (i < shell->pipe_array->size)
+    {
+        wait(&status);
+        i++;
+    }
+
+}
+
+void execute_command(t_pipe *pipe) {
+
+    if(pipe->is_builtin)
+        execute_builtin(pipe);
+    else if(pipe->is_execve)
+        execute_execve(pipe);
+    else if(pipe->is_redir)
+        execute_redir(pipe);
+
+}
 
 
 

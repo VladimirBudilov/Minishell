@@ -19,12 +19,12 @@ int main(int argc, char **argv, char **envp)
 		parse_readline(minishell);
         if(has_pipes(minishell)) {
             create_pipe_list(minishell);
+            execute_pipes(minishell);
         }
         else
         {
             command_func(minishell, envp);
         }
-		//print_all_args(minishell->parser_tokens_array);
         print_all_pipe(minishell->pipe_array);
         clean_array(minishell);
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **envp)
     clean_all(minishell);
 }
 
-void print_all_pipe(ArrayList *pipes_array) {
+void print_all_pipe(t_array_list *pipes_array) {
     int i;
     int j;
     t_pipe **pipes;

@@ -30,3 +30,10 @@ void count_pipes(t_shell *shell) {
         i++;
     }
 }
+
+int is_redir(t_parser_token *token) {
+    if(token->main_type == REDIRECT_APPEND_OUTPUT || token->main_type == REDIRECT_OUTPUT
+       || token->main_type == REDIRECT_INPUT || token->main_type == HEREDOC)
+        return (1);
+    return (0);
+}

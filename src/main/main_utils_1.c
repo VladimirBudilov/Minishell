@@ -4,7 +4,7 @@ void clean_all(t_shell *shell) {
 
 }
 
-void free_env(ArrayList *tokens) {
+void free_env(t_array_list *tokens) {
     int i;
     i = 0;
     while (i < tokens->size) {
@@ -18,7 +18,7 @@ void free_env(ArrayList *tokens) {
 
 }
 
-void print_all_args(ArrayList *list)
+void print_all_args(t_array_list *list)
 {
     int i;
     i = 0;
@@ -42,7 +42,7 @@ void clean_array(t_shell *minishell)
 
 }
 
-void free_parser_tokens(ArrayList *tokens) {
+void free_parser_tokens(t_array_list *tokens) {
     int i;
     t_parser_token *po;
     t_parser_token **array;
@@ -59,7 +59,7 @@ void free_parser_tokens(ArrayList *tokens) {
 
 }
 
-void free_tokenizer_output_array(ArrayList *tokens) {
+void free_tokenizer_output_array(t_array_list *tokens) {
     int i;
     t_tokenizer_output *po;
     t_tokenizer_output **array;

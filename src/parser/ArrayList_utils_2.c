@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-void *find_element_by_index(ArrayList *list, int index)
+void *find_element_by_index(t_array_list *list, int index)
 {
 	if (index >= list->size)
 	{
@@ -9,7 +9,7 @@ void *find_element_by_index(ArrayList *list, int index)
 	return list->array[index];
 }
 
-void print_all_tokens(ArrayList *list)
+void print_all_tokens(t_array_list *list)
 {
 	int i;
 	i = 0;
