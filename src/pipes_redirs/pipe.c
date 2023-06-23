@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 
+
 void create_pipe_list(t_shell *shell)
 {
     int index;
@@ -32,9 +33,7 @@ void create_pipe_list(t_shell *shell)
 
 void execute_pipes(t_shell *shell) {
 
-    int pid;
     int i;
-    int j;
     int fd[2];
     int fd_in;
     int fd_out;
@@ -42,52 +41,13 @@ void execute_pipes(t_shell *shell) {
     t_pipe **pipes;
 
     i = 0;
-    j = 0;
+    fd_in = 0;
+    fd_out = 1;
     pipes = (t_pipe **) shell->pipe_array->array;
+    printf("execute started\n");
     while (i < shell->pipe_array->size)
     {
-        if (pipe(fd) == -1)
-            exit(1);
-        pid = fork();
-        if (pid == -1)
-            exit(1);
-        if (pid == 0)
-        {
-            if (pipes[i]->first == 1)
-            {
-                fd_out = fd[1];
-                fd_in = 0;
-            }
-            else if (pipes[i]->middle == 1)
-            {
-                fd_out = fd[1];
-                fd_in = fd[0];
-            }
-            else if (pipes[i]->last == 1)
-            {
-                fd_out = 1;
-                fd_in = fd[0];
-            }
-            dup2(fd_in, 0);
-            dup2(fd_out, 1);
-            close(fd[0]);
-            close(fd[1]);
-            execute_command_in_pipe(pipes[i]);
-        }
-        /*else
-        {
-            if (pipes[i]->first == 1)
-                close(fd[1]);
-            else if (pipes[i]->middle == 1)
-            {
-                close(fd[1]);
-                close(fd[0]);
-            }
-            else if (pipes[i]->last == 1)
-                close(fd[0]);
-        }
-        i++;
-        j++;*/
+        execute_pipe(pipes[i], fd, &fd_in, &fd_out);
     }
     i = 0;
     while (i < shell->pipe_array->size)
@@ -98,6 +58,33 @@ void execute_pipes(t_shell *shell) {
 
 }
 
+void execute_pipe(t_pipe *pipe_token, int fd[2], int *fd_in, int *fd_out) {
 
 
+    int pid;
 
+    printf("execute pipe\n");
+    pid = fork();
+    if (pid == -1)
+        exit(1);
+    if (pid == 0) {
+        if (pipe_token->first == 1) {
+            *fd_out = fd[1];
+            fd_in = 0;
+        } else if (pipe_token->middle == 1) {
+            *fd_out = fd[1];
+            *fd_in = fd[0];
+        } else if (pipe_token->last == 1) {
+            *fd_out = 1;
+            *fd_in = fd[0];
+        }
+        dup2(*fd_in, 0);
+        dup2(*fd_out, 1);
+        close(fd[0]);
+        close(fd[1]);
+        printf("execute\n");
+        execute_command_in_pipe(pipe_token);
+    }
+
+
+}

@@ -11,7 +11,7 @@ typedef struct s_pipe
     int first;
     int middle;
     int last;
-    int *pid;
+    int pid;
     int *status;
     int is_execve;
     int is_builtin;
