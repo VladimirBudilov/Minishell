@@ -6,7 +6,7 @@ void add_execver_from_path(t_parser_token **parser_tokens, char **paths, int *i,
 
 void add_execvere(t_parser_token **parser_tokens, t_shell *shell);
 
-void find_execver(ArrayList *parser_tokens_array, t_shell *shell)
+void find_execver(t_array_list *parser_tokens_array, t_shell *shell)
 {
 	t_parser_token **parser_tokens;
 	parser_tokens = (t_parser_token **) (parser_tokens_array->array);
@@ -99,7 +99,7 @@ void add_execver_from_path(t_parser_token **parser_tokens, char **paths, int *i,
     free(path);
 }
 
-void find_dirs(ArrayList *parser_tokens)
+void find_dirs(t_array_list *parser_tokens)
 {
 	int i;
 	t_parser_token **tokens;
@@ -134,7 +134,7 @@ int is_directory(char *path)
 	return 0;
 }
 
-void find_build_in(ArrayList *parser_tokens)
+void find_build_in(t_array_list *parser_tokens)
 {
 	int i;
 	t_parser_token **tokens;

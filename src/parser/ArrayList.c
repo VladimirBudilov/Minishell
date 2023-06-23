@@ -1,16 +1,16 @@
 #include "../../includes/minishell_structs.h"
 
 
-ArrayList *createArrayList()
+t_array_list *createArrayList()
 {
-	ArrayList *list = (ArrayList *) malloc(sizeof(ArrayList));
+	t_array_list *list = (t_array_list *) malloc(sizeof(t_array_list));
 	list->size = 0;
 	list->capacity = 1000;
 	list->array = (void **) malloc(list->capacity * sizeof(void *));
 	return list;
 }
 
-void add_element(ArrayList *list, void *element)
+void add_element(t_array_list *list, void *element)
 {
 	if (list->size == list->capacity)
 	{
@@ -21,7 +21,7 @@ void add_element(ArrayList *list, void *element)
 	list->size++;
 }
 
-void delete_element(ArrayList *list, int index)
+void delete_element(t_array_list *list, int index)
 {
 	if (index >= list->size)
 	{
@@ -36,7 +36,7 @@ void delete_element(ArrayList *list, int index)
 }
 
 //free all elements in list
-void free_arrayList(ArrayList *list)
+void free_arrayList(t_array_list *list)
 {
 	int i;
 	i = 0;

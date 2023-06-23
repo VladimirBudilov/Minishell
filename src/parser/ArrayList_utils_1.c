@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-char *get_value_by_key(ArrayList *list, char *key)
+char *get_value_by_key(t_array_list *list, char *key)
 {
 	int i;
 	i = 0;
@@ -13,7 +13,7 @@ char *get_value_by_key(ArrayList *list, char *key)
 	return NULL;
 }
 
-int contain_key(ArrayList *list, char *key)
+int contain_key(t_array_list *list, char *key)
 {
 	int i;
 	i = 0;
@@ -26,7 +26,7 @@ int contain_key(ArrayList *list, char *key)
 	return 0;
 }
 
-void change_value_by_key(ArrayList *list, char *key, char *value)
+void change_value_by_key(t_array_list *list, char *key, char *value)
 {
 	int i;
 	i = 0;

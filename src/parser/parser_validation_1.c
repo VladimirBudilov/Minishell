@@ -2,7 +2,7 @@
 
 
 /*
-void validate_tokens(ArrayList *parser_tokens) {
+void validate_tokens(t_array_list *parser_tokens) {
 
 
 }

@@ -1,7 +1,7 @@
 #include "../../includes/minishell.h"
 
 
-void create_parser_tokens(t_lexer_token **lexer_tokens, ArrayList *parser_tokens, int size)
+void create_parser_tokens(t_lexer_token **lexer_tokens, t_array_list *parser_tokens, int size)
 {
 	int i;
 
@@ -28,7 +28,7 @@ void create_parser_tokens(t_lexer_token **lexer_tokens, ArrayList *parser_tokens
 	}
 }
 
-void add_parser_token(ArrayList *tokens_array, enum parser_type type, const char *content) {
+void add_parser_token(t_array_list *tokens_array, enum parser_type type, const char *content) {
     t_parser_token *token;
 
     token = malloc(sizeof(t_parser_token));

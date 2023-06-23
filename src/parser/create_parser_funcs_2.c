@@ -7,7 +7,7 @@ int is_joinable(enum lexer_type type)
 	return 0;
 }
 
-void open_quotes(t_lexer_token **lexer_tokens, ArrayList *parser_tokens, int *i, int size)
+void open_quotes(t_lexer_token **lexer_tokens, t_array_list *parser_tokens, int *i, int size)
 {
 	t_parser_token *token;
 

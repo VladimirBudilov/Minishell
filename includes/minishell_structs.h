@@ -7,10 +7,13 @@
 
 typedef struct s_minishell
 {
-    ArrayList *env;
-    ArrayList *lexer_tokens_array;
-    ArrayList *parser_tokens_array;
-	ArrayList *tokenizer_array;
+    t_array_list *env;
+    t_array_list *lexer_tokens_array;
+    t_array_list *parser_tokens_array;
+	t_array_list *tokenizer_array;
+	t_array_list *pipe_array;
+	int number_of_pipes;
+	int number_of_commands;
     char **from_readline;
     char *input;
     char **cmd;

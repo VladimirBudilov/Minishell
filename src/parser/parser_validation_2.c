@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-void clean_flags_n(ArrayList *tokens_array, int index);
+void clean_flags_n(t_array_list *tokens_array, int index);
 
 int is_flag(const char *content);
 
@@ -15,7 +15,7 @@ void add_cd(t_parser_token *token) {
     free(temp);
 }
 
-void add_echo(t_parser_token *token, ArrayList *tokens_array, int index) {
+void add_echo(t_parser_token *token, t_array_list *tokens_array, int index) {
     char *temp;
 
     temp = ft_str_to_lower(token->content);
@@ -27,7 +27,7 @@ void add_echo(t_parser_token *token, ArrayList *tokens_array, int index) {
     free(temp);
 }
 
-void clean_flags_n(ArrayList *tokens_array, int index) {
+void clean_flags_n(t_array_list *tokens_array, int index) {
     int flag;
     t_parser_token *token;
 

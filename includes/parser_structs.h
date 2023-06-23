@@ -35,12 +35,6 @@ enum parser_type {
     EXECUTABLE,
     EXECUTABLE_PATH,
     DIRECTORY,
-    SEQUENCE,
-    PIPELINE_COMMAND,
-    SEQUENCE_COMMAND,
-    SIMPLE_COMMAND,
-    COMPOUND_COMMAND,
-    SUBSHELL,
 };
 
 typedef struct parser {
