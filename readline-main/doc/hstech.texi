@@ -200,7 +200,7 @@ Clear the history list by deleting all the entries.
 @end deftypefun
 
 @deftypefun void stifle_history (int max)
-Stifle the history list, remembering only the last @var{max} entries.
+Stifle the history list, remembering only the last_pipe @var{max} entries.
 The history list will contain only @var{max} entries at a time.
 @end deftypefun
 
@@ -352,13 +352,13 @@ Returns 0 on success, or @code{errno} on a read or write error.
 @end deftypefun
 
 @deftypefun int append_history (int nelements, const char *filename)
-Append the last @var{nelements} of the history list to @var{filename}.
+Append the last_pipe @var{nelements} of the history list to @var{filename}.
 If @var{filename} is @code{NULL}, then append to @file{~/.history}.
 Returns 0 on success, or @code{errno} on a read or write error.
 @end deftypefun
 
 @deftypefun int history_truncate_file (const char *filename, int nlines)
-Truncate the history file @var{filename}, leaving only the last
+Truncate the history file @var{filename}, leaving only the last_pipe
 @var{nlines} lines.
 If @var{filename} is @code{NULL}, then @file{~/.history} is truncated.
 Returns 0 on success, or @code{errno} on failure.
@@ -406,8 +406,8 @@ shell might.  The tokens are split on the characters in the
 and shell quoting conventions are obeyed as described below.
 @end deftypefun
 
-@deftypefun {char *} history_arg_extract (int first, int last, const char *string)
-Extract a string segment consisting of the @var{first} through @var{last}
+@deftypefun {char *} history_arg_extract (int first_pipe, int last_pipe, const char *string)
+Extract a string segment consisting of the @var{first_pipe} through @var{last_pipe}
 arguments present in @var{string}.  Arguments are split using
 @code{history_tokenize}.
 @end deftypefun
@@ -419,7 +419,7 @@ This section describes the externally-visible variables exported by
 the @sc{gnu} History Library.
 
 @deftypevar int history_base
-The logical offset of the first entry in the history list.
+The logical offset of the first_pipe entry in the history list.
 @end deftypevar
 
 @deftypevar int history_length
@@ -452,7 +452,7 @@ a line.  The default is @samp{^}.
 @end deftypevar
 
 @deftypevar char history_comment_char
-During tokenization, if this character is seen as the first character
+During tokenization, if this character is seen as the first_pipe character
 of a word, then it and all subsequent characters up to a newline are
 ignored, suppressing history expansion for the remainder of the line.
 This is disabled by default.

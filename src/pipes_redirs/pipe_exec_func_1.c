@@ -5,8 +5,8 @@ void execute_command_in_pipe(t_pipe *pipe) {
     if(pipe->is_builtin) {
         execute_builtin_in_pipe(pipe);
     }
-   /*else if(pipe->is_execve)
-        execute_execve_in_pipe(pipe);*/
+    else if(pipe->is_execve)
+        execute_execve_in_pipe(pipe);
 /*     else if(pipe->is_redir)
         execute_redir_in_pipe(pipe);*/
 

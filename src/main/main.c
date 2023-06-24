@@ -1,6 +1,8 @@
 #include "../../includes/minishell.h"
 
 
+void pipe_array_cheker(t_shell *shell);
+
 int main(int argc, char **argv, char **envp)
 {
 	(void) argv;
@@ -20,6 +22,7 @@ int main(int argc, char **argv, char **envp)
         if(has_pipes(minishell)) {
             create_pipe_list(minishell);
             execute_pipes(minishell);
+            pipe_array_cheker(minishell);
         }
         else
             command_func(minishell, envp);
@@ -31,6 +34,41 @@ int main(int argc, char **argv, char **envp)
     clean_all(minishell);
 }
 
+void pipe_array_cheker(t_shell *shell) {
+
+    int i = 0;
+    int j = 0;
+    t_pipe **pipes;
+    pipes = (t_pipe **) shell->pipe_array->array;
+    while(i < shell->pipe_array->size) {
+        if(pipes[i]->first_pipe == 1) {
+            j = 0;
+            printf("first_pipe\n");
+            while(j < pipes[i]->commands->size) {
+                printf("first_pipe command %s\n", ((t_parser_token *)pipes[i]->commands->array[j])->content);
+                j++;
+            }
+        }
+        else if(pipes[i]->last_pipe == 1) {
+            j = 0;
+            printf("last_pipe\n");
+            while(j < pipes[i]->commands->size) {
+                printf("last_pipe command %s\n", ((t_parser_token *)pipes[i]->commands->array[j])->content);
+                j++;
+            }
+        }
+        else if (pipes[i]->middle_pipe == 1){
+            j = 0;
+            printf("middle_pipe\n");
+            while(j < pipes[i]->commands->size) {
+                printf("middle_pipe command %s\n", ((t_parser_token *)pipes[i]->commands->array[j])->content);
+                j++;
+            }
+        }
+        i++;
+    }
+
+}
 void print_all_pipe(t_array_list *pipes_array) {
     int i;
     int j;
@@ -51,3 +89,5 @@ void print_all_pipe(t_array_list *pipes_array) {
         i++;
     }
 }
+
+

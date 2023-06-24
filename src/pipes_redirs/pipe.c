@@ -6,9 +6,11 @@ void create_pipe_list(t_shell *shell)
     int index;
     int prev_index;
     int pipe_count;
+    int last_pipe;
     t_parser_token **parser_tokens;
 
     index = 0;
+    last_pipe = 0;
     prev_index = 0;
     pipe_count = 0;
     parser_tokens = (t_parser_token **) shell->parser_tokens_array->array;
@@ -17,73 +19,61 @@ void create_pipe_list(t_shell *shell)
     {
         if(parser_tokens[index]->main_type == PIPELINE)
         {
-                add_command(shell, &index, &prev_index);
-                index++;
-                pipe_count++;
-                continue;
-        }
-        if(pipe_count == shell->number_of_pipes) {
-            add_last_command(shell, &index);
-            index++;
-            break;
+            last_pipe = index;
+            last_pipe++;
+            add_command(shell, index, prev_index);
+            prev_index = index++;
+            pipe_count++;
+            continue;
         }
         index++;
     }
+    add_last_command(shell, last_pipe);
+    ((t_pipe *)shell->pipe_array->array[shell->pipe_array->size - 1])->last_pipe = 1;
 }
 
 void execute_pipes(t_shell *shell) {
 
     int i;
-    int fd[2];
-    int fd_in;
-    int fd_out;
-    int status;
+    int fd_array[1000][2];
+    //int status;
     t_pipe **pipes;
 
     i = 0;
-    fd_in = 0;
-    fd_out = 1;
     pipes = (t_pipe **) shell->pipe_array->array;
-    pipe(fd);
     while (i < shell->pipe_array->size)
     {
-        execute_pipe(pipes[i], fd, &fd_in, &fd_out);
+        pipe(fd_array[i]);
+        execute_pipe(pipes[i], fd_array, i);
         i++;
     }
     i = 0;
-    while (i < shell->pipe_array->size)
+    /*while (i < shell->pipe_array->size)
     {
         wait(&status);
         i++;
-    }
+    }*/
 
 }
 
-void execute_pipe(t_pipe *pipe_token, int fd[2], int *fd_in, int *fd_out) {
-    /*int pid;
+void execute_pipe(t_pipe *pipe_token, int array[1000][2], int i) {
 
-    pid = fork();
-    if(pid == 0)
-    {
-        if(pipe_token->first)
-        {
-            dup2(fd[1], *fd_out);
-            *fd_out = fd[1];
-            close(fd[1]);
+   /* pid = fork();
+    if (pid == 0) {
+        *//*if (pipe_token->first_pipe) {
+            dup2(array[i][1], STDOUT_FILENO);
+        } else if (pipe_token->middle_pipe) {
+            dup2(array[i-1][0], STDIN_FILENO);
+            dup2(array[i][1], STDOUT_FILENO);
+        } else if (pipe_token->last_pipe) {
+            dup2(array[i][0], STDIN_FILENO);
         }
-        else if( pipe_token->last)
-        {
-            dup2(fd[0], *fd_in);
-            *fd_in = fd[0];
-            close(fd[0]);
-        }*/
-
-    (void) fd;
-    (void) fd_in;
-    (void) fd_out;
-
+        close(array[i][1]);
+        close(array[i][0]);*/
+        (void) array;
+        (void) i;
         execute_command_in_pipe(pipe_token);
-        exit(0);
-    }
-
+        //execute_command_in_pipe(pipe_token);
+        //exit(0);
+}
 

@@ -10,7 +10,7 @@ void command_func(t_shell *shell, char **envp)
 
     if (shell->input == NULL)
         return ;
-    while(((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE)
+    while(((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE || ((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == PIPELINE)
         i++;
     token_key = (t_parser_token **)shell->parser_tokens_array->array;
     if(token_key[i]->main_type == BIlD_IN)

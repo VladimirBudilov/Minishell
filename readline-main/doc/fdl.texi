@@ -162,7 +162,7 @@ the title of the Document and satisfy these conditions, can be treated
 as verbatim copying in other respects.
 
 If the required texts for either cover are too voluminous to fit
-legibly, you should put the first ones listed (as many as fit
+legibly, you should put the first_pipe ones listed (as many as fit
 reasonably) on the actual cover, and continue the rest onto adjacent
 pages.
 
@@ -175,7 +175,7 @@ a complete Transparent copy of the Document, free of added material.
 If you use the latter option, you must take reasonably prudent steps,
 when you begin distribution of Opaque copies in quantity, to ensure
 that this Transparent copy will remain thus accessible at the stated
-location until at least one year after the last time you distribute an
+location until at least one year after the last_pipe time you distribute an
 Opaque copy (directly or through your agents or retailers) of that
 edition to the public.
 
@@ -396,7 +396,7 @@ fails to notify you of the violation by some reasonable means prior to
 
 Moreover, your license from a particular copyright holder is
 reinstated permanently if the copyright holder notifies you of the
-violation by some reasonable means, this is the first time you have
+violation by some reasonable means, this is the first_pipe time you have
 received notice of violation of this License (for any work) from that
 copyright holder, and you cure the violation prior to 30 days after
 your receipt of the notice.
@@ -450,7 +450,7 @@ published by that same organization.
 in part, as part of another Document.
 
 An MMC is ``eligible for relicensing'' if it is licensed under this
-License, and if all works that were first published under this License
+License, and if all works that were first_pipe published under this License
 somewhere other than this MMC, and subsequently incorporated in whole
 or in part into the MMC, (1) had no cover texts or invariant sections,
 and (2) were thus incorporated prior to November 1, 2008.
