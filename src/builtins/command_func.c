@@ -26,18 +26,16 @@ void command_func(t_shell *shell, char **envp)
             if (token_key[i]->main_type == BIlD_IN)
                 execute_builtin(parser_tokens, shell, i);
             else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
-                ex_func(token_key, shell, envp);
+                ex_func(parser_tokens, shell, envp);
             exit(0);
         }
         waitpid(pid, NULL, 0);
         return ;
     }
     if(token_key[i]->main_type == BIlD_IN)
-        execute_builtin(tmp, shell, i);
+        execute_builtin(parser_tokens, shell, i);
     else if (token_key[i]->main_type == EXECUTABLE || token_key[i]->main_type == EXECUTABLE_PATH)
-        ex_func(tmp, shell, envp);
-/*    else if(has_redir(shell->parser_tokens_array))
-        execute_redir(token_key, shell, envp);*/
+        ex_func(parser_tokens, shell, envp);
     else
     {
         ft_putstr_fd("shell: ", 2);
@@ -85,8 +83,6 @@ void redir_in_func(t_array_list *parser_tokens, int i) {
     }
     dup2(fd, STDIN_FILENO);
     close(fd);
-
-
 }
 
 void redir_out_append_func(t_array_list *parser_tokens, int i) {

@@ -21,7 +21,6 @@ int main(int argc, char **argv, char **envp)
 		parse_readline(minishell);
         if(has_pipes(minishell)) {
             create_pipe_list(minishell);
-            //pipe_array_cheker(minishell);
             execute_pipes(minishell);
         }
         else
