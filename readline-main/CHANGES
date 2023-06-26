@@ -58,8 +58,8 @@ q. Readline now behaves better when operate-and-get-next is used when the
 r. Fixed a bug that could cause vi redo (`.') of a replace command not to work
    correctly in the C or POSIX locale.
 
-s. Fixed a bug with vi-mode digit arguments that caused the last command to be
-   set incorrectly. This prevents yank-last-arg from working as intended, for
+s. Fixed a bug with vi-mode digit arguments that caused the last_pipe command to be
+   set incorrectly. This prevents yank-last_pipe-arg from working as intended, for
    example.
 
 t. Make sure that all undo groups are closed when leaving vi insertion mode.  
@@ -85,7 +85,7 @@ z. Ensure that disabling bracketed paste turns off highlighting the incremental
 
 2. New Features in Readline
 
-a. If a second consecutive completion attempt produces matches where the first
+a. If a second consecutive completion attempt produces matches where the first_pipe
    did not, treat it as a new completion attempt and insert a match as
    appropriate.
 
@@ -135,7 +135,7 @@ b. Instead of allocating enough history list entries to hold the maximum list
 c. Added a strategy to avoid allocating huge amounts of memory if a block of
    history entries without timestamps occurs after a block with timestamps.
 
-d. Added support for keyboard timeouts when an ESC character is the last
+d. Added support for keyboard timeouts when an ESC character is the last_pipe
    character in a macro.
 
 e. There are several performance improvements when in a UTF-8 locale.
@@ -201,7 +201,7 @@ z. Fixed a bug that caused the history library to attempt to append a history
    line to a non-existent history entry.
 
 aa. If using bracketed paste mode, output a newline after the \r that is the
-    last character of the mode disable string to avoid overwriting output.
+    last_pipe character of the mode disable string to avoid overwriting output.
 
 bb. Fixes to the vi-mode `b', `B', `w', `W', `e', and `E' commands to better
     handle multibyte characters.
@@ -306,7 +306,7 @@ l.  Fixed a bug with tilde expanding directory names in filename completion.
 m.  Fixed a bug that did not allow binding sequences beginning with a `\'.
 
 n.  Fixed a redisplay bug involving incorrect line wrapping when the prompt
-    contains a multibyte character in the last screen column.
+    contains a multibyte character in the last_pipe screen column.
 
 o.  Fixed a bug that caused history expansion to disregard characters that are
     documented to delimit a history event specifier without requiring `:'.
@@ -363,7 +363,7 @@ ff. Fixed a bug in the character insertion code that attempts to optimize
     resets the key sequence state.
 
 gg.  When refreshing the line as the result of a key sequence, Readline attempts
-     to redraw only the last line of a multiline prompt.
+     to redraw only the last_pipe line of a multiline prompt.
 
 hh.  Fixed an issue that caused completion of git commands to display
      incorrectly when using colored-completion-prefix.
@@ -388,7 +388,7 @@ c.  The editing mode indicators can now be strings and are user-settable
     variables).  Mode strings can contain invisible character sequences.
     Setting mode strings to null strings restores the defaults.
 
-d.  Prompt expansion adds the mode string to the last line of a multi-line
+d.  Prompt expansion adds the mode string to the last_pipe line of a multi-line
     prompt (one with embedded newlines).
 
 e.  There is a new bindable variable, `colored-completion-prefix', which, if
@@ -408,7 +408,7 @@ i.  rl_callback_sigcleanup: a new application function that can clean up and
     unset any state set by readline's callback mode.  Intended to be used
     after a signal.
 
-j.  If an incremental search string has its last character removed with DEL, the
+j.  If an incremental search string has its last_pipe character removed with DEL, the
     resulting empty search string no longer matches the previous line.
 
 k.  If readline reads a history file that begins with `#' (or the value of
@@ -511,7 +511,7 @@ r.  Fixed several redisplay errors with multibyte characters and prompts
 s.  Fixed a bug that caused redisplay errors when trying to overwrite
     existing characters using multibyte characters.
 
-t.  Fixed a bug in vi mode that caused the arrow keys to set the saved last
+t.  Fixed a bug in vi mode that caused the arrow keys to set the saved last_pipe
     vi-mode command to the wrong value.
 
 u.  Fixed a bug that caused double-quoted strings to be scanned incorrectly
@@ -555,7 +555,7 @@ e.  New application-settable variable: rl_filename_stat_hook: a function called
     expand shell variables so things like $HOME/Downloads have a slash
     appended.
 
-f.  New bindable function `print-last-kbd-macro', prints the most-recently-
+f.  New bindable function `print-last_pipe-kbd-macro', prints the most-recently-
     defined keyboard macro in a reusable format.
 
 g.  New user-settable variable `colored-stats', enables use of colored text
@@ -622,10 +622,10 @@ j.  The incremental search code treats key sequences that map to the same
 k.  Fixed a bug in menu-complete that caused it to misbehave with large
     negative argument.
 
-l.  Fixed a bug that caused vi-mode yank-last-arg to ring the bell when invoked
+l.  Fixed a bug that caused vi-mode yank-last_pipe-arg to ring the bell when invoked
     at the end of the line.
 
-m.  Fixed a bug that made an explicit argument of 0 to yank-last-arg behave
+m.  Fixed a bug that made an explicit argument of 0 to yank-last_pipe-arg behave
     as if it were a negative argument.
 
 n.  Fixed a bug that caused directory names in words to be completed to not
@@ -657,7 +657,7 @@ and the previous version, readline-6.0.
 1.  Changes to Readline
 
 a.  The SIGWINCH signal handler now avoids calling the redisplay code if
-    one arrives while in the middle of redisplay.
+    one arrives while in the middle_pipe of redisplay.
 
 b.  Changes to the timeout code to make sure that timeout values greater
     than one second are handled better.
@@ -675,7 +675,7 @@ f.  Fixed a redisplay bug caused by a multibyte character causing a line to
     wrap.
 
 g.  Fixed a bug that caused key sequences of two characters to not be
-    recognized when a longer sequence identical in the first two characters
+    recognized when a longer sequence identical in the first_pipe two characters
     was bound.
 
 h.  Fixed a bug that caused history expansion to be attempted on $'...'
@@ -711,7 +711,7 @@ e.  New application-settable function: rl_filename_rewrite_hook.  Can be used
     compared to the word to be completed.
 
 f.  New bindable variable: skip-completed-text, active when completing in the
-    middle of a word.  If enabled, it means that characters in the completion
+    middle_pipe of a word.  If enabled, it means that characters in the completion
     that match characters in the remainder of the word are "skipped" rather
     than inserted into the line.
 
@@ -771,7 +771,7 @@ l.  Fixed a bug in the code that buffers characters received very quickly in
 m.  Fixed a bug that caused readline to reference uninitialized data structures
     if it received a SIGWINCH before completing initialzation.
 
-n.  Fixed a bug that caused the vi-mode `last command' to be set incorrectly
+n.  Fixed a bug that caused the vi-mode `last_pipe command' to be set incorrectly
     and therefore unrepeatable.
 
 o.  Fixed a bug that caused readline to disable echoing when it was being used
@@ -898,7 +898,7 @@ a.  Calling applications can now set the keyboard timeout to 0, allowing
     poll-like behavior.
 
 b.  The value of SYS_INPUTRC (configurable at compilation time) is now used as
-    the default last-ditch startup file.
+    the default last_pipe-ditch startup file.
 
 c.  The history file reading functions now allow windows-like \r\n line
     terminators.
@@ -915,11 +915,11 @@ a.  Fixed a bug that caused multiliine prompts to be wrapped and displayed
 b.  Fixed a bug that caused ^P/^N in emacs mode to fail to display the current
     line correctly.
 
-c.  Fixed a problem in computing the number of invisible characters on the first
+c.  Fixed a problem in computing the number of invisible characters on the first_pipe
     line of a prompt whose length exceeds the screen width.
 
 d.  Fixed vi-mode searching so that failure preserves the current line rather
-    than the last line in the history list.
+    than the last_pipe line in the history list.
 
 e.  Fixed the vi-mode `~' command (change-case) to have the correct behavior at
     end-of-line when manipulating multibyte characters.
@@ -968,7 +968,7 @@ r.  Lots of changes so readline builds and runs on MinGW.
 s.  Readline no longer tries to modify the terminal settings when running in
     callback mode.
 
-t.  The Readline display code no longer sets the location of the last invisible
+t.  The Readline display code no longer sets the location of the last_pipe invisible
     character in the prompt if the \[\] sequence is empty.
 
 u.  The `change-case' command now correctly changes the case of multibyte
@@ -987,7 +987,7 @@ x.  Fixed the non-incremental search code in vi mode to dispose of any current
 y.  Fixed a bug that caused reversing the incremental search direction to
     not work correctly.  
     
-z.  Fixed the vi-mode `U' command to only undo up to the first time insert mode
+z.  Fixed the vi-mode `U' command to only undo up to the first_pipe time insert mode
     was entered, as Posix specifies.
 
 aa. Fixed a bug in the vi-mode `r' command that left the cursor in the wrong
@@ -1043,7 +1043,7 @@ a.  Fixes to avoid core dumps because of null pointer references in the
 
 b.  Fix to avoid infinite recursion caused by certain key combinations.
 
-c.  Fixed a bug that caused the vi-mode `last command' to be set incorrectly.
+c.  Fixed a bug that caused the vi-mode `last_pipe command' to be set incorrectly.
 
 d.  Readline no longer tries to read ahead more than one line of input, even
     when more is available.
@@ -1115,8 +1115,8 @@ y.  Some changes to the display code to improve display and redisplay of
 z.  Changes to speed up the multibyte character redisplay code.
 
 aa. Fixed a bug in the vi-mode `E' command that caused it to skip over the
-    last character of a word if invoked while point was on the word's
-    next-to-last character.
+    last_pipe character of a word if invoked while point was on the word's
+    next-to-last_pipe character.
 
 bb. Fixed a bug that could cause incorrect filename quoting when
     case-insensitive completion was enabled and the word being completed
@@ -1126,7 +1126,7 @@ cc. Fixed a bug in redisplay triggered when the prompt string contains
     invisible characters.
 
 dd. Fixed some display (and other) bugs encountered in multibyte locales
-    when a non-ascii character was the last character on a line.
+    when a non-ascii character was the last_pipe character on a line.
 
 ee. Fixed some display bugs caused by multibyte characters in prompt strings.
 
@@ -1140,12 +1140,12 @@ hh. Improvements to the code that expands and displays prompt strings
     containing multibyte characters.
 
 ii. Fixed a problem with vi-mode not correctly remembering the numeric argument
-    to the last `c'hange command for later use with `.'.
+    to the last_pipe `c'hange command for later use with `.'.
 
 jj. Fixed a bug in vi-mode that caused multi-digit count arguments to work   
     incorrectly.
 
-kk. Fixed a problem in vi-mode that caused the last text modification command
+kk. Fixed a problem in vi-mode that caused the last_pipe text modification command
     to not be remembered across different command lines.
 
 ll. Fixed problems with changing characters and changing case at the end of
@@ -1244,7 +1244,7 @@ i.  Changes to make reading and writing the history file a little faster, and
 
 j.  The vi-mode `S' and `s' commands are now undone correctly.
 
-k.  Fixed a problem which caused the display to be messed up when the last
+k.  Fixed a problem which caused the display to be messed up when the last_pipe
     line of a multi-line prompt (possibly containing invisible characters)
     was longer than the screen width.
 
@@ -1266,7 +1266,7 @@ d.  The behavior introduced in bash-2.05a of deciding whether or not to
     variable (default is the 2.05a behavior).
 
 e.  The `insert-comment' command now acts as a toggle if given a numeric
-    argument:  if the first characters on the line don't specify a
+    argument:  if the first_pipe characters on the line don't specify a
     comment, insert one; if they do, delete the comment text
 
 f.  New application-settable completion variable:
@@ -1361,9 +1361,9 @@ d.  New bindable boolean readline variable:  match-hidden-files.  Controls
     completion of files beginning with a `.' (on Unix).  Enabled by default.
 
 e.  The history expansion code now allows any character to terminate a
-    `:first-' modifier, like csh.
+    `:first_pipe-' modifier, like csh.
 
-f.  The incremental search code remembers the last search string and uses
+f.  The incremental search code remembers the last_pipe search string and uses
     it if ^R^R is typed without a search string.
 
 h.  New bindable variable `history-preserve-point'.  If set, the history
@@ -1605,7 +1605,7 @@ b.  Parentheses matching is now always compiled into readline, and enabled
     or disabled when the value of the `blink-matching-paren' variable is
     changed.
 
-c.  MS-DOS systems now use ~/_inputrc as the last-ditch inputrc filename.
+c.  MS-DOS systems now use ~/_inputrc as the last_pipe-ditch inputrc filename.
 
 d.  MS-DOS systems now use ~/_history as the default history file.
 
@@ -1613,7 +1613,7 @@ e.  history-search-{forward,backward} now leave the point at the end of the
     line when the string to search for is empty, like
     {reverse,forward}-search-history.
 
-f.  history-search-{forward,backward} now leave the last history line found
+f.  history-search-{forward,backward} now leave the last_pipe history line found
     in the readline buffer if the second or subsequent search fails.
 
 g.  New function for use by applications:  rl_on_new_line_with_prompt, used
@@ -1797,8 +1797,8 @@ j.  The time delay when showing matching parentheses is now 0.5 seconds.
 
 2.  New Features in Readline
 
-a.  There is now an option for `iterative' yank-last-arg handline, so a user
-    can keep entering `M-.', yanking the last argument of successive history
+a.  There is now an option for `iterative' yank-last_pipe-arg handline, so a user
+    can keep entering `M-.', yanking the last_pipe argument of successive history
     lines.
 
 b.  New variable, `print-completions-horizontally', which causes completion

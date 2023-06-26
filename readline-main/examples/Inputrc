@@ -75,7 +75,7 @@ $endif
 $if Ftp
 "\C-xg": "get \M-?"
 "\C-xt": "put \M-?"
-"\M-.": yank-last-arg
+"\M-.": yank-last_pipe-arg
 $endif
 
 " ": self-insert

@@ -2,24 +2,29 @@
 
 void execute_command_in_pipe(t_pipe *pipe) {
 
-    if(pipe->is_builtin)
+    if(pipe->is_builtin) {
         execute_builtin_in_pipe(pipe);
-/*    else if(pipe->is_execve)
+    }
+    else if(pipe->is_execve) {
         execute_execve_in_pipe(pipe);
-    else if(pipe->is_redir)
+    }
+/*     else if(pipe->is_redir)
         execute_redir_in_pipe(pipe);*/
 
 }
 
-/*
-void execute_redir_in_pipe(t_pipe *pipe) {
 
-}
+/*void execute_redir_in_pipe(t_pipe *pipe) {
+
+}*/
 
 void execute_execve_in_pipe(t_pipe *pipe) {
+    t_parser_token **token_key;
 
+    token_key = (t_parser_token **) pipe->commands->array;
+    ex_func(token_key, pipe->shell, (char **)pipe->shell->env->array);
 }
-*/
+
 
 void execute_builtin_in_pipe(t_pipe *pipe)
 {

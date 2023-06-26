@@ -98,7 +98,7 @@ File: rluserman.info,  Node: Readline Interaction,  Next: Readline Init File,  P
 ========================
 
 Often during an interactive session you type in a long line of text,
-only to notice that the first word on the line is misspelled.  The
+only to notice that the first_pipe word on the line is misspelled.  The
 Readline library gives you a set of commands for manipulating the text
 as you type it in, allowing you to just fix your typo, and not forcing
 you to retype the majority of the line.  Using these editing commands,
@@ -132,7 +132,7 @@ you have typed several other characters.  In that case, you can type
 'C-b' to move the cursor to the left, and then correct your mistake.
 Afterwards, you can move the cursor to the right with 'C-f'.
 
-   When you add text in the middle of a line, you will notice that
+   When you add text in the middle_pipe of a line, you will notice that
 characters to the right of the cursor are 'pushed over' to make room for
 the text that you have inserted.  Likewise, when you delete text behind
 the cursor, characters to the right of the cursor are 'pulled back' to
@@ -150,7 +150,7 @@ the bare essentials for editing the text of an input line follows.
 Printing characters
      Insert the character into the line at the cursor.
 'C-_' or 'C-x C-u'
-     Undo the last editing command.  You can undo all the way back to an
+     Undo the last_pipe editing command.  You can undo all the way back to an
      empty line.
 
 (Depending on your configuration, the <Backspace> key be set to delete
@@ -250,7 +250,7 @@ act in a backward direction.  For example, to kill text back to the
 start of the line, you might type 'M-- C-k'.
 
    The general way to pass numeric arguments to a command is to type
-meta digits before the command.  If the first 'digit' typed is a minus
+meta digits before the command.  If the first_pipe 'digit' typed is a minus
 sign ('-'), then the sign of the argument will be negative.  Once you
 have typed one meta digit to get the argument started, you can type the
 remainder of the digits, and then the command.  For example, to give the
@@ -288,9 +288,9 @@ other key sequence bound to a Readline command will terminate the search
 and execute that command.  For instance, a <RET> will terminate the
 search and accept the line, thereby executing the command from the
 history list.  A movement command will terminate the search, make the
-last line found the current line, and begin editing.
+last_pipe line found the current line, and begin editing.
 
-   Readline remembers the last incremental search string.  If two 'C-r's
+   Readline remembers the last_pipe incremental search string.  If two 'C-r's
 are typed without any intervening characters defining a new search
 string, any remembered search string is used.
 
@@ -457,7 +457,7 @@ Variable Settings
 
      'emacs-mode-string'
           If the SHOW-MODE-IN-PROMPT variable is enabled, this string is
-          displayed immediately before the last line of the primary
+          displayed immediately before the last_pipe line of the primary
           prompt when emacs editing mode is active.  The value is
           expanded like a key binding, so the standard set of meta- and
           control prefixes and backslash escape sequences is available.
@@ -625,7 +625,7 @@ Variable Settings
      'skip-completed-text'
           If set to 'on', this alters the default completion behavior
           when inserting a single match into the line.  It's only active
-          when performing completion in the middle of a word.  If
+          when performing completion in the middle_pipe of a word.  If
           enabled, readline does not insert characters from the
           completion that match characters after point in the word being
           completed, so portions of the word following the cursor are
@@ -637,7 +637,7 @@ Variable Settings
 
      'vi-cmd-mode-string'
           If the SHOW-MODE-IN-PROMPT variable is enabled, this string is
-          displayed immediately before the last line of the primary
+          displayed immediately before the last_pipe line of the primary
           prompt when vi editing mode is active and in command mode.
           The value is expanded like a key binding, so the standard set
           of meta- and control prefixes and backslash escape sequences
@@ -648,7 +648,7 @@ Variable Settings
 
      'vi-ins-mode-string'
           If the SHOW-MODE-IN-PROMPT variable is enabled, this string is
-          displayed immediately before the last line of the primary
+          displayed immediately before the last_pipe line of the primary
           prompt when vi editing mode is active and in insertion mode.
           The value is expanded like a key binding, so the standard set
           of meta- and control prefixes and backslash escape sequences
@@ -708,7 +708,7 @@ Key Bindings
                "\e[11~": "Function Key 1"
 
           In the above example, 'C-u' is again bound to the function
-          'universal-argument' (just as it was in the first example),
+          'universal-argument' (just as it was in the first_pipe example),
           ''C-x' 'C-r'' is bound to the function 're-read-init-file',
           and '<ESC> <[> <1> <1> <~>' is bound to insert the text
           'Function Key 1'.
@@ -794,7 +794,7 @@ four parser directives used.
           bindings, perhaps to bind the key sequences output by the
           terminal's function keys.  The word on the right side of the
           '=' is tested against both the full name of the terminal and
-          the portion of the terminal name before the first '-'.  This
+          the portion of the terminal name before the first_pipe '-'.  This
           allows 'sun' to match both 'sun' and 'sun-cmd', for instance.
 
      'version'
@@ -960,7 +960,7 @@ variable assignment, and conditional syntax.
      $if Ftp
      "\C-xg": "get \M-?"
      "\C-xt": "put \M-?"
-     "\M-.": yank-last-arg
+     "\M-.": yank-last_pipe-arg
      $endif
 
 
@@ -1061,7 +1061,7 @@ File: rluserman.info,  Node: Commands For History,  Next: Commands For Text,  Pr
      Move 'forward' through the history list, fetching the next command.
 
 'beginning-of-history (M-<)'
-     Move to the first line in the history.
+     Move to the first_pipe line in the history.
 
 'end-of-history (M->)'
      Move to the end of the input history, i.e., the line currently
@@ -1116,7 +1116,7 @@ File: rluserman.info,  Node: Commands For History,  Next: Commands For Text,  Pr
      non-incremental search.  By default, this command is unbound.
 
 'yank-nth-arg (M-C-y)'
-     Insert the first argument to the previous command (usually the
+     Insert the first_pipe argument to the previous command (usually the
      second word on the previous line) at point.  With an argument N,
      insert the Nth word from the previous command (the words in the
      previous command begin with word 0).  A negative argument inserts
@@ -1124,16 +1124,16 @@ File: rluserman.info,  Node: Commands For History,  Next: Commands For Text,  Pr
      argument N is computed, the argument is extracted as if the '!N'
      history expansion had been specified.
 
-'yank-last-arg (M-. or M-_)'
-     Insert last argument to the previous command (the last word of the
+'yank-last_pipe-arg (M-. or M-_)'
+     Insert last_pipe argument to the previous command (the last_pipe word of the
      previous history entry).  With a numeric argument, behave exactly
-     like 'yank-nth-arg'.  Successive calls to 'yank-last-arg' move back
-     through the history list, inserting the last word (or the word
-     specified by the argument to the first call) of each line in turn.
+     like 'yank-nth-arg'.  Successive calls to 'yank-last_pipe-arg' move back
+     through the history list, inserting the last_pipe word (or the word
+     specified by the argument to the first_pipe call) of each line in turn.
      Any numeric argument supplied to these successive calls determines
      the direction to move through the history.  A negative argument
      switches the direction through the history (back or forward).  The
-     history expansion facilities are used to extract the last argument,
+     history expansion facilities are used to extract the last_pipe argument,
      as if the '!$' history expansion had been specified.
 
 'operate-and-get-next (C-o)'
@@ -1196,13 +1196,13 @@ File: rluserman.info,  Node: Commands For Text,  Next: Commands For Killing,  Pr
 'transpose-chars (C-t)'
      Drag the character before the cursor forward over the character at
      the cursor, moving the cursor forward as well.  If the insertion
-     point is at the end of the line, then this transposes the last two
+     point is at the end of the line, then this transposes the last_pipe two
      characters of the line.  Negative arguments have no effect.
 
 'transpose-words (M-t)'
      Drag the word before point past the word after point, moving point
      past that word as well.  If the insertion point is at the end of
-     the line, this transposes the last two words on the line.
+     the line, this transposes the last_pipe two words on the line.
 
 'upcase-word (M-u)'
      Uppercase the current (or following) word.  With a negative
@@ -1265,7 +1265,7 @@ File: rluserman.info,  Node: Commands For Killing,  Next: Numeric Arguments,  Pr
 'shell-transpose-words (M-C-t)'
      Drag the word before point past the word after point, moving point
      past that word as well.  If the insertion point is at the end of
-     the line, this transposes the last two words on the line.  Word
+     the line, this transposes the last_pipe two words on the line.  Word
      boundaries are the same as 'shell-forward-word' and
      'shell-backward-word'.
 
@@ -1326,7 +1326,7 @@ File: rluserman.info,  Node: Numeric Arguments,  Next: Commands For Completion, 
      command is immediately followed by a character that is neither a
      digit nor minus sign, the argument count for the next command is
      multiplied by four.  The argument count is initially one, so
-     executing this function the first time makes the argument count
+     executing this function the first_pipe time makes the argument count
      four, a second time makes the argument count sixteen, and so on.
      By default, this is not bound to a key.
 
@@ -1388,12 +1388,12 @@ File: rluserman.info,  Node: Keyboard Macros,  Next: Miscellaneous Commands,  Pr
      Stop saving the characters typed into the current keyboard macro
      and save the definition.
 
-'call-last-kbd-macro (C-x e)'
-     Re-execute the last keyboard macro defined, by making the
+'call-last_pipe-kbd-macro (C-x e)'
+     Re-execute the last_pipe keyboard macro defined, by making the
      characters in the macro appear as if typed at the keyboard.
 
-'print-last-kbd-macro ()'
-     Print the last keboard macro defined in a format suitable for the
+'print-last_pipe-kbd-macro ()'
+     Print the last_pipe keboard macro defined in a format suitable for the
      INPUTRC file.
 
 
@@ -1675,7 +1675,7 @@ Appendix A GNU Free Documentation License
      conditions, can be treated as verbatim copying in other respects.
 
      If the required texts for either cover are too voluminous to fit
-     legibly, you should put the first ones listed (as many as fit
+     legibly, you should put the first_pipe ones listed (as many as fit
      reasonably) on the actual cover, and continue the rest onto
      adjacent pages.
 
@@ -1689,7 +1689,7 @@ Appendix A GNU Free Documentation License
      reasonably prudent steps, when you begin distribution of Opaque
      copies in quantity, to ensure that this Transparent copy will
      remain thus accessible at the stated location until at least one
-     year after the last time you distribute an Opaque copy (directly or
+     year after the last_pipe time you distribute an Opaque copy (directly or
      through your agents or retailers) of that edition to the public.
 
      It is requested, but not required, that you contact the authors of
@@ -1902,7 +1902,7 @@ Appendix A GNU Free Documentation License
 
      Moreover, your license from a particular copyright holder is
      reinstated permanently if the copyright holder notifies you of the
-     violation by some reasonable means, this is the first time you have
+     violation by some reasonable means, this is the first_pipe time you have
      received notice of violation of this License (for any work) from
      that copyright holder, and you cure the violation prior to 30 days
      after your receipt of the notice.
@@ -1954,7 +1954,7 @@ Appendix A GNU Free Documentation License
      in part, as part of another Document.
 
      An MMC is "eligible for relicensing" if it is licensed under this
-     License, and if all works that were first published under this
+     License, and if all works that were first_pipe published under this
      License somewhere other than this MMC, and subsequently
      incorporated in whole or in part into the MMC, (1) had no cover
      texts or invariant sections, and (2) were thus incorporated prior

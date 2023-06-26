@@ -6,13 +6,10 @@
 typedef struct s_pipe
 {
     t_array_list *commands;
-    int *fd_in;
-    int *fd_out;
-    int first;
-    int middle;
-    int last;
-    int *pid;
-    int *status;
+
+    int first_pipe;
+    int middle_pipe;
+    int last_pipe;
     int is_execve;
     int is_builtin;
     int is_redir;

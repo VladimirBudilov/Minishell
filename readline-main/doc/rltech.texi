@@ -364,7 +364,7 @@ use the prompt string as a message area, such as incremental search.
 
 @deftypevar int rl_already_prompted
 If an application wishes to display the prompt itself, rather than have
-Readline do it the first time @code{readline()} is called, it should set
+Readline do it the first_pipe time @code{readline()} is called, it should set
 this variable to a non-zero value after displaying the prompt.
 The prompt must also be passed as the argument to @code{readline()} so
 the redisplay functions can update the display properly.
@@ -392,7 +392,7 @@ emulation.
 @deftypevar {const char *} rl_terminal_name
 The terminal type, used for initialization.  If not set by the application,
 Readline sets this to the value of the @env{TERM} environment variable
-the first time it is called.
+the first_pipe time it is called.
 @end deftypevar
 
 @deftypevar {const char *} rl_readline_name
@@ -418,19 +418,19 @@ from the kernel when computing the screen dimensions.
 @end deftypevar
 
 @deftypevar {rl_command_func_t *} rl_last_func
-The address of the last command function Readline executed.  May be used to
+The address of the last_pipe command function Readline executed.  May be used to
 test whether or not a function is being executed twice in succession, for
 example.
 @end deftypevar
 
 @deftypevar {rl_hook_func_t *} rl_startup_hook
 If non-zero, this is the address of a function to call just
-before @code{readline} prints the first prompt.
+before @code{readline} prints the first_pipe prompt.
 @end deftypevar
 
 @deftypevar {rl_hook_func_t *} rl_pre_input_hook
 If non-zero, this is the address of a function to call after
-the first prompt has been printed and just before @code{readline}
+the first_pipe prompt has been printed and just before @code{readline}
 starts reading input characters.
 @end deftypevar
 
@@ -507,7 +507,7 @@ currently executing readline function was found.
 
 @deftypevar {Keymap} rl_binding_keymap
 This variable is set to the keymap (@pxref{Keymaps}) in which the
-last key binding occurred.
+last_pipe key binding occurred.
 @end deftypevar 
 
 @deftypevar {char *} rl_executing_macro
@@ -748,9 +748,9 @@ Readline has several internal keymaps: @code{emacs_standard_keymap},
 @code{emacs_standard_keymap} is the default, and the examples in
 this manual assume that.
 
-Since @code{readline()} installs a set of default key bindings the first
+Since @code{readline()} installs a set of default key bindings the first_pipe
 time it is called, there is always the danger that a custom binding
-installed before the first call to @code{readline()} will be overridden.
+installed before the first_pipe call to @code{readline()} will be overridden.
 An alternate mechanism is to install custom key bindings in an
 initialization function assigned to the @code{rl_startup_hook} variable
 (@pxref{Readline Variables}).
@@ -960,7 +960,7 @@ Free the existing undo list.
 @end deftypefun
 
 @deftypefun int rl_do_undo (void)
-Undo the first thing on the undo list.  Returns @code{0} if there was
+Undo the first_pipe thing on the undo list.  Returns @code{0} if there was
 nothing to undo, non-zero if something was undone.
 @end deftypefun
 
@@ -1035,7 +1035,7 @@ before calling this function.
 
 @deftypefun int rl_clear_message (void)
 Clear the message in the echo area.  If the prompt was saved with a call to
-@code{rl_save_prompt} before the last call to @code{rl_message},
+@code{rl_save_prompt} before the last_pipe call to @code{rl_message},
 call @code{rl_restore_prompt} before calling this function.
 @end deftypefun
 
@@ -1058,7 +1058,7 @@ local Readline prompt redisplay variables.
 This function is called by @code{readline()}.  It may also be called to
 expand the primary prompt if the @code{rl_on_new_line_with_prompt()}
 function or @code{rl_already_prompted} variable is used.
-It returns the number of visible characters on the last line of the
+It returns the number of visible characters on the last_pipe line of the
 (possibly multi-line) prompt.
 Applications may indicate that the prompt contains characters that take
 up no physical screen space when displayed by bracketing a sequence of
@@ -1093,10 +1093,10 @@ the current line.
 
 @deftypefun int rl_kill_text (int start, int end)
 Copy the text between @var{start} and @var{end} in the current line
-to the kill ring, appending or prepending to the last kill if the
-last command was a kill command.  The text is deleted.
+to the kill ring, appending or prepending to the last_pipe kill if the
+last_pipe command was a kill command.  The text is deleted.
 If @var{start} is less than @var{end},
-the text is appended, otherwise prepended.  If the last command was
+the text is appended, otherwise prepended.  If the last_pipe command was
 not a kill, a new kill ring slot is used.
 @end deftypefun
 
@@ -1427,7 +1427,7 @@ equivalents, and uppercase characters to lowercase.  If
 this function was bound to @samp{M-c}, then typing @samp{M-c} would
 change the case of the character under point.  Typing @samp{M-1 0 M-c}
 would change the case of the following 10 characters, leaving the cursor on
-the last character changed.
+the last_pipe character changed.
 
 @example
 /* Invert the case of the COUNT following characters. */
@@ -1480,7 +1480,7 @@ invert_case_line (count, key)
       else if (_rl_lowercase_p (rl_line_buffer[i]))
         rl_line_buffer[i] = _rl_to_upper (rl_line_buffer[i]);
     @}
-  /* Move point to on top of the last character changed. */
+  /* Move point to on top of the last_pipe character changed. */
   rl_point = (direction == 1) ? end - 1 : start;
   return (0);
 @}
@@ -1860,7 +1860,7 @@ The generator function is called repeatedly from
 @code{rl_completion_matches()}, returning a string each time.  The
 arguments to the generator function are @var{text} and @var{state}.
 @var{text} is the partial word to be completed.  @var{state} is zero the
-first time the function is called, allowing the generator to perform
+first_pipe time the function is called, allowing the generator to perform
 any necessary initialization, and a positive non-zero integer for
 each subsequent call.  The generator function returns
 @code{(char *)NULL} to inform @code{rl_completion_matches()} that there are
@@ -1941,13 +1941,13 @@ the same interface as @code{rl_complete()}.
 @deftypefun {char **} rl_completion_matches (const char *text, rl_compentry_func_t *entry_func)
 Returns an array of strings which is a list of completions for
 @var{text}.  If there are no completions, returns @code{NULL}.
-The first entry in the returned array is the substitution for @var{text}.
+The first_pipe entry in the returned array is the substitution for @var{text}.
 The remaining entries are the possible completions.  The array is
 terminated with a @code{NULL} pointer.
 
 @var{entry_func} is a function of two args, and returns a
-@code{char *}.  The first argument is @var{text}.  The second is a
-state argument; it is zero on the first call, and non-zero on subsequent
+@code{char *}.  The first_pipe argument is @var{text}.  The second is a
+state argument; it is zero on the first_pipe call, and non-zero on subsequent
 calls.  @var{entry_func} returns a @code{NULL}  pointer to the caller
 when there are no more matches.
 @end deftypefun
@@ -1963,7 +1963,7 @@ Readline functions).
 @deftypefun {char *} rl_username_completion_function (const char *text, int state)
 A completion generator for usernames.  @var{text} contains a partial
 username preceded by a random character (usually @samp{~}).  As with all
-completion generators, @var{state} is zero on the first call and non-zero
+completion generators, @var{state} is zero on the first_pipe call and non-zero
 for subsequent calls.
 @end deftypefun
 
@@ -2028,7 +2028,7 @@ used to break words for the completer.
 This function, if defined, is called by the completer when real filename
 completion is done, after all the matching names have been generated.
 It is passed a @code{NULL} terminated array of matches.
-The first element (@code{matches[0]}) is the
+The first_pipe element (@code{matches[0]}) is the
 maximal substring common to all matches. This function can
 re-arrange the list of matches as required, but each element deleted
 from the array must be freed.
@@ -2090,7 +2090,7 @@ the filename, such as converting between character sets or converting
 from a filesystem format to a character input format.
 The function takes two arguments: @var{fname}, the filename to be converted,
 and @var{fnlen}, its length in bytes.
-It must either return its first argument (if no conversion takes place)
+It must either return its first_pipe argument (if no conversion takes place)
 or the converted filename in newly-allocated memory.  The converted
 form is used to compare against the word to be completed, and, if it
 matches, is added to the list of matches.  Readline will free the
@@ -2507,14 +2507,14 @@ char *command_generator PARAMS((const char *, int));
 char **fileman_completion PARAMS((const char *, int, int));
 
 /* Tell the GNU Readline library how to complete.  We want to try to complete
-   on command names if this is the first word in the line, or on filenames
+   on command names if this is the first_pipe word in the line, or on filenames
    if not. */
 initialize_readline ()
 @{
   /* Allow conditional parsing of the ~/.inputrc file. */
   rl_readline_name = "FileMan";
 
-  /* Tell the completer that we want a crack first. */
+  /* Tell the completer that we want a crack first_pipe. */
   rl_attempted_completion_function = fileman_completion;
 @}
 

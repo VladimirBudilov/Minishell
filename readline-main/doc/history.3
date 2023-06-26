@@ -62,7 +62,7 @@ fix errors in previous commands quickly.
 History expansion is usually performed immediately after a complete line
 is read.
 It takes place in two parts.
-The first is to determine which line from the history list
+The first_pipe is to determine which line from the history list
 to use during substitution.
 The second is to select portions of that line for inclusion into
 the current one.
@@ -120,7 +120,7 @@ If \fIstring\fP is missing, the string from the most recent search is used;
 it is an error if there is no previous search string.
 .TP
 .B \d\s+2^\s-2\u\fIstring1\fP\d\s+2^\s-2\u\fIstring2\fP\d\s+2^\s-2\u
-Quick substitution.  Repeat the last command, replacing
+Quick substitution.  Repeat the last_pipe command, replacing
 .I string1
 with
 .IR string2 .
@@ -144,7 +144,7 @@ It may be omitted if the word designator begins with a
 or
 .BR % .
 Words are numbered from the beginning of the line,
-with the first word being denoted by 0 (zero).
+with the first_pipe word being denoted by 0 (zero).
 Words are inserted into the current line separated by single spaces.
 .PP
 .PD 0
@@ -157,14 +157,14 @@ word.
 The \fIn\fRth word.
 .TP
 .B ^
-The first argument.  That is, word 1.
+The first_pipe argument.  That is, word 1.
 .TP
 .B $
-The last word.  This is usually the last argument, but will expand to the
+The last_pipe word.  This is usually the last_pipe argument, but will expand to the
 zeroth word if there is only one word in the line.
 .TP
 .B %
-The first word matched by the most recent `?\fIstring\fR?' search,
+The first_pipe word matched by the most recent `?\fIstring\fR?' search,
 if the search string begins with a character that is part of a word.
 .TP
 .I x\fB\-\fPy
@@ -181,7 +181,7 @@ word in the event; the empty string is returned in that case.
 Abbreviates \fIx\-$\fP.
 .TP
 .B x\-
-Abbreviates \fIx\-$\fP like \fBx*\fP, but omits the last word.
+Abbreviates \fIx\-$\fP like \fBx*\fP, but omits the last_pipe word.
 If \fBx\fP is missing, it defaults to 0.
 .PD
 .PP
@@ -220,17 +220,17 @@ Quote the substituted words as with
 but break into words at
 .B blanks
 and newlines.
-The \fBq\fP and \fBx\fP modifiers are mutually exclusive; the last one
+The \fBq\fP and \fBx\fP modifiers are mutually exclusive; the last_pipe one
 supplied is used.
 .TP
 .B s/\fIold\fP/\fInew\fP/
 Substitute
 .I new
-for the first occurrence of
+for the first_pipe occurrence of
 .I old
 in the event line.
 Any character may be used as the delimiter in place of /.
-The final delimiter is optional if it is the last character of the
+The final delimiter is optional if it is the last_pipe character of the
 event line.
 The delimiter may be quoted in
 .I old
@@ -243,10 +243,10 @@ it is replaced by
 A single backslash will quote the &.
 If
 .I old
-is null, it is set to the last
+is null, it is set to the last_pipe
 .I old
 substituted, or, if no previous history substitutions took place,
-the last
+the last_pipe
 .I string
 in a
 .B !?\fIstring\fR\fB[?]\fR
@@ -266,7 +266,7 @@ used in conjunction with `\fB:s\fP' (e.g., `\fB:gs/\fIold\fP/\fInew\fP/\fR')
 or `\fB:&\fP'.  If used with
 `\fB:s\fP', any delimiter can be used
 in place of /, and the final delimiter is optional
-if it is the last character of the event line.
+if it is the last_pipe character of the event line.
 An \fBa\fP may be used as a synonym for \fBg\fP.
 .TP
 .B G
@@ -391,7 +391,7 @@ of an invalid \fIwhich\fP, a \fBNULL\fP pointer is returned.
 Clear the history list by deleting all the entries.
 
 .Fn1 void stifle_history "int max"
-Stifle the history list, remembering only the last \fImax\fP entries.
+Stifle the history list, remembering only the last_pipe \fImax\fP entries.
 The history list will contain only \fImax\fP entries at a time.
 
 .Fn1 int unstifle_history "void"
@@ -516,12 +516,12 @@ Returns 0 on success, or \fBerrno\fP on a read or write error.
 
 
 .Fn2 int append_history "int nelements" "const char *filename"
-Append the last \fInelements\fP of the history list to \fIfilename\fP.
+Append the last_pipe \fInelements\fP of the history list to \fIfilename\fP.
 If \fIfilename\fP is \fBNULL\fP, then append to \fI~/.history\fP.
 Returns 0 on success, or \fBerrno\fP on a read or write error.
 
 .Fn2 int history_truncate_file "const char *filename" "int nlines"
-Truncate the history file \fIfilename\fP, leaving only the last
+Truncate the history file \fIfilename\fP, leaving only the last_pipe
 \fInlines\fP lines.
 If \fIfilename\fP is \fBNULL\fP, then \fI~/.history\fP is truncated.
 Returns 0 on success, or \fBerrno\fP on failure.
@@ -570,7 +570,7 @@ The tokens are split on the characters in the
 \fBhistory_word_delimiters\fP variable,
 and shell quoting conventions are obeyed.
 
-.Fn3 "char *" history_arg_extract "int first" "int last" "const char *string"
+.Fn3 "char *" history_arg_extract "int first_pipe" "int last_pipe" "const char *string"
 Extract a string segment consisting of the \fIfirst\fP through \fIlast\fP
 arguments present in \fIstring\fP.  Arguments are split using
 \fBhistory_tokenize()\fP.
@@ -581,7 +581,7 @@ This section describes the externally-visible variables exported by
 the GNU History Library.
 
 .Vb int history_base
-The logical offset of the first entry in the history list.
+The logical offset of the first_pipe entry in the history list.
 
 .Vb int history_length
 The number of entries currently stored in the history list.
@@ -607,7 +607,7 @@ The character that invokes word substitution if found at the start of
 a line.  The default is \fB^\fP.
 
 .Vb char history_comment_char
-During tokenization, if this character is seen as the first character
+During tokenization, if this character is seen as the first_pipe character
 of a word, then it and all subsequent characters up to a newline are
 ignored, suppressing history expansion for the remainder of the line.
 This is disabled by default.
@@ -668,7 +668,7 @@ chet.ramey@case.edu
 .SH BUG REPORTS
 If you find a bug in the
 .B history
-library, you should report it.  But first, you should
+library, you should report it.  But first_pipe, you should
 make sure that it really is a bug, and that it appears in the latest
 version of the
 .B history

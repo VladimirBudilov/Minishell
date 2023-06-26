@@ -26,7 +26,7 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
        commands quickly.
 
        History expansion is usually performed  immediately  after  a  complete
-       line  is read.  It takes place in two parts.  The first is to determine
+       line  is read.  It takes place in two parts.  The first_pipe is to determine
        which line from the history list to use during substitution.  The  sec-
        ond  is  to select portions of that line for inclusion into the current
        one.  The line selected from the history is the [4mevent[24m, and the portions
@@ -59,7 +59,7 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
               [4mstring[24m  is  missing,  the  string from the most recent search is
               used; it is an error if there is no previous search string.
        [1m^[4m[22mstring1[24m[1m^[4m[22mstring2[24m[1m^[0m
-              Quick substitution.  Repeat the last command, replacing  [4mstring1[0m
+              Quick substitution.  Repeat the last_pipe command, replacing  [4mstring1[0m
               with [4mstring2[24m.  Equivalent to ``!!:s^[4mstring1[24m^[4mstring2[24m^'' (see [1mMod-[0m
               [1mifiers [22mbelow).
        [1m!#     [22mThe entire command line typed so far.
@@ -68,17 +68,17 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
        Word designators are used to select desired words from the event.  A  [1m:[0m
        separates  the event specification from the word designator.  It may be
        omitted if the word designator begins with a [1m^[22m, [1m$[22m, [1m*[22m, [1m-[22m, or  [1m%[22m.   Words
-       are  numbered from the beginning of the line, with the first word being
+       are  numbered from the beginning of the line, with the first_pipe word being
        denoted by 0 (zero).  Words are inserted into the  current  line  sepa-
        rated by single spaces.
 
        [1m0 (zero)[0m
               The zeroth word.  For the shell, this is the command word.
        [4mn[24m      The [4mn[24mth word.
-       [1m^      [22mThe first argument.  That is, word 1.
-       [1m$      [22mThe  last word.  This is usually the last argument, but will ex-
+       [1m^      [22mThe first_pipe argument.  That is, word 1.
+       [1m$      [22mThe  last_pipe word.  This is usually the last_pipe argument, but will ex-
               pand to the zeroth word if there is only one word in the line.
-       [1m%      [22mThe first word matched by the most recent `?[4mstring[24m?' search,  if
+       [1m%      [22mThe first_pipe word matched by the most recent `?[4mstring[24m?' search,  if
               the  search  string  begins  with  a character that is part of a
               word.
        [4mx[24m[1m-[4m[22my[24m    A range of words; `-[4my[24m' abbreviates `0-[4my[24m'.
@@ -86,7 +86,7 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
               It  is  not  an  error to use [1m* [22mif there is just one word in the
               event; the empty string is returned in that case.
        [1mx*     [22mAbbreviates [4mx-$[24m.
-       [1mx-     [22mAbbreviates [4mx-$[24m like [1mx*[22m, but omits the last word.  If [1mx [22mis miss-
+       [1mx-     [22mAbbreviates [4mx-$[24m like [1mx*[22m, but omits the last_pipe word.  If [1mx [22mis miss-
               ing, it defaults to 0.
 
        If  a  word  designator is supplied without an event specification, the
@@ -105,22 +105,22 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
        [1mq      [22mQuote the substituted words, escaping further substitutions.
        [1mx      [22mQuote the substituted words as with [1mq[22m, but break into  words  at
               [1mblanks  [22mand newlines.  The [1mq [22mand [1mx [22mmodifiers are mutually exclu-
-              sive; the last one supplied is used.
+              sive; the last_pipe one supplied is used.
        [1ms/[4m[22mold[24m[1m/[4m[22mnew[24m[1m/[0m
-              Substitute [4mnew[24m for the first occurrence  of  [4mold[24m  in  the  event
+              Substitute [4mnew[24m for the first_pipe occurrence  of  [4mold[24m  in  the  event
               line.  Any character may be used as the delimiter in place of /.
-              The final delimiter is optional if it is the last  character  of
+              The final delimiter is optional if it is the last_pipe  character  of
               the event line.  The delimiter may be quoted in [4mold[24m and [4mnew[24m with
               a single backslash.  If & appears in [4mnew[24m, it is replaced by [4mold[24m.
               A  single backslash will quote the &.  If [4mold[24m is null, it is set
-              to the last [4mold[24m substituted, or, if no previous history  substi-
-              tutions  took  place,  the last [4mstring[24m in a [1m!?[4m[22mstring[24m[1m[?]  [22msearch.
+              to the last_pipe [4mold[24m substituted, or, if no previous history  substi-
+              tutions  took  place,  the last_pipe [4mstring[24m in a [1m!?[4m[22mstring[24m[1m[?]  [22msearch.
               If [4mnew[24m is null, each matching [4mold[24m is deleted.
        [1m&      [22mRepeat the previous substitution.
        [1mg      [22mCause changes to be applied over the entire event line.  This is
               used  in  conjunction  with `[1m:s[22m' (e.g., `[1m:gs/[4m[22mold[24m[1m/[4m[22mnew[24m[1m/[22m') or `[1m:&[22m'.
               If used with `[1m:s[22m', any delimiter can be used in place of /,  and
-              the  final  delimiter is optional if it is the last character of
+              the  final  delimiter is optional if it is the last_pipe character of
               the event line.  An [1ma [22mmay be used as a synonym for [1mg[22m.
        [1mG      [22mApply the following `[1ms[22m' or `[1m&[22m' modifier once to each word in the
               event line.
@@ -242,7 +242,7 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
        Clear the history list by deleting all the entries.
 
        [4mvoid[24m [1mstifle_history [22m([4mint[24m [4mmax[24m)
-       Stifle the history list, remembering only the last  [4mmax[24m  entries.   The
+       Stifle the history list, remembering only the last_pipe  [4mmax[24m  entries.   The
        history list will contain only [4mmax[24m entries at a time.
 
        [4mint[24m [1munstifle_history [22m([4mvoid[24m)
@@ -361,12 +361,12 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
 
 
        [4mint[24m [1mappend_history [22m([4mint[24m [4mnelements,[24m [4mconst[24m [4mchar[24m [4m*filename[24m)
-       Append the last [4mnelements[24m of the history list to [4mfilename[24m.  If [4mfilename[0m
+       Append the last_pipe [4mnelements[24m of the history list to [4mfilename[24m.  If [4mfilename[0m
        is  [1mNULL[22m, then append to [4m~/.history[24m.  Returns 0 on success, or [1merrno [22mon
        a read or write error.
 
        [4mint[24m [1mhistory_truncate_file [22m([4mconst[24m [4mchar[24m [4m*filename,[24m [4mint[24m [4mnlines[24m)
-       Truncate the history file [4mfilename[24m, leaving only the last [4mnlines[24m lines.
+       Truncate the history file [4mfilename[24m, leaving only the last_pipe [4mnlines[24m lines.
        If  [4mfilename[24m  is [1mNULL[22m, then [4m~/.history[24m is truncated.  Returns 0 on suc-
        cess, or [1merrno [22mon failure.
 
@@ -410,7 +410,7 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
        GNU History Library.
 
        [4mint[24m [1mhistory_base[0m
-       The logical offset of the first entry in the history list.
+       The logical offset of the first_pipe entry in the history list.
 
        [4mint[24m [1mhistory_length[0m
        The number of entries currently stored in the history list.
@@ -436,7 +436,7 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
        line.  The default is [1m^[22m.
 
        [4mchar[24m [1mhistory_comment_char[0m
-       During tokenization, if this character is seen as the  first  character
+       During tokenization, if this character is seen as the  first_pipe  character
        of  a  word,  then it and all subsequent characters up to a newline are
        ignored, suppressing history expansion for the remainder of  the  line.
        This is disabled by default.
@@ -488,7 +488,7 @@ HISTORY(3)                 Library Functions Manual                 HISTORY(3)
 
 [1mBUG REPORTS[0m
        If you find a bug in the [1mhistory [22mlibrary, you should  report  it.   But
-       first,  you  should  make sure that it really is a bug, and that it ap-
+       first_pipe,  you  should  make sure that it really is a bug, and that it ap-
        pears in the latest version of the [1mhistory [22mlibrary that you have.
 
        Once you have determined that a bug actually exists, mail a bug  report

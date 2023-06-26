@@ -13,10 +13,8 @@ typedef struct s_minishell
 	t_array_list *tokenizer_array;
 	t_array_list *pipe_array;
 	int number_of_pipes;
-	int number_of_commands;
-    char **from_readline;
+    int status;
     char *input;
-    char **cmd;
     int exit_code;
 
 	int			error_status;

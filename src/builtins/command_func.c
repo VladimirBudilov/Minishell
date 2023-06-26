@@ -10,14 +10,14 @@ void command_func(t_shell *shell, char **envp)
 
     if (shell->input == NULL)
         return ;
-    while(((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE)
+    while(((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE || ((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == PIPELINE)
         i++;
     token_key = (t_parser_token **)shell->parser_tokens_array->array;
     if(token_key[i]->main_type == BIlD_IN)
         execute_builtin(token_key, shell, i);
     else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
         ex_func(token_key, shell, envp);
-    /*else if(has_redir(shell->parser_tokens_array))
+/*    else if(has_redir(shell->parser_tokens_array))
         execute_redir(token_key, shell, envp);*/
     else
     {
