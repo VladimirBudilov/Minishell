@@ -7,7 +7,9 @@ void command_func(t_shell *shell, char **envp)
 
     i = 0;
     t_parser_token **token_key;
+    t_array_list *parser_tokens;
 
+    parser_tokens = shell->parser_tokens_array;
     if (shell->input == NULL)
         return ;
     while(((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE || ((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == PIPELINE)
@@ -17,8 +19,8 @@ void command_func(t_shell *shell, char **envp)
         execute_builtin(token_key, shell, i);
     else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
         ex_func(token_key, shell, envp);
-/*    else if(has_redir(shell->parser_tokens_array))
-        execute_redir(token_key, shell, envp);*/
+    else if(has_redir(shell->parser_tokens_array))
+        execute_redir(token_key, shell);
     else
     {
         ft_putstr_fd("shell: ", 2);
@@ -28,9 +30,9 @@ void command_func(t_shell *shell, char **envp)
     }
 }
 
-/*void execute_redir(t_parser_token **tokens, t_shell *shell, char **envp) {
+void execute_redir(t_array_list *parser_array, t_shell *shell) {
 
-}*/
+}
 
 int has_redir(t_array_list *tokens) {
     int i;
