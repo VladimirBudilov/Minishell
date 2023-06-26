@@ -73,16 +73,22 @@ void change_old_path(t_hashmap **hashmap_key, char *path, t_shell *shell)
 }
 
 
-void cd_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
+void cd_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 {
     char *path;
+	int i;
 
-    if (shell->parser_tokens_array->size <= 2 || !ft_strncmp(token_key[2]->content, "~", 2))
+	t_parser_token **token_key;
+	i = 2;
+	token_key = (t_parser_token **)line->array;
+	if (token_key[0]->main_type == NEW_SPACE)
+		i++;
+    if (line->size <= 2 || !ft_strncmp(token_key[i]->content, "~", 2))
     {
         to_home(hashmap_key, shell);
         return ;
     }
-    else if (!ft_strncmp(token_key[2]->content, "-", 2))
+    else if (!ft_strncmp(token_key[i]->content, "-", 2))
     {
         path = ft_strdup(find_path(hashmap_key, shell, 2));
         if (path == NULL)
@@ -94,13 +100,13 @@ void cd_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell
     }
     else
     {
-        if (ft_strchr(token_key[2]->content, '~'))
+        if (ft_strchr(token_key[i]->content, '~'))
         {
             path = ft_strdup(find_path(hashmap_key, shell, 3));
-            path = ft_strjoin(path, ft_strchr(token_key[2]->content, '/'));
+            path = ft_strjoin(path, ft_strchr(token_key[i]->content, '/'));
         }
         else
-            path = ft_strdup(token_key[2]->content);
+            path = ft_strdup(token_key[i]->content);
         change_path(hashmap_key, path, shell);
     }
     free(path);

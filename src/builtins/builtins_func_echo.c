@@ -1,30 +1,16 @@
 #include "../../includes/minishell.h"
 
-    //надо решить вопрос с << >> < >
-    //кавычки
-    //проверить в конце перенос строки с кэт е когда подкдючим
-    //првоерить по тест кейсам 
-
-
-void print_echo(char *str)
-{
-    int i;
-
-    i = 0;
-    while(str[i])
-    {
-        if (str[i] != 34)
-            ft_putchar_fd(str[i], 1);
-        i++;
-    }
-}
-
-void echo_func(t_parser_token **token_key, t_shell *shell)
+void echo_func(t_array_list *line)
 {
     int check_n;
-    int i = 2;
+    int i;
+
+	i = 2;
     check_n = 0;
-    if(shell->parser_tokens_array->size <= 2)
+	t_parser_token **token_key = (t_parser_token **)line->array;
+	if (token_key[0]->main_type == NEW_SPACE)
+		i++;
+    if(line->size <= 2)
     {
         write(1, "\n", 1);
         return ;
@@ -32,12 +18,11 @@ void echo_func(t_parser_token **token_key, t_shell *shell)
     if (!(ft_strncmp(token_key[i]->content, "-n", 2)) && token_key[i]->content[2] == '\0')
     {
         check_n = 1;
-        i++;
+        i += 2;
     }
-    printf("size %d\n", shell->parser_tokens_array->size);
-    while(i < shell->parser_tokens_array->size)
+    while(i < line->size)
     {
-        print_echo(token_key[i]->content);
+        ft_putstr_fd(token_key[i]->content, 1);
         i++;
     }
     if (!check_n)
