@@ -13,6 +13,7 @@ typedef struct s_minishell
 	t_array_list *tokenizer_array;
 	t_array_list *pipe_array;
 	int number_of_pipes;
+    int status;
     char *input;
     int exit_code;
 

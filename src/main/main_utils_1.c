@@ -1,4 +1,6 @@
 #include "../../includes/minishell.h"
+
+
 void clean_all(t_shell *shell) {
     free_env(shell->env);
 
@@ -39,9 +41,23 @@ void clean_array(t_shell *minishell)
     minishell->parser_tokens_array->size = 0;
     minishell->tokenizer_array->size = 0;
     minishell->pipe_array->size = 0;
+    clean_pipe_commands(minishell);
     minishell->number_of_pipes = 0;
     free(minishell->input);
 
+}
+
+void clean_pipe_commands(t_shell *shell) {
+    int i;
+    t_pipe **pipes;
+
+    i = 0;
+    pipes = (t_pipe **) shell->pipe_array->array;
+    while (i < shell->pipe_array->size) {
+
+        pipes[i]->commands->size = 0;
+        i++;
+    }
 }
 
 void free_parser_tokens(t_array_list *tokens) {

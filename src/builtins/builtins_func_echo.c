@@ -34,6 +34,7 @@ void echo_func(t_parser_token **token_key, t_shell *shell)
         check_n = 1;
         i++;
     }
+    printf("size %d\n", shell->parser_tokens_array->size);
     while(i < shell->parser_tokens_array->size)
     {
         print_echo(token_key[i]->content);

@@ -21,12 +21,11 @@ int main(int argc, char **argv, char **envp)
 		parse_readline(minishell);
         if(has_pipes(minishell)) {
             create_pipe_list(minishell);
-            execute_pipes(minishell);
             pipe_array_cheker(minishell);
+            execute_pipes(minishell);
         }
         else
             command_func(minishell, envp);
-        print_all_pipe(minishell->pipe_array);
         clean_array(minishell);
 
     }
