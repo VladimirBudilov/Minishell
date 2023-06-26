@@ -17,9 +17,9 @@ void print_all_args(t_array_list *list);
 void free_tokenizer_output_array(t_array_list *tokens);
 int ft_is_ascii(char *str);
 void free_parser_tokens(t_array_list *tokens);
-void execute_builtin(t_parser_token **token_key, t_shell *shell, int i);
+void execute_builtin(t_array_list *token_array, t_shell *shell, int i);
 int has_redir(t_array_list *tokens);
-void execute_redir(t_parser_token **tokens, t_shell *shell, char **envp);
+void execute_redir(t_array_list *tokens);
 void clean_all(t_shell *shell);
 void free_env(t_array_list *tokens);
 

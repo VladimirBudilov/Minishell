@@ -50,8 +50,6 @@ void execute_pipes(t_shell *shell) {
 void execute_pipe(t_pipe *pipe_token, int fd_array[1000][2], int i) {
 
     int pid;
-    printf("fd_array[%d][0] = %d\n", i, fd_array[i][0]);
-    printf("fd_array[%d][1] = %d\n", i, fd_array[i][1]);
     pid = fork();
     if (pid == 0)
     {

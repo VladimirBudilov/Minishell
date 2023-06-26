@@ -30,6 +30,7 @@ void execute_builtin_in_pipe(t_pipe *pipe)
 {
     int i;
     t_parser_token **token_key;
+	t_array_list *token_array;
     t_hashmap **hashmap_key;
     t_shell *shell;
 
@@ -37,20 +38,21 @@ void execute_builtin_in_pipe(t_pipe *pipe)
     shell = pipe->shell;
     hashmap_key = (t_hashmap **) shell->env->array;
     token_key = (t_parser_token **) pipe->commands->array;
+	token_array = pipe->commands;
     while(token_key[i] == NEW_SPACE)
         i++;
     if (token_key[i]->sub_type == ECHO)
-        echo_func(token_key, shell);
+        echo_func(token_array);
     else if (token_key[i]->sub_type == ENVP)
-        env_func(hashmap_key, token_key, shell);
+        env_func(hashmap_key, token_array, shell);
     else if (token_key[i]->sub_type == CD)
-        cd_func(hashmap_key, token_key, shell);
-    else if (token_key[i]->sub_type == PWD)
-        pwd_func();
-    else if (token_key[i]->sub_type == EXIT)
-        exit_func(token_key, shell);
-    else if (token_key[i]->sub_type == EXPORT)
-        export_func(hashmap_key, token_key, shell);
-    else if (token_key[i]->sub_type == UNSET)
-        unset_func(hashmap_key, token_key, shell);
+        cd_func(hashmap_key, token_array, shell);
+//    else if (token_key[i]->sub_type == PWD)
+//        pwd_func();
+//    else if (token_key[i]->sub_type == EXIT)
+//        exit_func(token_array, shell);
+//    else if (token_key[i]->sub_type == EXPORT)
+//        export_func(hashmap_key, token_array, shell);
+//    else if (token_key[i]->sub_type == UNSET)
+//        unset_func(hashmap_key, token_array, shell);
 }
