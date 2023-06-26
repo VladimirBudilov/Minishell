@@ -105,3 +105,60 @@ int ft_is_ascii(char *str)
     }
     return (1);
 }
+
+
+void pipe_array_cheker(t_shell *shell) {
+
+    int i = 0;
+    int j = 0;
+    t_pipe **pipes;
+    pipes = (t_pipe **) shell->pipe_array->array;
+    while(i < shell->pipe_array->size) {
+        if(pipes[i]->first_pipe == 1) {
+            j = 0;
+            printf("first_pipe\n");
+            while(j < pipes[i]->commands->size) {
+                printf("first_pipe command %s\n", ((t_parser_token *)pipes[i]->commands->array[j])->content);
+                j++;
+            }
+        }
+        else if(pipes[i]->last_pipe == 1) {
+            j = 0;
+            printf("last_pipe\n");
+            while(j < pipes[i]->commands->size) {
+                printf("last_pipe command %s\n", ((t_parser_token *)pipes[i]->commands->array[j])->content);
+                j++;
+            }
+        }
+        else if (pipes[i]->middle_pipe == 1){
+            j = 0;
+            printf("middle_pipe\n");
+            while(j < pipes[i]->commands->size) {
+                printf("middle_pipe command %s\n", ((t_parser_token *)pipes[i]->commands->array[j])->content);
+                j++;
+            }
+        }
+        i++;
+    }
+
+}
+void print_all_pipe(t_array_list *pipes_array) {
+    int i;
+    int j;
+    t_pipe **pipes;
+
+    i = 0;
+    pipes = (t_pipe **) pipes_array->array;
+    while (i < pipes_array->size)
+    {
+        j = 0;
+        printf("new pipe %d\n", i);
+        while(j < pipes[i]->commands->size)
+        {
+            printf("command  %s   ",((t_parser_token *)pipes[i]->commands->array[j])->content);
+            j++;
+        }
+        printf("\n\n");
+        i++;
+    }
+}
