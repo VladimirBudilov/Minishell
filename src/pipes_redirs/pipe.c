@@ -72,12 +72,13 @@ void execute_pipe(t_pipe *pipe_token, int fd_array[1000][2], int i) {
             dup2(fd_array[i - 1][0], 0);
             close(fd_array[i - 1][0]);
             close(fd_array[i - 1][1]);
-
-            char baf[1000];
-            int res_read = read(0, baf, 1000);
-            baf[res_read] = '\0';
-            write(1, baf, res_read);
-            printf("res_read = %d\n", res_read);
+			close(fd_array[i][0]);
+			close(fd_array[i][1]);
+            //char baf[1000];
+            //int res_read = read(0, baf, 1000);
+//            baf[res_read] = '\0';
+//            write(1, baf, res_read);
+//            printf("res_read = %d\n", res_read);
         }
         execute_command_in_pipe(pipe_token);
         exit(0);

@@ -31,13 +31,17 @@ int check_number_arg(t_parser_token **token_key, t_shell *shell)
 }
 
 
-void exit_func(t_parser_token **token_key, t_shell *shell)
+void exit_func(t_array_list *line, t_shell *shell)
 {
+	t_parser_token **token_key;
+	token_key = (t_parser_token **)line->array;
+
+	int index;
+	index = 2;
 	if (check_number_arg(token_key, shell))
 	{
-		if (shell->parser_tokens_array->size <= 4) {
+		if (line->size <= 4) {
 			ft_putstr_fd("exit\n", 1);
-			shell->exit_code = ft_atoi(token_key[2]->content);
 			exit(1);
 		}
 		else
@@ -49,9 +53,11 @@ void exit_func(t_parser_token **token_key, t_shell *shell)
 	}
 	else
 	{
+		if (token_key[index]->main_type == NEW_SPACE)
+			index++;
 		ft_putstr_fd("exit\n", 1);
 		ft_putstr_fd("minishell: exit: ", 2);
-		ft_putstr_fd(token_key[2]->content, 2);
+		ft_putstr_fd(token_key[index]->content, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit(1);
 	}

@@ -1,8 +1,5 @@
 #include "../../includes/minishell.h"
 
-// get_position изменить
-//првоерить тест кейсы
-
 int get_position_of_element(t_hashmap **hashmap_key, char *key, t_shell *shell)
 {
     int i;
@@ -20,14 +17,16 @@ int get_position_of_element(t_hashmap **hashmap_key, char *key, t_shell *shell)
 }
 
 
-void unset_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
+void unset_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 {
     int i;
+	t_parser_token **token_key;
     
     i = 2;
+	token_key = (t_parser_token **)line->array;
     if (!check_valid_arguments(token_key, shell))
 		return ;
-    while (i < shell->parser_tokens_array->size)
+    while (i < line->size)
     {
         if (token_key[i]->main_type != NEW_SPACE)
         {

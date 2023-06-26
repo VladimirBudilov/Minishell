@@ -29,12 +29,13 @@ int contain_key(t_array_list *list, char *key)
 void change_value_by_key(t_array_list *list, char *key, char *value)
 {
 	int i;
+
 	i = 0;
 	while (i < list->size)
 	{
 		if (ft_strcmp(((t_hashmap *) list->array[i])->key, key) == 0)
 		{
-			((t_hashmap *) list->array[i])->value = value;
+			((t_hashmap *) list->array[i])->value = ft_strdup(value);
 			return;
 		}
 		i++;

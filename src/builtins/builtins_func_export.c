@@ -1,19 +1,12 @@
 #include "../../includes/minishell.h"
 
-//провечакать тест кейсы
-//проверить валидность аргументов
-//не записывать повторяющиеся аргументы
-//поменять сайзы
-
-
-
-void print_command_export(t_hashmap **hashmap_key, t_shell *shell)
+void print_command_export(t_hashmap **hashmap_key, t_shell *shell, t_array_list *line)
 {
     int i;
 
     i = 0;
     
-    if (shell->parser_tokens_array->size <= 2)
+    if (line->size <= 2)
     {
         while(i < shell->env->size)
         {
@@ -72,14 +65,14 @@ void save_value_in_key(char *string, t_shell *shell)
 	}
 }
 
-void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
+void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell, t_array_list *line)
 {
     int i;
 
     i = 2;
-    if (shell->parser_tokens_array->size > 2)
+    if (line->size > 2)
     {
-        while(i < shell->parser_tokens_array->size)
+        while(i < line->size)
         {
             if (token_key[i]->main_type != NEW_SPACE)
 			{
@@ -95,10 +88,11 @@ void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key,
 
 
 
-void export_func(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell)
+void export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 {
-    print_command_export(hashmap_key, shell);
+	t_parser_token **token_key = (t_parser_token **)line->array;
+    print_command_export(hashmap_key, shell, line);
     if(!check_valid_arguments(token_key, shell))
         return ;
-    check_double_arguments(hashmap_key, token_key, shell);
+    check_double_arguments(hashmap_key, token_key, shell, line);
 }
