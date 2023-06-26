@@ -7,14 +7,15 @@ void command_func(t_shell *shell, char **envp)
 
     i = 0;
     t_parser_token **token_key;
-
+	t_array_list *tmp;
     if (shell->input == NULL)
         return ;
     while(((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE || ((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == PIPELINE)
         i++;
     token_key = (t_parser_token **)shell->parser_tokens_array->array;
+ 	tmp = shell->parser_tokens_array;
     if(token_key[i]->main_type == BIlD_IN)
-        execute_builtin(token_key, shell, i);
+        execute_builtin(tmp, shell, i);
     else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
         ex_func(token_key, shell, envp);
 /*    else if(has_redir(shell->parser_tokens_array))
@@ -46,23 +47,24 @@ int has_redir(t_array_list *tokens) {
 }
 
 
-void execute_builtin(t_parser_token **token_key, t_shell *shell, int i) {
+void execute_builtin(t_array_list *token_array, t_shell *shell, int i) {
 
     t_hashmap **hashmap_key;
-
+	t_parser_token **token_key;
+	token_key = (t_parser_token **)token_array->array;
     hashmap_key = (t_hashmap **)shell->env->array;
     if (token_key[i]->sub_type == ECHO)
-        echo_func(token_key, shell);
+        echo_func(token_array);
     else if (token_key[i]->sub_type == ENVP)
-        env_func(hashmap_key, token_key, shell);
+        env_func(hashmap_key, token_array, shell);
     else if (token_key[i]->sub_type == CD)
-        cd_func(hashmap_key, token_key, shell);
+        cd_func(hashmap_key, token_array, shell);
     else if (token_key[i]->sub_type == PWD)
         pwd_func();
-    else if (token_key[i]->sub_type == EXIT)
-        exit_func(token_key, shell);
-    else if (token_key[i]->sub_type == EXPORT)
-        export_func(hashmap_key, token_key, shell);
-    else if (token_key[i]->sub_type == UNSET)
-        unset_func(hashmap_key, token_key, shell);
+//    else if (token_key[i]->sub_type == EXIT)
+//        exit_func(token_array, shell);
+//    else if (token_key[i]->sub_type == EXPORT)
+//        export_func(hashmap_key, token_array, shell);
+//    else if (token_key[i]->sub_type == UNSET)
+//        unset_func(hashmap_key, token_array, shell);
 }
