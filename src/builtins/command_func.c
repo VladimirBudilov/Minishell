@@ -1,10 +1,14 @@
-#include <stdbool.h>
 #include "../../includes/minishell.h"
+
+
+void redir_out_append_func(t_array_list *parser_tokens, int i);
+
+void redir_in_func(t_array_list *parser_tokens, int i);
 
 void command_func(t_shell *shell, char **envp)
 {
     int i;
-
+    int pid;
     i = 0;
     t_parser_token **token_key;
     t_array_list *parser_tokens;
@@ -15,13 +19,23 @@ void command_func(t_shell *shell, char **envp)
     while(((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE || ((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == PIPELINE)
         i++;
     token_key = (t_parser_token **)shell->parser_tokens_array->array;
- 	tmp = shell->parser_tokens_array;
+    if(has_redir(shell->parser_tokens_array)) {
+        pid = fork();
+        if (pid == 0) {
+            execute_redir(parser_tokens);
+            if (token_key[i]->main_type == BIlD_IN)
+                execute_builtin(parser_tokens, shell, i);
+            else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
+                ex_func(token_key, shell, envp);
+            exit(0);
+        }
+        waitpid(pid, NULL, 0);
+        return ;
+    }
     if(token_key[i]->main_type == BIlD_IN)
-        execute_builtin(tmp, shell, i);
+        execute_builtin(parser_tokens, shell, i);
     else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
         ex_func(token_key, shell, envp);
-    else if(has_redir(shell->parser_tokens_array))
-        execute_redir(token_key, shell);
     else
     {
         ft_putstr_fd("shell: ", 2);
@@ -31,8 +45,83 @@ void command_func(t_shell *shell, char **envp)
     }
 }
 
-void execute_redir(t_array_list *parser_array, t_shell *shell) {
+void execute_redir(t_array_list *parser_array) {
 
+    t_parser_token **token_key;
+    int i;
+
+    i = 0;
+    token_key = (t_parser_token **)parser_array->array;
+    while(i < parser_array->size)
+    {
+        if(token_key[i]->main_type == REDIRECT_OUTPUT)
+            redir_out_func(parser_array, i);
+        else if(token_key[i]->main_type == REDIRECT_APPEND_OUTPUT)
+            redir_out_append_func(parser_array, i);
+        else if(token_key[i]->main_type == REDIRECT_OUTPUT)
+            redir_in_func(parser_array, i);
+
+        /*else if(token_key[i]->main_type == HEREDOC)
+            heredoc_func(token_key, shell, i);*/
+        i++;
+    }
+}
+
+void redir_in_func(t_array_list *parser_tokens, int i) {
+    int fd;
+    t_parser_token **token_key;
+
+    token_key = (t_parser_token **)parser_tokens->array;
+    fd = open(token_key[i]->file, O_RDONLY);
+    printf("file < = %s\n", token_key[i]->file);
+    if (fd < 0)
+    {
+        ft_putstr_fd("shell: ", 2);
+        ft_putstr_fd(token_key[i + 1]->content, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        return ;
+    }
+    dup2(fd, STDIN_FILENO);
+    close(fd);
+
+
+}
+
+void redir_out_append_func(t_array_list *parser_tokens, int i) {
+    int fd;
+    t_parser_token **token_key;
+
+    token_key = (t_parser_token **)parser_tokens->array;
+    fd = open(token_key[i]->file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+    printf("file >> = %s\n", token_key[i]->file);
+    if (fd < 0)
+    {
+        ft_putstr_fd("shell: ", 2);
+        ft_putstr_fd(token_key[i + 1]->content, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        return ;
+    }
+    dup2(fd, STDOUT_FILENO);
+    close(fd);
+}
+
+void redir_out_func(t_array_list *parser_tokens, int i) {
+    int fd;
+    t_parser_token **token_key;
+
+    token_key = (t_parser_token **)parser_tokens->array;
+    fd = open(token_key[i]->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    printf("file > = %s\n", token_key[i]->file);
+    if (fd < 0)
+    {
+        ft_putstr_fd("shell: ", 2);
+        ft_putstr_fd(token_key[i + 1]->content, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        return ;
+    }
+    dup2(fd, STDOUT_FILENO);
+    close(fd);
+    //delete_element(parser_tokens, i);
 }
 
 int has_redir(t_array_list *tokens) {
@@ -41,6 +130,7 @@ int has_redir(t_array_list *tokens) {
     i = 0;
     while(i < tokens->size)
     {
+
         if(is_redir(((t_parser_token **)tokens->array)[i]))
             return (1);
         i++;

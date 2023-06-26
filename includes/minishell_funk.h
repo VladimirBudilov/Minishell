@@ -19,7 +19,7 @@ int ft_is_ascii(char *str);
 void free_parser_tokens(t_array_list *tokens);
 void execute_builtin(t_array_list *token_array, t_shell *shell, int i);
 int has_redir(t_array_list *tokens);
-void execute_redir(t_array_list *tokens, t_shell *shell);
+void execute_redir(t_array_list *tokens);
 void clean_all(t_shell *shell);
 void free_env(t_array_list *tokens);
 
