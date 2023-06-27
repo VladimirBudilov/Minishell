@@ -19,7 +19,6 @@ typedef struct s_pipe
 typedef struct s_redirection
 {
 
-
 } t_redirection;
 
 

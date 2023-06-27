@@ -10,6 +10,7 @@ void read_2d_arr(char **arr)
     while (arr[i])
     {
         ft_putstr_fd(arr[i], 2);
+        ft_putstr_fd("\n", 2);
         i++;
     }
 }
@@ -23,7 +24,7 @@ char **new_arr(t_array_list *line, int index)
 	char **arr = (char **)malloc(sizeof(char *) * (line->size - index + 1));
     while (index < line->size)
 	{
-		if (token_key[index]->main_type == NEW_SPACE) {
+		if (token_key[index]->main_type == NEW_SPACE || token_key[index]->main_type == REDIRECT_INPUT) {
             index++;
             continue;
         }

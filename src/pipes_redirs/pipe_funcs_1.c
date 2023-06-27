@@ -50,6 +50,7 @@ void add_flags(t_pipe *pipe, t_parser_token *token) {
         pipe->is_execve = 1; }
 
 }
+
 void add_command(t_shell *shell, int index, int prev) {
     t_parser_token **parser_tokens;
     t_pipe *pipe;

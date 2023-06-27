@@ -51,6 +51,13 @@ void find_redir(t_array_list *parser_tokens) {
                 delete_element(parser_tokens, i + 1);
             array[i]->file = ft_strdup(array[i + 1]->content);
             delete_element(parser_tokens, i + 1);}
+        else if(array[i]->main_type == HEREDOC)
+        {
+            if (array[i + 1]->main_type == NEW_SPACE)
+                delete_element(parser_tokens, i + 1);
+            array[i]->file = ft_strdup(array[i + 1]->content);
+            delete_element(parser_tokens, i + 1);
+        }
         i++;
     }
 }
