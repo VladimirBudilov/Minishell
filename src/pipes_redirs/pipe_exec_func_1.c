@@ -1,6 +1,32 @@
 #include "../../includes/minishell.h"
 
 void execute_command_in_pipe(t_pipe *pipe) {
+    int pid;
+    int i;
+    t_array_list *parser_tokens;
+    t_parser_token **token_key;
+    t_shell *shell;
+    i = 0;
+    shell = pipe->shell;
+    parser_tokens = pipe->commands;
+    token_key = (t_parser_token **)parser_tokens->array;
+
+    while(token_key[i]->main_type == NEW_SPACE)
+        i++;
+    if(has_redir(pipe->shell->parser_tokens_array)) {
+        pid = fork();
+        if (pid == 0) {
+            execute_redir(parser_tokens);
+            if (token_key[i]->main_type == BIlD_IN)
+                execute_builtin(parser_tokens, shell, i);
+            else if (token_key[i]->main_type == EXECUTABLE || token_key[i]->main_type == EXECUTABLE_PATH)
+                ex_func(parser_tokens, shell, (char **)shell->env->array);
+            exit(0);
+        }
+        waitpid(pid, NULL, 0);
+        return ;
+    }
+
 
     if(pipe->is_builtin) {
         execute_builtin_in_pipe(pipe);
@@ -8,15 +34,8 @@ void execute_command_in_pipe(t_pipe *pipe) {
     else if(pipe->is_execve) {
         execute_execve_in_pipe(pipe);
     }
-/*     else if(pipe->is_redir)
-        execute_redir_in_pipe(pipe);*/
-
 }
 
-
-/*void execute_redir_in_pipe(t_pipe *pipe) {
-
-}*/
 
 void execute_execve_in_pipe(t_pipe *pipe) {
     t_array_list *token_key;

@@ -60,7 +60,6 @@ void execute_redir(t_array_list *parser_array) {
             redir_out_append_func(parser_array, i);
         else if(token_key[i]->main_type == REDIRECT_OUTPUT)
             redir_in_func(parser_array, i);
-
         /*else if(token_key[i]->main_type == HEREDOC)
             heredoc_func(token_key, shell, i);*/
         i++;
@@ -73,7 +72,6 @@ void redir_in_func(t_array_list *parser_tokens, int i) {
 
     token_key = (t_parser_token **)parser_tokens->array;
     fd = open(token_key[i]->file, O_RDONLY);
-    printf("file < = %s\n", token_key[i]->file);
     if (fd < 0)
     {
         ft_putstr_fd("shell: ", 2);
@@ -91,7 +89,6 @@ void redir_out_append_func(t_array_list *parser_tokens, int i) {
 
     token_key = (t_parser_token **)parser_tokens->array;
     fd = open(token_key[i]->file, O_WRONLY | O_CREAT | O_APPEND, 0777);
-    printf("file >> = %s\n", token_key[i]->file);
     if (fd < 0)
     {
         ft_putstr_fd("shell: ", 2);
@@ -109,7 +106,6 @@ void redir_out_func(t_array_list *parser_tokens, int i) {
 
     token_key = (t_parser_token **)parser_tokens->array;
     fd = open(token_key[i]->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    printf("file > = %s\n", token_key[i]->file);
     if (fd < 0)
     {
         ft_putstr_fd("shell: ", 2);
@@ -119,7 +115,7 @@ void redir_out_func(t_array_list *parser_tokens, int i) {
     }
     dup2(fd, STDOUT_FILENO);
     close(fd);
-    //delete_element(parser_tokens, i);
+    delete_element(parser_tokens, i);
 }
 
 int has_redir(t_array_list *tokens) {
@@ -135,7 +131,6 @@ int has_redir(t_array_list *tokens) {
     }
     return (0);
 }
-
 
 void execute_builtin(t_array_list *token_array, t_shell *shell, int i) {
 

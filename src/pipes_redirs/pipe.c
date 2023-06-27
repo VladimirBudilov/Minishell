@@ -27,7 +27,6 @@ void create_pipe_list(t_shell *shell)
         index++;
     }
     add_last_command(shell, last_pipe);
-    //((t_pipe *)shell->pipe_array->array[shell->pipe_array->size - 1])->last_pipe = 1;
 }
 
 void execute_pipes(t_shell *shell) {
