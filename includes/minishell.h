@@ -21,10 +21,7 @@
 #include "fcntl.h"
 #include "redirect_func.h"
 
-
-
 void signal_handler(int signal);
-
 void command_func(t_shell *shell, char **envp);
 void echo_func(t_array_list *line);
 void env_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell);
@@ -34,9 +31,6 @@ void exit_func(t_array_list *line, t_shell *shell);
 void export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell);
 void unset_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell);
 void ex_func(t_array_list *line, t_shell *shell, char **envp);
-
-void print_all_pipe(t_array_list *pipes_array);
-
 int check_valid_arguments(t_parser_token **token_key, t_shell *shell);
 void free_arr(char **arr);
 

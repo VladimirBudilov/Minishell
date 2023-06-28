@@ -31,13 +31,18 @@ void clean_flags_n(t_array_list *tokens_array, int index) {
     int flag;
     t_parser_token *token;
 
-    index += 2;
+    index += 1;
     flag = 0;
-    while (index < tokens_array->size) {
+    while (index < tokens_array->size)
+    {
         token = find_element_by_index(tokens_array, index);
-        if (is_flag(token->content)) {
-            if (!flag) {
+        if (is_flag(token->content))
+        {
+            if (!flag)
+            {
                 flag = 1;
+                free(token->content);
+                token->content = ft_strdup("-n");
                 index++;
                 continue;
             }

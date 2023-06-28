@@ -11,8 +11,11 @@ void parse_tokens(t_shell *shell)
 	lexer_tokens = (t_lexer_token **) shell->lexer_tokens_array->array;
 	parser_tokens = shell->parser_tokens_array;
 	size = shell->lexer_tokens_array->size;
-	if (size == 0)
-		return;
+	if (shell->cant_execute || (size == 1 && lexer_tokens[0]->type == WHITE_SPACE))
+    {
+        shell->cant_execute = 1;
+        return;
+    }
 	create_parser_tokens(lexer_tokens, parser_tokens, size);
 	find_build_in(parser_tokens);
 	find_execver(parser_tokens, shell);

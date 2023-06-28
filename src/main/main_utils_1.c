@@ -22,6 +22,8 @@ void free_env(t_array_list *tokens) {
 
 void clean_array(t_shell *minishell)
 {
+    minishell->cant_execute = 0;
+    free(minishell->input);
     free_tokenizer_output_array(minishell->tokenizer_array);
     free_parser_tokens(minishell->parser_tokens_array);
     minishell->lexer_tokens_array->size = 0;
@@ -30,7 +32,7 @@ void clean_array(t_shell *minishell)
     minishell->pipe_array->size = 0;
     clean_pipe_commands(minishell);
     minishell->number_of_pipes = 0;
-    free(minishell->input);
+
 
 }
 
