@@ -50,7 +50,14 @@ void parse_execver_from_path(t_parser_token **parser_tokens, t_shell *shell)
     int size_sub;
     char *temp;
 
+
+    if(get_value_by_key(shell->env, "PATH") == NULL)
+    {
+        err_no = 127;
+        return;
+    }
     temp = ft_strdup(get_value_by_key(shell->env, "PATH"));
+
     paths = ft_split(temp, ':');
     size_sub = get_array_size(paths);
     if (size_sub == 0)

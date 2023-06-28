@@ -7,7 +7,6 @@ void command_func(t_shell *shell, char **envp)
     i = 0;
     t_parser_token **token_key;
     t_array_list *parser_tokens;
-
     parser_tokens = shell->parser_tokens_array;
     if(shell->cant_execute)
         return ;
@@ -30,6 +29,7 @@ void command_func(t_shell *shell, char **envp)
                 ft_putstr_fd("shell last: ", 2);
                 ft_putstr_fd(token_key[i]->content, 2);
                 ft_putstr_fd(": command not found\n", 2);
+				err_no = 127;
                 exit(0);
             }
             exit(0);
@@ -47,7 +47,7 @@ void command_func(t_shell *shell, char **envp)
             ft_putstr_fd("shell: ", 2);
             ft_putstr_fd(token_key[i]->content, 2);
             ft_putstr_fd(": command not found\n", 2);
-            err_no = 127;
+			err_no = 127;
             return ;
         }
 }

@@ -7,6 +7,7 @@ void env_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 
     i = 0;
 	index = 2;
+	err_no = 0;
 	t_parser_token **token_key;
 	token_key = (t_parser_token **)line->array;
     if (line->size > 2)
@@ -18,6 +19,7 @@ void env_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
             ft_putstr_fd("env: ", 2);
             ft_putstr_fd(token_key[2]->content, 2);
             ft_putstr_fd(": No such file or directory\n", 2);
+			err_no = 127;
         }
         else
         {
@@ -26,6 +28,7 @@ void env_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
             write(1, "\n", 1);
             ft_putstr_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n", 2);
             ft_putstr_fd("           [name=value ...] [utility [argument ...]]\n", 2);
+			err_no = 1;
         }
         return ;
     }

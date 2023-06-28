@@ -67,11 +67,10 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 	int i;
 	t_parser_token **token_key;
 	token_key = (t_parser_token **)line->array;
-	int index = 0;
 
+    int index = 0;
 	if (token_key[index]->main_type == NEW_SPACE)
 		index++;
-
 	if (token_key[index]->main_type == EXECUTABLE)
 	{
 		argv = new_arr(line, index);
@@ -108,6 +107,7 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
+    err_no = WEXITSTATUS(status);
 }
 
 
