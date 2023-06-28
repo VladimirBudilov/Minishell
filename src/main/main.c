@@ -1,13 +1,10 @@
 #include "../../includes/minishell.h"
 
-
-void pipe_array_cheker(t_shell *shell);
-
 int main(int argc, char **argv, char **envp)
 {
 	(void) argv;
 	t_shell *shell;
-
+    err_no = 0;
 	if (argc > 1)
 		exit(1);
     shell = create_shell();
