@@ -3,46 +3,53 @@
 void execute_command_in_pipe(t_pipe *pipe) {
     int pid;
     int i;
-    t_array_list *parser_tokens;
     t_parser_token **token_key;
-    t_shell *shell;
+
     i = 0;
-    shell = pipe->shell;
-    parser_tokens = pipe->commands;
-    token_key = (t_parser_token **)parser_tokens->array;
+    token_key = (t_parser_token **)pipe->commands->array;
 
     while(token_key[i]->main_type == NEW_SPACE)
         i++;
     if(has_redir(pipe->shell->parser_tokens_array)) {
         pid = fork();
         if (pid == 0) {
-            execute_redir(parser_tokens);
+            execute_redir(pipe->commands);
             if (token_key[i]->main_type == BIlD_IN)
-                execute_builtin(parser_tokens, shell, i);
+                execute_builtin_in_pipe(pipe);
             else if (token_key[i]->main_type == EXECUTABLE || token_key[i]->main_type == EXECUTABLE_PATH)
-                ex_func(parser_tokens, shell, (char **)shell->env->array);
+                execute_execve_in_pipe(pipe);
+            else
+            {
+                if(pipe->shell->has_here_doc)
+                    exit(0);
+                ft_putstr_fd("shell last: ", 2);
+                ft_putstr_fd(token_key[i]->content, 2);
+                ft_putstr_fd(": command not found\n", 2);
+                exit(0);
+            }
             exit(0);
         }
         waitpid(pid, NULL, 0);
         return ;
     }
-
-
-    if(pipe->is_builtin) {
+    if(pipe->is_builtin)
         execute_builtin_in_pipe(pipe);
-    }
-    else if(pipe->is_execve) {
+    else if(pipe->is_execve)
         execute_execve_in_pipe(pipe);
+    else
+    {
+        ft_putstr_fd("shell last: ", 2);
+        ft_putstr_fd(token_key[i]->content, 2);
+        ft_putstr_fd(": command not found\n", 2);
+        exit(0);
     }
 }
-
 
 void execute_execve_in_pipe(t_pipe *pipe) {
     t_array_list *token_key;
     token_key = (t_array_list *)pipe->commands;
     ex_func(token_key, pipe->shell, (char **)pipe->shell->env->array);
 }
-
 
 void execute_builtin_in_pipe(t_pipe *pipe)
 {

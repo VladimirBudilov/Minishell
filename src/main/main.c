@@ -6,33 +6,27 @@ void pipe_array_cheker(t_shell *shell);
 int main(int argc, char **argv, char **envp)
 {
 	(void) argv;
-	(void) envp;
-	t_shell *minishell;
+	t_shell *shell;
 
 	if (argc > 1)
 		exit(1);
-	minishell = create_shell();
+    shell = create_shell();
 	welcome_message();
-	minishell->env = add_env(envp);
+    shell->env = add_env(envp);
 	rl_catch_signals = 0;
-
 	while (1)
 	{
-		parse_readline(minishell);
-        print_all_args(minishell->parser_tokens_array);
-        if(has_pipes(minishell)) {
-            create_pipe_list(minishell);
-            execute_pipes(minishell);
+		parse_readline(shell);
+        if(has_pipes(shell))
+        {
+            create_pipe_list(shell);
+            execute_pipes(shell);
         }
         else
-            command_func(minishell, envp);
-        printf("\n");
-        print_all_args(minishell->parser_tokens_array);
-        clean_array(minishell);
-
+            command_func(shell, envp);
+        clean_array(shell);
     }
-    return 0;
-    clean_all(minishell);
+    exit(0);
 }
 
 

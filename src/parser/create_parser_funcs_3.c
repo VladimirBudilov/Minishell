@@ -6,6 +6,8 @@ void create_parser_tokens(t_lexer_token **lexer_tokens, t_array_list *parser_tok
 	int i;
 
 	i = 0;
+    if(lexer_tokens[i]->type == WHITE_SPACE)
+        i++;
 	while (i < size)
 	{
 		if (is_joinable(lexer_tokens[i]->type))
