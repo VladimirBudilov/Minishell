@@ -24,7 +24,6 @@ void clean_array(t_shell *minishell)
 {
     minishell->cant_execute = 0;
     free(minishell->input);
-    err_no = 0;
     free_tokenizer_output_array(minishell->tokenizer_array);
     free_parser_tokens(minishell->parser_tokens_array);
     minishell->lexer_tokens_array->size = 0;

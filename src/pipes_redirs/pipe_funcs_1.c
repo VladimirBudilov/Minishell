@@ -69,6 +69,8 @@ void add_command(t_shell *shell, int index, int prev) {
         add_flags(pipe, parser_tokens[prev]);
         prev++;
     }
+    if(parser_tokens[prev-1]->main_type == NEW_SPACE)
+        delete_element(pipe->commands, pipe->commands->size - 1);
     add_element(shell->pipe_array, pipe);
 
 }

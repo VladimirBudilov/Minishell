@@ -62,6 +62,8 @@ void execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2]) {
 
     int pid;
     pid = fork();
+    if(pid == -1)
+        error(strerror(err_no));
     if (pid == 0)
     {
         if(pipe_token->first_pipe)

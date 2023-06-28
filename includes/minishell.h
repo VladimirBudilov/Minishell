@@ -21,7 +21,7 @@
 #include "fcntl.h"
 #include "redirect_func.h"
 
-unsigned int err_no;
+int err_no;
 
 void signal_handler(int signal);
 void command_func(t_shell *shell, char **envp);
