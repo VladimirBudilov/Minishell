@@ -8,6 +8,8 @@ void add_last_command(t_shell *shell, int index) {
     parser_tokens = (t_parser_token **) shell->parser_tokens_array->array;
     pipe = init_pipe(shell);
     pipe->last_pipe = 1;
+    if(parser_tokens[index]->main_type == NEW_SPACE)
+        index++;
     while (index < shell->parser_tokens_array->size)
     {
         add_element(pipe->commands, parser_tokens[index]);
@@ -48,6 +50,7 @@ void add_flags(t_pipe *pipe, t_parser_token *token) {
         pipe->is_execve = 1; }
 
 }
+
 void add_command(t_shell *shell, int index, int prev) {
     t_parser_token **parser_tokens;
     t_pipe *pipe;
@@ -58,6 +61,8 @@ void add_command(t_shell *shell, int index, int prev) {
     }
     else
         pipe->middle_pipe = 1;
+    if(parser_tokens[prev]->main_type == NEW_SPACE)
+        prev++;
     while (prev < index)
     {
         add_element(pipe->commands, parser_tokens[prev]);

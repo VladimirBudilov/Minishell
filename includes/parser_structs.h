@@ -42,6 +42,7 @@ typedef struct parser {
     enum parser_type sub_type;
     int flags;
     char *content;
+    char *file;
 } t_parser_token;
 
 typedef struct token {

@@ -9,17 +9,6 @@ void *find_element_by_index(t_array_list *list, int index)
 	return list->array[index];
 }
 
-void print_all_tokens(t_array_list *list)
-{
-	int i;
-	i = 0;
-	while (i < list->size)
-	{
-		printf("lexer content : %s\n", ((t_lexer_token *) list->array[i])->content);
-		i++;
-	}
-}
-
 int ft_strcmp(const char *s1, const char *s2)
 {
 	int i;

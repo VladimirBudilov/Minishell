@@ -18,6 +18,8 @@
 #include <limits.h>
 #include "pipe_funcs.h"
 #include "pipe_structs.h"
+#include "fcntl.h"
+#include "redirect_func.h"
 
 
 

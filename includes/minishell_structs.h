@@ -14,6 +14,7 @@ typedef struct s_minishell
 	t_array_list *pipe_array;
 	int number_of_pipes;
     int status;
+	int has_here_doc;
     char *input;
     int exit_code;
 

@@ -20,19 +20,6 @@ void free_env(t_array_list *tokens) {
 
 }
 
-void print_all_args(t_array_list *list)
-{
-    int i;
-    i = 0;
-    while (i < list->size)
-    {
-        printf("parser type %d parser content : %s\n", ((t_parser_token *) list->array[i])->main_type,
-               ((t_parser_token *) list->array[i])->content);
-        i++;
-    }
-    printf("\n");
-}
-
 void clean_array(t_shell *minishell)
 {
     free_tokenizer_output_array(minishell->tokenizer_array);

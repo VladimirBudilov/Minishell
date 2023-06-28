@@ -1,10 +1,5 @@
 #include "../../includes/minishell.h"
 
-void free_array(char **paths);
-
-void add_execver_from_path(t_parser_token **parser_tokens, char **paths, int *i, int *j);
-
-void add_execvere(t_parser_token **parser_tokens, t_shell *shell);
 
 void find_execver(t_array_list *parser_tokens_array, t_shell *shell)
 {
@@ -45,7 +40,6 @@ void free_array(char **paths) {
     while (paths[i])
         free(paths[i++]);
     free(paths);
-
 }
 
 void parse_execver_from_path(t_parser_token **parser_tokens, t_shell *shell)

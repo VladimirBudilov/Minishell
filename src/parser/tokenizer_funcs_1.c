@@ -47,7 +47,6 @@ t_tokenizer_output *tokenize_single_quote(char *input, t_shell *shell)
 t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell)
 {
 	int i;
-    int last_dollar;
 	t_tokenizer_output *po;
 	t_lexer_token *t;
     char *temp;
@@ -57,7 +56,6 @@ t_tokenizer_output *tokenize_double_quote(char *input, t_shell *shell)
 	add_element(shell->tokenizer_array, po);
 	input++;
 	i = 0;
-    last_dollar = 0;
 	t->content = ft_strdup("");
 	while (input[i] && input[i] != '\"')
 	{
