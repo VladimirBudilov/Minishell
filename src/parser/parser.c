@@ -18,7 +18,15 @@ void parse_tokens(t_shell *shell)
 	find_execver(parser_tokens, shell);
 	find_dirs(parser_tokens);
     find_redir(parser_tokens, shell);
-	//validate_tokens(parser_tokens);
+    validate_tokens(parser_tokens, NULL);
+}
+
+void validate_tokens(t_array_list *parser_tokens, t_shell *shell)
+{
+    if(parser_tokens->size == 1 && ((t_parser_token **)parser_tokens->array)[0]->main_type == NEW_SPACE) {
+        shell->cant_execute = 1;
+        return;
+    }
 }
 
 void find_redir(t_array_list *parser_tokens, t_shell *shell) {

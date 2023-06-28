@@ -22,19 +22,17 @@ void get_line(t_shell *minishell)
 	{
 		printf("\033[1A\033[3Cexit\n");
 		exit(1);
-	} else if (*minishell->input == '\0')
-	{
-		free(minishell->input);
-		minishell->input = NULL;
 	}
-	else if (*minishell->input == '\0')
+    else if (*minishell->input == '\0')
 	{
 		free(minishell->input);
 		minishell->input = NULL;
+        minishell->cant_execute = 1;
 	}
     else if (!ft_is_ascii(minishell->input))
     {
         free(minishell->input);
         minishell->input = NULL;
+        minishell->cant_execute = 1;
     }
 }

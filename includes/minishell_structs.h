@@ -15,7 +15,8 @@ typedef struct s_minishell
 	int number_of_pipes;
     int status;
 	int has_here_doc;
-    char *input;
+	int cant_execute;
+	char *input;
     int exit_code;
 
 	int			error_status;
