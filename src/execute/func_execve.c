@@ -15,6 +15,25 @@ void read_2d_arr(char **arr)
     }
 }
 
+void signal_handler_sigint(int signal)
+{
+	(void)signal;
+	write(1, "\n", 1);
+}
+
+void	signal_hendler_sigquit(int signal)
+{
+	(void)signal;
+	ft_putstr_fd("Quit: 3\n", 2);
+}
+
+void define_signals(void)
+{
+	signal(SIGINT, signal_handler_sigint);
+	signal(SIGQUIT, signal_hendler_sigquit);
+}
+
+
 char **new_arr(t_array_list *line, int index)
 {
 	int i;
@@ -57,6 +76,7 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 	{
 		argv = new_arr(line, index);
 		pid = fork();
+		define_signals();
 		if(pid == 0)
 		{
 			execve(token_key[index]->content, argv, envp);
@@ -70,6 +90,7 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 	path = ft_split(ft_strdup(get_value_by_key(shell->env,"PATH")), ':');
 	i = 0;
 	pid = fork();
+	define_signals();
 	if(pid == 0)
 	{
 
