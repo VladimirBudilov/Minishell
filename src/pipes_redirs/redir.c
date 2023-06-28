@@ -10,13 +10,24 @@ void execute_redir(t_array_list *parser_array) {
     while(i < parser_array->size)
     {
         if(token_key[i]->main_type == REDIRECT_OUTPUT)
+        {
             redir_out_func(parser_array, i);
-        else if(token_key[i]->main_type == REDIRECT_APPEND_OUTPUT)
+            continue;
+        }
+        else if(token_key[i]->main_type == REDIRECT_APPEND_OUTPUT) {
             redir_out_append_func(parser_array, i);
+            continue;
+        }
         else if(token_key[i]->main_type == REDIRECT_INPUT)
+        {
             redir_in_func(parser_array, i);
+            continue;
+         }
         else if(token_key[i]->main_type == HEREDOC)
+        {
             redir_heredoc(parser_array, i);
+            continue;
+        }
         i++;
     }
 }
@@ -50,7 +61,7 @@ void redir_out_func(t_array_list *parser_tokens, int i) {
     if (fd < 0)
     {
         ft_putstr_fd("shell: ", 2);
-        ft_putstr_fd(token_key[i + 1]->content, 2);
+        ft_putstr_fd(token_key[i]->content, 2);
         ft_putstr_fd(": No such file or directory\n", 2);
         exit(0);
     }

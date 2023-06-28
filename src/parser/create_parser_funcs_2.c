@@ -11,7 +11,6 @@ void open_quotes(t_lexer_token **lexer_tokens, t_array_list *parser_tokens, int 
 {
 	t_parser_token *token;
 
-    printf("lexer_tokens[*i]->content: %s\n", lexer_tokens[*i]->content);
 	add_parser_token(parser_tokens, WORDLIST, lexer_tokens[*i]->content);
     token = (t_parser_token *) parser_tokens->array[parser_tokens->size - 1];
 	*i += 1;

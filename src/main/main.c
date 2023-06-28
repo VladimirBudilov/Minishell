@@ -26,7 +26,20 @@ int main(int argc, char **argv, char **envp)
     exit(0);
 }
 
+void print_all_args(t_array_list *list)
+{
+    int i;
+    t_parser_token **array;
 
+    i = 0;
+    array = (t_parser_token **) list->array;
+    while (i < list->size)
+    {
+        printf("token: %s ", array[i]->content);
+        printf("type: %d\n", array[i]->main_type);
+        i++;
+    }
+}
 
 
 

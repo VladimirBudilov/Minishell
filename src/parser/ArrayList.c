@@ -5,7 +5,7 @@ t_array_list *createArrayList()
 {
 	t_array_list *list = (t_array_list *) malloc(sizeof(t_array_list));
 	list->size = 0;
-	list->capacity = 1000;
+	list->capacity = 1500;
 	list->array = (void **) malloc(list->capacity * sizeof(void *));
 	return list;
 }

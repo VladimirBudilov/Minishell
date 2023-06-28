@@ -8,6 +8,10 @@ void create_pipe_list(t_shell *shell)
     int last_pipe;
     t_parser_token **parser_tokens;
 
+    if(shell->number_of_pipes > 250) {
+        printf("fork: Resource temporarily unavailable\n");
+        return;
+    }
     index = 0;
     last_pipe = 0;
     prev_index = 0;
@@ -45,6 +49,8 @@ void execute_pipes(t_shell *shell) {
     i = 0;
     while (i < shell->pipe_array->size)
     {
+        if(shell->cant_execute)
+            break;
         execute_pipe(pipes[i], i, fd_array);
         i++;
     }
@@ -62,8 +68,6 @@ void execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2]) {
 
     int pid;
     pid = fork();
-    if(pid == -1)
-        error(strerror(err_no));
     if (pid == 0)
     {
         if(pipe_token->first_pipe)
