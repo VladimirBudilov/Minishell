@@ -9,7 +9,7 @@ void command_func(t_shell *shell, char **envp)
     t_array_list *parser_tokens;
 
     parser_tokens = shell->parser_tokens_array;
-    if (shell->input == NULL)
+    if(shell->cant_execute || err_no)
         return ;
     while(((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE)
         i++;

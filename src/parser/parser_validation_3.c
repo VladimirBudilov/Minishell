@@ -17,7 +17,7 @@ void add_envp(t_parser_token *token) {
     char *temp;
 
     temp = ft_str_to_lower(token->content);
-    if(ft_strcmp(temp, "envp") == 0)
+    if(ft_strcmp(temp, "env") == 0)
     {
         token->main_type = BIlD_IN;
         token->sub_type = ENVP;

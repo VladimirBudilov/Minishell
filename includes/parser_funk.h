@@ -16,7 +16,7 @@ void open_quotes(t_lexer_token **lexer_tokens, t_array_list *parser_tokens, int 
 int is_joinable(enum lexer_type type);
 void find_build_in(t_array_list *parser_tokens);
 void find_execver(t_array_list *parser_tokens_array, t_shell *shell);
-void validate_tokens(t_array_list *parser_tokens);
+void validate_tokens(t_array_list *parser_tokens, t_shell *shell);
 void create_parser_tokens(t_lexer_token **lexer_tokens, t_array_list *parser_tokens, int size);
 char * ft_str_to_lower(char *content);
 void add_echo(t_parser_token *token, t_array_list *tokens_array, int index);

@@ -82,10 +82,7 @@ t_tokenizer_output *tokenize_bare_word(char *input, t_shell *shell)
 	t_tokenizer_output *po;
 	t_lexer_token *t;
 
-	if (is_breaking_character(*input))
-		bug("Expected a bare word, but found a breaking character.");
 	int i = 0;
-
 	while (input[i] && !is_breaking_character(input[i]))
 		i++;
 	t = malloc(sizeof(t_lexer_token));
