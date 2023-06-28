@@ -5,7 +5,6 @@ void print_command_export(t_hashmap **hashmap_key, t_shell *shell, t_array_list 
     int i;
 
     i = 0;
-    
     if (line->size <= 2)
     {
         while(i < shell->env->size)
@@ -15,9 +14,9 @@ void print_command_export(t_hashmap **hashmap_key, t_shell *shell, t_array_list 
             ft_putstr_fd(hashmap_key[i]->key, 1);
             if (hashmap_key[i]->value != NULL)
             {
-                write(1, "=\"", 2);
+                write(1, "=\"", 1);
                 ft_putstr_fd(hashmap_key[i]->value, 1);
-                write(1, "\"", 2);
+                write(1, "\"", 1);
             }
             write(1, "\n", 1);
             i++;
@@ -95,4 +94,5 @@ void export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
     if(!check_valid_arguments(token_key, shell))
         return ;
     check_double_arguments(hashmap_key, token_key, shell, line);
+	err_no = 0;
 }

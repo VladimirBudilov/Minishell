@@ -5,6 +5,7 @@ void pwd_func(void)
     char *pwd;
     char buf[PATH_MAX];
 
+	err_no = 0;
     pwd = getcwd(buf, PATH_MAX);
     if (pwd)
     {

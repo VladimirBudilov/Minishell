@@ -21,9 +21,24 @@ int main(int argc, char **argv, char **envp)
         }
         else
             command_func(shell, envp);
+		//print_all_args(shell->parser_tokens_array);
         clean_array(shell);
     }
     exit(0);
+}
+
+void print_all_args(t_array_list *list)
+{
+	int i;
+	t_parser_token **array;
+
+	i = 0;
+	array = (t_parser_token **) list->array;
+	while (i < list->size)
+	{
+		printf("token: %s\n", array[i]->content);
+		i++;
+	}
 }
 
 

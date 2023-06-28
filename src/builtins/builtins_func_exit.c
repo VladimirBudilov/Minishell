@@ -35,9 +35,10 @@ void exit_func(t_array_list *line, t_shell *shell)
 {
 	t_parser_token **token_key;
 	token_key = (t_parser_token **)line->array;
-
 	int index;
+
 	index = 2;
+	err_no = 0;
 	if (check_number_arg(token_key, shell))
 	{
 		if (line->size <= 4) {
@@ -48,7 +49,7 @@ void exit_func(t_array_list *line, t_shell *shell)
 		{
 			ft_putstr_fd("exit\n", 1);
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			shell->exit_code = 1;
+			err_no = 1;
 		}
 	}
 	else

@@ -74,6 +74,7 @@ int check_valid_arguments(t_parser_token **token_key, t_shell *shell)
                 ft_putstr_fd("minishell: unset: `", 2);
             ft_putstr_fd(token_key[i - 1]->content, 2);
             ft_putstr_fd("': not a valid identifier\n", 2);
+			err_no = 1;
             return 0;
         }
     }

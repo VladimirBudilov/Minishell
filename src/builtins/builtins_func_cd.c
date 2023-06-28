@@ -22,6 +22,7 @@ void change_path(t_hashmap **hashmap_key, char *path, t_shell *shell)
         ft_putstr_fd("minishell: cd: ", 2);
         ft_putstr_fd(path, 2);
         ft_putstr_fd(": No such file or directory\n", 2);
+		err_no = 1;
     }
     pwd = getcwd(buf, PATH_MAX);
     i = 0;
@@ -59,6 +60,7 @@ void to_home(t_hashmap **hashmap_key, t_shell *shell)
 	if (home_path == NULL)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		err_no = 1;
 		free(home_path);
 	} else
 		change_path(hashmap_key, home_path, shell);
@@ -80,6 +82,7 @@ void cd_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 
 	t_parser_token **token_key;
 	i = 2;
+	err_no = 0;
 	token_key = (t_parser_token **)line->array;
 	if (token_key[0]->main_type == NEW_SPACE)
 		i++;
@@ -94,6 +97,7 @@ void cd_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
         if (path == NULL)
         {
             ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+			err_no = 1;
             return ;
         }
         change_old_path(hashmap_key, path, shell);

@@ -7,6 +7,7 @@ void echo_func(t_array_list *line)
 
 	i = 2;
     check_n = 0;
+	err_no = 0;
 	t_parser_token **token_key = (t_parser_token **)line->array;
 	if (token_key[0]->main_type == NEW_SPACE)
 		i++;
