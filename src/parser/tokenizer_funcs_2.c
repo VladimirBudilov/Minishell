@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer_funcs_2.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/29 19:56:46 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/06/29 19:56:48 by vbudilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 t_tokenizer_output	*tokenize_less(char *input, t_shell *shell)
@@ -41,7 +53,7 @@ t_tokenizer_output	*tokenize_pipe(char *input, t_shell *shell)
 	return (po);
 }
 
-t_tokenizer_output *tokenize_greater(char *input, t_shell *shell)
+t_tokenizer_output	*tokenize_greater(char *input, t_shell *shell)
 {
 	t_tokenizer_output	*po;
 	t_lexer_token		*t;

@@ -35,7 +35,7 @@ void	parse_tokens(t_shell *shell)
 	find_redir(parser_tokens, shell);
 }
 
-void find_redir(t_array_list *parser_tokens, t_shell *shell)
+void	find_redir(t_array_list *parser_tokens, t_shell *shell)
 {
 	int				i;
 	int				size;

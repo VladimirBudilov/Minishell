@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_finding_funcs.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/29 19:48:46 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/06/29 19:48:48 by vbudilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	find_execver(t_array_list *parser_tokens_array, t_shell *shell)
@@ -35,16 +47,6 @@ void	add_execvere(t_parser_token **parser_tokens, t_shell *shell)
 	}
 }
 
-void	free_array(char **paths)
-{
-	int	i;
-
-	i = 0;
-	while (paths[i])
-		free(paths[i++]);
-	free(paths);
-}
-
 void	parse_execver_from_path(t_parser_token **parser_tokens, t_shell *shell)
 {
 	char	**paths;
@@ -61,11 +63,6 @@ void	parse_execver_from_path(t_parser_token **parser_tokens, t_shell *shell)
 	temp = ft_strdup(get_value_by_key(shell->env, "PATH"));
 	paths = ft_split(temp, ':');
 	size_sub = get_array_size(paths);
-	if (size_sub == 0)
-	{
-		error("PATH is not set");
-		return ;
-	}
 	i = 0;
 	while (i < shell->parser_tokens_array->size)
 	{
@@ -81,28 +78,6 @@ void	parse_execver_from_path(t_parser_token **parser_tokens, t_shell *shell)
 	free_array(paths);
 }
 
-void	add_execver_from_path(t_parser_token **parser_tokens,
-		char **paths, int *i, int *j)
-{
-	char		*path;
-	struct stat	s;
-
-	path = ft_strjoin(ft_strjoin(ft_strdup(paths[*j]), "/"),
-			parser_tokens[*i]->content);
-	if (access(path, X_OK) == 0
-		&& parser_tokens[*i]->main_type == WORDLIST)
-	{
-		stat(path, &s);
-		if (S_ISREG(s.st_mode))
-		{
-			free(path);
-			parser_tokens[*i]->main_type = EXECUTABLE_PATH;
-			return ;
-		}
-	}
-	free(path);
-}
-
 void	find_dirs(t_array_list *parser_tokens)
 {
 	int				i;
@@ -113,29 +88,10 @@ void	find_dirs(t_array_list *parser_tokens)
 	while (i < parser_tokens->size)
 	{
 		if (tokens[i]->main_type == WORDLIST)
-		{
 			if (is_directory(tokens[i]->content))
-			{
 				tokens[i]->main_type = DIRECTORY;
-			}
-		}
 		i++;
 	}
-}
-
-int	is_directory(char *path)
-{
-	struct stat	struct_stat;
-
-	if (access(path, F_OK | R_OK | X_OK) == 0)
-	{
-		if (stat(path, &struct_stat) != 0)
-		{
-			return (0);
-		}
-		return (S_ISDIR(struct_stat.st_mode));
-	}
-	return (0);
 }
 
 void	find_build_in(t_array_list *parser_tokens)

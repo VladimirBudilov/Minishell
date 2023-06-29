@@ -27,7 +27,8 @@ void clean_array(t_shell *minishell)
     free(minishell->input);
     free_tokenizer_output_array(minishell->tokenizer_array);
     free_parser_tokens(minishell->parser_tokens_array);
-    if(minishell->cant_execute) {
+    if(minishell->cant_execute)
+	{
         free_pipe_array(minishell->pipe_array);
         clean_pipe_commands(minishell);
     }
@@ -80,12 +81,14 @@ void free_parser_tokens(t_array_list *tokens) {
         po = array[i];
         if(is_redir(po))
         {
-            free(po->file);
-            if(po->main_type == HEREDOC)
+
+           /* if(po->main_type == HEREDOC)
             {
                 remove(po->heredoc);
                 free(po->heredoc);
             }
+			else
+				free(po->file);*/
         }
         free(po->content);
         free(po);
