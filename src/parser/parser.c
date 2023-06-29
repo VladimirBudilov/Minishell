@@ -34,11 +34,13 @@ void validate_tokens(t_array_list *parser_tokens, t_shell *shell)
 
     i = 0;
     array = (t_parser_token **) parser_tokens->array;
-    if(parser_tokens->size == 1 && array[i]->main_type == NEW_SPACE) {
+    if(parser_tokens->size == 1 && array[i]->main_type == NEW_SPACE)
+    {
         shell->cant_execute = 1;
         return ;
     }
-    else if(array[parser_tokens->size - 1]->main_type == PIPELINE) {
+    else if(array[parser_tokens->size - 1]->main_type == PIPELINE)
+    {
         syntax_error(shell);
         return ;
 
@@ -88,7 +90,7 @@ void find_redir(t_array_list *parser_tokens, t_shell *shell) {
                 return ;
             if(array[i + 1]->main_type == NEW_SPACE)
                 delete_parse_element(parser_tokens, i + 1);
-            array[i]->file = array[i + 1]->content;
+            array[i]->file = ft_strdup(array[i + 1]->content);
             delete_parse_element(parser_tokens, i + 1);
         }
         else if(array[i]->main_type == REDIRECT_APPEND_OUTPUT) {
@@ -96,7 +98,7 @@ void find_redir(t_array_list *parser_tokens, t_shell *shell) {
                 return ;
             if (array[i + 1]->main_type == NEW_SPACE)
                 delete_parse_element(parser_tokens, i + 1);
-            array[i]->file = array[i + 1]->content;
+            array[i]->file = ft_strdup(array[i + 1]->content);
             delete_parse_element(parser_tokens, i + 1);
         }
         else if(array[i]->main_type == REDIRECT_INPUT)
@@ -105,7 +107,7 @@ void find_redir(t_array_list *parser_tokens, t_shell *shell) {
                 return ;
             if (array[i + 1]->main_type == NEW_SPACE)
                 delete_parse_element(parser_tokens, i + 1);
-            array[i]->file = array[i + 1]->content;
+            array[i]->file = ft_strdup(array[i + 1]->content);
             delete_parse_element(parser_tokens, i + 1);
         }
         else if(array[i]->main_type == HEREDOC)
@@ -115,7 +117,7 @@ void find_redir(t_array_list *parser_tokens, t_shell *shell) {
             shell->has_here_doc = 1;
             if (array[i + 1]->main_type == NEW_SPACE)
                 delete_parse_element(parser_tokens, i + 1);
-            array[i]->file = array[i + 1]->content;
+            array[i]->file = ft_strdup(array[i + 1]->content);
             delete_parse_element(parser_tokens, i + 1);
         }
         i++;

@@ -17,12 +17,12 @@ int main(int argc, char **argv, char **envp)
         if(has_pipes(shell))
         {
             create_pipe_list(shell);
-            //execute_pipes(shell);
+            execute_pipes(shell);
         }
-        //else
-            //command_func(shell, envp);
+        else
+            command_func(shell, envp);
         clean_array(shell);
-        system("leaks minishell");
+        //system("leaks minishell");
 
     }
     exit(0);

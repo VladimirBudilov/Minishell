@@ -36,8 +36,8 @@ void redir_out_func(t_array_list *parser_tokens, int i) {
     dup2(fd, STDOUT_FILENO);
     close(fd);
     if(token_key[i + 1]->main_type == NEW_SPACE)
-        delete_element(parser_tokens, i + 1);
-    delete_element(parser_tokens, i);
+        delete_parse_element(parser_tokens, i + 1);
+    delete_parse_element(parser_tokens, i);
 }
 
 void redir_in_func(t_array_list *parser_tokens, int i) {
