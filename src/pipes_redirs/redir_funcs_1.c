@@ -1,40 +1,102 @@
 #include "../../includes/minishell.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+void redir_out_append_func(t_array_list *parser_tokens, int i) {
+    int fd;
+    t_parser_token **token_key;
 
-char	*gen_random_name(void)
-{
-    char			buff[4];
-    char			*name;
-    int				fd;
-    int				nbr;
-
-    name = ft_calloc(1, sizeof(char));
-    fd = open("/dev/urandom", O_RDONLY);
-    if (fd < -1)
-        return ("ERROR");
-    read(fd, buff, 4);
-    nbr = *(int *)buff;
-    if (nbr < 0)
-        nbr++;
-    if (nbr < 0)
-        nbr = nbr * (-1);
-    *name = ('a' + nbr % 26);
-    return (name);
+    token_key = (t_parser_token **)parser_tokens->array;
+    fd = open(token_key[i]->file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+    if (fd < 0)
+    {
+        ft_putstr_fd("shell: ", 2);
+        ft_putstr_fd(token_key[i + 1]->content, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        exit(0);
+    }
+    dup2(fd, STDOUT_FILENO);
+    close(fd);
+    if(token_key[i + 1]->main_type == NEW_SPACE)
+        delete_element(parser_tokens, i + 1);
+    delete_element(parser_tokens, i);
 }
 
+void redir_out_func(t_array_list *parser_tokens, int i) {
+    int fd;
+    t_parser_token **token_key;
 
-int has_redir(t_array_list *tokens) {
-    int i;
-
-    i = 0;
-    while(i < tokens->size)
+    token_key = (t_parser_token **)parser_tokens->array;
+    fd = open(token_key[i]->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd < 0)
     {
-        if(is_redir(((t_parser_token **)tokens->array)[i]))
-            return (1);
-        i++;
+        ft_putstr_fd("shell: ", 2);
+        ft_putstr_fd(token_key[i]->content, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        exit(0);
     }
-    return (0);
+    dup2(fd, STDOUT_FILENO);
+    close(fd);
+    if(token_key[i + 1]->main_type == NEW_SPACE)
+        delete_element(parser_tokens, i + 1);
+    delete_element(parser_tokens, i);
+}
+
+void redir_in_func(t_array_list *parser_tokens, int i) {
+    int fd;
+    t_parser_token **token_key;
+
+    token_key = (t_parser_token **)parser_tokens->array;
+    fd = open(token_key[i]->file, O_RDONLY);
+    if (fd < 0)
+    {
+        ft_putstr_fd("shell: ", 2);
+        ft_putstr_fd(token_key[i + 1]->content, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        exit(0);
+    }
+    dup2(fd, STDIN_FILENO);
+    close(fd);
+    delete_element(parser_tokens, i);
+    delete_element(parser_tokens, i);
+}
+
+void redir_heredoc(t_array_list *parser_tokens, int i) {
+    int fd;
+    t_parser_token **token_key;
+    char *input;
+
+
+
+    token_key = (t_parser_token **)parser_tokens->array;
+    token_key[i]->heredoc = gen_random_name();
+    fd = open(token_key[i]->heredoc, O_CREAT | O_APPEND | O_EXCL | O_RDWR, 0400 | 0200 | 0040 | 0004);
+    if (fd < 0) {
+        ft_putstr_fd("shell heredoc: ", 2);
+        ft_putstr_fd(                token_key[i]->heredoc, 2);
+        ft_putstr_fd(": No such file or directory\n", 2);
+        exit(0);
+    }
+
+    while (1) {
+        input = readline("> ");
+        if (ft_strcmp(input, token_key[i]->file) == 0)
+            break;
+        write(fd, input, ft_strlen(input));
+        write(fd, "\n", 1);
+    }
+    close(fd);
+
+    fd = open(            token_key[i]->heredoc, O_RDONLY);
+    if (fd == -1) {
+        ft_putstr_fd("shell heredoc: ", 2);
+        ft_putstr_fd(                token_key[i]->heredoc, 2);
+        ft_putstr_fd(": Failed to open file\n", 2);
+        free(                token_key[i]->heredoc);
+        return;
+    }
+
+    dup2(fd, STDIN_FILENO);
+    close(fd);
+
+    delete_element(parser_tokens, i);
+    delete_element(parser_tokens, i);
 }

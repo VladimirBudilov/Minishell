@@ -21,6 +21,7 @@ void get_line(t_shell *minishell)
 	if (!minishell->input)
 	{
 		printf("\033[1A\033[3Cexit\n");
+        system("leaks minishell");
 		exit(1);
 	}
     else if (*minishell->input == '\0')
