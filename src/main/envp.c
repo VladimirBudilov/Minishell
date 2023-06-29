@@ -8,7 +8,7 @@ t_array_list *add_env(char **envp)
     i = 0;
     t_array_list *env;
     t_hashmap *hashmap;
-    env = createArrayList();
+    env = create_array_list();
     while(envp[i])
     {
         hashmap =  create_hashmap(envp[i]);

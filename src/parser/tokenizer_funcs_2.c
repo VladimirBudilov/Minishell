@@ -1,9 +1,9 @@
 #include "../../includes/minishell.h"
 
-t_tokenizer_output *tokenize_less(char *input, t_shell *shell)
+t_tokenizer_output	*tokenize_less(char *input, t_shell *shell)
 {
-	t_tokenizer_output *po;
-	t_lexer_token *t;
+	t_tokenizer_output	*po;
+	t_lexer_token		*t;
 
 	po = malloc(sizeof(t_tokenizer_output));
 	t = malloc(sizeof(t_lexer_token));
@@ -14,21 +14,21 @@ t_tokenizer_output *tokenize_less(char *input, t_shell *shell)
 		t->content = ft_strdup("<<");
 		po->string = input + 2;
 		po->token = *t;
-        free(t);
-		return po;
+		free(t);
+		return (po);
 	}
 	t->type = LESS_THAN;
 	t->content = ft_strdup("<");
 	po->string = input + 1;
 	po->token = *t;
-    free(t);
-	return po;
+	free(t);
+	return (po);
 }
 
-t_tokenizer_output *tokenize_pipe(char *input, t_shell *shell)
+t_tokenizer_output	*tokenize_pipe(char *input, t_shell *shell)
 {
-	t_tokenizer_output *po;
-	t_lexer_token *t;
+	t_tokenizer_output	*po;
+	t_lexer_token		*t;
 
 	po = malloc(sizeof(t_tokenizer_output));
 	t = malloc(sizeof(t_lexer_token));
@@ -37,14 +37,14 @@ t_tokenizer_output *tokenize_pipe(char *input, t_shell *shell)
 	t->content = ft_strdup("|");
 	po->string = input + 1;
 	po->token = *t;
-    free(t);
-	return po;
+	free(t);
+	return (po);
 }
 
 t_tokenizer_output *tokenize_greater(char *input, t_shell *shell)
 {
-	t_tokenizer_output *po;
-	t_lexer_token *t;
+	t_tokenizer_output	*po;
+	t_lexer_token		*t;
 
 	po = malloc(sizeof(t_tokenizer_output));
 	t = malloc(sizeof(t_lexer_token));
@@ -55,23 +55,23 @@ t_tokenizer_output *tokenize_greater(char *input, t_shell *shell)
 		t->content = ft_strdup(">>");
 		po->string = input + 2;
 		po->token = *t;
-        free(t);
-		return po;
+		free(t);
+		return (po);
 	}
 	t->type = GREATER_THAN;
 	t->content = ft_strdup(">");
 	po->string = input + 1;
 	po->token = *t;
-    free(t);
-	return po;
+	free(t);
+	return (po);
 }
 
-t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
+t_tokenizer_output	*tokenize_dollar(char *input, t_shell *shell)
 {
-	int i;
-    t_tokenizer_output *po;
-	t_lexer_token *t;
-	char *temp;
+	t_tokenizer_output	*po;
+	t_lexer_token		*t;
+	char				*temp;
+	int					i;
 
 	i = 0;
 	input++;
@@ -82,20 +82,20 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
 	if (*input == '?')
 	{
 		t->content = ft_strjoin(t->content, (temp = ft_itoa(err_no)));
-        free(temp);
+		free(temp);
 		t->type = DOLLAR;
 		po->string = input + 1;
 		po->token = *t;
-        free(t);
-		return po;
+		free(t);
+		return (po);
 	}
 	if (ft_isdigit(*input))
 	{
 		t->type = DOLLAR;
 		po->string = input + 1;
 		po->token = *t;
-        free(t);
-        return po;
+		free(t);
+		return (po);
 	}
 	if (is_breaking_character(*input) || *input == '\0')
 	{
@@ -103,18 +103,19 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
 		t->type = DOLLAR;
 		po->string = input;
 		po->token = *t;
-        free(t);
-        return po;
+		free(t);
+		return (po);
 	}
 	while (input[i] && !is_breaking_character(input[i]))
 	{
 		temp = ft_strndup(input, i + 1);
 		if (contain_key(shell->env, temp) && !ft_isalnum(input[i + 1]))
 		{
-			t->content = ft_strjoin(t->content, get_value_by_key(shell->env, (temp)));
+			t->content = ft_strjoin(t->content,
+					get_value_by_key(shell->env, (temp)));
 			i++;
-            free(temp);
-			break;
+			free(temp);
+			break ;
 		}
 		free(temp);
 		i++;
@@ -122,6 +123,6 @@ t_tokenizer_output *tokenize_dollar(char *input, t_shell *shell)
 	t->type = DOLLAR;
 	po->string = input + i;
 	po->token = *t;
-    free(t);
-    return po;
+	free(t);
+	return (po);
 }

@@ -2,7 +2,7 @@
 #define MINI_MINISHELL_STRUCTS_H
 
 #include "minishell.h"
-#include "ArrayList.h"
+#include "array_list.h"
 
 
 typedef struct s_minishell

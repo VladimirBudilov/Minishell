@@ -59,7 +59,7 @@ t_pipe * init_pipe(t_shell *shell) {
     t_pipe *pipe_token;
 
     pipe_token = malloc(sizeof(t_pipe));
-    pipe_token->commands = createArrayList();
+    pipe_token->commands = create_array_list();
     pipe_token->shell = shell;
     pipe_token->first_pipe = 0;
     pipe_token->middle_pipe = 0;

@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   array_list_utils_2.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/29 16:38:35 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/06/29 16:38:37 by vbudilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-void *find_element_by_index(t_array_list *list, int index)
+void	*find_element_by_index(t_array_list *list, int index)
 {
 	if (index >= list->size)
 	{
-		return NULL;
+		return (NULL);
 	}
-	return list->array[index];
+	return (list->array[index]);
 }
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int i;
-	const char *str1;
-	const char *str2;
+	const char	*str1;
+	const char	*str2;
+	int			i;
 
 	i = 0;
 	str1 = s1;
@@ -27,9 +39,9 @@ int ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-void *ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	void *new_ptr;
+	void	*new_ptr;
 
 	if (!ptr)
 		return (malloc(size));
@@ -45,4 +57,3 @@ void *ft_realloc(void *ptr, size_t size)
 	free(ptr);
 	return (new_ptr);
 }
-

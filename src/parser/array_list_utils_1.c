@@ -1,34 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   array_list_utils_1.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/29 16:37:17 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/06/29 16:37:18 by vbudilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-char *get_value_by_key(t_array_list *list, char *key)
+char	*get_value_by_key(t_array_list *list, char *key)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (i < list->size)
 	{
 		if (ft_strcmp(((t_hashmap *) list->array[i])->key, key) == 0)
-			return ((t_hashmap *) list->array[i])->value;
+			return (((t_hashmap *) list->array[i])->value);
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
 
-int contain_key(t_array_list *list, char *key)
+int	contain_key(t_array_list *list, char *key)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (i < list->size)
 	{
 		if (ft_strcmp(((t_hashmap *) list->array[i])->key, key) == 0)
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
-void change_value_by_key(t_array_list *list, char *key, char *value)
+void	change_value_by_key(t_array_list *list, char *key, char *value)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < list->size)
@@ -36,10 +50,8 @@ void change_value_by_key(t_array_list *list, char *key, char *value)
 		if (ft_strcmp(((t_hashmap *) list->array[i])->key, key) == 0)
 		{
 			((t_hashmap *) list->array[i])->value = ft_strdup(value);
-			return;
+			return ;
 		}
 		i++;
 	}
 }
-
-

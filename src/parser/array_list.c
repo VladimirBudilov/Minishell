@@ -1,16 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   array_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/29 16:35:42 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/06/29 16:35:45 by vbudilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell_structs.h"
 
-
-t_array_list *createArrayList()
+t_array_list	*create_array_list(void )
 {
-	t_array_list *list = (t_array_list *) malloc(sizeof(t_array_list));
+	t_array_list	*list;
+
+	list = (t_array_list *) malloc(sizeof(t_array_list));
 	list->size = 0;
 	list->capacity = 1500;
 	list->array = (void **) malloc(list->capacity * sizeof(void *));
-	return list;
+	return (list);
 }
 
-void add_element(t_array_list *list, void *element)
+void	add_element(t_array_list *list, void *element)
 {
 	if (list->size == list->capacity)
 	{
@@ -21,11 +34,11 @@ void add_element(t_array_list *list, void *element)
 	list->size++;
 }
 
-void delete_element(t_array_list *list, int index)
+void	delete_element(t_array_list *list, int index)
 {
 	if (index >= list->size)
 	{
-		return;
+		return ;
 	}
 	while (index < list->size - 1)
 	{
@@ -35,10 +48,10 @@ void delete_element(t_array_list *list, int index)
 	list->size--;
 }
 
-//free all elements in list
-void free_arrayList(t_array_list *list)
+void	free_array_list(t_array_list *list)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (i < list->size)
 	{
@@ -49,7 +62,12 @@ void free_arrayList(t_array_list *list)
 	free(list);
 }
 
+void	delete_parse_element(t_array_list *parser_tokens, int i)
+{
+	t_parser_token	**array;
 
-
-
-
+	array = (t_parser_token **) parser_tokens->array;
+	free(array[i]->content);
+	free(array[i]);
+	delete_element(parser_tokens, i);
+}

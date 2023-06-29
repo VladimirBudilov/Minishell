@@ -13,13 +13,14 @@
 #include "parser_funk.h"
 #include <assert.h>
 #include <string.h>
-#include "ArrayList.h"
+#include "array_list.h"
 #include <sys/stat.h>
 #include <limits.h>
 #include "pipe_funcs.h"
 #include "pipe_structs.h"
 #include "fcntl.h"
 #include "redirect_func.h"
+#include "validation_funcs.h"
 
 int err_no;
 
