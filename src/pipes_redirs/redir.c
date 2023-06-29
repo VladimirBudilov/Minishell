@@ -93,16 +93,17 @@ void redir_in_func(t_array_list *parser_tokens, int i) {
 
 void redir_heredoc(t_array_list *parser_tokens, int i) {
     int fd;
-    char *random_name;
     t_parser_token **token_key;
     char *input;
 
-    random_name = gen_random_name();
+
+
     token_key = (t_parser_token **)parser_tokens->array;
-    fd = open(random_name, O_CREAT | O_APPEND | O_EXCL | O_RDWR, 0400 | 0200 | 0040 | 0004);
+    token_key[i]->heredoc = gen_random_name();
+    fd = open(token_key[i]->heredoc, O_CREAT | O_APPEND | O_EXCL | O_RDWR, 0400 | 0200 | 0040 | 0004);
     if (fd < 0) {
         ft_putstr_fd("shell heredoc: ", 2);
-        ft_putstr_fd(random_name, 2);
+        ft_putstr_fd(                token_key[i]->heredoc, 2);
         ft_putstr_fd(": No such file or directory\n", 2);
         exit(0);
     }
@@ -116,12 +117,12 @@ void redir_heredoc(t_array_list *parser_tokens, int i) {
     }
     close(fd);
 
-    fd = open(random_name, O_RDONLY);
+    fd = open(            token_key[i]->heredoc, O_RDONLY);
     if (fd == -1) {
         ft_putstr_fd("shell heredoc: ", 2);
-        ft_putstr_fd(random_name, 2);
+        ft_putstr_fd(                token_key[i]->heredoc, 2);
         ft_putstr_fd(": Failed to open file\n", 2);
-        free(random_name);
+        free(                token_key[i]->heredoc);
         return;
     }
 

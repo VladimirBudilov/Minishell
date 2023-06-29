@@ -4,27 +4,27 @@
 #include <stdlib.h>
 #include <time.h>
 
-char *gen_random_name(void) {
-    const char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const int name_length = 10;  // Adjust the desired length of the random name
-    char *name = (char *)malloc((name_length + 1) * sizeof(char));
+char	*gen_random_name(void)
+{
+    char			buff[4];
+    char			*name;
+    int				fd;
+    int				nbr;
 
-    if (name == NULL) {
-        fprintf(stderr, "Memory allocation failed.\n");
-        return NULL;
-    }
-
-    srand(time(NULL));
-
-    for (int i = 0; i < name_length; ++i) {
-        int index = rand() % (sizeof(charset) - 1);
-        name[i] = charset[index];
-    }
-
-    name[name_length] = '\0';  // Null-terminate the string
-
-    return name;
+    name = ft_calloc(1, sizeof(char));
+    fd = open("/dev/urandom", O_RDONLY);
+    if (fd < -1)
+        return ("ERROR");
+    read(fd, buff, 4);
+    nbr = *(int *)buff;
+    if (nbr < 0)
+        nbr++;
+    if (nbr < 0)
+        nbr = nbr * (-1);
+    *name = ('a' + nbr % 26);
+    return (name);
 }
+
 
 int has_redir(t_array_list *tokens) {
     int i;

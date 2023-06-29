@@ -14,15 +14,15 @@ int main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		parse_readline(shell);
-        if(has_pipes(shell))
+       /* if(has_pipes(shell))
         {
             create_pipe_list(shell);
             execute_pipes(shell);
         }
         else
-            command_func(shell, envp);
-		//print_all_args(shell->parser_tokens_array);
+            command_func(shell, envp);*/
         clean_array(shell);
+        system("leaks minishell");
     }
     exit(0);
 }
