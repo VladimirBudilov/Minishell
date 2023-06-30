@@ -37,3 +37,35 @@ int is_redir(t_parser_token *token) {
         return (1);
     return (0);
 }
+
+void add_flags(t_pipe *pipe, t_parser_token *token) {
+
+    if(pipe->is_redir == 1)
+        return;
+    if(pipe->is_builtin == 1 || pipe->is_execve == 1 )
+        return;
+    if(is_redir(token)) {
+        pipe->is_redir = 1;
+    }
+    else if(token->main_type == BIlD_IN) {
+        pipe->is_builtin = 1; }
+    else if(token->main_type == EXECUTABLE || token->main_type == EXECUTABLE_PATH) {
+        pipe->is_execve = 1; }
+
+}
+
+t_pipe * init_pipe(t_shell *shell) {
+
+    t_pipe *pipe_token;
+
+    pipe_token = malloc(sizeof(t_pipe));
+    pipe_token->commands = create_array_list();
+    pipe_token->shell = shell;
+    pipe_token->first_pipe = 0;
+    pipe_token->middle_pipe = 0;
+    pipe_token->last_pipe = 0;
+    pipe_token->is_redir = 0;
+    pipe_token->is_builtin = 0;
+    pipe_token->is_execve = 0;
+    return pipe_token;
+}

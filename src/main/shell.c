@@ -21,10 +21,10 @@ t_shell *create_shell()
 	minishell->input = NULL;
     minishell->number_of_pipes = 0;
     minishell->cant_execute = 0;
-	minishell->lexer_tokens_array = createArrayList();
-	minishell->parser_tokens_array = createArrayList();
-	minishell->tokenizer_array = createArrayList();
-    minishell->pipe_array = createArrayList();
+	minishell->lexer_tokens_array = create_array_list();
+	minishell->parser_tokens_array = create_array_list();
+	minishell->tokenizer_array = create_array_list();
+    minishell->pipe_array = create_array_list();
     return minishell;
 
 }

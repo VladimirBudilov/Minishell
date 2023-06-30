@@ -1,5 +1,5 @@
-#ifndef MINI_ARRAYLIST_H
-#define MINI_ARRAYLIST_H
+#ifndef MINI_ARRAY_LIST_H
+#define MINI_ARRAY_LIST_H
 
 #include "minishell_structs.h"
 #include "minishell_funk.h"
@@ -18,10 +18,10 @@ typedef struct s_arrayList
 } t_array_list;
 
 /*MAIN*/
-t_array_list* createArrayList();
+t_array_list* create_array_list();
 void add_element(t_array_list* list, void *element);
 void delete_element(t_array_list* list, int index);
-void free_arrayList(t_array_list* list);
+void free_array_list(t_array_list* list);
 
 /*HELPERS*/
 char *get_value_by_key(t_array_list* list, char *key);
@@ -37,4 +37,4 @@ t_hashmap *create_hashmap(char *string);
 void *ft_realloc(void *ptr, size_t size);
 
 
-#endif //MINI_ARRAYLIST_H
+#endif //MINI_ARRAY_LIST_H

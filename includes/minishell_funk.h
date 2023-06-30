@@ -2,7 +2,7 @@
 #define MINI_MINISHELL_FUNK_H
 
 #include "minishell.h"
-#include "ArrayList.h"
+#include "array_list.h"
 #include "parser_structs.h"
 
 typedef struct s_arrayList t_array_list;

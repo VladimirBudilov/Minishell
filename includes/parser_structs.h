@@ -43,6 +43,7 @@ typedef struct parser {
     int flags;
     char *content;
     char *file;
+    char *heredoc;
 } t_parser_token;
 
 typedef struct token {

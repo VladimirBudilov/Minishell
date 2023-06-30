@@ -21,8 +21,8 @@ int main(int argc, char **argv, char **envp)
         }
         else
             command_func(shell, envp);
-		//print_all_args(shell->parser_tokens_array);
         clean_array(shell);
+
     }
     exit(0);
 }

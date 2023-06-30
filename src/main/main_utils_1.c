@@ -1,6 +1,8 @@
 #include "../../includes/minishell.h"
 
 
+void free_pipe_array(t_array_list *pipe_array);
+
 void clean_all(t_shell *shell) {
     free_env(shell->env);
 
@@ -22,18 +24,36 @@ void free_env(t_array_list *tokens) {
 
 void clean_array(t_shell *minishell)
 {
-    minishell->cant_execute = 0;
     free(minishell->input);
     free_tokenizer_output_array(minishell->tokenizer_array);
     free_parser_tokens(minishell->parser_tokens_array);
+    if(minishell->cant_execute)
+	{
+        free_pipe_array(minishell->pipe_array);
+        clean_pipe_commands(minishell);
+    }
+    minishell->number_of_pipes = 0;
     minishell->lexer_tokens_array->size = 0;
     minishell->parser_tokens_array->size = 0;
     minishell->tokenizer_array->size = 0;
     minishell->pipe_array->size = 0;
-    clean_pipe_commands(minishell);
-    minishell->number_of_pipes = 0;
+    minishell->cant_execute = 0;
 
 
+}
+
+void free_pipe_array(t_array_list *pipe_array) {
+    int i;
+    t_pipe **pipes;
+
+    i = 0;
+    pipes = (t_pipe **) pipe_array->array;
+    while (i < pipe_array->size) {
+        free(pipes[i]->commands->array);
+        free(pipes[i]->commands);
+        free(pipes[i]);
+        i++;
+    }
 }
 
 void clean_pipe_commands(t_shell *shell) {
@@ -59,6 +79,17 @@ void free_parser_tokens(t_array_list *tokens) {
     while (i < tokens->size)
     {
         po = array[i];
+        if(is_redir(po))
+        {
+
+           /* if(po->main_type == HEREDOC)
+            {
+                remove(po->heredoc);
+                free(po->heredoc);
+            }
+			else
+				free(po->file);*/
+        }
         free(po->content);
         free(po);
         i++;

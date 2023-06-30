@@ -1,39 +1,72 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_parser_funcs_2.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/29 17:55:02 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/06/29 17:55:03 by vbudilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-int is_joinable(enum lexer_type type)
+void	create_parser_tokens(t_lexer_token **lexer_tokens,
+							t_array_list *parser_tokens, int size)
 {
-	if (type == BARE_WORD || type == SINGLE_QUOTES || type == DOUBLE_QUOTES || type == DOLLAR)
-		return 1;
-	return 0;
-}
+	int	i;
 
-void open_quotes(t_lexer_token **lexer_tokens, t_array_list *parser_tokens, int *i, int size)
-{
-	t_parser_token *token;
-
-	add_parser_token(parser_tokens, WORDLIST, lexer_tokens[*i]->content);
-    token = (t_parser_token *) parser_tokens->array[parser_tokens->size - 1];
-	*i += 1;
-	while (*i < size && is_joinable(lexer_tokens[*i]->type))
+	i = 0;
+	if (lexer_tokens[i]->type == WHITE_SPACE)
+		i++;
+	while (i < size)
 	{
-		join_words(lexer_tokens[*i], token);
-		*i += 1;
+		if (is_joinable(lexer_tokens[i]->type))
+		{
+			open_quotes(lexer_tokens, parser_tokens, &i, size);
+			continue ;
+		}
+		else if (lexer_tokens[i]->type == WHITE_SPACE)
+			add_parser_token(parser_tokens, NEW_SPACE, " ");
+		else if (is_lexer_redir(lexer_tokens[i]->type))
+			add_redirection(lexer_tokens, parser_tokens, i);
+		else if (lexer_tokens[i]->type == PIPE)
+			add_parser_token(parser_tokens, PIPELINE, "|");
+		i++;
 	}
 }
 
-void join_words(t_lexer_token *lexer_token, t_parser_token *token)
+int	is_lexer_redir(enum lexer_type type)
 {
-	token->content = ft_strjoin(token->content, lexer_token->content);
+	if (type == LESS_THAN || type == GREATER_THAN
+		|| type == LESS_THAN_LESS_THAN || type == GREATER_THAN_GREATER_THAN)
+		return (1);
+	return (0);
 }
 
-t_parser_token *create_token(enum parser_type type, char *content)
+void	add_redirection(t_lexer_token **lexer_tokens,
+					t_array_list *parser_tokens, int i)
 {
-	t_parser_token *token;
+	if (lexer_tokens[i]->type == LESS_THAN)
+		add_parser_token(parser_tokens, REDIRECT_INPUT, "");
+	else if (lexer_tokens[i]->type == GREATER_THAN)
+		add_parser_token(parser_tokens, REDIRECT_OUTPUT, "");
+	else if (lexer_tokens[i]->type == LESS_THAN_LESS_THAN)
+		add_parser_token(parser_tokens, HEREDOC, "");
+	else if (lexer_tokens[i]->type == GREATER_THAN_GREATER_THAN)
+		add_parser_token(parser_tokens, REDIRECT_APPEND_OUTPUT, "");
+}
+
+void	add_parser_token(t_array_list *tokens_array,
+		enum parser_type type, const char *content)
+{
+	t_parser_token	*token;
 
 	token = malloc(sizeof(t_parser_token));
 	token->main_type = type;
 	token->sub_type = 0;
 	token->flags = 0;
 	token->content = ft_strdup(content);
-	return token;
+	add_element(tokens_array, token);
 }
