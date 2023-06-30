@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-//решить вопрос с ошибкой в execve WIFEXITED(status)
-
 void read_2d_arr(char **arr)
 {
     int i;
@@ -13,24 +11,6 @@ void read_2d_arr(char **arr)
         ft_putstr_fd("\n", 2);
         i++;
     }
-}
-
-void signal_handler_sigint(int signal)
-{
-	(void)signal;
-	write(1, "\n", 1);
-}
-
-void	signal_hendler_sigquit(int signal)
-{
-	(void)signal;
-	ft_putstr_fd("Quit: 3\n", 2);
-}
-
-void define_signals(void)
-{
-	signal(SIGINT, signal_handler_sigint);
-	signal(SIGQUIT, signal_hendler_sigquit);
 }
 
 
@@ -92,7 +72,6 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 	define_signals();
 	if(pid == 0)
 	{
-
 		while(i < get_array_size(path))
 		{
 			if(access(ft_strjoin(ft_strjoin(ft_strdup(path[i]), "/"), token_key[index]->content), X_OK) == 0)
@@ -102,15 +81,12 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 			}
 			i++;
 		}
-		free_arr(argv);
-		free_arr(path);
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
     err_no = WEXITSTATUS(status);
+	free_arr(path);
+	free_arr(argv);
 }
-
-
-
 
 
