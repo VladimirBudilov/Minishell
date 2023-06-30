@@ -14,7 +14,7 @@ void print_command_export(t_hashmap **hashmap_key, t_shell *shell, t_array_list 
             ft_putstr_fd(hashmap_key[i]->key, 1);
             if (hashmap_key[i]->value != NULL)
             {
-                write(1, "=\"", 1);
+                write(1, "=\"", 2);
                 ft_putstr_fd(hashmap_key[i]->value, 1);
                 write(1, "\"", 1);
             }

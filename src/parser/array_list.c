@@ -18,7 +18,7 @@ t_array_list	*create_array_list(void )
 
 	list = (t_array_list *) malloc(sizeof(t_array_list));
 	list->size = 0;
-	list->capacity = 1500;
+	list->capacity = 1000;
 	list->array = (void **) malloc(list->capacity * sizeof(void *));
 	return (list);
 }
@@ -67,7 +67,10 @@ void	delete_parse_element(t_array_list *parser_tokens, int i)
 	t_parser_token	**array;
 
 	array = (t_parser_token **) parser_tokens->array;
-	free(array[i]->content);
+	if (is_redir(array[i]))
+		free(array[i]->file);
+	else
+		free(array[i]->content);
 	free(array[i]);
 	delete_element(parser_tokens, i);
 }

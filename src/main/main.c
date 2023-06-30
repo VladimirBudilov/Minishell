@@ -1,30 +1,33 @@
 #include "../../includes/minishell.h"
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	(void) argv;
-	t_shell *shell;
-    err_no = 0;
+	t_shell	*shell;
+
+	(void )	argv;
+	err_no = 0;
 	if (argc > 1)
 		exit(1);
-    shell = create_shell();
+	shell = create_shell();
 	welcome_message();
-    shell->env = add_env(envp);
+	shell->env = add_env(envp);
+	printf("1");
 	rl_catch_signals = 0;
 	while (1)
 	{
 		parse_readline(shell);
-        if(has_pipes(shell))
-        {
-            create_pipe_list(shell);
-            execute_pipes(shell);
-        }
-        else
-            command_func(shell, envp);
-        clean_array(shell);
-
-    }
-    exit(0);
+		if (has_pipes(shell))
+		{
+			create_pipe_list(shell);
+			execute_pipes(shell);
+		}
+		else
+			command_func(shell, envp);
+        print_all_args(shell->parser_tokens_array);
+		clean_array(shell);
+		//system("leaks minishell");
+	}
+	exit(0);
 }
 
 void print_all_args(t_array_list *list)
