@@ -18,6 +18,7 @@ void command_func(t_shell *shell, char **envp)
         if (pid == 0)
         {
             execute_redir(parser_tokens);
+            printf("here");
             if (token_key[i]->main_type == BIlD_IN)
                 execute_builtin(parser_tokens, shell, i);
             else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)

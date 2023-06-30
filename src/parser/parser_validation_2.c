@@ -59,8 +59,6 @@ void	clean_flags_n(t_array_list *tokens_array, int index)
 				index++;
 				continue ;
 			}
-			delete_parse_element(tokens_array, index - 1);
-			index--;
 			delete_parse_element(tokens_array, index);
 		}
 		index++;

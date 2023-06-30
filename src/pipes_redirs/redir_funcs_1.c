@@ -1,6 +1,5 @@
 #include "../../includes/minishell.h"
 
-int remove_space(t_array_list *parser_tokens, int index);
 
 int redir_out_append_func(t_array_list *parser_tokens, int i)
 {
@@ -19,7 +18,6 @@ int redir_out_append_func(t_array_list *parser_tokens, int i)
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	delete_parse_element(parser_tokens, i);
-	remove_space(parser_tokens, i);
 	return (i);
 }
 
@@ -39,10 +37,8 @@ int redir_out_func(t_array_list *parser_tokens, int i)
     }
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	printf("index: %d\n", i);
-	printf("file: %s\n", token_key[i]->file);
+    ft_putnbr_fd(token_key[i]->main_type, 2);
 	delete_parse_element(parser_tokens, i);
-	remove_space(parser_tokens, i);
 	return (i);
 }
 
@@ -61,9 +57,7 @@ int redir_in_func(t_array_list *parser_tokens, int i) {
     }
     dup2(fd, STDIN_FILENO);
     close(fd);
-	printf("index: %d\n", i);
 	delete_parse_element(parser_tokens, i);
-	//remove_space(parser_tokens, i);
 	return (i);
 }
 
@@ -112,6 +106,5 @@ int redir_heredoc(t_array_list *parser_tokens, int i) {
     dup2(fd, STDIN_FILENO);
     close(fd);
 	delete_parse_element(parser_tokens, i);
-	i -= remove_space(parser_tokens, i);
 	return (i);
 }

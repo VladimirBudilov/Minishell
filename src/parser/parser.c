@@ -65,33 +65,7 @@ void	handle_redirect(t_parser_token **array, int index,
 		return ;
 	if (array[index]->main_type == HEREDOC)
 		shell->has_here_doc = 1;
-	//remove_new_space(parser_tokens, index);
 	array[index]->file = ft_strdup(array[index + 1]->content);
 	delete_parse_element(parser_tokens, index + 1);
 }
 
-void	remove_new_space(t_array_list *parser_tokens, int index)
-{
-	t_parser_token	**array;
-
-	array = (t_parser_token **)parser_tokens->array;
-	if (index > parser_tokens->size - 1)
-		return ;
-	if (array[index + 1]->main_type == NEW_SPACE)
-		delete_parse_element(parser_tokens, index + 1);
-}
-
-int	remove_prev_space(t_array_list *parser_tokens, int index)
-{
-	t_parser_token	**array;
-
-	array = (t_parser_token **)parser_tokens->array;
-	if (index < 1)
-		return (0);
-	if (array[index - 1]->main_type == NEW_SPACE)
-	{
-		delete_parse_element(parser_tokens, index - 1);
-		return (1);
-	}
-	return (0);
-}

@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*shell;
@@ -30,6 +31,22 @@ int	main(int argc, char **argv, char **envp)
 	exit(0);
 }
 
+//print content in all commands in all pipe
+void print_all_commands(t_array_list *list)
+{
+    int i;
+    t_array_list **array;
+
+    i = 0;
+    array = (t_array_list **) list->array;
+    while (i < list->size)
+    {
+        print_all_args(array[i]);
+        i++;
+    }
+}
+
+
 void print_all_args(t_array_list *list)
 {
 	int i;
@@ -39,7 +56,7 @@ void print_all_args(t_array_list *list)
 	array = (t_parser_token **) list->array;
 	while (i < list->size)
 	{
-		printf("token: %s\n", array[i]->content);
+		printf("token: %s token type %d\n", array[i]->content, array[i]->main_type);
 		i++;
 	}
 }

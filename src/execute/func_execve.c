@@ -69,8 +69,6 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 	token_key = (t_parser_token **)line->array;
 
     int index = 0;
-	if (token_key[index]->main_type == NEW_SPACE)
-		index++;
 	if (token_key[index]->main_type == EXECUTABLE)
 	{
 		argv = new_arr(line, index);

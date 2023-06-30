@@ -37,8 +37,10 @@ void execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2]) {
     pid = fork();
     if (pid == 0)
     {
+        ft_putstr_fd("pid: ", 2);
         if(pipe_token->first_pipe)
             dup2(fd_array[i][1], STDOUT_FILENO);
+
         else if(pipe_token->middle_pipe)
         {
             dup2(fd_array[i - 1][0], STDIN_FILENO);

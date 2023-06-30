@@ -27,8 +27,6 @@ void	create_parser_tokens(t_lexer_token **lexer_tokens,
 			open_quotes(lexer_tokens, parser_tokens, &i, size);
 			continue ;
 		}
-		else if (lexer_tokens[i]->type == WHITE_SPACE)
-			add_parser_token(parser_tokens, NEW_SPACE, " ");
 		else if (is_lexer_redir(lexer_tokens[i]->type))
 			add_redirection(lexer_tokens, parser_tokens, i);
 		else if (lexer_tokens[i]->type == PIPE)
