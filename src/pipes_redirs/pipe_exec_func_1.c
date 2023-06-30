@@ -7,10 +7,13 @@ void execute_command_in_pipe(t_pipe *pipe) {
 
     i = 0;
     token_key = (t_parser_token **)pipe->commands->array;
-    if(has_redir(pipe->shell->parser_tokens_array)) {
+    if(has_redir(pipe->commands))
+    {
         pid = fork();
-        if (pid == 0) {
+        if (pid == 0)
+        {
             execute_redir(pipe->commands);
+            ft_putstr_fd("\n", 2);
             if (token_key[i]->main_type == BIlD_IN)
                 execute_builtin_in_pipe(pipe);
             else if (token_key[i]->main_type == EXECUTABLE || token_key[i]->main_type == EXECUTABLE_PATH)
@@ -46,7 +49,6 @@ void execute_command_in_pipe(t_pipe *pipe) {
 void execute_execve_in_pipe(t_pipe *pipe) {
     t_array_list *token_key;
     token_key = (t_array_list *)pipe->commands;
-    ft_putstr_fd("execv", 2);
     ex_func(token_key, pipe->shell, (char **)pipe->shell->env->array);
 }
 

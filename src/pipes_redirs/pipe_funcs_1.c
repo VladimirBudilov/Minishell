@@ -17,6 +17,7 @@ void add_last_command(t_shell *shell, int index) {
 }
 
 void add_command(t_shell *shell, int index, int prev) {
+
     t_parser_token **parser_tokens;
     t_pipe *pipe;
     parser_tokens = (t_parser_token **) shell->parser_tokens_array->array;

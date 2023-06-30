@@ -12,7 +12,6 @@ int	main(int argc, char **argv, char **envp)
 	shell = create_shell();
 	welcome_message();
 	shell->env = add_env(envp);
-	printf("1");
 	rl_catch_signals = 0;
 	while (1)
 	{
@@ -30,22 +29,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	exit(0);
 }
-
-//print content in all commands in all pipe
-void print_all_commands(t_array_list *list)
-{
-    int i;
-    t_array_list **array;
-
-    i = 0;
-    array = (t_array_list **) list->array;
-    while (i < list->size)
-    {
-        print_all_args(array[i]);
-        i++;
-    }
-}
-
 
 void print_all_args(t_array_list *list)
 {

@@ -68,6 +68,8 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 	t_parser_token **token_key;
 	token_key = (t_parser_token **)line->array;
 
+
+
     int index = 0;
 	if (token_key[index]->main_type == EXECUTABLE)
 	{
@@ -95,6 +97,7 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 		{
 			if(access(ft_strjoin(ft_strjoin(ft_strdup(path[i]), "/"), token_key[index]->content), X_OK) == 0)
 			{
+				ft_putstr_fd("here\n",2);
 				execve(ft_strjoin(ft_strjoin(ft_strdup(path[i]), "/"), token_key[index]->content), argv, envp);
 				break ;
 			}
@@ -102,6 +105,7 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 		}
 		free_arr(argv);
 		free_arr(path);
+		ft_putstr_fd("minishell: command not found: ", 2);
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
