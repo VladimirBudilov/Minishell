@@ -43,7 +43,7 @@ void command_func(t_shell *shell, char **envp)
             ex_func(parser_tokens, shell, envp);
         else
         {
-            ft_putstr_fd("shell: ", 2);
+            ft_putstr_fd("shell first: ", 2);
             ft_putstr_fd(token_key[i]->content, 2);
             ft_putstr_fd(": command not found\n", 2);
 			err_no = 127;

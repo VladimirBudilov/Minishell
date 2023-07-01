@@ -99,11 +99,11 @@ t_tokenizer_output	*tokenize_bare_word(char *input, t_shell *shell)
 		i++;
 	t = malloc(sizeof(t_lexer_token));
 	po = malloc(sizeof(t_tokenizer_output));
-	add_element(shell->tokenizer_array, po);
 	t->type = BARE_WORD;
 	t->content = ft_strndup(input, i);
 	po->string = input + i;
 	po->token = *t;
+	add_element(shell->tokenizer_array, po);
 	free(t);
 	return (po);
 }

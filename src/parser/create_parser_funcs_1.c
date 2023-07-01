@@ -25,7 +25,8 @@ void	open_quotes(t_lexer_token **lexer_tokens,
 {
 	t_parser_token	*token;
 
-	add_parser_token(parser_tokens, WORDLIST, lexer_tokens[*i]->content);
+	add_parser_token(parser_tokens, WORDLIST,
+		ft_strdup(lexer_tokens[*i]->content));
 	token = (t_parser_token *) parser_tokens->array[parser_tokens->size - 1];
 	*i += 1;
 	while (*i < size && is_joinable(lexer_tokens[*i]->type))

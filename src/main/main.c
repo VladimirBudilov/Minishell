@@ -11,7 +11,7 @@ int	main(int argc, char **argv, char **envp)
 		exit(1);
 	shell = create_shell();
 	welcome_message();
-    shell->envp = envp;
+	shell->envp = envp;
 	shell->env = add_env(envp);
 	rl_catch_signals = 0;
 	while (1)
