@@ -78,12 +78,10 @@ void	cd_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	int				i;
 	t_parser_token	**token_key;
 
-	i = 2;
+	i = 1;
 	err_no = 0;
 	token_key = (t_parser_token **)line->array;
-	if (token_key[0]->main_type == NEW_SPACE)
-		i++;
-	if (line->size <= 2 || !ft_strncmp(token_key[i]->content, "~", 2))
+	if (line->size <= 1 || !ft_strncmp(token_key[i]->content, "~", 2))
 	{
 		to_home(hashmap_key, shell);
 		return ;
