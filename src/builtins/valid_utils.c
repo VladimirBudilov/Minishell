@@ -106,3 +106,13 @@ void	free_arr(char **arr)
 	}
 	free(arr);
 }
+
+void	free_tmp(char **tmp)
+{
+    int	i;
+
+    i = 1;
+    while (tmp[i])
+        free(tmp[i++]);
+    free(tmp);
+}
