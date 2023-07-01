@@ -67,19 +67,16 @@ int	check_valid_arguments(t_parser_token **token_key, t_shell *shell)
 	int	check_token;
 	int	i;
 
-	i = 2;
+	i = 1;
 	check_token = 0;
-	if (shell->parser_tokens_array->size > 2)
+	if (shell->parser_tokens_array->size > 1)
 	{
 		while (i < shell->parser_tokens_array->size && !check_token)
 		{
-			if (token_key[i]->main_type != NEW_SPACE)
-			{
-				if (!ft_strncmp(token_key[0]->content, "unset", 5))
-					check_token += valid_token_for_unset(token_key[i]->content);
-				else if (!ft_strncmp(token_key[0]->content, "export", 6))
-					check_token += valid_token_for_ex(token_key[i]->content);
-			}
+			if (!ft_strncmp(token_key[0]->content, "unset", 5))
+				check_token += valid_token_for_unset(token_key[i]->content);
+			else if (!ft_strncmp(token_key[0]->content, "export", 6))
+				check_token += valid_token_for_ex(token_key[i]->content);
 			i++;
 		}
 		if (check_token)

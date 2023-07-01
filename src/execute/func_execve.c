@@ -1,8 +1,5 @@
 #include "../../includes/minishell.h"
 
-//решить вопрос с ошибкой в execve WIFEXITED(status)
-
-
 void read_2d_arr(char **arr)
 {
     int i;

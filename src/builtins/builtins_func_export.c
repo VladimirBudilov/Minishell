@@ -16,7 +16,7 @@ void print_command_export(t_hashmap **hashmap_key, t_shell *shell, t_array_list 
     int i;
 
     i = 0;
-    if (line->size <= 2)
+    if (line->size <= 1)
     {
         while(i < shell->env->size)
         {
@@ -105,7 +105,9 @@ void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key,
 
 void export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 {
-	t_parser_token **token_key = (t_parser_token **)line->array;
+	t_parser_token **token_key;
+
+	token_key = (t_parser_token **)line->array;
     print_command_export(hashmap_key, shell, line);
     if(!check_valid_arguments(token_key, shell))
         return ;
