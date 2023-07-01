@@ -65,10 +65,10 @@ int redir_heredoc(t_array_list *parser_tokens, int i, t_shell *shell) {
     t_parser_token **token_key;
     char *input;
     token_key = (t_parser_token **)parser_tokens->array;
-    token_key[i]->heredoc = gen_random_name();
+    token_key[i]->heredoc = "here_doc";
     if(parser_tokens->size == 1)
         shell->only_here_doc = 1;
-    fd = open(token_key[i]->heredoc, O_CREAT | O_APPEND | O_EXCL | O_RDWR, 0400 | 0200 | 0040 | 0004);
+    fd = open(token_key[i]->heredoc, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     if (fd < 0) {
         ft_putstr_fd("shell heredoc: ", 2);
         ft_putstr_fd(token_key[i]->heredoc, 2);

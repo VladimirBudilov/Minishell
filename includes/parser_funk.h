@@ -45,9 +45,9 @@ t_tokenizer_output *tokenize_bare_word(char *input, t_shell *shell);
 t_tokenizer_output *tokenize_white_space(char *input, t_shell *shell);
 void add_parser_token(t_array_list *tokens_array, enum parser_type type, const char *content);
 int is_lexer_redir(enum lexer_type type);
-char *tokenize_brackets(char *input, t_shell *shell, t_tokenizer_output **po_array, int *i);
-char * tokenize_less_bigger(char *input, t_shell *shell, t_tokenizer_output **po_array, int *i);
-char *tokenize_pipe_and_dollar(char *input, t_shell *shell, t_tokenizer_output **po_array, int *i);
+char *tokenize_brackets(char *input, t_shell *shell, t_tokenizer_output *po);
+char *tokenize_less_bigger(char *input, t_shell *shell, t_tokenizer_output *po);
+char *tokenize_pipe_and_dollar(char *input, t_shell *shell, t_tokenizer_output *po);
 
 
 /*UTILS*/

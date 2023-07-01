@@ -25,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
         else
             command_func(shell, envp);
         clean_array(shell);
-		//system("leaks minishell");
     }
     exit(0);
 }
@@ -40,6 +39,19 @@ void print_all_args(t_array_list *list)
 	while (i < list->size)
 	{
 		printf("token: %s token type %d\n", array[i]->content, array[i]->main_type);
+		i++;
+	}
+}
+void print_all_tokens(t_array_list *list)
+{
+	int i;
+	t_tokenizer_output **array;
+
+	i = 0;
+	array = (t_tokenizer_output **) list->array;
+	while (i < list->size)
+	{
+		printf("token tokenize : %s token type %d\n", array[i]->token.content, array[i]->token.type);
 		i++;
 	}
 }
