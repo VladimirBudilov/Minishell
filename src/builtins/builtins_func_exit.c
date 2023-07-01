@@ -14,8 +14,6 @@
 
 void	print_error(t_parser_token **token_key, int index)
 {
-	if (token_key[index]->main_type == NEW_SPACE)
-		index++;
 	ft_putstr_fd("exit\n", 1);
 	ft_putstr_fd("minishell: exit: ", 2);
 	ft_putstr_fd(token_key[index]->content, 2);
@@ -28,22 +26,19 @@ int	check_number_arg(t_parser_token **token_key, t_shell *shell)
 	int	i;
 	int	j;
 
-	i = 2;
+	i = 1;
 	while (i < shell->parser_tokens_array->size)
 	{
-		if (token_key[i]->main_type != NEW_SPACE)
+		j = 0;
+		while (token_key[i]->content[j])
 		{
-			j = 0;
-			while (token_key[i]->content[j])
-			{
-				if (token_key[i]->content[j] == '-' && j == 0)
-					j++;
-				if (token_key[i]->content[j] == '+' && j == 0)
-					j++;
-				if (ft_isdigit(token_key[i]->content[j]) == 0)
-					return (0);
+			if (token_key[i]->content[j] == '-' && j == 0)
 				j++;
-			}
+			if (token_key[i]->content[j] == '+' && j == 0)
+				j++;
+			if (ft_isdigit(token_key[i]->content[j]) == 0)
+				return (0);
+			j++;
 		}
 		i++;
 	}
@@ -56,11 +51,11 @@ void	exit_func(t_array_list *line, t_shell *shell)
 	int				index;
 
 	token_key = (t_parser_token **)line->array;
-	index = 2;
+	index = 1;
 	err_no = 0;
 	if (check_number_arg(token_key, shell))
 	{
-		if (line->size <= 4)
+		if (line->size <= 2)
 		{
 			ft_putstr_fd("exit\n", 1);
 			exit(1);
