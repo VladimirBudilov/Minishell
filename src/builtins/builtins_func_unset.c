@@ -19,7 +19,7 @@ int	get_position_of_element(t_hashmap **hashmap_key, char *key, t_shell *shell)
 	i = 0;
 	while (i < shell->env->size)
 	{
-		if (!ft_strncmp(hashmap_key[i]->key, key, ft_strlen(key)))
+		if (!ft_strncmp(hashmap_key[i]->key, key, ft_strlen()))
 			return (i);
 		i++;
 	}

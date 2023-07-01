@@ -48,7 +48,12 @@ int is_lexer_redir(enum lexer_type type);
 char *tokenize_brackets(char *input, t_shell *shell, t_tokenizer_output *po);
 char *tokenize_less_bigger(char *input, t_shell *shell, t_tokenizer_output *po);
 char *tokenize_pipe_and_dollar(char *input, t_shell *shell, t_tokenizer_output *po);
-
+void	check_quotes(t_shell *shell);
+int execute_dable_quote(char *input, int i, t_shell *shell, t_lexer_token *t);
+t_tokenizer_output *dollar_corner_cases(char *input, t_lexer_token *t, t_tokenizer_output *po);
+int	is_corner_case(char *input);
+int execute_dollar(char *input, t_lexer_token *t, int i, t_shell *shell);
+int	open_dollar_corner_case(char *input, t_shell *shell, t_lexer_token *t, int i);
 
 /*UTILS*/
 int open_dollar(char *input, t_shell *shell, t_lexer_token *t);
@@ -58,7 +63,7 @@ void free_array(char **paths);
 int is_breaking_character(char c);
 
 /*ERROR_HANDLER*/
-void error(char *message);
+void error(char *message, t_shell *shell);
 void	syntax_error(t_shell *shell);
 
 

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdbool.h>
 #include "../../includes/minishell.h"
 
 t_tokenizer_output	*tokenize_less(char *input, t_shell *shell)
@@ -82,7 +83,6 @@ t_tokenizer_output	*tokenize_dollar(char *input, t_shell *shell)
 {
 	t_tokenizer_output	*po;
 	t_lexer_token		*t;
-	char				*temp;
 	int					i;
 
 	i = 0;
@@ -91,15 +91,26 @@ t_tokenizer_output	*tokenize_dollar(char *input, t_shell *shell)
 	t = malloc(sizeof(t_lexer_token));
 	add_element(shell->tokenizer_array, po);
 	t->content = ft_strdup("");
+	if (is_corner_case(input))
+		return (po = dollar_corner_cases(input, t, po));
+	execute_dollar(input, t, 0, NULL);
+	t->type = DOLLAR;
+	po->string = input + i;
+	po->token = *t;
+	free(t);
+	return (po);
+}
+
+t_tokenizer_output	*dollar_corner_cases(char *input, t_lexer_token *t,
+						t_tokenizer_output *po)
+{
 	if (*input == '?')
 	{
-		t->content = ft_strjoin(t->content, (temp = ft_itoa(err_no)));
-		free(temp);
+		t->content = ft_itoa(err_no);
 		t->type = DOLLAR;
 		po->string = input + 1;
 		po->token = *t;
 		free(t);
-		return (po);
 	}
 	if (ft_isdigit(*input))
 	{
@@ -107,7 +118,6 @@ t_tokenizer_output	*tokenize_dollar(char *input, t_shell *shell)
 		po->string = input + 1;
 		po->token = *t;
 		free(t);
-		return (po);
 	}
 	if (is_breaking_character(*input) || *input == '\0')
 	{
@@ -116,25 +126,6 @@ t_tokenizer_output	*tokenize_dollar(char *input, t_shell *shell)
 		po->string = input;
 		po->token = *t;
 		free(t);
-		return (po);
 	}
-	while (input[i] && !is_breaking_character(input[i]))
-	{
-		temp = ft_strndup(input, i + 1);
-		if (contain_key(shell->env, temp) && !ft_isalnum(input[i + 1]))
-		{
-			t->content = ft_strjoin(t->content,
-					get_value_by_key(shell->env, (temp)));
-			i++;
-			free(temp);
-			break ;
-		}
-		free(temp);
-		i++;
-	}
-	t->type = DOLLAR;
-	po->string = input + i;
-	po->token = *t;
-	free(t);
 	return (po);
 }

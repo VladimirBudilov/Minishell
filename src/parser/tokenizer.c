@@ -21,7 +21,7 @@ void	tokenize(t_shell *shell)
 	i = 0;
 	input = shell->input;
 	po_array = (t_tokenizer_output **) shell->tokenizer_array->array;
-	while (*input)
+	while (*input && shell->cant_execute == 0)
 	{
 		if (*input == ' ')
 			input = add_token(shell, (po_array[i++]

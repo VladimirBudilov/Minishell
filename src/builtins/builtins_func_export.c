@@ -53,7 +53,7 @@ int check_key(char *str, t_hashmap **hashmap_key, t_shell *shell)
 
     while(i < shell->env->size)
     {
-        if(!ft_strncmp(hashmap_key[i]->key, parse_str, ft_strlen(str))) {
+        if(!ft_strncmp(hashmap_key[i]->key, parse_str, ft_strlen())) {
 			free(parse_str);
 			return 1;
 		}

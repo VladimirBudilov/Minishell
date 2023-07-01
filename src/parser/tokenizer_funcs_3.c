@@ -41,7 +41,7 @@ char	*tokenize_brackets(char *input, t_shell *shell,
 {
 	if (*input == '\'')
 		return (add_token(shell, (po
-					= tokenize_less(input, shell))));
+					= tokenize_single_quote(input, shell))));
 	else if (*input == '\"')
 		return (add_token(shell, (po
 					= tokenize_double_quote(input, shell))));
