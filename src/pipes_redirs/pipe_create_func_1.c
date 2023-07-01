@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_utils_1.c                                    :+:      :+:    :+:   */
+/*   pipe_create_func_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 19:41:34 by vbudilov          #+#    #+#             */
-/*   Updated: 2023/07/01 19:41:35 by vbudilov         ###   ########.fr       */
+/*   Created: 2023/07/01 19:40:28 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/07/01 19:40:32 by vbudilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	has_redir(t_array_list *tokens)
+void	init_number_of_pipes(int *index, int *prev_index, int *last_pipe)
 {
-	int	i;
+	*index = 0;
+	*last_pipe = 0;
+	*prev_index = 0;
+}
 
-	i = 0;
-	while (i < tokens->size)
+int	too_many_pipes(t_shell *shell)
+{
+	if (shell->number_of_pipes > 250)
 	{
-		if (is_redir(((t_parser_token **) tokens->array)[i]))
-			return (1);
-		i++;
+		shell->cant_execute = 1;
+		printf("fork: Resource temporarily unavailable\n");
+		return (1);
 	}
 	return (0);
 }

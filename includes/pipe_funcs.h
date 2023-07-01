@@ -21,6 +21,8 @@ int is_redir(t_parser_token *token);
 void execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2]);
 t_pipe * init_pipe(t_shell *shell);
 void clean_pipe_commands(t_shell *shell);
+int too_many_pipes(t_shell *shell);
+void init_number_of_pipes(int *index, int *prev_index, int *last_pipe);
 
 
 
