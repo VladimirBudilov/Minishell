@@ -8,6 +8,7 @@
 typedef struct s_minishell
 {
     t_array_list *env;
+    char **envp;
     t_array_list *lexer_tokens_array;
     t_array_list *parser_tokens_array;
 	t_array_list *tokenizer_array;
@@ -15,6 +16,7 @@ typedef struct s_minishell
 	int number_of_pipes;
     int status;
 	int has_here_doc;
+    int only_here_doc;
 	int cant_execute;
 	char *input;
     int exit_code;

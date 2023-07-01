@@ -1,15 +1,18 @@
 #include "../../includes/minishell.h"
 
-int main(int argc, char **argv, char **envp)
+
+int	main(int argc, char **argv, char **envp)
 {
-	(void) argv;
-	t_shell *shell;
-    err_no = 0;
+	t_shell	*shell;
+
+	(void )	argv;
+	err_no = 0;
 	if (argc > 1)
 		exit(1);
-    shell = create_shell();
+	shell = create_shell();
 	welcome_message();
-    shell->env = add_env(envp);
+    shell->envp = envp;
+	shell->env = add_env(envp);
 	rl_catch_signals = 0;
 	while (1)
 	{
@@ -36,7 +39,7 @@ void print_all_args(t_array_list *list)
 	array = (t_parser_token **) list->array;
 	while (i < list->size)
 	{
-		printf("token: %s\n", array[i]->content);
+		printf("token: %s token type %d\n", array[i]->content, array[i]->main_type);
 		i++;
 	}
 }

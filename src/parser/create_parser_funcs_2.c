@@ -27,8 +27,6 @@ void	create_parser_tokens(t_lexer_token **lexer_tokens,
 			open_quotes(lexer_tokens, parser_tokens, &i, size);
 			continue ;
 		}
-		else if (lexer_tokens[i]->type == WHITE_SPACE)
-			add_parser_token(parser_tokens, NEW_SPACE, " ");
 		else if (is_lexer_redir(lexer_tokens[i]->type))
 			add_redirection(lexer_tokens, parser_tokens, i);
 		else if (lexer_tokens[i]->type == PIPE)
@@ -49,13 +47,13 @@ void	add_redirection(t_lexer_token **lexer_tokens,
 					t_array_list *parser_tokens, int i)
 {
 	if (lexer_tokens[i]->type == LESS_THAN)
-		add_parser_token(parser_tokens, REDIRECT_INPUT, "");
+		add_parser_token(parser_tokens, REDIRECT_INPUT, " ");
 	else if (lexer_tokens[i]->type == GREATER_THAN)
-		add_parser_token(parser_tokens, REDIRECT_OUTPUT, "");
+		add_parser_token(parser_tokens, REDIRECT_OUTPUT, " ");
 	else if (lexer_tokens[i]->type == LESS_THAN_LESS_THAN)
-		add_parser_token(parser_tokens, HEREDOC, "");
+		add_parser_token(parser_tokens, HEREDOC, " ");
 	else if (lexer_tokens[i]->type == GREATER_THAN_GREATER_THAN)
-		add_parser_token(parser_tokens, REDIRECT_APPEND_OUTPUT, "");
+		add_parser_token(parser_tokens, REDIRECT_APPEND_OUTPUT, " ");
 }
 
 void	add_parser_token(t_array_list *tokens_array,

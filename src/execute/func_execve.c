@@ -1,5 +1,8 @@
 #include "../../includes/minishell.h"
 
+//решить вопрос с ошибкой в execve WIFEXITED(status)
+
+
 void read_2d_arr(char **arr)
 {
     int i;
@@ -20,15 +23,10 @@ char **new_arr(t_array_list *line, int index)
 	t_parser_token **token_key;
 	i = 0;
 	token_key = (t_parser_token **)line->array;
-	char **arr = (char **)malloc(sizeof(char *) * (line->size - index + 1));
-    while (index < line->size)
+	char **arr = (char **)malloc(sizeof(char *) * ((line->size) + 1));
+    while (i < line->size)
 	{
-		if (token_key[index]->main_type == NEW_SPACE || token_key[index]->main_type == REDIRECT_INPUT) {
-            index++;
-            continue;
-        }
-		arr[i] = ft_strdup(token_key[index]->content);
-		index++;
+		arr[i] = ft_strdup(token_key[i]->content);
 		i++;
 	}
 	arr[i] = NULL;
@@ -49,11 +47,10 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 	token_key = (t_parser_token **)line->array;
 
     int index = 0;
-	if (token_key[index]->main_type == NEW_SPACE)
-		index++;
+    i = 0;
 	if (token_key[index]->main_type == EXECUTABLE)
 	{
-		argv = new_arr(line, index);
+		argv = new_arr(line);
 		pid = fork();
 		define_signals();
 		if(pid == 0)
@@ -65,7 +62,7 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 		waitpid(pid, &status, 0);
 		return ;
 	}
-	argv = new_arr(line, index);
+	argv = new_arr(line);
 	path = ft_split(ft_strdup(get_value_by_key(shell->env,"PATH")), ':');
 	i = 0;
 	pid = fork();
@@ -88,5 +85,9 @@ void ex_func(t_array_list *line, t_shell *shell, char **envp)
 	free_arr(path);
 	free_arr(argv);
 }
+
+
+
+
 
 

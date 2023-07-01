@@ -14,35 +14,32 @@
 
 void	command_func(t_shell *shell, char **envp)
 {
-	int	i;
-	int	pid;
+    int i;
+    int pid;
+    i = 0;
 
-	i = 0;
-	t_parser_token **token_key;
-	t_array_list *parser_tokens;
-	parser_tokens = shell->parser_tokens_array;
-	if (shell->cant_execute)
-		return ;
-	while (((t_parser_token *)shell->parser_tokens_array->array[i])->main_type == NEW_SPACE)
-		i++;
-	token_key = (t_parser_token **)shell->parser_tokens_array->array;
-	if (has_redir(shell->parser_tokens_array))
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			execute_redir(parser_tokens);
-			if (token_key[i]->main_type == BIlD_IN)
-				execute_builtin(parser_tokens, shell, i);
-			else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
-				ex_func(parser_tokens, shell, envp);
-			else
-			{
-				if (shell->has_here_doc)
-					exit(0);
-				ft_putstr_fd("shell last: ", 2);
-				ft_putstr_fd(token_key[i]->content, 2);
-				ft_putstr_fd(": command not found\n", 2);
+    t_parser_token **token_key;
+    t_array_list *parser_tokens;
+    parser_tokens = shell->parser_tokens_array;
+    if(shell->cant_execute)
+        return ;
+    token_key = (t_parser_token **)shell->parser_tokens_array->array;
+    if(has_redir(shell->parser_tokens_array)) {
+        pid = fork();
+        if (pid == 0)
+        {
+            execute_redir(parser_tokens, shell);
+            if(shell->only_here_doc)
+                exit(0);
+            if (token_key[i]->main_type == BIlD_IN)
+                execute_builtin(parser_tokens, shell, i);
+            else if (token_key[i]->main_type == EXECUTABLE || token_key[i]->main_type == EXECUTABLE_PATH)
+                ex_func(parser_tokens, shell, envp);
+            else
+            {
+                ft_putstr_fd("shell last: ", 2);
+                ft_putstr_fd(token_key[i]->content, 2);
+                ft_putstr_fd(": command not found\n", 2);
 				err_no = 127;
 				exit(0);
 			}

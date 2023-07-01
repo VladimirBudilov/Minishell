@@ -1,6 +1,5 @@
 #include "../../includes/minishell.h"
 
-
 void create_pipe_list(t_shell *shell)
 {
     int index;
@@ -33,6 +32,5 @@ void create_pipe_list(t_shell *shell)
         index++;
     }
     add_last_command(shell, last_pipe);
-    //system("leaks -fullContent minishell");
 }
 
