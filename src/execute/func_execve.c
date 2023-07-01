@@ -17,7 +17,7 @@ void read_2d_arr(char **arr)
 }
 
 
-char **new_arr(t_array_list *line, int index)
+char **new_arr(t_array_list *line)
 {
 	int i;
 	t_parser_token **token_key;
