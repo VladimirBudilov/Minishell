@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:47:48 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/06/30 16:54:31 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/01 15:15:32 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,15 @@ void	unset_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	int				i;
 	t_parser_token	**token_key;
 
-	i = 2;
+	i = 1;
 	token_key = (t_parser_token **)line->array;
 	if (!check_valid_arguments(token_key, shell))
 		return ;
 	while (i < line->size)
 	{
-		if (token_key[i]->main_type != NEW_SPACE)
-			if (contain_key(shell->env, token_key[i]->content))
-				delete_element(shell->env, get_position_of_element(hashmap_key, \
-							token_key[i]->content, shell));
+		if (contain_key(shell->env, token_key[i]->content))
+			delete_element(shell->env, get_position_of_element(hashmap_key, \
+						token_key[i]->content, shell));
 		i++;
 	}
 	err_no = 0;
