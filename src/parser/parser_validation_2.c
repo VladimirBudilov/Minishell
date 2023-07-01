@@ -44,7 +44,6 @@ void	clean_flags_n(t_array_list *tokens_array, int index)
 	int				flag;
 	t_parser_token	*token;
 
-	index += 1;
 	flag = 0;
 	while (index < tokens_array->size)
 	{
@@ -60,6 +59,7 @@ void	clean_flags_n(t_array_list *tokens_array, int index)
 				continue ;
 			}
 			delete_parse_element(tokens_array, index);
+			continue ;
 		}
 		index++;
 	}

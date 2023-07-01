@@ -26,6 +26,12 @@ t_hashmap *create_hashmap(char *string)
     hashmap = init_hashmap();
     array = ft_split(string, '=');
     hashmap->key = ft_strdup(array[0]);
+
+	if(get_array_size(array) < 2) {
+		free_array(array);
+		hashmap->value = NULL;
+		return hashmap;
+	}
 	if(get_array_size(array) > 2)
 	{
 		hashmap->value = ft_strdup(array[1]);
@@ -39,9 +45,9 @@ t_hashmap *create_hashmap(char *string)
 	}
 	else if(ft_strncmp(array[0], "OLDPWD", 6) == 0)
 		hashmap->value = NULL;
-    else
-        hashmap->value = ft_strdup(array[1]);
-
+    else {
+		hashmap->value = ft_strdup(array[1]);
+	}
     free_array(array);
     return hashmap;
 }

@@ -1,5 +1,16 @@
 #include "../../includes/minishell.h"
 
+void free_tmp(char **tmp)
+{
+	int i;
+
+	i = 1;
+	while(tmp[i])
+		free(tmp[i++]);
+	free(tmp);
+}
+
+
 void print_command_export(t_hashmap **hashmap_key, t_shell *shell, t_array_list *line)
 {
     int i;
@@ -35,16 +46,20 @@ int check_key(char *str, t_hashmap **hashmap_key, t_shell *shell)
 	{
 		tmp = ft_split(str, '=');
 		parse_str = tmp[0];
+		free_tmp(tmp);
 	}
 	else
-		parse_str = str;
+		parse_str = ft_strdup(str);
 
     while(i < shell->env->size)
     {
-        if(!ft_strncmp(hashmap_key[i]->key, parse_str, ft_strlen(str)))
-            return 1;
+        if(!ft_strncmp(hashmap_key[i]->key, parse_str, ft_strlen(str))) {
+			free(parse_str);
+			return 1;
+		}
         i++;
     }
+	free(parse_str);
     return 0;
 }
 
@@ -61,6 +76,7 @@ void save_value_in_key(char *string, t_shell *shell)
 		tmp = ft_split(string, '=');
 		parse_string = tmp[0];
 		change_value_by_key(shell->env, parse_string, value);
+		free_array(tmp);
 	}
 }
 
