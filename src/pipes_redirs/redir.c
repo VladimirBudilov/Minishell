@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-void execute_redir(t_array_list *parser_array) {
+void execute_redir(t_array_list *parser_array, t_shell *shell) {
 
     t_parser_token **token_key;
     int i;
@@ -16,7 +16,7 @@ void execute_redir(t_array_list *parser_array) {
         else if(token_key[i]->main_type == REDIRECT_INPUT)
 			i = redir_in_func(parser_array, i);
         else if(token_key[i]->main_type == HEREDOC)
-			i = redir_heredoc(parser_array, i);
+			i = redir_heredoc(parser_array, i, shell);
 		else
 			i++;
     }

@@ -10,8 +10,6 @@ void execute_pipes(t_shell *shell) {
     pipes = (t_pipe **) shell->pipe_array->array;
     while (i < shell->pipe_array->size - 1)
     {
-
-        printf("pipe %d\n", i);
         pipe(fd_array[i]);
         i++;
     }
@@ -53,24 +51,14 @@ void execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2]) {
         else if(pipe_token->last_pipe) {
             dup2(fd_array[i - 1][0], STDIN_FILENO);
             close(fd_array[i - 1][0]);
-
-            char buf[1001];
-            int n;
-            ft_putstr_fd("heredoc> 1\n", 2);
-            n = read(STDIN_FILENO, buf, 1000);
-            ft_putstr_fd("heredoc> 2\n", 2);
-
-            buf[n] = '\0';
-            ft_putnbr_fd(n, 2);
-
         }
-        /*int j = 0;
+        int j = 0;
         while (j < i)
         {
             close(fd_array[j][0]);
             close(fd_array[j][1]);
             j++;
-        }*/
+        }
         execute_command_in_pipe(pipe_token);
         exit(0);
     }

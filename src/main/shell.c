@@ -21,6 +21,8 @@ t_shell *create_shell()
 	minishell->input = NULL;
     minishell->number_of_pipes = 0;
     minishell->cant_execute = 0;
+    minishell->envp = NULL;
+    minishell->only_here_doc = 0;
 	minishell->lexer_tokens_array = create_array_list();
 	minishell->parser_tokens_array = create_array_list();
 	minishell->tokenizer_array = create_array_list();

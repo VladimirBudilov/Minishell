@@ -11,6 +11,7 @@ int	main(int argc, char **argv, char **envp)
 		exit(1);
 	shell = create_shell();
 	welcome_message();
+    shell->envp = envp;
 	shell->env = add_env(envp);
 	rl_catch_signals = 0;
 	while (1)
@@ -23,9 +24,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else
 			command_func(shell, envp);
-        print_all_args(shell->parser_tokens_array);
 		clean_array(shell);
-		//system("leaks minishell");
 	}
 	exit(0);
 }

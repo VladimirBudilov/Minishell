@@ -68,4 +68,3 @@ void	handle_redirect(t_parser_token **array, int index,
 	array[index]->file = ft_strdup(array[index + 1]->content);
 	delete_parse_element(parser_tokens, index + 1);
 }
-

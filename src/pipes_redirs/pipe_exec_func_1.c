@@ -12,16 +12,15 @@ void execute_command_in_pipe(t_pipe *pipe) {
         pid = fork();
         if (pid == 0)
         {
-            execute_redir(pipe->commands);
-            ft_putstr_fd("\n", 2);
+            execute_redir(pipe->commands, pipe->shell);
+            if(pipe->shell->only_here_doc)
+                exit(0);
             if (token_key[i]->main_type == BIlD_IN)
                 execute_builtin_in_pipe(pipe);
             else if (token_key[i]->main_type == EXECUTABLE || token_key[i]->main_type == EXECUTABLE_PATH)
                 execute_execve_in_pipe(pipe);
             else
             {
-                if(pipe->shell->has_here_doc)
-                    exit(0);
                 ft_putstr_fd("shell last: ", 2);
                 ft_putstr_fd(token_key[i]->content, 2);
                 ft_putstr_fd(": command not found\n", 2);
@@ -49,7 +48,7 @@ void execute_command_in_pipe(t_pipe *pipe) {
 void execute_execve_in_pipe(t_pipe *pipe) {
     t_array_list *token_key;
     token_key = (t_array_list *)pipe->commands;
-    ex_func(token_key, pipe->shell, (char **)pipe->shell->env->array);
+    ex_func(token_key, pipe->shell, pipe->shell->envp);
 }
 
 void execute_builtin_in_pipe(t_pipe *pipe)

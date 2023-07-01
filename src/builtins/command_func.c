@@ -16,15 +16,15 @@ void command_func(t_shell *shell, char **envp)
         pid = fork();
         if (pid == 0)
         {
-            execute_redir(parser_tokens);
+            execute_redir(parser_tokens, shell);
+            if(shell->only_here_doc)
+                exit(0);
             if (token_key[i]->main_type == BIlD_IN)
                 execute_builtin(parser_tokens, shell, i);
-            else if (token_key[i]->main_type == EXECUTABLE || token_key[0]->main_type == EXECUTABLE_PATH)
+            else if (token_key[i]->main_type == EXECUTABLE || token_key[i]->main_type == EXECUTABLE_PATH)
                 ex_func(parser_tokens, shell, envp);
             else
             {
-                if(shell->has_here_doc)
-                    exit(0);
                 ft_putstr_fd("shell last: ", 2);
                 ft_putstr_fd(token_key[i]->content, 2);
                 ft_putstr_fd(": command not found\n", 2);
