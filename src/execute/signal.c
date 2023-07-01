@@ -1,5 +1,16 @@
-#include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/01 16:05:18 by vchizhov          #+#    #+#             */
+/*   Updated: 2023/07/01 16:05:45 by vchizhov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../includes/minishell.h"
 
 void	signal_handler(int signal)
 {
@@ -11,7 +22,7 @@ void	signal_handler(int signal)
 	(void)signal;
 }
 
-void signal_handler_sigint(int signal)
+void	signal_handler_sigint(int signal)
 {
 	(void)signal;
 	err_no = 130;
@@ -25,7 +36,7 @@ void	signal_hendler_sigquit(int signal)
 	ft_putstr_fd("Quit: 3\n", 2);
 }
 
-void define_signals(void)
+void	define_signals(void)
 {
 	signal(SIGINT, signal_handler_sigint);
 	signal(SIGQUIT, signal_hendler_sigquit);

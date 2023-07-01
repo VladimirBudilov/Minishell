@@ -1,27 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_execve.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/01 16:06:05 by vchizhov          #+#    #+#             */
+/*   Updated: 2023/07/01 17:57:40 by vchizhov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-void read_2d_arr(char **arr)
+char	**new_arr(t_array_list *line)
 {
-    int i;
+	int				i;
+	t_parser_token	**token_key;
+	char			**arr;
 
-    i = 0;
-    while (arr[i])
-    {
-        ft_putstr_fd(arr[i], 2);
-        ft_putstr_fd("\n", 2);
-        i++;
-    }
-}
-
-
-char **new_arr(t_array_list *line)
-{
-	int i;
-	t_parser_token **token_key;
 	i = 0;
 	token_key = (t_parser_token **)line->array;
-	char **arr = (char **)malloc(sizeof(char *) * ((line->size) + 1));
-    while (i < line->size)
+	arr = (char **)malloc(sizeof(char *) * ((line->size) + 1));
+	while (i < line->size)
 	{
 		arr[i] = ft_strdup(token_key[i]->content);
 		i++;
@@ -30,61 +30,68 @@ char **new_arr(t_array_list *line)
 	return (arr);
 }
 
-
-
-
-void ex_func(t_array_list *line, t_shell *shell, char **envp)
+void	absolute_path(t_parser_token **token_key, char **argv, char **envp)
 {
-	char **argv;
-	char **path;
-	int pid;
-	int status;
-	int i;
-	t_parser_token **token_key;
-	token_key = (t_parser_token **)line->array;
+	int	pid;
+	int	status;
 
-    int index = 0;
-    i = 0;
-	if (token_key[index]->main_type == EXECUTABLE)
-	{
-		argv = new_arr(line);
-		pid = fork();
-		define_signals();
-		if(pid == 0)
-		{
-			execve(token_key[index]->content, argv, envp);
-			free_arr(argv);
-			exit(EXIT_FAILURE);
-		}
-		waitpid(pid, &status, 0);
-		return ;
-	}
-	argv = new_arr(line);
-	path = ft_split(ft_strdup(get_value_by_key(shell->env,"PATH")), ':');
-	i = 0;
 	pid = fork();
 	define_signals();
-	if(pid == 0)
+	if (pid == 0)
 	{
-		while(i < get_array_size(path))
+		execve(token_key[0]->content, argv, envp);
+		free_arr(argv);
+		exit(EXIT_FAILURE);
+	}
+	waitpid(pid, &status, 0);
+	err_no = WEXITSTATUS(status);
+}
+
+void	relative_path(t_parser_token **t, \
+		char **argv, char **envp, char **path)
+{
+	int		pid;
+	int		status;
+	int		i;
+	char	*s;
+
+	s = NULL;
+	pid = fork();
+	define_signals();
+	i = -1;
+	if (pid == 0)
+	{
+		while (++i < get_array_size(path))
 		{
-			if(access(ft_strjoin(ft_strjoin(ft_strdup(path[i]), "/"), token_key[index]->content), X_OK) == 0)
+			s = ft_strjoin(ft_strjoin(ft_strdup(path[i]), "/"), t[0]->content);
+			if (access(s, X_OK) == 0)
 			{
-				execve(ft_strjoin(ft_strjoin(ft_strdup(path[i]), "/"), token_key[index]->content), argv, envp);
+				execve(s, argv, envp);
 				break ;
 			}
-			i++;
 		}
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
-    err_no = WEXITSTATUS(status);
+	free(s);
+	err_no = WEXITSTATUS(status);
+}
+
+void	ex_func(t_array_list *line, t_shell *shell, char **envp)
+{
+	char			**argv;
+	char			**path;
+	t_parser_token	**token_key;
+
+	token_key = (t_parser_token **)line->array;
+	argv = new_arr(line);
+	if (token_key[0]->main_type == EXECUTABLE)
+	{
+		absolute_path(token_key, argv, envp);
+		return ;
+	}
+	path = ft_split(get_value_by_key(shell->env, "PATH"), ':');
+	relative_path(token_key, argv, envp, path);
 	free_arr(path);
 	free_arr(argv);
 }
-
-
-
-
-
-
