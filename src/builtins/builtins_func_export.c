@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 13:56:41 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/07/01 15:11:41 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/01 15:33:11 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,14 @@ void	export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 
 	token_key = (t_parser_token **)line->array;
 	print_command_export(hashmap_key, shell, line);
-	if (!check_valid_arguments(token_key, shell))
-		return ;
+	if (line->size > 1)
+	{
+		if (!check_valid_arguments(token_key, shell))
+		{
+			err_no = 1;
+			return ;
+		}
+	}
 	check_double_arguments(hashmap_key, token_key, shell, line);
 	err_no = 0;
 }
