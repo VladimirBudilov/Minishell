@@ -31,7 +31,7 @@ void add_execvere(t_parser_token **parser_tokens, t_shell *shell);
 void	clean_flags_n(t_array_list *tokens_array, int index);
 int					is_flag(const char *content);
 void add_redirection(t_lexer_token **lexer_tokens, t_array_list *parser_tokens, int i);
-
+int	has_path(t_shell *shell);
 
 
 /*TOKENIZER*/
