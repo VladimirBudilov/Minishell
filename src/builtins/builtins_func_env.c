@@ -15,7 +15,7 @@
 void	print_error1(t_parser_token **token_key)
 {
 	ft_putstr_fd("env: ", 2);
-	ft_putstr_fd(token_key[2]->content, 2);
+	ft_putstr_fd(token_key[1]->content, 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
 	err_no = 127;
 }
@@ -45,13 +45,11 @@ void	env_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	t_parser_token	**token_key;
 
 	i = 0;
-	index = 2;
+	index = 1;
 	err_no = 0;
 	token_key = (t_parser_token **)line->array;
-	if (line->size > 2)
+	if (line->size > 1)
 	{
-		if (token_key[index]->main_type == NEW_SPACE)
-			index++;
 		if (token_key[index]->content[0] != '-')
 			print_error1(token_key);
 		else
