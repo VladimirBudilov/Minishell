@@ -44,7 +44,7 @@ void	absolute_path(t_parser_token **token_key, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
-	err_no = WEXITSTATUS(status);
+    g_err_no = WEXITSTATUS(status);
 }
 
 void	relative_path(t_parser_token **t, \
@@ -74,7 +74,7 @@ void	relative_path(t_parser_token **t, \
 	}
 	waitpid(pid, &status, 0);
 	free(s);
-	err_no = WEXITSTATUS(status);
+    g_err_no = WEXITSTATUS(status);
 }
 
 void	ex_func(t_array_list *line, t_shell *shell, char **envp)

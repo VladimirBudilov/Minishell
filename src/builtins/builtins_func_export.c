@@ -110,10 +110,10 @@ void	export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	{
 		if (!check_valid_arguments(token_key, shell))
 		{
-			err_no = 1;
+            g_err_no = 1;
 			return ;
 		}
 	}
 	check_double_arguments(hashmap_key, token_key, shell, line);
-	err_no = 0;
+    g_err_no = 0;
 }

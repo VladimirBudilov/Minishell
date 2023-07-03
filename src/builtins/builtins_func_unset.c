@@ -37,7 +37,7 @@ void	unset_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	{
 		if (!check_valid_arguments(token_key, shell))
 		{
-			err_no = 1;
+            g_err_no = 1;
 			return ;
 		}
 	}
@@ -48,5 +48,5 @@ void	unset_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 						token_key[i]->content, shell));
 		i++;
 	}
-	err_no = 0;
+    g_err_no = 0;
 }

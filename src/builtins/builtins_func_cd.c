@@ -59,7 +59,7 @@ void	to_home(t_hashmap **hashmap_key, t_shell *shell)
 	if (home_path == NULL)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-		err_no = 1;
+        g_err_no = 1;
 	}
 	else
 		change_path(hashmap_key, home_path, shell);
@@ -79,7 +79,7 @@ void	cd_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	t_parser_token	**token_key;
 
 	i = 1;
-	err_no = 0;
+    g_err_no = 0;
 	token_key = (t_parser_token **)line->array;
 	if (line->size <= 1 || !ft_strncmp(token_key[i]->content, "~", 2))
 	{
@@ -88,7 +88,7 @@ void	cd_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	}
 	else if (!check_other_cases(hashmap_key, shell, token_key, i))
 	{
-		err_no = 1;
+        g_err_no = 1;
 		return ;
 	}
 }

@@ -14,7 +14,7 @@
 
 void	signal_handler(int signal)
 {
-	err_no = 130;
+    g_err_no = 130;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -25,14 +25,14 @@ void	signal_handler(int signal)
 void	signal_handler_sigint(int signal)
 {
 	(void)signal;
-	err_no = 130;
+    g_err_no = 130;
 	write(1, "\n", 1);
 }
 
 void	signal_hendler_sigquit(int signal)
 {
 	(void)signal;
-	err_no = 131;
+    g_err_no = 131;
 	ft_putstr_fd("Quit: 3\n", 2);
 }
 

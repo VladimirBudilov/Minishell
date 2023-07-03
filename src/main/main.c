@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	t_shell	*shell;
 
 	(void) argv;
-	err_no = 0;
+    g_err_no = 0;
 	if (argc > 1)
 		exit(1);
 	shell = create_shell();

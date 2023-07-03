@@ -64,7 +64,7 @@ int	open_dollar_corner_case(char *input,
 
 	if (input[i] == '?')
 	{
-		t->content = ft_strjoin(t->content, (temp = ft_itoa(err_no)));
+		t->content = ft_strjoin(t->content, (temp = ft_itoa(g_err_no)));
 		free(temp);
 		t->type = DOLLAR;
 		return (i + 1);

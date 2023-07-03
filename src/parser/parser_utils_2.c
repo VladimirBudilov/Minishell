@@ -16,7 +16,7 @@ int	has_path(t_shell *shell)
 {
 	if (get_value_by_key(shell->env, "PATH") == NULL)
 	{
-		err_no = 127;
+        g_err_no = 127;
 		return (0);
 	}
 	return (1);

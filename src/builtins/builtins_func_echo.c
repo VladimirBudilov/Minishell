@@ -30,7 +30,7 @@ void	echo_func(t_array_list *line)
 
 	i = 1;
 	check_n = 0;
-	err_no = 0;
+    g_err_no = 0;
 	token_key = (t_parser_token **)line->array;
 	if (!check_size(line))
 		return ;
