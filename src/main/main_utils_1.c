@@ -35,7 +35,7 @@ void	clean_array(t_shell *minishell)
 	free_parser_tokens(minishell->parser_tokens_array);
 	if (has_redir(minishell->parser_tokens_array))
 		free_redirects(minishell);
-	if (minishell->number_of_pipes > 0)
+	if (minishell->number_of_pipes > 0 && minishell->cant_execute == 0)
 	{
 		free_pipe_array(minishell->pipe_array);
 		clean_pipe_commands(minishell);
