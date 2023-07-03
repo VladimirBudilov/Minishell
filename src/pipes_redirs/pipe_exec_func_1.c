@@ -94,3 +94,4 @@ void execute_builtin_in_pipe(t_pipe *pipe) {
 	else if (token_key[i]->sub_type == UNSET)
 		unset_func(hashmap_key, token_array, shell);
 }
+

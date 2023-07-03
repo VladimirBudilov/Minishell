@@ -13,6 +13,7 @@ typedef struct s_pipe
     int is_execve;
     int is_builtin;
     int is_redir;
+	int pid;
     t_shell *shell;
 } t_pipe;
 

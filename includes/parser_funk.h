@@ -63,7 +63,7 @@ void free_array(char **paths);
 int is_breaking_character(char c);
 
 /*ERROR_HANDLER*/
-void error(char *message, t_shell *shell);
+void error(char *message, t_shell *shell, int error);
 void	syntax_error(t_shell *shell);
 
 

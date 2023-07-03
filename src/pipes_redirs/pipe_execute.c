@@ -12,58 +12,69 @@
 
 #include "../../includes/minishell.h"
 
-void execute_pipes(t_shell *shell) {
-
-	int i;
-	int fd_array[1000][2];
-	t_pipe **pipes;
+void	execute_pipes(t_shell *shell)
+{
+	int		i;
+	int		fd_array[1000][2];
+	t_pipe	**pipes;
 
 	i = 0;
 	pipes = (t_pipe **) shell->pipe_array->array;
-	while (i < shell->pipe_array->size - 1) {
+	while (i < shell->pipe_array->size - 1)
+	{
 		pipe(fd_array[i]);
 		i++;
 	}
 	i = 0;
-	while (i < shell->pipe_array->size) {
+	while (i < shell->pipe_array->size)
+	{
 		execute_pipe(pipes[i], i, fd_array);
 		i++;
 	}
-	i = 0;
-	while (i < shell->pipe_array->size - 1) {
-		close(fd_array[i][0]);
-		close(fd_array[i][1]);
-		i++;
-	}
-	while (wait(NULL) != -1);
+	close_pipes(shell->pipe_array->size - 1, fd_array);
+	while (wait(NULL) != -1)
+		;
 }
 
-void execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2]) {
+void	close_pipes(int i, int fd_array[1000][2])
+{
+	int	j;
 
-	int pid;
-	pid = fork();
-	if (pid == -1)
-		perror("shell");
-	if (pid == 0) {
-		if (pipe_token->first_pipe) {
+	j = 0;
+	while (j < i)
+	{
+		close(fd_array[j][0]);
+		close(fd_array[j][1]);
+		j++;
+	}
+}
+
+void	execute_pipe(t_pipe *pipe_token, int i,
+			int fd_array[1000][2])
+			{
+	pipe_token->pid = fork();
+	if (pipe_token->pid == 0)
+	{
+		if (pipe_token->first_pipe)
+		{
 			dup2(fd_array[i][1], STDOUT_FILENO);
 			close(fd_array[i][1]);
-		} else if (pipe_token->middle_pipe) {
+		}
+		else if (pipe_token->middle_pipe)
+		{
 			dup2(fd_array[i - 1][0], STDIN_FILENO);
 			dup2(fd_array[i][1], STDOUT_FILENO);
 			close(fd_array[i - 1][0]);
 			close(fd_array[i][1]);
-		} else if (pipe_token->last_pipe) {
+		}
+		else if (pipe_token->last_pipe)
+		{
 			dup2(fd_array[i - 1][0], STDIN_FILENO);
 			close(fd_array[i - 1][0]);
 		}
-		int j = 0;
-		while (j < i) {
-			close(fd_array[j][0]);
-			close(fd_array[j][1]);
-			j++;
-		}
+		close_pipes(i, fd_array);
 		execute_command_in_pipe(pipe_token);
 		exit(0);
 	}
+	waitid(pipe_token->pid, 0, NULL, WEXITED);
 }

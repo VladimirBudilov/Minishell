@@ -23,6 +23,8 @@ t_pipe * init_pipe(t_shell *shell);
 void clean_pipe_commands(t_shell *shell);
 int too_many_pipes(t_shell *shell);
 void init_number_of_pipes(int *index, int *prev_index, int *last_pipe);
+void close_pipes(int i, int fd_array[1000][2]);
+
 
 
 

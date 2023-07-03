@@ -13,6 +13,6 @@ int redir_error(t_parser_token **parser_tokens, int i, t_shell *shell);
 void delete_parse_element(t_array_list *parser_tokens, int i);
 int	remove_prev_space(t_array_list *parser_tokens, int index);
 int remove_space(t_array_list *parser_tokens, int index);
-
+void execute_heredoc(int i, char *delimiter);
 
 #endif //MINI_REDIRECT_FUNC_H

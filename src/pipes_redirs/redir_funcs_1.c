@@ -12,7 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-
 int	redir_out_append_func(t_array_list *parser_tokens, int i)
 {
 	int				fd;
@@ -77,7 +76,6 @@ int	redir_heredoc(t_array_list *parser_tokens, int i, t_shell *shell)
 {
 	int				fd;
 	t_parser_token	**token_key;
-	char			*input;
 
 	token_key = (t_parser_token **) parser_tokens->array;
 	token_key[i]->heredoc = "here_doc";
@@ -86,32 +84,36 @@ int	redir_heredoc(t_array_list *parser_tokens, int i, t_shell *shell)
 	fd = open(token_key[i]->heredoc, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
-		ft_putstr_fd("shell heredoc: ", 2);
-		ft_putstr_fd(token_key[i]->heredoc, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		exit(0);
+		error(": No such file or directory\n", shell, 2);
+		exit(1);
 	}
-	while (1) {
-		input = readline("> ");
-		if (ft_strncmp(input, token_key[i]->file,
-					   ft_strlen(token_key[i]->file) + 1) == 0)
-			break;
-		write(fd, input, ft_strlen(input));
-		write(fd, "\n", 1);
-		free(input);
-		input = NULL;
-	}
+	execute_heredoc(fd, token_key[i]->file);
 	close(fd);
 	fd = open(token_key[i]->heredoc, O_RDONLY);
-	if (fd == -1) {
-		ft_putstr_fd("shell heredoc: ", 2);
-		ft_putstr_fd(token_key[i]->heredoc, 2);
-		ft_putstr_fd(": Failed to open file\n", 2);
-		free(token_key[i]->heredoc);
-		return (0);
+	if (fd < 0)
+	{
+		error(": No such file or directory\n", shell, 2);
+		exit(1);
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 	delete_parse_element(parser_tokens, i);
 	return (i);
+}
+
+void	execute_heredoc(int i, char *delimiter)
+{
+	char			*input;
+
+	input = NULL;
+	while (1)
+	{
+		input = readline("> ");
+		usleep(1000);
+		if (ft_strcmp(input, delimiter) == 0)
+			break ;
+		write(i, input, ft_strlen(input));
+		write(i, "\n", 1);
+		free(input);
+	}
 }

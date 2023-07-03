@@ -28,5 +28,4 @@ t_shell *create_shell()
 	minishell->tokenizer_array = create_array_list();
     minishell->pipe_array = create_array_list();
     return minishell;
-
 }
