@@ -16,7 +16,7 @@ int	command_func3(t_parser_token **token_key, t_array_list \
 		ft_putstr_fd("shell: ", 2);
 		ft_putstr_fd(token_key[i]->content, 2);
 		ft_putstr_fd(": command not found\n", 2);
-		err_no = 127;
+		g_err_no = 127;
 		return (0);
 	}
 	return (1);
@@ -41,7 +41,7 @@ void	command_func2(t_parser_token **token_key, t_array_list \
 		ft_putstr_fd("shell last: ", 2);
 		ft_putstr_fd(token_key[i]->content, 2);
 		ft_putstr_fd(": command not found\n", 2);
-		err_no = 127;
+		g_err_no = 127;
 		exit(0);
 	}
 	exit(0);

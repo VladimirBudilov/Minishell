@@ -25,7 +25,7 @@ void	execute_pipes(t_shell *shell);
 void	execute_command_in_pipe(t_pipe *pipe);
 void	add_flags(t_pipe *pipe, t_parser_token *token);
 int		is_redir(t_parser_token *token);
-void	execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2]);
+void execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2], int size);
 t_pipe	*init_pipe(t_shell *shell);
 void	clean_pipe_commands(t_shell *shell);
 int		too_many_pipes(t_shell *shell);

@@ -34,8 +34,10 @@ int	main(int argc, char **argv, char **envp)
 			execute_pipes(shell);
 		}
 		else
+		{
+			printf("command: %s\n", shell->input);
 			command_func(shell, envp);
+		}
 		clean_array(shell);
-		system("leaks minishell");
 	}
 }
