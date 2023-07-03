@@ -53,7 +53,7 @@ int execute_dable_quote(char *input, int i, t_shell *shell, t_lexer_token *t);
 t_tokenizer_output *dollar_corner_cases(char *input, t_lexer_token *t, t_tokenizer_output *po);
 int	is_corner_case(char *input);
 int execute_dollar(char *input, t_lexer_token *t, int i, t_shell *shell);
-int	open_dollar_corner_case(char *input, t_shell *shell, t_lexer_token *t, int i);
+int open_dollar_corner_case(char *input, t_lexer_token *t, int i);
 
 /*UTILS*/
 int open_dollar(char *input, t_shell *shell, t_lexer_token *t);

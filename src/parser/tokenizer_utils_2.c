@@ -40,7 +40,7 @@ int	open_dollar(char *input, t_shell *shell, t_lexer_token *t)
 
 	i = 1;
 	if (is_corner_case(input + 1))
-		return (open_dollar_corner_case(input, shell, t, i));
+		return (open_dollar_corner_case(input, t, i));
 	while (input[i] && !is_breaking_character(input[i]))
 	{
 		temp = ft_strndup(input + 1, i);
@@ -57,14 +57,14 @@ int	open_dollar(char *input, t_shell *shell, t_lexer_token *t)
 	return (i + 1);
 }
 
-int	open_dollar_corner_case(char *input, t_shell *shell,
-					t_lexer_token *t, int i)
+int	open_dollar_corner_case(char *input,
+							t_lexer_token *t, int i)
 {
 	char	*temp;
 
 	if (input[i] == '?')
 	{
-		t->content = ft_strjoin(t->content, (temp = ft_itoa(shell->exit_code)));
+		t->content = ft_strjoin(t->content, (temp = ft_itoa(err_no)));
 		free(temp);
 		t->type = DOLLAR;
 		return (i + 1);
