@@ -110,7 +110,7 @@ t_tokenizer_output	*dollar_corner_cases(char *input, t_lexer_token *t,
 	if (*input == '?')
 	{
 		free(t->content);
-		t->content = ft_itoa(err_no);
+		t->content = ft_itoa(g_err_no);
 		t->type = DOLLAR;
 		po->string = input + 1;
 		po->token = *t;

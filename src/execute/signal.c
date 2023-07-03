@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 16:05:18 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/07/01 16:05:45 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:33:31 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	signal_handler(int signal)
 {
-	err_no = 130;
+	g_err_no = 130;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -25,14 +25,14 @@ void	signal_handler(int signal)
 void	signal_handler_sigint(int signal)
 {
 	(void)signal;
-	err_no = 130;
+	g_err_no = 130;
 	write(1, "\n", 1);
 }
 
 void	signal_hendler_sigquit(int signal)
 {
 	(void)signal;
-	err_no = 131;
+	g_err_no = 131;
 	ft_putstr_fd("Quit: 3\n", 2);
 }
 

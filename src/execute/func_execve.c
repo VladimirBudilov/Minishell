@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 16:06:05 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/07/01 17:57:40 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:34:39 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	absolute_path(t_parser_token **token_key, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, &status, 0);
-	err_no = WEXITSTATUS(status);
+	g_err_no = WEXITSTATUS(status);
 }
 
 void	relative_path(t_parser_token **t, \
@@ -74,7 +74,7 @@ void	relative_path(t_parser_token **t, \
 	}
 	waitpid(pid, &status, 0);
 	free(s);
-	err_no = WEXITSTATUS(status);
+	g_err_no = WEXITSTATUS(status);
 }
 
 void	ex_func(t_array_list *line, t_shell *shell, char **envp)

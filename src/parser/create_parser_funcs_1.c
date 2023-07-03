@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int	is_joinable(enum lexer_type type)
+int	is_joinable(enum e_lexer_type type)
 {
 	if (type == BARE_WORD || type == SINGLE_QUOTES
 		|| type == DOUBLE_QUOTES || type == DOLLAR)

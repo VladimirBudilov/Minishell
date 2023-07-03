@@ -6,7 +6,7 @@
 /*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 17:55:02 by vbudilov          #+#    #+#             */
-/*   Updated: 2023/06/29 17:55:03 by vbudilov         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:37:55 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	create_parser_tokens(t_lexer_token **lexer_tokens,
 	}
 }
 
-int	is_lexer_redir(enum lexer_type type)
+int	is_lexer_redir(enum e_lexer_type type)
 {
 	if (type == LESS_THAN || type == GREATER_THAN
 		|| type == LESS_THAN_LESS_THAN || type == GREATER_THAN_GREATER_THAN)
@@ -56,8 +56,8 @@ void	add_redirection(t_lexer_token **lexer_tokens,
 		add_parser_token(parser_tokens, REDIRECT_APPEND_OUTPUT, " ");
 }
 
-void	add_parser_token(t_array_list *tokens_array,
-		enum parser_type type, const char *content)
+void	add_parser_token(t_array_list *tokens_array, \
+		enum e_parser_type type, const char *content)
 {
 	t_parser_token	*token;
 

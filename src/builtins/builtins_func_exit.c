@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:40:45 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/06/30 16:46:26 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:30:55 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	exit_func(t_array_list *line, t_shell *shell)
 
 	token_key = (t_parser_token **)line->array;
 	index = 1;
-	err_no = 0;
+	g_err_no = 0;
 	if (check_number_arg(token_key, shell))
 	{
 		if (line->size <= 2)
@@ -64,7 +64,7 @@ void	exit_func(t_array_list *line, t_shell *shell)
 		{
 			ft_putstr_fd("exit\n", 1);
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			err_no = 1;
+			g_err_no = 1;
 		}
 	}
 	else

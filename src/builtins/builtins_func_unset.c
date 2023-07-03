@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:47:48 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/07/01 15:34:00 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:32:33 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	unset_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	{
 		if (!check_valid_arguments(token_key, shell))
 		{
-			err_no = 1;
+			g_err_no = 1;
 			return ;
 		}
 	}
@@ -48,5 +48,5 @@ void	unset_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 						token_key[i]->content, shell));
 		i++;
 	}
-	err_no = 0;
+	g_err_no = 0;
 }

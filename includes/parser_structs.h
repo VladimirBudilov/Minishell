@@ -1,9 +1,21 @@
-#ifndef MINI_PARSER_H
-#define MINI_PARSER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_structs.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/03 13:15:40 by vchizhov          #+#    #+#             */
+/*   Updated: 2023/07/03 13:22:38 by vchizhov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PARSER_STRUCTS_H
+# define PARSER_STRUCTS_H
 
-enum lexer_type {
+# include "minishell.h"
+
+enum e_lexer_type {
 	WHITE_SPACE,
 	LESS_THAN_LESS_THAN,
 	LESS_THAN,
@@ -16,44 +28,44 @@ enum lexer_type {
 	DOUBLE_QUOTES,
 };
 
-enum parser_type {
-    NEW_SPACE,
-    WORDLIST,
+enum e_parser_type {
+	NEW_SPACE,
+	WORDLIST,
 	REDIRECT_INPUT,
 	REDIRECT_OUTPUT,
 	REDIRECT_APPEND_OUTPUT,
-    HEREDOC,
-    PIPELINE,
-    BIlD_IN,
-    CD,
-    PWD,
-    ECHO,
-    EXPORT,
-    ENVP,
-    UNSET,
-    EXIT,
-    EXECUTABLE,
-    EXECUTABLE_PATH,
-    DIRECTORY,
+	HEREDOC,
+	PIPELINE,
+	BIlD_IN,
+	CD,
+	PWD,
+	ECHO,
+	EXPORT,
+	ENVP,
+	UNSET,
+	EXIT,
+	EXECUTABLE,
+	EXECUTABLE_PATH,
+	DIRECTORY,
 };
 
 typedef struct parser {
-    enum parser_type main_type;
-    enum parser_type sub_type;
-    int flags;
-    char *content;
-    char *file;
-    char *heredoc;
-} t_parser_token;
+	enum e_parser_type	main_type;
+	enum e_parser_type	sub_type;
+	int					flags;
+	char				*content;
+	char				*file;
+	char				*heredoc;
+}						t_parser_token;
 
 typedef struct token {
-	enum lexer_type type;
-	char *content;
-} t_lexer_token;
+	enum e_lexer_type	type;
+	char				*content;
+}						t_lexer_token;
 
 typedef struct tokenizer_output {
-	char *string;
-	struct token token;
-} t_tokenizer_output;
+	char			*string;
+	struct token	token;
+}					t_tokenizer_output;
 
-#endif //MINI_PARSER_H
+#endif
