@@ -25,10 +25,10 @@ void	execute_command_in_pipe(t_pipe *pipe)
 			command_func2(token_key, pipe->commands,
 				pipe->shell, pipe->shell->envp);
 		waitpid(pid, NULL, 0);
-		exit(0);
+		return ;
 	}
 	else
 		if (!command_func3(token_key, pipe->commands,
 				pipe->shell, pipe->shell->envp))
-			exit(0);
+			return ;
 }

@@ -65,7 +65,6 @@ void	command_func(t_shell *shell, char **envp)
 	t_parser_token	**token_key;
 	t_array_list	*parser_tokens;
 
-	printf("command_func\n");
 	parser_tokens = shell->parser_tokens_array;
 	if (shell->cant_execute)
 		return ;
