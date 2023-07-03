@@ -89,16 +89,14 @@ t_tokenizer_output	*tokenize_dollar(char *input, t_shell *shell)
 	input++;
 	po = malloc(sizeof(t_tokenizer_output));
 	t = malloc(sizeof(t_lexer_token));
-	system("leaks minishell");
 	add_element(shell->tokenizer_array, po);
 	t->content = ft_strdup("");
 	if (is_corner_case(input))
 	{
 		po = dollar_corner_cases(input, t, po);
-		//free(t);
 		return (po);
 	}
-	execute_dollar(input, t, 0, shell);
+	i = execute_dollar(input, t, i, shell);
 	t->type = DOLLAR;
 	po->string = input + i;
 	po->token = *t;
@@ -111,6 +109,7 @@ t_tokenizer_output	*dollar_corner_cases(char *input, t_lexer_token *t,
 {
 	if (*input == '?')
 	{
+		free(t->content);
 		t->content = ft_itoa(err_no);
 		t->type = DOLLAR;
 		po->string = input + 1;
@@ -124,6 +123,7 @@ t_tokenizer_output	*dollar_corner_cases(char *input, t_lexer_token *t,
 	}
 	if (is_breaking_character(*input) || *input == '\0')
 	{
+		free(t->content);
 		t->content = ft_strdup("$");
 		t->type = DOLLAR;
 		po->string = input;
