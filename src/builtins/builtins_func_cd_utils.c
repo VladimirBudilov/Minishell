@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:30:02 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/06/30 18:08:53 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:29:30 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	change_path2(t_hashmap **hashmap_key, char *path, t_shell *shell)
 		ft_putstr_fd("minishell: cd: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-        g_err_no = 1;
+		g_err_no = 1;
 	}
 	pwd = getcwd(buf, PATH_MAX);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 16:15:37 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/07/01 12:46:39 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:29:48 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	echo_func(t_array_list *line)
 
 	i = 1;
 	check_n = 0;
-    g_err_no = 0;
+	g_err_no = 0;
 	token_key = (t_parser_token **)line->array;
 	if (!check_size(line))
 		return ;

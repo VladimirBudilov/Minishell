@@ -6,7 +6,7 @@
 /*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 10:59:51 by vbudilov          #+#    #+#             */
-/*   Updated: 2023/07/03 10:59:52 by vbudilov         ###   ########.fr       */
+/*   Updated: 2023/07/03 13:35:07 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	t_shell	*shell;
 
 	(void) argv;
-    g_err_no = 0;
+	g_err_no = 0;
 	if (argc > 1)
 		exit(1);
 	shell = create_shell();
@@ -36,5 +36,6 @@ int	main(int argc, char **argv, char **envp)
 		else
 			command_func(shell, envp);
 		clean_array(shell);
+		system("leaks minishell");
 	}
 }

@@ -31,7 +31,6 @@ void	free_env(t_array_list *tokens)
 void	clean_array(t_shell *minishell)
 {
 	free(minishell->input);
-	minishell->input = NULL;
 	free_tokenizer_output_array(minishell->tokenizer_array);
 	free_parser_tokens(minishell->parser_tokens_array);
 	if (has_redir(minishell->parser_tokens_array))
