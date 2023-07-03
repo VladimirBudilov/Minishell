@@ -45,8 +45,6 @@ t_tokenizer_output	*tokenize_single_quote(char *input, t_shell *shell)
 	input++;
 	while (input[i] && input[i] != '\'')
 		i++;
-	if (input[i] == 0)
-		error("Unclosed single quote.");
 	po->string = input + i + 1;
 	t->type = SINGLE_QUOTES;
 	t->content = ft_strndup(input, i);
@@ -59,7 +57,6 @@ t_tokenizer_output	*tokenize_double_quote(char *input, t_shell *shell)
 {
 	t_tokenizer_output	*po;
 	t_lexer_token		*t;
-	char				*temp;
 	int					i;
 
 	t = malloc(sizeof(t_lexer_token));
@@ -67,6 +64,19 @@ t_tokenizer_output	*tokenize_double_quote(char *input, t_shell *shell)
 	add_element(shell->tokenizer_array, po);
 	input++;
 	i = 0;
+	i = execute_dable_quote(input, i, shell, t);
+	po->string = input + i + 1;
+	t->type = DOUBLE_QUOTES;
+	po->token = *t;
+	free(t);
+	return (po);
+}
+
+int	execute_dable_quote(char *input, int i,
+						t_shell *shell, t_lexer_token *t)
+{
+	char	*temp;
+
 	t->content = ft_strdup("");
 	while (input[i] && input[i] != '\"')
 	{
@@ -79,13 +89,7 @@ t_tokenizer_output	*tokenize_double_quote(char *input, t_shell *shell)
 		free(temp);
 		i++;
 	}
-	if (input[0] == 0)
-		error("Unclosed double quote.");
-	po->string = input + i + 1;
-	t->type = DOUBLE_QUOTES;
-	po->token = *t;
-	free(t);
-	return (po);
+	return (i);
 }
 
 t_tokenizer_output	*tokenize_bare_word(char *input, t_shell *shell)
@@ -99,11 +103,11 @@ t_tokenizer_output	*tokenize_bare_word(char *input, t_shell *shell)
 		i++;
 	t = malloc(sizeof(t_lexer_token));
 	po = malloc(sizeof(t_tokenizer_output));
-	add_element(shell->tokenizer_array, po);
 	t->type = BARE_WORD;
 	t->content = ft_strndup(input, i);
 	po->string = input + i;
 	po->token = *t;
+	add_element(shell->tokenizer_array, po);
 	free(t);
 	return (po);
 }

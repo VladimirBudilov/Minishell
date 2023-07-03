@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipe_create_func_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 10:59:51 by vbudilov          #+#    #+#             */
-/*   Updated: 2023/07/03 10:59:52 by vbudilov         ###   ########.fr       */
+/*   Created: 2023/07/01 19:40:28 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/07/01 19:40:32 by vbudilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	init_number_of_pipes(int *index, int *prev_index, int *last_pipe)
 {
-	t_shell	*shell;
+	*index = 0;
+	*last_pipe = 0;
+	*prev_index = 0;
+}
 
-	(void) argv;
-	err_no = 0;
-	if (argc > 1)
-		exit(1);
-	shell = create_shell();
-	welcome_message();
-	shell->envp = envp;
-	shell->env = add_env(envp);
-	rl_catch_signals = 0;
-	while (1)
+int	too_many_pipes(t_shell *shell)
+{
+	if (shell->number_of_pipes > 250)
 	{
-		parse_readline(shell);
-		if (has_pipes(shell))
-		{
-			create_pipe_list(shell);
-			execute_pipes(shell);
-		}
-		else
-			command_func(shell, envp);
-		clean_array(shell);
+		shell->cant_execute = 1;
+		printf("fork: Resource temporarily unavailable\n");
+		return (1);
 	}
+	return (0);
 }

@@ -12,9 +12,11 @@
 
 #include "../../includes/minishell.h"
 
-void	error(char *message)
+void	error(char *message, t_shell *shell, int error)
 {
-	fprintf(stderr, "Error. %s\n", message);
+	fprintf(stderr, "shell : %s\n", message);
+	shell->cant_execute = 1;
+	err_no = error;
 }
 
 int	redir_error(t_parser_token **parser_tokens, int i, t_shell *shell)

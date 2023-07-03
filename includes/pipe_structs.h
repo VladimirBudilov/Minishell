@@ -13,13 +13,8 @@ typedef struct s_pipe
     int is_execve;
     int is_builtin;
     int is_redir;
+	int pid;
     t_shell *shell;
 } t_pipe;
-
-typedef struct s_redirection
-{
-
-} t_redirection;
-
 
 #endif //MINI_PIPE_STRUCTS_H

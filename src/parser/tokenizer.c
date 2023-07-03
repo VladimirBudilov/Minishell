@@ -21,30 +21,19 @@ void	tokenize(t_shell *shell)
 	i = 0;
 	input = shell->input;
 	po_array = (t_tokenizer_output **) shell->tokenizer_array->array;
-	while (*input)
+	while (*input && shell->cant_execute == 0)
 	{
 		if (*input == ' ')
 			input = add_token(shell, (po_array[i++]
 						= tokenize_white_space(input, shell)));
-		else if (*input == '\'')
-		input = add_token(shell, (po_array[i++]
-						= tokenize_single_quote(input, shell)));
-		else if (*input == '\"')
-		input = add_token(shell, (po_array[i++]
-						= tokenize_double_quote(input, shell)));
-		else if (*input == '<')
-		input = add_token(shell, (po_array[i++]
-						= tokenize_less(input, shell)));
-		else if (*input == '>')
-		input = add_token(shell, (po_array[i++]
-						= tokenize_greater(input, shell)));
-		else if (*input == '|')
-		input = add_token(shell, (po_array[i++] = tokenize_pipe(input, shell)));
-		else if (*input == '$')
-		input = add_token(shell, (po_array[i++]
-						= tokenize_dollar(input, shell)));
+		else if ((*input == '\'') || (*input == '\"'))
+			input = tokenize_brackets(input, shell, po_array[i++]);
+		else if ((*input == '<') || (*input == '>'))
+			input = tokenize_less_bigger(input, shell, po_array[i++]);
+		else if ((*input == '|') || (*input == '$'))
+			input = tokenize_pipe_and_dollar(input, shell, po_array[i++]);
 		else if (ft_isascii(*input) && !is_breaking_character(*input))
-		input = add_token(shell, (po_array[i++]
+			input = add_token(shell, (po_array[i++]
 						= tokenize_bare_word(input, shell)));
 		else
 			break ;
