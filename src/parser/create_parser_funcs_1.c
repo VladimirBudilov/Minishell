@@ -39,5 +39,5 @@ void	open_quotes(t_lexer_token **lexer_tokens,
 void	join_words(t_lexer_token *lexer_token, t_parser_token *token)
 {
 	token->content = ft_strjoin(token->content,
-			ft_strdup(lexer_token->content));
+			lexer_token->content);
 }
