@@ -1,45 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins_func_export.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/01 13:56:41 by vchizhov          #+#    #+#             */
+/*   Updated: 2023/07/01 15:33:11 by vchizhov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-void free_tmp(char **tmp)
+void	print_command_export(t_hashmap **hashmap_key, \
+		t_shell *shell, t_array_list *line)
 {
-	int i;
+	int	i;
 
-	i = 1;
-	while(tmp[i])
-		free(tmp[i++]);
-	free(tmp);
+	i = 0;
+	if (line->size <= 1)
+	{
+		while (i < shell->env->size)
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(hashmap_key[i]->key, 1);
+			if (hashmap_key[i]->value != NULL)
+			{
+				write(1, "=\"", 2);
+				ft_putstr_fd(hashmap_key[i]->value, 1);
+				write(1, "\"", 1);
+			}
+			write(1, "\n", 1);
+			i++;
+		}
+	}
 }
 
-
-void print_command_export(t_hashmap **hashmap_key, t_shell *shell, t_array_list *line)
+int	check_key(char *str, t_hashmap **hashmap_key, t_shell *shell)
 {
-    int i;
-
-    i = 0;
-    if (line->size <= 1)
-    {
-        while(i < shell->env->size)
-        {
-
-            ft_putstr_fd("declare -x ", 1);
-            ft_putstr_fd(hashmap_key[i]->key, 1);
-            if (hashmap_key[i]->value != NULL)
-            {
-                write(1, "=\"", 2);
-                ft_putstr_fd(hashmap_key[i]->value, 1);
-                write(1, "\"", 1);
-            }
-            write(1, "\n", 1);
-            i++;
-        }
-    }
-}
-
-int check_key(char *str, t_hashmap **hashmap_key, t_shell *shell)
-{
-    int i;
-	char **tmp;
-	char *parse_str;
+	int		i;
+	char	**tmp;
+	char	*parse_str;
 
 	i = 0;
 	if (ft_strchr(str, '='))
@@ -50,28 +51,28 @@ int check_key(char *str, t_hashmap **hashmap_key, t_shell *shell)
 	}
 	else
 		parse_str = ft_strdup(str);
-
-    while(i < shell->env->size)
-    {
-        if(!ft_strncmp(hashmap_key[i]->key, parse_str, ft_strlen())) {
+	while (i < shell->env->size)
+	{
+		if (!ft_strncmp(hashmap_key[i]->key, parse_str, ft_strlen(str)))
+		{
 			free(parse_str);
-			return 1;
+			return (1);
 		}
-        i++;
-    }
+		i++;
+	}
 	free(parse_str);
-    return 0;
+	return (0);
 }
 
-void save_value_in_key(char *string, t_shell *shell)
+void	save_value_in_key(char *string, t_shell *shell)
 {
-	char *value;
-	char **tmp;
-	char *parse_string;
+	char	*value;
+	char	**tmp;
+	char	*parse_string;
 
-	value = NULL;
-	if ((value = ft_strchr(string, '=')))
+	if (ft_strchr(string, '='))
 	{
+		value = ft_strchr(string, '=');
 		value++;
 		tmp = ft_split(string, '=');
 		parse_string = tmp[0];
@@ -80,37 +81,39 @@ void save_value_in_key(char *string, t_shell *shell)
 	}
 }
 
-void check_double_arguments(t_hashmap **hashmap_key, t_parser_token **token_key, t_shell *shell, t_array_list *line)
+void	check_double_arguments(t_hashmap **hashmap_key, \
+		t_parser_token **token_key, t_shell *shell, t_array_list *line)
 {
-    int i;
+	int	i;
 
-    i = 2;
-    if (line->size > 2)
-    {
-        while(i < line->size)
-        {
-            if (token_key[i]->main_type != NEW_SPACE)
-			{
-				if (!check_key(token_key[i]->content, hashmap_key, shell))
-					add_element(shell->env, create_hashmap(token_key[i]->content));
-				else
-					save_value_in_key(token_key[i]->content, shell);
-			}
-            i++;
-        }
-    }
+	i = 1;
+	if (line->size > 1)
+	{
+		while (i < line->size)
+		{
+			if (!check_key(token_key[i]->content, hashmap_key, shell))
+				add_element(shell->env, create_hashmap(token_key[i]->content));
+			else
+				save_value_in_key(token_key[i]->content, shell);
+			i++;
+		}
+	}
 }
 
-
-
-void export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
+void	export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 {
-	t_parser_token **token_key;
+	t_parser_token	**token_key;
 
 	token_key = (t_parser_token **)line->array;
-    print_command_export(hashmap_key, shell, line);
-    if(!check_valid_arguments(token_key, shell))
-        return ;
-    check_double_arguments(hashmap_key, token_key, shell, line);
+	print_command_export(hashmap_key, shell, line);
+	if (line->size > 1)
+	{
+		if (!check_valid_arguments(token_key, shell))
+		{
+			err_no = 1;
+			return ;
+		}
+	}
+	check_double_arguments(hashmap_key, token_key, shell, line);
 	err_no = 0;
 }
