@@ -1,11 +1,22 @@
-#include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbudilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/03 10:59:51 by vbudilov          #+#    #+#             */
+/*   Updated: 2023/07/03 10:59:52 by vbudilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../includes/minishell.h"
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	*shell;
 
-	(void )	argv;
+	(void) argv;
 	err_no = 0;
 	if (argc > 1)
 		exit(1);
@@ -17,46 +28,14 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		parse_readline(shell);
-        if(has_pipes(shell))
-        {
-            create_pipe_list(shell);
-            execute_pipes(shell);
-        }
-        else
-            command_func(shell, envp);
-        clean_array(shell);
-    }
-    exit(0);
-}
-
-void print_all_args(t_array_list *list)
-{
-	int i;
-	t_parser_token **array;
-
-	i = 0;
-	array = (t_parser_token **) list->array;
-	while (i < list->size)
-	{
-		printf("token: %s token type %d\n", array[i]->content, array[i]->main_type);
-		i++;
+		if (has_pipes(shell))
+		{
+			create_pipe_list(shell);
+			execute_pipes(shell);
+		}
+		else
+			command_func(shell, envp);
+		clean_array(shell);
+		system("leaks minishell");
 	}
 }
-void print_all_tokens(t_array_list *list)
-{
-	int i;
-	t_tokenizer_output **array;
-
-	i = 0;
-	array = (t_tokenizer_output **) list->array;
-	while (i < list->size)
-	{
-		printf("token tokenize : %s token type %d\n", array[i]->token.content, array[i]->token.type);
-		i++;
-	}
-}
-
-
-
-
-

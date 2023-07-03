@@ -17,10 +17,4 @@ typedef struct s_pipe
     t_shell *shell;
 } t_pipe;
 
-typedef struct s_redirection
-{
-
-} t_redirection;
-
-
 #endif //MINI_PIPE_STRUCTS_H
