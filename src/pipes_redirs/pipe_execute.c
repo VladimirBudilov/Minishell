@@ -28,7 +28,7 @@ void	execute_pipes(t_shell *shell)
 	i = 0;
 	while (i < shell->pipe_array->size)
 	{
-		execute_pipe(pipes[i], i, fd_array);
+		execute_pipe(pipes[i], i, fd_array, shell->pipe_array->size);
 		i++;
 	}
 	close_pipes(shell->pipe_array->size - 1, fd_array);
@@ -49,9 +49,8 @@ void	close_pipes(int i, int fd_array[1000][2])
 	}
 }
 
-void	execute_pipe(t_pipe *pipe_token, int i,
-			int fd_array[1000][2])
-			{
+void	execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2], int size)
+{
 	pipe_token->pid = fork();
 	if (pipe_token->pid == 0)
 	{
@@ -72,9 +71,8 @@ void	execute_pipe(t_pipe *pipe_token, int i,
 			dup2(fd_array[i - 1][0], STDIN_FILENO);
 			close(fd_array[i - 1][0]);
 		}
-		close_pipes(i, fd_array);
+		close_pipes(size, fd_array);
 		execute_command_in_pipe(pipe_token);
 		exit(0);
 	}
-	waitid(pipe_token->pid, 0, NULL, WEXITED);
 }

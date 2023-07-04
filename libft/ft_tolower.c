@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char ft_tolower(char argument)
+int	ft_tolower(int argument)
 {
 	if (argument >= 'A' && argument <= 'Z')
 		return (argument + 32);

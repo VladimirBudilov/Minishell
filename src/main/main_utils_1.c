@@ -31,14 +31,14 @@ void	free_env(t_array_list *tokens)
 void	clean_array(t_shell *minishell)
 {
 	free(minishell->input);
-	free_tokenizer_output_array(minishell->tokenizer_array);
-	free_parser_tokens(minishell->parser_tokens_array);
 	if (has_redir(minishell->parser_tokens_array))
 		free_redirects(minishell);
+	free_tokenizer_output_array(minishell->tokenizer_array);
+	free_parser_tokens(minishell->parser_tokens_array);
 	if (minishell->number_of_pipes > 0 && minishell->cant_execute == 0)
 	{
-		free_pipe_array(minishell->pipe_array);
 		clean_pipe_commands(minishell);
+		free_pipe_array(minishell->pipe_array);
 		minishell->number_of_pipes = 0;
 		minishell->pipe_array->size = 0;
 	}

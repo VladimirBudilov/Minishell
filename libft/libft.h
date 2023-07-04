@@ -32,7 +32,7 @@ int				ft_ispunct(int c);
 int				ft_islower(int c);
 int				ft_isupper(int c);
 
-char ft_tolower(char argument);
+int				ft_tolower(int c);
 int				ft_toupper(int c);
 
 void			ft_bzero(void *s, size_t n);
@@ -44,7 +44,7 @@ int				ft_memcmp(const void *s1, const void *s2, size_t max_len);
 char			*ft_strdup(const char *s1);
 void			*ft_calloc(size_t count, size_t size);
 
-size_t ft_strlen();
+size_t			ft_strlen(const char *s);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *input_str, int ch);
 char			*ft_strnstr(const char *haystack, const char *needle,

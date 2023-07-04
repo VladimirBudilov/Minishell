@@ -34,7 +34,7 @@ t_shell	*create_shell(void )
 	minishell->number_of_pipes = 0;
 	minishell->cant_execute = 0;
 	minishell->envp = NULL;
-	minishell->only_here_doc = 0;
+	minishell->only_redir = 0;
 	minishell->lexer_tokens_array = create_array_list();
 	minishell->parser_tokens_array = create_array_list();
 	minishell->tokenizer_array = create_array_list();
