@@ -44,13 +44,12 @@ t_hashmap	*create_hashmap(char *string)
 		return (hashmap);
 	}
 	if (get_array_size(array) > 2)
-	{
 		execute_hashmap(array, hashmap);
-	}
 	else if (ft_strncmp(array[0], "OLDPWD", 6) == 0)
 		hashmap->value = NULL;
-	else
+	else {
 		hashmap->value = ft_strdup(array[1]);
+	}
 	free_array(array);
 	return (hashmap);
 }

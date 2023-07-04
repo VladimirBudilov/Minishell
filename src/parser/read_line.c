@@ -21,6 +21,7 @@ void	parse_readline(t_shell *minishell)
 	check_quotes(minishell);
 	tokenize(minishell);
 	parse_tokens(minishell);
+	system("leaks minishell");
 }
 
 void	check_quotes(t_shell *shell)

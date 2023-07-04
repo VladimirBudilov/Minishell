@@ -91,8 +91,9 @@ void	check_double_arguments(t_hashmap **hashmap_key, \
 	{
 		while (i < line->size)
 		{
-			if (!check_key(token_key[i]->content, hashmap_key, shell))
+			if (!check_key(token_key[i]->content, hashmap_key, shell)) {
 				add_element(shell->env, create_hashmap(token_key[i]->content));
+			}
 			else
 				save_value_in_key(token_key[i]->content, shell);
 			i++;
@@ -106,6 +107,7 @@ void	export_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 
 	token_key = (t_parser_token **)line->array;
 	print_command_export(hashmap_key, shell, line);
+
 	if (line->size > 1)
 	{
 		if (!check_valid_arguments(token_key, shell))
