@@ -12,11 +12,13 @@
 
 #include "../../includes/minishell.h"
 
-int	redir_out_append_func(t_array_list *parser_tokens, int i)
+int	redir_out_append_func(t_array_list *parser_tokens, int i, t_shell *shell)
 {
 	int				fd;
 	t_parser_token	**token_key;
 
+	if (parser_tokens->size == 1)
+		shell->only_redir = 1;
 	token_key = (t_parser_token **) parser_tokens->array;
 	fd = open(token_key[i]->file, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (fd < 0)
@@ -32,11 +34,14 @@ int	redir_out_append_func(t_array_list *parser_tokens, int i)
 	return (i);
 }
 
-int	redir_out_func(t_array_list *parser_tokens, int i)
+int	redir_out_func(t_array_list *parser_tokens,
+				int i, t_shell *shell)
 {
 	int				fd;
 	t_parser_token	**token_key;
 
+	if (parser_tokens->size == 1)
+		shell->only_redir = 1;
 	token_key = (t_parser_token **) parser_tokens->array;
 	fd = open(token_key[i]->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
@@ -52,11 +57,13 @@ int	redir_out_func(t_array_list *parser_tokens, int i)
 	return (i);
 }
 
-int	redir_in_func(t_array_list *parser_tokens, int i)
+int	redir_in_func(t_array_list *parser_tokens, int i, t_shell *shell)
 {
 	int				fd;
 	t_parser_token	**token_key;
 
+	if (parser_tokens->size == 1)
+		shell->only_redir = 1;
 	token_key = (t_parser_token **) parser_tokens->array;
 	fd = open(token_key[i]->file, O_RDONLY);
 	if (fd < 0)
@@ -64,7 +71,7 @@ int	redir_in_func(t_array_list *parser_tokens, int i)
 		ft_putstr_fd("shell: ", 2);
 		ft_putstr_fd(token_key[i]->content, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		exit(0);
+		exit(1);
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
@@ -80,7 +87,7 @@ int	redir_heredoc(t_array_list *parser_tokens, int i, t_shell *shell)
 	token_key = (t_parser_token **) parser_tokens->array;
 	token_key[i]->heredoc = "here_doc";
 	if (parser_tokens->size == 1)
-		shell->only_here_doc = 1;
+		shell->only_redir = 1;
 	fd = open(token_key[i]->heredoc, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{

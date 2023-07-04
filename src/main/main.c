@@ -36,5 +36,6 @@ int	main(int argc, char **argv, char **envp)
 		else
 			command_func(shell, envp);
 		clean_array(shell);
+		system("leaks minishell");
 	}
 }

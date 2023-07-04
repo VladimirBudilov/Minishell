@@ -63,8 +63,6 @@ void	handle_redirect(t_parser_token **array, int index,
 {
 	if (redir_error(array, index, shell))
 		return ;
-	if (array[index]->main_type == HEREDOC)
-		shell->has_here_doc = 1;
 	array[index]->file = ft_strdup(array[index + 1]->content);
 	delete_parse_element(parser_tokens, index + 1);
 }

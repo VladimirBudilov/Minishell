@@ -41,7 +41,7 @@ void	command_func2(t_parser_token **token_key, t_array_list \
 
 	i = 0;
 	execute_redir(parser_tokens, shell);
-	if (shell->only_here_doc)
+	if (shell->only_redir)
 		exit(0);
 	if (token_key[i]->main_type == BIlD_IN)
 		execute_builtin(parser_tokens, shell, i);
