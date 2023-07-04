@@ -49,6 +49,7 @@ void	change_value_by_key(t_array_list *list, char *key, char *value)
 	{
 		if (ft_strcmp(((t_hashmap *) list->array[i])->key, key) == 0)
 		{
+            free(((t_hashmap *) list->array[i])->value);
 			((t_hashmap *) list->array[i])->value = ft_strdup(value);
 			return ;
 		}
