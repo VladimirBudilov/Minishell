@@ -56,9 +56,12 @@ int	check_other_cases(t_hashmap **hashmap_key, t_shell *shell, \
 
 	if (!ft_strncmp(token_key[i]->content, "-", 2))
 	{
-		path = ft_strdup(find_path(hashmap_key, shell, 2));
-		if (!check_null(path))
+		if(find_path(hashmap_key, shell, 2) == NULL)
+		{
+			check_null(NULL);
 			return (0);
+		}
+		path = ft_strdup(find_path(hashmap_key, shell, 2));
 		change_old_path(hashmap_key, path, shell);
 	}
 	else

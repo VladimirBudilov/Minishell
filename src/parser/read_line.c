@@ -41,7 +41,7 @@ void	check_quotes(t_shell *shell)
 		i++;
 	}
 	if (single_quote || double_quote)
-		error("syntax error: unclosed quotes", shell, 1);
+		error("syntax error: unclosed quotes\n", shell, 1);
 }
 
 void	get_line(t_shell *minishell)

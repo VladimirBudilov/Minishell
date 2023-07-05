@@ -14,9 +14,8 @@
 
 void	error(char *message, t_shell *shell, int error)
 {
-	(void ) message;
 	ft_putstr_fd("shell: ", 2);
-	ft_putstr_fd(": No such file or directory\n", 2);
+	ft_putstr_fd(message, 2);
 	shell->cant_execute = 1;
 	g_err_no = error;
 }

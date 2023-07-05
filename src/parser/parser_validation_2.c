@@ -49,7 +49,6 @@ void	clean_flags_n(t_array_list *tokens_array, int index)
 	while (index < tokens_array->size)
 	{
 		token = find_element_by_index(tokens_array, index);
-		printf("token->content = %s\n", token->content);
 		if (is_flag(token->content))
 		{
 			if (!flag)
