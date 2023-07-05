@@ -45,9 +45,11 @@ void	clean_flags_n(t_array_list *tokens_array, int index)
 	t_parser_token	*token;
 
 	flag = 0;
+	index++;
 	while (index < tokens_array->size)
 	{
 		token = find_element_by_index(tokens_array, index);
+		printf("token->content = %s\n", token->content);
 		if (is_flag(token->content))
 		{
 			if (!flag)
@@ -61,7 +63,8 @@ void	clean_flags_n(t_array_list *tokens_array, int index)
 			delete_parse_element(tokens_array, index);
 			continue ;
 		}
-		index++;
+		else
+			break ;
 	}
 }
 
