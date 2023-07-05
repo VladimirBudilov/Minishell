@@ -15,9 +15,9 @@
 void	parse_readline(t_shell *minishell)
 {
 	get_line(minishell);
-	add_history(minishell->input);
 	if (minishell->input == NULL)
 		return ;
+	add_history(minishell->input);
 	check_quotes(minishell);
 	tokenize(minishell);
 	parse_tokens(minishell);
