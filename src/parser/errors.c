@@ -34,7 +34,7 @@ int	redir_error(t_parser_token **parser_tokens, int i, t_shell *shell)
 
 void	syntax_error(t_shell *shell)
 {
-	printf("shell: syntax error near unexpected token\n");
+	printf("shell: syntax error\n");
 	shell->cant_execute = 1;
 	g_err_no = 258;
 }

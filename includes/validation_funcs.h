@@ -26,5 +26,6 @@ void	remove_parse_element(t_array_list *parser_tokens, int index);
 void	handle_redirect(t_parser_token **array, int index, \
 		t_array_list *parser_tokens, t_shell *shell);
 void	print_2d_arr(char **pString);
+int		has_sequence_pipe(t_array_list *parser_tokens);
 
 #endif

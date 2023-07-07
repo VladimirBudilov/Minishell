@@ -26,6 +26,29 @@ void	validate_tokens(t_array_list *parser_tokens, t_shell *shell)
 		handle_syntax_error(shell);
 		return ;
 	}
+	if (has_sequence_pipe(parser_tokens))
+	{
+		handle_syntax_error(shell);
+		return ;
+	}
+
+}
+
+int	has_sequence_pipe(t_array_list *parser_tokens)
+{
+	t_parser_token	**array;
+	int				i;
+
+	array = (t_parser_token **)parser_tokens->array;
+	i = 0;
+	while (i < parser_tokens->size - 1)
+	{
+		if (array[i]->main_type
+			== PIPELINE && array[i + 1]->main_type == PIPELINE)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int	has_only_new_space(t_array_list *parser_tokens)

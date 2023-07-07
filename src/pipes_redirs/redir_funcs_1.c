@@ -116,7 +116,6 @@ void	execute_heredoc(int i, char *delimiter)
 	while (1)
 	{
 		input = readline("> ");
-		usleep(1000);
 		if (ft_strcmp(input, delimiter) == 0)
 			break ;
 		write(i, input, ft_strlen(input));
