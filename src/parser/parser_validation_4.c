@@ -31,7 +31,6 @@ void	validate_tokens(t_array_list *parser_tokens, t_shell *shell)
 		handle_syntax_error(shell);
 		return ;
 	}
-
 }
 
 int	has_sequence_pipe(t_array_list *parser_tokens)

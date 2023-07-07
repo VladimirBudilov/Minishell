@@ -25,6 +25,7 @@ int	too_many_pipes(t_shell *shell)
 	{
 		shell->cant_execute = 1;
 		printf("fork: Resource temporarily unavailable\n");
+		g_err_no = 1;
 		return (1);
 	}
 	return (0);

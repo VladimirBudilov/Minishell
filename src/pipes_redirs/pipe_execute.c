@@ -32,7 +32,7 @@ void	execute_pipes(t_shell *shell)
 		i++;
 	}
 	close_pipes(shell->pipe_array->size - 1, fd_array);
-	while (wait(&g_err_no) != -1)
+	while (wait(0) != -1)
 		;
 	g_err_no %= 255;
 }
@@ -72,9 +72,8 @@ void	execute_pipe(t_pipe *pipe_token, int i, int fd_array[1000][2], int size)
 			dup2(fd_array[i - 1][0], STDIN_FILENO);
 			close(fd_array[i - 1][0]);
 		}
-		close_pipes(size -1, fd_array);
+		close_pipes(size - 1, fd_array);
 		execute_command_in_pipe(pipe_token);
 		exit(g_err_no);
 	}
 }
-
