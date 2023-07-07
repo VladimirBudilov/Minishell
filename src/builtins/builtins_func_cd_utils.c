@@ -6,7 +6,7 @@
 /*   By: vchizhov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 17:30:02 by vchizhov          #+#    #+#             */
-/*   Updated: 2023/07/03 13:29:30 by vchizhov         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:21:54 by vchizhov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	check_other_cases(t_hashmap **hashmap_key, t_shell *shell, \
 
 	if (!ft_strncmp(token_key[i]->content, "-", 2))
 	{
-		if(find_path(hashmap_key, shell, 2) == NULL)
+		if (find_path(hashmap_key, shell, 2) == NULL)
 		{
 			check_null(NULL);
 			return (0);
