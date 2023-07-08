@@ -25,6 +25,7 @@ void	execute_command_in_pipe(t_pipe *pipe)
 			command_func2(token_key, pipe->commands,
 				pipe->shell, pipe->shell->envp);
 		waitpid(pid, &g_err_no, 0);
+		g_err_no /= 256;
 		return ;
 	}
 	else

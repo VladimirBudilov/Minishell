@@ -25,5 +25,6 @@ int		redir_error(t_parser_token **parser_tokens, int i, t_shell *shell);
 void	delete_parse_element(t_array_list *parser_tokens, int i);
 void	execute_heredoc(int i, char *delimiter);
 void	free_redirects(t_shell *shell);
+void	find_last_err(t_shell *shell);
 
 #endif

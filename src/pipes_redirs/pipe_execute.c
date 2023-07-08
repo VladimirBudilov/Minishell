@@ -32,9 +32,28 @@ void	execute_pipes(t_shell *shell)
 		i++;
 	}
 	close_pipes(shell->pipe_array->size - 1, fd_array);
-	while (wait(0) != -1)
-		;
-	g_err_no /= 256;
+	find_last_err(shell);
+}
+
+void	find_last_err(t_shell *shell)
+{
+	int		i;
+	t_pipe	**pipes;
+
+	i = 0;
+	pipes = (t_pipe **) shell->pipe_array->array;
+	while (i < shell->pipe_array->size)
+	{
+		if (pipes[i]->last_pipe)
+			waitpid(pipes[i]->pid, &g_err_no, 0);
+		else
+			waitpid(pipes[i]->pid, 0, 0);
+		i++;
+	}
+	if (g_err_no == 256)
+		g_err_no = 1;
+	else
+		g_err_no /= 256;
 }
 
 void	close_pipes(int i, int fd_array[1000][2])

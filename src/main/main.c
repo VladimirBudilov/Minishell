@@ -31,7 +31,8 @@ int	main(int argc, char **argv, char **envp)
 		if (has_pipes(shell))
 		{
 			create_pipe_list(shell);
-			execute_pipes(shell);
+			if (shell->cant_execute == 0)
+				execute_pipes(shell);
 		}
 		else
 			command_func(shell, envp);
