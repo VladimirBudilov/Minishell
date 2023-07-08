@@ -63,24 +63,19 @@ void	print_error(t_parser_token **token_key, int index)
 
 int	check_number_arg(t_parser_token **token_key, t_shell *shell)
 {
-	int	i;
 	int	j;
 
-	i = 1;
-	while (i < shell->parser_tokens_array->size)
+	(void)shell;
+	j = 0;
+	while (token_key[1]->content[j])
 	{
-		j = 0;
-		while (token_key[i]->content[j])
-		{
-			if (token_key[i]->content[j] == '-' && j == 0)
-				j++;
-			if (token_key[i]->content[j] == '+' && j == 0)
-				j++;
-			if (ft_isdigit(token_key[i]->content[j]) == 0)
-				return (0);
+		if (token_key[1]->content[j] == '-' && j == 0)
 			j++;
-		}
-		i++;
+		if (token_key[1]->content[j] == '+' && j == 0)
+			j++;
+		if (ft_isdigit(token_key[1]->content[j]) == 0)
+			return (0);
+		j++;
 	}
 	return (1);
 }
@@ -104,7 +99,7 @@ void	exit_func(t_array_list *line, t_shell *shell)
 		{
 			ft_putstr_fd("exit\n", 1);
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			g_err_no = 255;
+			g_err_no = 1;
 		}
 	}
 	else
