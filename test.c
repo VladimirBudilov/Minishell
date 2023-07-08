@@ -26,20 +26,26 @@ int main() {
 
 	switch (fork()) {
 	case 0: // Child. cat << a
-		{ // Heredoc.
-			int fd = open("heredoc", O_WRONLY | O_CREAT | O_TRUNC);
-			assert(fd >= 0);
-			execute_heredoc(fd, "a");
-			assert(close(fd) >= 0);
+		switch (fork()) {
+		case 0: { // Child.
+			{ // Heredoc.
+				int fd = open("heredoc", O_WRONLY | O_CREAT | O_TRUNC);
+				assert(fd >= 0);
+				execute_heredoc(fd, "a");
+				assert(close(fd) >= 0);
 
-			fd = open("heredoc", O_RDONLY);
-			dup2(fd, STDIN_FILENO);
+				fd = open("heredoc", O_RDONLY);
+				dup2(fd, STDIN_FILENO);
+			}
+
+			dup2(fds[1], STDOUT_FILENO);
+			close(fds[0]);
+
+			assert(execlp("cat", "", "-e", 0) >= 0);
+		} break;
+		case -1: assert(0);
 		}
-
-		dup2(fds[1], STDOUT_FILENO);
-		close(fds[0]);
-
-		assert(execlp("cat", "", "-e", 0) >= 0);
+		assert(wait(&(int){0}) >= 0);
 	break;
 	case -1: assert(0);
 	break;

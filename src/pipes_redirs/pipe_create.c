@@ -37,4 +37,7 @@ void	create_pipe_list(t_shell *shell)
 		index++;
 	}
 	add_last_command(shell, last_pipe);
+	for (int i = 0; i < shell->pipe_array->size; i++) {
+		fprintf(stderr, "bruh: %d\n", ((t_pipe *)shell->pipe_array->array[i])->commands->size);
+	}
 }
