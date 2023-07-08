@@ -34,7 +34,7 @@ void	execute_pipes(t_shell *shell)
 	close_pipes(shell->pipe_array->size - 1, fd_array);
 	while (wait(0) != -1)
 		;
-	g_err_no %= 255;
+	g_err_no /= 256;
 }
 
 void	close_pipes(int i, int fd_array[1000][2])

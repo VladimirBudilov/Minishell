@@ -74,7 +74,7 @@ void	command_func(t_shell *shell, char **envp)
 		if (pid == 0)
 			command_func2(token_key, parser_tokens, shell, envp);
 		waitpid(pid, &g_err_no, 0);
-		g_err_no %= 255;
+		g_err_no /= 256;
 		return ;
 	}
 	else

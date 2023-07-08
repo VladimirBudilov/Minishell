@@ -28,8 +28,6 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		parse_readline(shell);
-		if (shell->input == NULL)
-			continue ;
 		if (has_pipes(shell))
 		{
 			create_pipe_list(shell);
