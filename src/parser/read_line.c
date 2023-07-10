@@ -20,6 +20,11 @@ void	parse_readline(t_shell *minishell)
 	add_history(minishell->input);
 	check_quotes(minishell);
 	tokenize(minishell);
+    if (minishell->lexer_tokens_array->size == 0)
+    {
+        minishell->cant_execute = 1;
+        return;
+    }
 	parse_tokens(minishell);
 }
 

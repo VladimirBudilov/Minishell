@@ -18,7 +18,7 @@ void	create_parser_tokens(t_lexer_token **lexer_tokens,
 	int	i;
 
 	i = 0;
-	if (lexer_tokens[i]->type == WHITE_SPACE)
+	if (lexer_tokens[i] && lexer_tokens[i]->type == WHITE_SPACE)
 		i++;
 	while (i < size)
 	{
