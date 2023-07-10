@@ -20,12 +20,8 @@ void	add_last_command(t_shell *shell, int index)
 	parser_tokens = (t_parser_token **) shell->parser_tokens_array->array;
 	pipe = init_pipe(shell);
 	pipe->last_pipe = 1;
-	//fprintf(stderr, "shell->parser_tokens_array->size = %d\n", shell->parser_tokens_array->size);
-	//fprintf(stderr, "add_last_command/index = %d\n", index);
 	while (index < shell->parser_tokens_array->size)
 	{
-		//printf("parser_tokens[index] %s \n", parser_tokens[index]->content);
-		//printf("parser_tokens[index] %d \n", parser_tokens[index]->main_type);
 		add_element(pipe->commands, parser_tokens[index]);
 		add_flags(pipe, parser_tokens[index]);
 		index++;

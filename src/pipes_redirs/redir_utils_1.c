@@ -25,3 +25,16 @@ int	has_redir(t_array_list *tokens)
 	}
 	return (0);
 }
+
+void	close_pipes(int i, int fd_array[1000][2])
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
+	{
+		close(fd_array[j][0]);
+		close(fd_array[j][1]);
+		j++;
+	}
+}

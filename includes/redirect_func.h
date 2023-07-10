@@ -26,5 +26,8 @@ void	delete_parse_element(t_array_list *parser_tokens, int i);
 void	execute_heredoc(int i, char *delimiter);
 void	free_redirects(t_shell *shell);
 void	find_last_err(t_shell *shell);
+int		heredoc_in_pipe(t_array_list *parser_array, t_shell *shell);
+void	do_pipe_redirects(t_pipe *pipe_token, int fd_array[1000][2],
+			int i, int heredocced);
 
 #endif
