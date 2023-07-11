@@ -31,9 +31,15 @@ int	contain_key(t_array_list *list, char *key)
 	int	i;
 
 	i = 0;
+	fprintf(stderr, "Key: %s\n", key);
 	while (i < list->size)
 	{
-		if (ft_strcmp(((t_hashmap *) list->array[i])->key, key) == 0)
+		if (
+			ft_strncmp(
+				((t_hashmap *) list->array[i])->key, key, ft_strlen(key)
+			) == 0 &&
+			ft_strlen(key) == ft_strlen(((t_hashmap *) list->array[i])->key)
+		)
 			return (1);
 		i++;
 	}

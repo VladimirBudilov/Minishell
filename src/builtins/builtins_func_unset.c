@@ -27,7 +27,10 @@ int	get_position_of_element(t_hashmap **hashmap_key, char *key, t_shell *shell)
 	i = 0;
 	while (i < shell->env->size)
 	{
-		if (!ft_strncmp(hashmap_key[i]->key, key, ft_strlen(key)))
+		if (
+			!ft_strncmp(hashmap_key[i]->key, key, ft_strlen(key)) &&
+			ft_strlen(key) == ft_strlen(hashmap_key[i]->key)
+		)
 			return (i);
 		i++;
 	}
@@ -51,9 +54,12 @@ void	unset_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell)
 	}
 	while (i < line->size)
 	{
-		if (contain_key(shell->env, token_key[i]->content))
+		fprintf(stderr, "%s\n", token_key[i]->content);
+		if (contain_key(shell->env, token_key[i]->content)) {
+			fprintf(stderr, "Deleting\n");
 			delete_map_element(shell->env, get_position_of_element(hashmap_key, \
 						token_key[i]->content, shell));
+		}
 		i++;
 	}
 	g_err_no = 0;
