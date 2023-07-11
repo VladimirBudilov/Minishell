@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 int	command_func3(t_parser_token **token_key, t_array_list \
-		*parser_tokens, t_shell *shell, char **envp)
+		*parser_tokens, t_shell *shell)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ int	command_func3(t_parser_token **token_key, t_array_list \
 		execute_builtin(parser_tokens, shell, i);
 	else if (token_key[i]->main_type == EXECUTABLE || \
 			token_key[i]->main_type == EXECUTABLE_PATH)
-		ex_func(parser_tokens, shell, envp);
+		ex_func(parser_tokens, shell);
 	else
 	{
 		ft_putstr_fd("shell: ", 2);
@@ -35,7 +35,7 @@ int	command_func3(t_parser_token **token_key, t_array_list \
 }
 
 void	command_func2(t_parser_token **token_key, t_array_list \
-		*parser_tokens, t_shell *shell, char **envp)
+		*parser_tokens, t_shell *shell)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ void	command_func2(t_parser_token **token_key, t_array_list \
 		execute_builtin(parser_tokens, shell, i);
 	else if (token_key[i]->main_type == EXECUTABLE || \
 					token_key[i]->main_type == EXECUTABLE_PATH)
-		ex_func(parser_tokens, shell, envp);
+		ex_func(parser_tokens, shell);
 	else
 	{
 		ft_putstr_fd("shell last: ", 2);
@@ -58,7 +58,7 @@ void	command_func2(t_parser_token **token_key, t_array_list \
 	exit(g_err_no);
 }
 
-void	command_func(t_shell *shell, char **envp)
+void	command_func(t_shell *shell)
 {
 	int				pid;
 	t_parser_token	**token_key;
@@ -72,14 +72,14 @@ void	command_func(t_shell *shell, char **envp)
 	{
 		pid = fork();
 		if (pid == 0)
-			command_func2(token_key, parser_tokens, shell, envp);
+			command_func2(token_key, parser_tokens, shell);
 		waitpid(pid, &g_err_no, 0);
 		g_err_no /= 256;
 		return ;
 	}
 	else
 	{
-		if (!command_func3(token_key, parser_tokens, shell, envp))
+		if (!command_func3(token_key, parser_tokens, shell))
 			return ;
 	}
 }

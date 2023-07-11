@@ -37,7 +37,7 @@
 int		g_err_no;
 
 void	signal_handler(int signal);
-void	command_func(t_shell *shell, char **envp);
+void	command_func(t_shell *shell);
 void	echo_func(t_array_list *line);
 void	env_func(t_hashmap **hashmap_key, t_array_list *line, t_shell *shell);
 

@@ -30,7 +30,27 @@ char	**new_arr(t_array_list *line)
 	return (arr);
 }
 
-void	absolute_path(t_parser_token **token_key, char **argv, char **envp)
+int execve_wrapper(char *path, char **argv, t_array_list *internal_env) {
+	int size = internal_env->size;
+	t_hashmap **array = (t_hashmap **)(internal_env->array);
+
+	char **envp = malloc(sizeof(char *) * (size + 1));
+	if (envp == 0) exit(1);
+
+	envp[size] = 0;
+	for (int i = 0; i < size; i++) {
+		if (asprintf(&envp[i], "%s=%s", array[i]->key, array[i]->value) < 0)
+			exit(1);
+	}
+
+	return execve(path, argv, envp);
+}
+
+void	absolute_path(
+	t_parser_token **token_key,
+	char **argv,
+	t_array_list *internal_env
+)
 {
 	int	pid;
 	int	status;
@@ -39,7 +59,7 @@ void	absolute_path(t_parser_token **token_key, char **argv, char **envp)
 	define_signals();
 	if (pid == 0)
 	{
-		execve(token_key[0]->content, argv, envp);
+		execve_wrapper(token_key[0]->content, argv, internal_env);
 		free_arr(argv);
 		exit(EXIT_FAILURE);
 	}
@@ -48,7 +68,7 @@ void	absolute_path(t_parser_token **token_key, char **argv, char **envp)
 }
 
 void	relative_path(t_parser_token **t, \
-		char **argv, char **envp, char **path)
+		char **argv, char **path, t_array_list *internal_env)
 {
 	int		pid;
 	int		status;
@@ -66,7 +86,7 @@ void	relative_path(t_parser_token **t, \
 			s = ft_strjoin(ft_strjoin(ft_strdup(path[i]), "/"), t[0]->content);
 			if (access(s, X_OK) == 0)
 			{
-				execve(s, argv, envp);
+				execve_wrapper(s, argv, internal_env);
 				break ;
 			}
 		}
@@ -77,7 +97,7 @@ void	relative_path(t_parser_token **t, \
 	g_err_no = WEXITSTATUS(status);
 }
 
-void	ex_func(t_array_list *line, t_shell *shell, char **envp)
+void	ex_func(t_array_list *line, t_shell *shell)
 {
 	char			**argv;
 	char			**path;
@@ -87,12 +107,12 @@ void	ex_func(t_array_list *line, t_shell *shell, char **envp)
 	argv = new_arr(line);
 	if (token_key[0]->main_type == EXECUTABLE)
 	{
-		absolute_path(token_key, argv, envp);
+		absolute_path(token_key, argv, shell->env);
 		free_arr(argv);
 		return ;
 	}
 	path = ft_split(get_value_by_key(shell->env, "PATH"), ':');
-	relative_path(token_key, argv, envp, path);
+	relative_path(token_key, argv, path, shell->env);
 	free_arr(path);
 	free_arr(argv);
 }

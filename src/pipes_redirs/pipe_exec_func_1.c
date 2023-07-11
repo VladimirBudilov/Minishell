@@ -23,13 +23,13 @@ void	execute_command_in_pipe(t_pipe *pipe)
 		pid = fork();
 		if (pid == 0)
 			command_func2(token_key, pipe->commands,
-				pipe->shell, pipe->shell->envp);
+				pipe->shell);
 		waitpid(pid, &g_err_no, 0);
 		g_err_no /= 256;
 		return ;
 	}
 	else
 		if (!command_func3(token_key, pipe->commands,
-				pipe->shell, pipe->shell->envp))
+				pipe->shell))
 			return ;
 }
