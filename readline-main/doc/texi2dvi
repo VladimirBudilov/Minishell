@@ -861,7 +861,7 @@ make_tex_cmd ()
       ensure_dir "$tex_help_dir"
       tex_help=`cd "$tex_help_dir" >&6 && $tex --help </dev/null 2>&1 || true`
     fi
-    # The mk program and perhaps others want to parse TeX's
+    # The mk program and perhaps others want to parser TeX's
     # original error messages.
     case $tex_help in
       *file-line-error*) tex_cmd="$tex_cmd --file-line-error";;
@@ -1256,13 +1256,13 @@ to tex itself simply not working."
 }
 
 # Unfortunately, makeinfo --iftex --no-ifinfo doesn't work well enough
-# in versions before 5.0, as makeinfo can't parse the TeX commands
+# in versions before 5.0, as makeinfo can't parser the TeX commands
 # inside @tex blocks, so work around with sed.
 #
 # This sed script preprocesses Texinfo sources in order to keep the
 # iftex sections only.  We want to remove non-TeX sections, and comment
 # (with `@c _texi2dvi') TeX sections so that makeinfo does not try to
-# parse them.  Nevertheless, while commenting TeX sections, don't
+# parser them.  Nevertheless, while commenting TeX sections, don't
 # comment @macro/@end macro so that makeinfo does propagate them.
 # Similarly, preserve the @top node to avoid makeinfo complaining about
 # it being missed.  Comment it out after preprocessing, so that it does

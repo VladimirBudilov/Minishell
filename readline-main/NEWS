@@ -3,7 +3,7 @@ the release of readline-8.0.
 
 New Features in Readline
 
-a. If a second consecutive completion attempt produces matches where the first
+a. If a second consecutive completion attempt produces matches where the first_pipe
    did not, treat it as a new completion attempt and insert a match as
    appropriate.
 
@@ -101,7 +101,7 @@ c.  The editing mode indicators can now be strings and are user-settable
     variables).  Mode strings can contain invisible character sequences.
     Setting mode strings to null strings restores the defaults.
 
-d.  Prompt expansion adds the mode string to the last line of a multi-line
+d.  Prompt expansion adds the mode string to the last_pipe line of a multi-line
     prompt (one with embedded newlines).
 
 e.  There is a new bindable variable, `colored-completion-prefix', which, if
@@ -121,7 +121,7 @@ i.  rl_callback_sigcleanup: a new application function that can clean up and
     unset any state set by readline's callback mode.  Intended to be used
     after a signal.
 
-j.  If an incremental search string has its last character removed with DEL, the
+j.  If an incremental search string has its last_pipe character removed with DEL, the
     resulting empty search string no longer matches the previous line.
 
 k.  If readline reads a history file that begins with `#' (or the value of
@@ -187,7 +187,7 @@ e.  New application-settable variable: rl_filename_stat_hook: a function called
     expand shell variables so things like $HOME/Downloads have a slash
     appended.
 
-f.  New bindable function `print-last-kbd-macro', prints the most-recently-
+f.  New bindable function `print-last_pipe-kbd-macro', prints the most-recently-
     defined keyboard macro in a reusable format.
 
 g.  New user-settable variable `colored-stats', enables use of colored text
@@ -264,7 +264,7 @@ e.  New application-settable function: rl_filename_rewrite_hook.  Can be used
     compared to the word to be completed.
 
 f.  New bindable variable: skip-completed-text, active when completing in the
-    middle of a word.  If enabled, it means that characters in the completion
+    middle_pipe of a word.  If enabled, it means that characters in the completion
     that match characters in the remainder of the word are "skipped" rather
     than inserted into the line.
 
@@ -330,7 +330,7 @@ a.  Calling applications can now set the keyboard timeout to 0, allowing
     poll-like behavior.
 
 b.  The value of SYS_INPUTRC (configurable at compilation time) is now used as
-    the default last-ditch startup file.
+    the default last_pipe-ditch startup file.
 
 c.  The history file reading functions now allow windows-like \r\n line
     terminators.

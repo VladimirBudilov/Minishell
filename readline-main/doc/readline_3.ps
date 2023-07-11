@@ -588,7 +588,7 @@ F0(.)A F1(emacs\255mode\255string \(@\))108 252 Q F0 .518(If the)144 264
 R F2(show\255mode\255in\255pr)3.018 E(ompt)-.45 E F0 -.25(va)3.018 G
 .517(riable is enabled, this string is displayed immediately before the)
 .25 F .622
-(last line of the primary prompt when emacs editing mode is acti)144 276
+(last_pipe line of the primary prompt when emacs editing mode is acti)144 276
 R -.15(ve)-.25 G 5.622(.T).15 G .622(he v)-5.622 F .622(alue is e)-.25 F
 .622(xpanded lik)-.15 F 3.122(ea)-.1 G -.1(ke)144 288 S 3.34(yb)-.05 G
 .839(inding, so the standard set of meta- and control pre\214x)-3.34 F
@@ -785,7 +785,7 @@ F1(On)2.595 E F0 2.595(,t)C .095(his alters the def)-2.595 F .095
 (ault completion beha)-.1 F .094
 (vior when inserting a single match into the line.)-.2 F(It')144 108 Q
 2.545(so)-.55 G .045(nly acti)-2.545 F .345 -.15(ve w)-.25 H .046
-(hen performing completion in the middle of a w).15 F 2.546(ord. If)-.1
+(hen performing completion in the middle_pipe of a w).15 F 2.546(ord. If)-.1
 F .046(enabled, readline does not)2.546 F 1.394(insert characters from \
 the completion that match characters after point in the w)144 120 R
 1.394(ord being com-)-.1 F(pleted, so portions of the w)144 132 Q
@@ -794,7 +794,7 @@ the completion that match characters after point in the w)144 120 R
 156 R/F2 10/Times-Italic@0 SF(show\255mode\255in\255pr)3.017 E(ompt)-.45
 E F0 -.25(va)3.017 G .518
 (riable is enabled, this string is displayed immediately before the).25
-F .475(last line of the primary prompt when vi editing mode is acti)144
+F .475(last_pipe line of the primary prompt when vi editing mode is acti)144
 168 R .775 -.15(ve a)-.25 H .475(nd in command mode.).15 F .475(The v)
 5.475 F(alue)-.25 E .33(is e)144 180 R .33(xpanded lik)-.15 F 2.83(eak)
 -.1 G .63 -.15(ey b)-2.93 H .33
@@ -807,7 +807,7 @@ F .475(last line of the primary prompt when vi editing mode is acti)144
 (If the)144 228 R F2(show\255mode\255in\255pr)3.017 E(ompt)-.45 E F0
 -.25(va)3.017 G .518
 (riable is enabled, this string is displayed immediately before the).25
-F .186(last line of the primary prompt when vi editing mode is acti)144
+F .186(last_pipe line of the primary prompt when vi editing mode is acti)144
 240 R .486 -.15(ve a)-.25 H .186(nd in insertion mode.).15 F .186(The v)
 5.186 F .186(alue is)-.25 F -.15(ex)144 252 S .923(panded lik).15 F
 3.423(eak)-.1 G 1.223 -.15(ey b)-3.523 H .924
@@ -958,7 +958,7 @@ g the search string becomes the current line.)108 412.8 Q 2.406 -.8
 -.15(xe)-.15 G .337(cuting the command from the history list.).15 F
 2.997(Am)108 477.6 S -.15(ove)-2.997 G .497
 (ment command will terminate the search, mak).15 F 2.997(et)-.1 G .497
-(he last line found the current line, and be)-2.997 F .498(gin edit-)
+(he last_pipe line found the current line, and be)-2.997 F .498(gin edit-)
 -.15 F(ing.)108 489.6 Q .567(Non-incremental searches read the entire s\
 earch string before starting to search for matching history lines.)108
 506.4 R(The search string may be typed by the user or be part of the co\
@@ -1115,14 +1115,14 @@ F .622(ord on the pre)-.1 F .622(vious line\))-.25 F .772(at point.)144
 (xtracted as if the "!)-.15 F F2(n)A F0(")A(history e)144 288 Q
 (xpansion had been speci\214ed.)-.15 E F1(yank\255last\255ar)108 300 Q
 2.5(g\()-.1 G -1.667(M\255. ,)-2.5 F -1.667(M\255_ \))2.5 F F0 1.308
-(Insert the last ar)144 312 R 1.308(gument to the pre)-.18 F 1.307
-(vious command \(the last w)-.25 F 1.307(ord of the pre)-.1 F 1.307
+(Insert the last_pipe ar)144 312 R 1.308(gument to the pre)-.18 F 1.307
+(vious command \(the last_pipe w)-.25 F 1.307(ord of the pre)-.1 F 1.307
 (vious history entry\).)-.25 F -.4(Wi)144 324 S .203(th a numeric ar).4
 F .203(gument, beha)-.18 F .504 -.15(ve ex)-.2 H .204(actly lik).15 F(e)
 -.1 E F1(yank\255nth\255ar)2.704 E(g)-.1 E F0 5.204(.S)C(uccessi)-5.204
 E .504 -.15(ve c)-.25 H .204(alls to).15 F F1(yank\255last\255ar)2.704 E
 (g)-.1 E F0(mo)144 336 Q .807 -.15(ve b)-.15 H .507
-(ack through the history list, inserting the last w).15 F .507
+(ack through the history list, inserting the last_pipe w).15 F .507
 (ord \(or the w)-.1 F .507(ord speci\214ed by the ar)-.1 F(gument)-.18 E
 .416(to the \214rst call\) of each line in turn.)144 348 R(An)5.416 E
 2.916(yn)-.15 G .416(umeric ar)-2.916 F .416
@@ -1133,7 +1133,7 @@ E .504 -.15(ve c)-.25 H .204(alls to).15 F F1(yank\255last\255ar)2.704 E
 (ument switches the direction).18 F .494
 (through the history \(back or forw)144 372 R 2.994(ard\). The)-.1 F
 .494(history e)2.994 F .494(xpansion f)-.15 F .494
-(acilities are used to e)-.1 F .494(xtract the last)-.15 F(ar)144 384 Q
+(acilities are used to e)-.1 F .494(xtract the last_pipe)-.15 F(ar)144 384 Q
 (gument, as if the "!$" history e)-.18 E(xpansion had been speci\214ed.)
 -.15 E F1(operate\255and\255get\255next \(C\255o\))108 396 Q F0 .733(Ac\
 cept the current line for return to the calling application as if a ne)
@@ -1191,7 +1191,7 @@ BP
 (Drag the w)144 108 R .024(ord before point past the w)-.1 F .023
 (ord after point, mo)-.1 F .023(ving point o)-.15 F -.15(ve)-.15 G 2.523
 (rt).15 G .023(hat w)-2.523 F .023(ord as well.)-.1 F .023(If point)
-5.023 F(is at the end of the line, this transposes the last tw)144 120 Q
+5.023 F(is at the end of the line, this transposes the last_pipe tw)144 120 Q
 2.5(ow)-.1 G(ords on the line.)-2.6 E F1(upcase\255w)108 132 Q
 (ord \(M\255u\))-.1 E F0 1.698(Uppercase the current \(or follo)144 144
 R 1.698(wing\) w)-.25 F 4.198(ord. W)-.1 F 1.698(ith a ne)-.4 F -.05(ga)
@@ -1377,7 +1377,7 @@ F1 -.25(Ke)87 626.4 S(yboard Macr).25 E(os)-.18 E(start\255kbd\255macr)
 (ving the characters typed into the current k)-.2 E -.15(ey)-.1 G
 (board macro and store the de\214nition.).15 E F1
 (call\255last\255kbd\255macr)108 686.4 Q 2.5(o\()-.18 G(C\255x e\))-2.5
-E F0(Re-e)144 698.4 Q -.15(xe)-.15 G .999(cute the last k).15 F -.15(ey)
+E F0(Re-e)144 698.4 Q -.15(xe)-.15 G .999(cute the last_pipe k).15 F -.15(ey)
 -.1 G .999(board macro de\214ned, by making the characters in the macro\
  appear as if).15 F(typed at the k)144 710.4 Q -.15(ey)-.1 G(board.).15
 E(GNU Readline 8.1)72 768 Q(2020 October 29)125.685 E(11)190.395 E 0 Cg
@@ -1389,7 +1389,7 @@ BP
 /F0 10/Times-Roman@0 SF 117.355(READLINE\(3\) Library)72 48 R
 (Functions Manual)2.5 E(READLINE\(3\))119.855 E/F1 10/Times-Bold@0 SF
 (print\255last\255kbd\255macr)108 84 Q 2.5(o\()-.18 G(\))-2.5 E F0
-(Print the last k)144 96 Q -.15(ey)-.1 G
+(Print the last_pipe k)144 96 Q -.15(ey)-.1 G
 (board macro de\214ned in a format suitable for the).15 E/F2 10
 /Times-Italic@0 SF(inputr)2.5 E(c)-.37 E F0(\214le.)2.5 E F1
 (Miscellaneous)87 112.8 Q -.18(re)108 124.8 S<ad72>.18 E
@@ -1560,7 +1560,7 @@ R 2.5("M-C-]" character)151.2 168 R(-search-backw)-.2 E(ard)-.1 E 2.5
 ("M-space" set-mark)151.2 180 R 2.5("M-#" insert-comment)151.2 192 R 2.5
 ("M-&" tilde-e)151.2 204 R(xpand)-.15 E 2.5("M-*" insert-completions)
 151.2 216 R 2.5("M--" digit-ar)151.2 228 R(gument)-.18 E 2.5
-("M-." yank-last-ar)151.2 240 R(g)-.18 E 2.5("M-0" digit-ar)151.2 252 R
+("M-." yank-last_pipe-ar)151.2 240 R(g)-.18 E 2.5("M-0" digit-ar)151.2 252 R
 (gument)-.18 E 2.5("M-1" digit-ar)151.2 264 R(gument)-.18 E 2.5
 ("M-2" digit-ar)151.2 276 R(gument)-.18 E 2.5("M-3" digit-ar)151.2 288 R
 (gument)-.18 E 2.5("M-4" digit-ar)151.2 300 R(gument)-.18 E 2.5
@@ -1580,12 +1580,12 @@ R 2.5("M-C-]" character)151.2 168 R(-search-backw)-.2 E(ard)-.1 E 2.5
 (ord)-.1 E 2.5("M-Y" yank-pop)151.2 540 R 2.5
 ("M-\\" delete-horizontal-space)151.2 552 R 2.5("M-~" tilde-e)151.2 564
 R(xpand)-.15 E 2.5("M-C-?" backw)151.2 576 R(ard-kill-w)-.1 E(ord)-.1 E
-2.5("M-_" yank-last-ar)151.2 588 R(g)-.18 E(Emacs Control-X bindings)
+2.5("M-_" yank-last_pipe-ar)151.2 588 R(g)-.18 E(Emacs Control-X bindings)
 151.2 604.8 Q 2.5("C-XC-G" abort)151.2 628.8 R 2.5
 ("C-XC-R" re-read-init-\214le)151.2 640.8 R 2.5("C-XC-U" undo)151.2
 652.8 R 2.5("C-XC-X" e)151.2 664.8 R(xchange-point-and-mark)-.15 E 2.5
 ("C-X\(" start-kbd-macro)151.2 676.8 R 2.5("C-X\)" end-kbd-macro)151.2
-688.8 R 2.5("C-XE" call-last-kbd-macro)151.2 700.8 R 2.5("C-XC-?" backw)
+688.8 R 2.5("C-XE" call-last_pipe-kbd-macro)151.2 700.8 R 2.5("C-XC-?" backw)
 151.2 712.8 R(ard-kill-line)-.1 E(GNU Readline 8.1)72 768 Q
 (2020 October 29)125.685 E(14)190.395 E 0 Cg EP
 %%Page: 15 15

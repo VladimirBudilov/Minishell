@@ -33,5 +33,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[s2_index] != '\0')
 		new_str[s1_index++] = s2[s2_index++];
 	new_str[s1_index] = '\0';
+	free((char *)s1);
 	return (new_str);
 }

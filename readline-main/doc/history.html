@@ -105,7 +105,7 @@ arguments to a previous command into the current input line, or
 fix errors in previous commands quickly.
 </P><P>
 
-History expansion takes place in two parts.  The first is to determine
+History expansion takes place in two parts.  The first_pipe is to determine
 which line from the history list should be used during substitution.
 The second is to select portions of that line for inclusion into the
 current one.  The line selected from the history is called the
@@ -197,7 +197,7 @@ it is an error if there is no previous search string.
 <P>
 
 <DT><CODE>^<VAR>string1</VAR>^<VAR>string2</VAR>^</CODE>
-<DD>Quick Substitution.  Repeat the last command, replacing <VAR>string1</VAR>
+<DD>Quick Substitution.  Repeat the last_pipe command, replacing <VAR>string1</VAR>
 with <VAR>string2</VAR>.  Equivalent to
 <CODE>!!:s^<VAR>string1</VAR>^<VAR>string2</VAR>^</CODE>.
 <P>
@@ -231,7 +231,7 @@ Word designators are used to select desired words from the event.
 A <SAMP>`:'</SAMP> separates the event specification from the word designator.  It
 may be omitted if the word designator begins with a <SAMP>`^'</SAMP>, <SAMP>`$'</SAMP>,
 <SAMP>`*'</SAMP>, <SAMP>`-'</SAMP>, or <SAMP>`%'</SAMP>.  Words are numbered from the beginning
-of the line, with the first word being denoted by 0 (zero).  Words are
+of the line, with the first_pipe word being denoted by 0 (zero).  Words are
 inserted into the current line separated by single spaces.
 </P><P>
 
@@ -245,7 +245,7 @@ command is repeated in toto.
 <P>
 
 <DT><CODE>!!:$</CODE>
-<DD>designates the last argument of the preceding command.  This may be
+<DD>designates the last_pipe argument of the preceding command.  This may be
 shortened to <CODE>!$</CODE>.
 <P>
 
@@ -268,15 +268,15 @@ Here are the word designators:
 <P>
 
 <DT><CODE>^</CODE>
-<DD>The first argument; that is, word 1.
+<DD>The first_pipe argument; that is, word 1.
 <P>
 
 <DT><CODE>$</CODE>
-<DD>The last argument.
+<DD>The last_pipe argument.
 <P>
 
 <DT><CODE>%</CODE>
-<DD>The first word matched by the most recent <SAMP>`?<VAR>string</VAR>?'</SAMP> search,
+<DD>The first_pipe word matched by the most recent <SAMP>`?<VAR>string</VAR>?'</SAMP> search,
 if the search string begins with a character that is part of a word.
 <P>
 
@@ -295,7 +295,7 @@ the empty string is returned in that case.
 <P>
 
 <DT><CODE><VAR>x</VAR>-</CODE>
-<DD>Abbreviates <SAMP>`<VAR>x</VAR>-$'</SAMP> like <SAMP>`<VAR>x</VAR>*'</SAMP>, but omits the last word.
+<DD>Abbreviates <SAMP>`<VAR>x</VAR>-$'</SAMP> like <SAMP>`<VAR>x</VAR>*'</SAMP>, but omits the last_pipe word.
 If <SAMP>`x'</SAMP> is missing, it defaults to 0.
 <P>
 
@@ -353,20 +353,20 @@ the basename.
 <P>
 
 <DT><CODE>s/<VAR>old</VAR>/<VAR>new</VAR>/</CODE>
-<DD>Substitute <VAR>new</VAR> for the first occurrence of <VAR>old</VAR> in the
+<DD>Substitute <VAR>new</VAR> for the first_pipe occurrence of <VAR>old</VAR> in the
 event line.
 Any character may be used as the delimiter in place of <SAMP>`/'</SAMP>.
 The delimiter may be quoted in <VAR>old</VAR> and <VAR>new</VAR>
 with a single backslash.  If <SAMP>`&#38;'</SAMP> appears in <VAR>new</VAR>,
 it is replaced by <VAR>old</VAR>.  A single backslash will quote
 the <SAMP>`&#38;'</SAMP>.
-If <VAR>old</VAR> is null, it is set to the last <VAR>old</VAR>
+If <VAR>old</VAR> is null, it is set to the last_pipe <VAR>old</VAR>
 substituted, or, if no previous history substitutions took place,
-the last <VAR>string</VAR>
+the last_pipe <VAR>string</VAR>
 in a !?<VAR>string</VAR><CODE>[?]</CODE>
 search.
 If <VAR>new</VAR> is is null, each matching <VAR>old</VAR> is deleted.
-The final delimiter is optional if it is the last
+The final delimiter is optional if it is the last_pipe
 character on the input line.
 <P>
 
@@ -696,7 +696,7 @@ of an invalid <VAR>which</VAR>, a <CODE>NULL</CODE> pointer is returned.
 <A NAME="IDX11"></A>
 <DL>
 <DT><U>Function:</U> void <B>stifle_history</B> <I>(int max)</I>
-<DD>Stifle the history list, remembering only the last <VAR>max</VAR> entries.
+<DD>Stifle the history list, remembering only the last_pipe <VAR>max</VAR> entries.
 The history list will contain only <VAR>max</VAR> entries at a time.
 </DL>
 </P><P>
@@ -965,7 +965,7 @@ Returns 0 on success, or <CODE>errno</CODE> on a read or write error.
 <A NAME="IDX30"></A>
 <DL>
 <DT><U>Function:</U> int <B>append_history</B> <I>(int nelements, const char *filename)</I>
-<DD>Append the last <VAR>nelements</VAR> of the history list to <VAR>filename</VAR>.
+<DD>Append the last_pipe <VAR>nelements</VAR> of the history list to <VAR>filename</VAR>.
 If <VAR>filename</VAR> is <CODE>NULL</CODE>, then append to <TT>`~/.history'</TT>.
 Returns 0 on success, or <CODE>errno</CODE> on a read or write error.
 </DL>
@@ -974,7 +974,7 @@ Returns 0 on success, or <CODE>errno</CODE> on a read or write error.
 <A NAME="IDX31"></A>
 <DL>
 <DT><U>Function:</U> int <B>history_truncate_file</B> <I>(const char *filename, int nlines)</I>
-<DD>Truncate the history file <VAR>filename</VAR>, leaving only the last
+<DD>Truncate the history file <VAR>filename</VAR>, leaving only the last_pipe
 <VAR>nlines</VAR> lines.
 If <VAR>filename</VAR> is <CODE>NULL</CODE>, then <TT>`~/.history'</TT> is truncated.
 Returns 0 on success, or <CODE>errno</CODE> on failure.
@@ -1051,8 +1051,8 @@ and shell quoting conventions are obeyed as described below.
 
 <A NAME="IDX35"></A>
 <DL>
-<DT><U>Function:</U> char * <B>history_arg_extract</B> <I>(int first, int last, const char *string)</I>
-<DD>Extract a string segment consisting of the <VAR>first</VAR> through <VAR>last</VAR>
+<DT><U>Function:</U> char * <B>history_arg_extract</B> <I>(int first_pipe, int last_pipe, const char *string)</I>
+<DD>Extract a string segment consisting of the <VAR>first_pipe</VAR> through <VAR>last_pipe</VAR>
 arguments present in <VAR>string</VAR>.  Arguments are split using
 <CODE>history_tokenize</CODE>.
 </DL>
@@ -1083,7 +1083,7 @@ the GNU History Library.
 <A NAME="IDX36"></A>
 <DL>
 <DT><U>Variable:</U> int <B>history_base</B>
-<DD>The logical offset of the first entry in the history list.
+<DD>The logical offset of the first_pipe entry in the history list.
 </DL>
 </P><P>
 
@@ -1135,7 +1135,7 @@ a line.  The default is <SAMP>`^'</SAMP>.
 <A NAME="IDX42"></A>
 <DL>
 <DT><U>Variable:</U> char <B>history_comment_char</B>
-<DD>During tokenization, if this character is seen as the first character
+<DD>During tokenization, if this character is seen as the first_pipe character
 of a word, then it and all subsequent characters up to a newline are
 ignored, suppressing history expansion for the remainder of the line.
 This is disabled by default.
@@ -1519,7 +1519,7 @@ as verbatim copying in other respects.
 </P><P>
 
 If the required texts for either cover are too voluminous to fit
-legibly, you should put the first ones listed (as many as fit
+legibly, you should put the first_pipe ones listed (as many as fit
 reasonably) on the actual cover, and continue the rest onto adjacent
 pages.
 </P><P>
@@ -1533,7 +1533,7 @@ a complete Transparent copy of the Document, free of added material.
 If you use the latter option, you must take reasonably prudent steps,
 when you begin distribution of Opaque copies in quantity, to ensure
 that this Transparent copy will remain thus accessible at the stated
-location until at least one year after the last time you distribute an
+location until at least one year after the last_pipe time you distribute an
 Opaque copy (directly or through your agents or retailers) of that
 edition to the public.
 </P><P>
@@ -1793,7 +1793,7 @@ fails to notify you of the violation by some reasonable means prior to
 
 Moreover, your license from a particular copyright holder is
 reinstated permanently if the copyright holder notifies you of the
-violation by some reasonable means, this is the first time you have
+violation by some reasonable means, this is the first_pipe time you have
 received notice of violation of this License (for any work) from that
 copyright holder, and you cure the violation prior to 30 days after
 your receipt of the notice.
@@ -1856,7 +1856,7 @@ in part, as part of another Document.
 </P><P>
 
 An MMC is "eligible for relicensing" if it is licensed under this
-License, and if all works that were first published under this License
+License, and if all works that were first_pipe published under this License
 somewhere other than this MMC, and subsequently incorporated in whole
 or in part into the MMC, (1) had no cover texts or invariant sections,
 and (2) were thus incorporated prior to November 1, 2008.

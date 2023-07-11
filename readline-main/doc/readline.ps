@@ -6966,7 +6966,7 @@ Fl(C-b)d Ft(to)j(mo)m(v)m(e)g(the)f(cursor)g(to)g(the)g(left,)i(and)150
 4987 y(then)f(correct)i(y)m(our)e(mistak)m(e.)42 b(Afterw)m(ards,)31
 b(y)m(ou)f(can)h(mo)m(v)m(e)h(the)e(cursor)g(to)h(the)g(righ)m(t)g
 (with)f Fl(C-f)p Ft(.)275 5121 y(When)i(y)m(ou)h(add)f(text)h(in)f(the)
-h(middle)f(of)h(a)g(line,)h(y)m(ou)e(will)h(notice)h(that)f(c)m
+h(middle_pipe)f(of)h(a)g(line,)h(y)m(ou)e(will)h(notice)h(that)f(c)m
 (haracters)h(to)g(the)e(righ)m(t)150 5230 y(of)d(the)g(cursor)f(are)h
 (`pushed)e(o)m(v)m(er')j(to)g(mak)m(e)f(ro)s(om)g(for)f(the)h(text)h
 (that)f(y)m(ou)g(ha)m(v)m(e)h(inserted.)40 b(Lik)m(ewise,)150
@@ -6988,7 +6988,7 @@ m(haracter)i(to)f(the)g(left)g(of)f(the)h(cursor.)150
 (the)i(cursor.)150 1325 y(Prin)m(ting)g(c)m(haracters)630
 1435 y(Insert)f(the)g(c)m(haracter)i(in)m(to)g(the)e(line)h(at)g(the)g
 (cursor.)150 1596 y Fl(C-_)e Ft(or)i Fl(C-x)e(C-u)630
-1706 y Ft(Undo)k(the)h(last)g(editing)g(command.)50 b(Y)-8
+1706 y Ft(Undo)k(the)h(last_pipe)g(editing)g(command.)50 b(Y)-8
 b(ou)34 b(can)f(undo)g(all)h(the)f(w)m(a)m(y)i(bac)m(k)f(to)g(an)g
 (empt)m(y)630 1815 y(line.)150 1977 y(\(Dep)s(ending)29
 b(on)h(y)m(our)f(con\014guration,)i(the)e Fs(Backspace)e
@@ -7139,9 +7139,9 @@ b(F)-8 b(or)26 b(instance,)h(a)f Fs(RET)f Ft(will)g(terminate)i(the)f
 (searc)m(h)g(and)e(accept)150 518 y(the)30 b(line,)g(thereb)m(y)f
 (executing)i(the)e(command)g(from)g(the)h(history)f(list.)41
 b(A)29 b(mo)m(v)m(emen)m(t)j(command)d(will)150 628 y(terminate)i(the)g
-(searc)m(h,)g(mak)m(e)h(the)e(last)h(line)g(found)e(the)i(curren)m(t)f
+(searc)m(h,)g(mak)m(e)h(the)e(last_pipe)h(line)g(found)e(the)i(curren)m(t)f
 (line,)h(and)f(b)s(egin)g(editing.)275 777 y(Readline)35
-b(remem)m(b)s(ers)f(the)h(last)h(incremen)m(tal)g(searc)m(h)f(string.)
+b(remem)m(b)s(ers)f(the)h(last_pipe)h(incremen)m(tal)g(searc)m(h)f(string.)
 54 b(If)34 b(t)m(w)m(o)j Fl(C-r)p Ft(s)c(are)i(t)m(yp)s(ed)g(without)
 150 886 y(an)m(y)i(in)m(terv)m(ening)g(c)m(haracters)h(de\014ning)e(a)h
 (new)f(searc)m(h)h(string,)h(an)m(y)f(remem)m(b)s(ered)e(searc)m(h)i
@@ -7318,7 +7318,7 @@ h(Emacs.)40 b(This)29 b(v)-5 b(ariable)30 b(can)1110
 Fs(vi)p Ft('.)630 3759 y Fs(emacs-mode-string)1110 3868
 y Ft(If)j(the)h Fj(sho)m(w-mo)s(de-in-prompt)h Ft(v)-5
 b(ariable)35 b(is)e(enabled,)i(this)f(string)f(is)h(dis-)1110
-3978 y(pla)m(y)m(ed)24 b(immediately)g(b)s(efore)f(the)g(last)h(line)f
+3978 y(pla)m(y)m(ed)24 b(immediately)g(b)s(efore)f(the)g(last_pipe)h(line)f
 (of)h(the)f(primary)f(prompt)g(when)1110 4088 y(emacs)g(editing)h(mo)s
 (de)e(is)h(activ)m(e.)40 b(The)21 b(v)-5 b(alue)22 b(is)g(expanded)f
 (lik)m(e)h(a)h(k)m(ey)f(bind-)1110 4197 y(ing,)27 b(so)f(the)f
@@ -7535,7 +7535,7 @@ b(is)f(`)p Fs(off)p Ft('.)630 4244 y Fs(skip-completed-text)1110
 (default)g(completion)h(b)s(eha)m(vior)f(when)f(in-)1110
 4463 y(serting)d(a)h(single)g(matc)m(h)f(in)m(to)h(the)g(line.)40
 b(It's)30 b(only)f(activ)m(e)i(when)d(p)s(erform-)1110
-4573 y(ing)35 b(completion)h(in)e(the)h(middle)f(of)h(a)f(w)m(ord.)53
+4573 y(ing)35 b(completion)h(in)e(the)h(middle_pipe)f(of)h(a)f(w)m(ord.)53
 b(If)35 b(enabled,)g(readline)g(do)s(es)1110 4682 y(not)41
 b(insert)f(c)m(haracters)i(from)e(the)h(completion)h(that)f(matc)m(h)g
 (c)m(haracters)1110 4792 y(after)c(p)s(oin)m(t)g(in)g(the)g(w)m(ord)f
@@ -7554,7 +7554,7 @@ b(Command)29 b(Line)i(Editing)2107 b(10)630 299 y Fs
 (vi-cmd-mode-string)1110 408 y Ft(If)33 b(the)h Fj(sho)m(w-mo)s
 (de-in-prompt)h Ft(v)-5 b(ariable)35 b(is)e(enabled,)i(this)f(string)f
 (is)h(dis-)1110 518 y(pla)m(y)m(ed)24 b(immediately)g(b)s(efore)f(the)g
-(last)h(line)f(of)h(the)f(primary)f(prompt)g(when)1110
+(last_pipe)h(line)f(of)h(the)f(primary)f(prompt)g(when)1110
 628 y(vi)32 b(editing)h(mo)s(de)f(is)g(activ)m(e)j(and)c(in)h(command)g
 (mo)s(de.)46 b(The)31 b(v)-5 b(alue)33 b(is)f(ex-)1110
 737 y(panded)26 b(lik)m(e)i(a)f(k)m(ey)h(binding,)e(so)i(the)f
@@ -7569,7 +7569,7 @@ y(the)g(mo)s(de)f(string.)40 b(The)30 b(default)h(is)f(`)p
 Fs(\(cmd\))p Ft('.)630 1340 y Fs(vi-ins-mode-string)1110
 1450 y Ft(If)j(the)h Fj(sho)m(w-mo)s(de-in-prompt)h Ft(v)-5
 b(ariable)35 b(is)e(enabled,)i(this)f(string)f(is)h(dis-)1110
-1559 y(pla)m(y)m(ed)24 b(immediately)g(b)s(efore)f(the)g(last)h(line)f
+1559 y(pla)m(y)m(ed)24 b(immediately)g(b)s(efore)f(the)g(last_pipe)h(line)f
 (of)h(the)f(primary)f(prompt)g(when)1110 1669 y(vi)35
 b(editing)h(mo)s(de)e(is)i(activ)m(e)h(and)d(in)h(insertion)g(mo)s(de.)
 54 b(The)35 b(v)-5 b(alue)35 b(is)g(ex-)1110 1778 y(panded)26
@@ -7866,7 +7866,7 @@ g(wants)f(to)h(see)g(all)g(of)g(them)390 5230 y(set)g
 TeXDict begin 16 19 bop 150 -116 a Ft(Chapter)30 b(1:)41
 b(Command)29 b(Line)i(Editing)2107 b(16)390 299 y Fs(#)47
 b(For)g(FTP)390 408 y($if)g(Ftp)390 518 y("\\C-xg":)f("get)g(\\M-?")390
-628 y("\\C-xt":)g("put)g(\\M-?")390 737 y("\\M-.":)g(yank-last-arg)390
+628 y("\\C-xt":)g("put)g(\\M-?")390 737 y("\\M-.":)g(yank-last_pipe-arg)390
 847 y($endif)150 1089 y Fr(1.4)68 b(Bindable)45 b(Readline)i(Commands)
 150 1248 y Ft(This)25 b(section)i(describ)s(es)d(Readline)j(commands)e
 (that)h(ma)m(y)g(b)s(e)f(b)s(ound)f(to)i(k)m(ey)h(sequences.)39
@@ -8016,14 +8016,14 @@ Fj(n)p Ft(th)g(w)m(ord)g(from)g(the)h(end)f(of)h(the)f(previous)630
 2350 y(command.)48 b(Once)33 b(the)g(argumen)m(t)h Fj(n)e
 Ft(is)h(computed,)h(the)f(argumen)m(t)g(is)g(extracted)i(as)e(if)630
 2460 y(the)e(`)p Fs(!)p Fl(n)p Ft(')f(history)g(expansion)g(had)g(b)s
-(een)g(sp)s(eci\014ed.)150 2632 y Fs(yank-last-arg)d(\(M-.)i(or)h
-(M-_\))630 2742 y Ft(Insert)k(last)i(argumen)m(t)g(to)g(the)f(previous)
-f(command)h(\(the)h(last)f(w)m(ord)g(of)g(the)g(previous)630
+(een)g(sp)s(eci\014ed.)150 2632 y Fs(yank-last_pipe-arg)d(\(M-.)i(or)h
+(M-_\))630 2742 y Ft(Insert)k(last_pipe)i(argumen)m(t)g(to)g(the)f(previous)
+f(command)h(\(the)h(last_pipe)f(w)m(ord)g(of)g(the)g(previous)630
 2851 y(history)e(en)m(try\).)51 b(With)34 b(a)g(n)m(umeric)g(argumen)m
 (t,)h(b)s(eha)m(v)m(e)f(exactly)h(lik)m(e)g Fs(yank-nth-arg)p
-Ft(.)630 2961 y(Successiv)m(e)26 b(calls)g(to)f Fs(yank-last-arg)c
+Ft(.)630 2961 y(Successiv)m(e)26 b(calls)g(to)f Fs(yank-last_pipe-arg)c
 Ft(mo)m(v)m(e)27 b(bac)m(k)e(through)f(the)h(history)g(list,)i
-(inserting)630 3070 y(the)c(last)g(w)m(ord)f(\(or)h(the)g(w)m(ord)f(sp)
+(inserting)630 3070 y(the)c(last_pipe)g(w)m(ord)f(\(or)h(the)g(w)m(ord)f(sp)
 s(eci\014ed)g(b)m(y)g(the)h(argumen)m(t)g(to)g(the)g(\014rst)f(call\))i
 (of)f(eac)m(h)h(line)630 3180 y(in)36 b(turn.)58 b(An)m(y)36
 b(n)m(umeric)h(argumen)m(t)f(supplied)g(to)h(these)g(successiv)m(e)g
@@ -8031,7 +8031,7 @@ b(n)m(umeric)h(argumen)m(t)f(supplied)g(to)h(these)g(successiv)m(e)g
 (through)e(the)h(history)-8 b(.)54 b(A)35 b(negativ)m(e)i(argumen)m(t)e
 (switc)m(hes)h(the)630 3399 y(direction)23 b(through)g(the)g(history)f
 (\(bac)m(k)i(or)f(forw)m(ard\).)38 b(The)22 b(history)h(expansion)g
-(facilities)630 3509 y(are)28 b(used)f(to)h(extract)h(the)f(last)g
+(facilities)630 3509 y(are)28 b(used)f(to)h(extract)h(the)f(last_pipe)g
 (argumen)m(t,)h(as)e(if)h(the)g(`)p Fs(!$)p Ft(')f(history)g(expansion)
 h(had)f(b)s(een)630 3618 y(sp)s(eci\014ed.)150 3791 y
 Fs(operate-and-get-next)e(\(C-o\))630 3900 y Ft(Accept)30
@@ -8099,14 +8099,14 @@ g(cursor)f(forw)m(ard)h(o)m(v)m(er)h(the)f(c)m(haracter)i(at)e(the)g
 (cursor,)630 3529 y(mo)m(ving)k(the)g(cursor)f(forw)m(ard)g(as)g(w)m
 (ell.)57 b(If)35 b(the)h(insertion)g(p)s(oin)m(t)f(is)g(at)i(the)e(end)
 g(of)h(the)630 3639 y(line,)24 b(then)e(this)g(transp)s(oses)f(the)h
-(last)h(t)m(w)m(o)g(c)m(haracters)g(of)f(the)h(line.)38
+(last_pipe)h(t)m(w)m(o)g(c)m(haracters)g(of)f(the)h(line.)38
 b(Negativ)m(e)25 b(argumen)m(ts)630 3748 y(ha)m(v)m(e)32
 b(no)e(e\013ect.)150 3900 y Fs(transpose-words)c(\(M-t\))630
 4009 y Ft(Drag)33 b(the)g(w)m(ord)f(b)s(efore)g(p)s(oin)m(t)g(past)g
 (the)h(w)m(ord)f(after)g(p)s(oin)m(t,)i(mo)m(ving)f(p)s(oin)m(t)f(past)
 g(that)630 4119 y(w)m(ord)c(as)h(w)m(ell.)41 b(If)27
 b(the)i(insertion)f(p)s(oin)m(t)h(is)f(at)h(the)g(end)e(of)i(the)f
-(line,)i(this)e(transp)s(oses)g(the)630 4228 y(last)j(t)m(w)m(o)h(w)m
+(line,)i(this)e(transp)s(oses)g(the)630 4228 y(last_pipe)j(t)m(w)m(o)h(w)m
 (ords)e(on)g(the)h(line.)150 4380 y Fs(upcase-word)c(\(M-u\))630
 4489 y Ft(Upp)s(ercase)32 b(the)g(curren)m(t)g(\(or)g(follo)m(wing\))i
 (w)m(ord.)45 b(With)32 b(a)g(negativ)m(e)j(argumen)m(t,)e(upp)s(er-)630
@@ -8168,7 +8168,7 @@ Fs(backward-word)p Ft(.)150 3845 y Fs(shell-transpose-words)c
 m(t)g(past)g(the)h(w)m(ord)f(after)g(p)s(oin)m(t,)i(mo)m(ving)f(p)s
 (oin)m(t)f(past)g(that)630 4064 y(w)m(ord)c(as)h(w)m(ell.)41
 b(If)27 b(the)i(insertion)f(p)s(oin)m(t)h(is)f(at)h(the)g(end)e(of)i
-(the)f(line,)i(this)e(transp)s(oses)g(the)630 4174 y(last)j(t)m(w)m(o)h
+(the)f(line,)i(this)e(transp)s(oses)g(the)630 4174 y(last_pipe)j(t)m(w)m(o)h
 (w)m(ords)d(on)i(the)f(line.)41 b(W)-8 b(ord)31 b(b)s(oundaries)e(are)h
 (the)h(same)f(as)h Fs(shell-forward-)630 4283 y(word)e
 Ft(and)h Fs(shell-backward-word)p Ft(.)150 4453 y Fs(unix-word-rubout)c
@@ -8288,12 +8288,12 @@ b(Macros)150 2399 y Fs(start-kbd-macro)26 b(\(C-x)j(\(\))630
 2664 y Fs(end-kbd-macro)d(\(C-x)i(\)\))630 2774 y Ft(Stop)e(sa)m(ving)h
 (the)g(c)m(haracters)g(t)m(yp)s(ed)f(in)m(to)i(the)e(curren)m(t)g(k)m
 (eyb)s(oard)g(macro)h(and)f(sa)m(v)m(e)i(the)630 2883
-y(de\014nition.)150 3039 y Fs(call-last-kbd-macro)c(\(C-x)k(e\))630
-3148 y Ft(Re-execute)37 b(the)e(last)h(k)m(eyb)s(oard)f(macro)h
+y(de\014nition.)150 3039 y Fs(call-last_pipe-kbd-macro)c(\(C-x)k(e\))630
+3148 y Ft(Re-execute)37 b(the)e(last_pipe)h(k)m(eyb)s(oard)f(macro)h
 (de\014ned,)f(b)m(y)h(making)f(the)g(c)m(haracters)i(in)e(the)630
 3258 y(macro)c(app)s(ear)f(as)g(if)h(t)m(yp)s(ed)f(at)h(the)f(k)m(eyb)s
-(oard.)150 3413 y Fs(print-last-kbd-macro)25 b(\(\))630
-3523 y Ft(Prin)m(t)30 b(the)h(last)g(k)m(eb)s(oard)f(macro)h(de\014ned)
+(oard.)150 3413 y Fs(print-last_pipe-kbd-macro)25 b(\(\))630
+3523 y Ft(Prin)m(t)30 b(the)h(last_pipe)g(k)m(eb)s(oard)f(macro)h(de\014ned)
 e(in)i(a)f(format)h(suitable)g(for)f(the)h Fj(inputrc)k
 Ft(\014le.)150 3718 y Fi(1.4.8)63 b(Some)41 b(Miscellaneous)i(Commands)
 150 3888 y Fs(re-read-init-file)26 b(\(C-x)j(C-r\))630
@@ -8764,7 +8764,7 @@ Ft(en)m(vironmen)m(t)j(v)-5 b(ari-)390 518 y(ables)41
 b(greater)h(precedence)g(than)e(v)-5 b(alues)41 b(fetc)m(hed)h(from)e
 (the)h(k)m(ernel)h(when)e(computing)h(the)390 628 y(screen)30
 b(dimensions.)3371 847 y([V)-8 b(ariable])-3598 b Fh(rl_command_func_t)
-57 b(*)c(rl_last_func)390 956 y Ft(The)34 b(address)g(of)h(the)g(last)h
+57 b(*)c(rl_last_func)390 956 y Ft(The)34 b(address)g(of)h(the)g(last_pipe)h
 (command)e(function)g(Readline)i(executed.)55 b(Ma)m(y)35
 b(b)s(e)g(used)f(to)h(test)390 1066 y(whether)30 b(or)g(not)h(a)f
 (function)h(is)f(b)s(eing)g(executed)h(t)m(wice)h(in)e(succession,)h
@@ -8871,7 +8871,7 @@ y([V)-8 b(ariable])-3598 b Fh(Keymap)54 b(rl_executing_keymap)390
 b Fh(Keymap)54 b(rl_binding_keymap)390 2481 y Ft(This)35
 b(v)-5 b(ariable)37 b(is)f(set)g(to)h(the)f(k)m(eymap)h(\(see)g
 (Section)f(2.4.2)i([Keymaps],)g(page)e(34\))i(in)d(whic)m(h)390
-2591 y(the)c(last)g(k)m(ey)g(binding)e(o)s(ccurred.)3371
+2591 y(the)c(last_pipe)g(k)m(ey)g(binding)e(o)s(ccurred.)3371
 2780 y([V)-8 b(ariable])-3598 b Fh(char)54 b(*)e(rl_executing_macro)390
 2890 y Ft(This)30 b(v)-5 b(ariable)31 b(is)f(set)h(to)g(the)g(text)g
 (of)g(an)m(y)f(curren)m(tly-executing)i(macro.)3371 3079
@@ -9451,7 +9451,7 @@ b(unction])-3599 b Fh(int)53 b(rl_clear_message)e Fg(\()p
 Ff(v)m(oid)p Fg(\))390 3367 y Ft(Clear)29 b(the)g(message)h(in)f(the)g
 (ec)m(ho)h(area.)41 b(If)29 b(the)g(prompt)f(w)m(as)h(sa)m(v)m(ed)h
 (with)f(a)g(call)i(to)e Fs(rl_save_)390 3477 y(prompt)38
-b Ft(b)s(efore)h(the)g(last)h(call)h(to)f Fs(rl_message)p
+b Ft(b)s(efore)h(the)g(last_pipe)h(call)h(to)f Fs(rl_message)p
 Ft(,)f(call)i Fs(rl_restore_prompt)34 b Ft(b)s(efore)39
 b(calling)390 3587 y(this)30 b(function.)3350 3769 y([F)-8
 b(unction])-3599 b Fh(void)54 b(rl_save_prompt)49 b Fg(\()p
@@ -9478,7 +9478,7 @@ Fs(readline\(\))p Ft(.)55 b(It)35 b(ma)m(y)i(also)g(b)s(e)390
 Fs(rl_on_new_line_with_prom)o(pt\()o(\))15 b Ft(function)390
 5230 y(or)25 b Fs(rl_already_prompted)c Ft(v)-5 b(ariable)26
 b(is)f(used.)39 b(It)25 b(returns)f(the)i(n)m(um)m(b)s(er)e(of)i
-(visible)f(c)m(haracters)390 5340 y(on)34 b(the)g(last)g(line)g(of)g
+(visible)f(c)m(haracters)390 5340 y(on)34 b(the)g(last_pipe)g(line)g(of)g
 (the)g(\(p)s(ossibly)f(m)m(ulti-line\))j(prompt.)50 b(Applications)34
 b(ma)m(y)h(indicate)f(that)p eop end
 %%Page: 40 44
@@ -9517,11 +9517,11 @@ b(rl_kill_text)c Fg(\()p Ff(in)m(t)34 b(start,)e(in)m(t)i(end)p
 Fg(\))390 2698 y Ft(Cop)m(y)g(the)g(text)i(b)s(et)m(w)m(een)e
 Fj(start)j Ft(and)d Fj(end)j Ft(in)d(the)g(curren)m(t)g(line)g(to)h
 (the)f(kill)h(ring,)g(app)s(ending)390 2808 y(or)f(prep)s(ending)e(to)j
-(the)f(last)h(kill)f(if)g(the)g(last)h(command)f(w)m(as)g(a)h(kill)f
+(the)f(last_pipe)h(kill)f(if)g(the)g(last_pipe)h(command)f(w)m(as)g(a)h(kill)f
 (command.)51 b(The)34 b(text)h(is)390 2918 y(deleted.)51
 b(If)33 b Fj(start)j Ft(is)e(less)g(than)f Fj(end)p Ft(,)h(the)g(text)g
 (is)g(app)s(ended,)f(otherwise)h(prep)s(ended.)48 b(If)33
-b(the)390 3027 y(last)e(command)f(w)m(as)h(not)g(a)f(kill,)i(a)f(new)e
+b(the)390 3027 y(last_pipe)e(command)f(w)m(as)h(not)g(a)f(kill,)i(a)f(new)e
 (kill)i(ring)g(slot)g(is)f(used.)3350 3224 y([F)-8 b(unction])-3599
 b Fh(int)53 b(rl_push_macro_input)e Fg(\()p Ff(c)m(har)35
 b(*macro)p Fg(\))390 3333 y Ft(Cause)28 b Fj(macro)33
@@ -9904,7 +9904,7 @@ Fs(M-c)p Ft(')150 1446 y(w)m(ould)c(c)m(hange)i(the)f(case)g(of)g(the)g
 (c)m(haracter)h(under)d(p)s(oin)m(t.)44 b(T)m(yping)31
 b(`)p Fs(M-1)f(0)g(M-c)p Ft(')h(w)m(ould)g(c)m(hange)i(the)150
 1555 y(case)e(of)g(the)g(follo)m(wing)g(10)h(c)m(haracters,)g(lea)m
-(ving)g(the)e(cursor)g(on)g(the)h(last)g(c)m(haracter)h(c)m(hanged.)390
+(ving)g(the)e(cursor)g(on)g(the)h(last_pipe)g(c)m(haracter)h(c)m(hanged.)390
 1724 y Fs(/*)47 b(Invert)f(the)h(case)g(of)g(the)g(COUNT)f(following)g
 (characters.)e(*/)390 1833 y(int)390 1943 y(invert_case_line)f
 (\(count,)j(key\))629 2052 y(int)h(count,)f(key;)390
@@ -9935,7 +9935,7 @@ b(\(rl_line_buffer[i]\)\))772 1614 y(rl_line_buffer[i])g(=)k
 (\(_rl_lowercase_p)d(\(rl_line_buffer[i]\)\))772 1833
 y(rl_line_buffer[i])f(=)k(_rl_to_upper)e(\(rl_line_buffer[i]\);)581
 1943 y(})485 2052 y(/*)j(Move)e(point)h(to)g(on)g(top)g(of)g(the)g
-(last)g(character)e(changed.)g(*/)485 2162 y(rl_point)h(=)h
+(last_pipe)g(character)e(changed.)g(*/)485 2162 y(rl_point)h(=)h
 (\(direction)e(==)j(1\))f(?)g(end)g(-)h(1)f(:)h(start;)485
 2271 y(return)f(\(0\);)390 2381 y(})150 2614 y Fi(2.4.14)63
 b(Alternate)40 b(In)m(terface)g(Example)150 2761 y Ft(Here)f(is)g(a)g
@@ -11006,12 +11006,12 @@ b(*/)390 3350 y(/*)40 b(******************************)q(*****)q(****)q
 (char)e(*,)g(int,)g(int\)\);)390 3786 y(/*)g(Tell)g(the)g(GNU)g
 (Readline)h(library)g(how)e(to)h(complete.)81 b(We)39
 b(want)h(to)g(try)g(to)g(complete)508 3873 y(on)f(command)i(names)g(if)
-e(this)h(is)g(the)g(first)g(word)g(in)g(the)g(line,)g(or)g(on)g
+e(this)h(is)g(the)g(first_pipe)g(word)g(in)g(the)g(line,)g(or)g(on)g
 (filenames)508 3960 y(if)f(not.)h(*/)390 4047 y(initialize_readline)k
 (\(\))390 4134 y({)468 4222 y(/*)c(Allow)g(conditional)i(parsing)f(of)f
 (the)g(~/.inputrc)h(file.)g(*/)468 4309 y(rl_readline_name)i(=)d
 ("FileMan";)468 4483 y(/*)g(Tell)g(the)g(completer)h(that)g(we)e(want)h
-(a)g(crack)g(first.)h(*/)468 4570 y(rl_attempted_completion_fun)q(ctio)
+(a)g(crack)g(first_pipe.)h(*/)468 4570 y(rl_attempted_completion_fun)q(ctio)
 q(n)k(=)39 b(fileman_completion;)390 4658 y(})390 4832
 y(/*)h(Attempt)g(to)g(complete)h(on)f(the)g(contents)h(of)f(TEXT.)79
 b(START)41 b(and)e(END)h(bound)h(the)508 4919 y(region)f(of)g
@@ -11397,7 +11397,7 @@ b(ransparen)m(t)39 b(cop)m(y)g(of)g(the)h(Do)s(cumen)m(t,)i(free)d(of)g
 (Opaque)g(copies)h(in)e(quan)m(tit)m(y)-8 b(,)43 b(to)38
 b(ensure)g(that)h(this)f(T)-8 b(ransparen)m(t)38 b(cop)m(y)h(will)330
 3818 y(remain)30 b(th)m(us)g(accessible)i(at)f(the)f(stated)h(lo)s
-(cation)h(un)m(til)e(at)h(least)h(one)e(y)m(ear)h(after)g(the)f(last)h
+(cation)h(un)m(til)e(at)h(least)h(one)e(y)m(ear)h(after)g(the)f(last_pipe)h
 (time)330 3927 y(y)m(ou)37 b(distribute)f(an)h(Opaque)f(cop)m(y)i
 (\(directly)g(or)e(through)g(y)m(our)h(agen)m(ts)h(or)f(retailers\))h
 (of)f(that)330 4037 y(edition)31 b(to)g(the)g(public.)330
@@ -11873,7 +11873,7 @@ y(blink-matc)n(hing-paren)6 b Fa(:)12 b(:)i(:)f(:)g(:)g(:)g(:)g(:)g(:)g
 g(:)21 b Fb(5)150 3100 y Fe(bracketed-paste-begin)30
 b(\(\))18 b Fa(:)c(:)f(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g
 (:)g(:)g(:)g(:)g(:)g(:)33 b Fb(19)146 3387 y Fr(C)150
-3509 y Fe(call-last-kbd-macro)d(\(C-x)c(e\))17 b Fa(:)d(:)f(:)h(:)f(:)g
+3509 y Fe(call-last_pipe-kbd-macro)d(\(C-x)c(e\))17 b Fa(:)d(:)f(:)h(:)f(:)g
 (:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)32 b Fb(22)150
 3598 y Fe(capitalize-word)d(\(M-c\))9 b Fa(:)14 b(:)f(:)g(:)g(:)h(:)f
 (:)g(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)
@@ -12076,7 +12076,7 @@ b Fa(:)13 b(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g
 (:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g(:)21
 b Fb(17)150 4128 y Fe(previous-screen-line)30 b(\(\))21
 b Fa(:)13 b(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g
-(:)h(:)f(:)g(:)g(:)35 b Fb(16)150 4215 y Fe(print-last-kbd-macro)30
+(:)h(:)f(:)g(:)g(:)35 b Fb(16)150 4215 y Fe(print-last_pipe-kbd-macro)30
 b(\(\))21 b Fa(:)13 b(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g
 (:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)35 b Fb(22)146 4547 y
 Fr(Q)150 4672 y Fe(quoted-insert)29 b(\(C-q)d(or)g(C-v\))10
@@ -12454,7 +12454,7 @@ g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g
 Fr(Y)2025 4879 y Fe(yank)g(\(C-y\))21 b Fa(:)13 b(:)g(:)h(:)f(:)g(:)g
 (:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)
 g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)34 b
-Fb(21)2025 4968 y Fe(yank-last-arg)28 b(\(M-.)f(or)f(M-_\))10
+Fb(21)2025 4968 y Fe(yank-last_pipe-arg)28 b(\(M-.)f(or)f(M-_\))10
 b Fa(:)k(:)f(:)g(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)h(:)
 f(:)g(:)24 b Fb(18)2025 5056 y Fe(yank-nth-arg)k(\(M-C-y\))11
 b Fa(:)k(:)e(:)g(:)h(:)f(:)g(:)g(:)g(:)g(:)g(:)g(:)h(:)f(:)g(:)g(:)g(:)

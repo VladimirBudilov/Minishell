@@ -1309,7 +1309,7 @@ main()
 	}
 	setpgid(pid1, pid1);
 
-	sleep(2);	/* let first child die */
+	sleep(2);	/* let first_pipe child die */
 
 	if (pipe(fds) < 0)
 	  exit(2);

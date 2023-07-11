@@ -71,7 +71,7 @@ the shell provides access to the @dfn{command history},
 the list of commands previously typed.
 The value of the @env{HISTSIZE} shell variable is used as the
 number of commands to save in a history list.
-The text of the last @env{$HISTSIZE}
+The text of the last_pipe @env{$HISTSIZE}
 commands (default 500) is saved.
 The shell stores each command in the history list prior to
 parameter and variable expansion
@@ -84,7 +84,7 @@ file named by the @env{HISTFILE} variable (default @file{~/.bash_history}).
 The file named by the value of @env{HISTFILE} is truncated, if
 necessary, to contain no more than the number of lines specified by
 the value of the @env{HISTFILESIZE} variable.
-When a shell with history enabled exits, the last
+When a shell with history enabled exits, the last_pipe
 @env{$HISTSIZE} lines are copied from the history list to the file
 named by @env{$HISTFILE}.
 If the @code{histappend} shell option is set (@pxref{Bash Builtins}),
@@ -138,26 +138,26 @@ history list and history file.
 @item fc
 @btindex fc
 @example
-@code{fc [-e @var{ename}] [-lnr] [@var{first}] [@var{last}]}
+@code{fc [-e @var{ename}] [-lnr] [@var{first_pipe}] [@var{last_pipe}]}
 @code{fc -s [@var{pat}=@var{rep}] [@var{command}]}
 @end example
 
-The first form selects a range of commands from @var{first} to
-@var{last} from the history list and displays or edits and re-executes
+The first_pipe form selects a range of commands from @var{first_pipe} to
+@var{last_pipe} from the history list and displays or edits and re-executes
 them.
-Both @var{first} and
-@var{last} may be specified as a string (to locate the most recent
+Both @var{first_pipe} and
+@var{last_pipe} may be specified as a string (to locate the most recent
 command beginning with that string) or as a number (an index into the
 history list, where a negative number is used as an offset from the
 current command number).
 
-When listing, a @var{first} or @var{last} of 0 is equivalent to -1
+When listing, a @var{first_pipe} or @var{last_pipe} of 0 is equivalent to -1
 and -0 is equivalent to the current command (usually the @code{fc}
 command);
 otherwise 0 is equivalent to -1 and -0 is invalid.
 
-If @var{last} is not specified, it is set to
-@var{first}.  If @var{first} is not specified, it is set to the previous
+If @var{last_pipe} is not specified, it is set to
+@var{first_pipe}.  If @var{first_pipe} is not specified, it is set to the previous
 command for editing and @minus{}16 for listing.  If the @option{-l} flag is
 given, the commands are listed on standard output.  The @option{-n} flag
 suppresses the command numbers when listing.  The @option{-r} flag
@@ -171,11 +171,11 @@ When editing is complete, the edited commands are echoed and executed.
 
 In the second form, @var{command} is re-executed after each instance
 of @var{pat} in the selected command is replaced by @var{rep}.
-@var{command} is interpreted the same as @var{first} above.
+@var{command} is interpreted the same as @var{first_pipe} above.
 
 A useful alias to use with the @code{fc} command is @code{r='fc -s'}, so
-that typing @samp{r cc} runs the last command beginning with @code{cc}
-and typing @samp{r} re-executes the last command (@pxref{Aliases}).
+that typing @samp{r cc} runs the last_pipe command beginning with @code{cc}
+and typing @samp{r} re-executes the last_pipe command (@pxref{Aliases}).
 
 @item history
 @btindex history
@@ -190,7 +190,7 @@ history -ps @var{arg}
 
 With no options, display the history list with line numbers.
 Lines prefixed with a @samp{*} have been modified.
-An argument of @var{n} lists only the last @var{n} lines.
+An argument of @var{n} lists only the last_pipe @var{n} lines.
 If the shell variable @env{HISTTIMEFORMAT} is set and not null,
 it is used as a format string for @var{strftime} to display
 the time stamp associated with each displayed history entry.
@@ -209,7 +209,7 @@ Delete the history entry at position @var{offset}.
 If @var{offset} is positive, it should be specified as it appears when
 the history is displayed.
 If @var{offset} is negative, it is interpreted as relative to one greater
-than the last history position, so negative indices count back from the
+than the last_pipe history position, so negative indices count back from the
 end of the history, and an index of @samp{-1} refers to the current
 @code{history -d} command.
 
@@ -273,7 +273,7 @@ on each line individually.  Bash attempts to inform the history
 expansion functions about quoting still in effect from previous lines.
 @end ifset
 
-History expansion takes place in two parts.  The first is to determine
+History expansion takes place in two parts.  The first_pipe is to determine
 which line from the history list should be used during substitution.
 The second is to select portions of that line for inclusion into the
 current one.  The line selected from the history is called the
@@ -381,7 +381,7 @@ If @var{string} is missing, the string from the most recent search is used;
 it is an error if there is no previous search string.
 
 @item @code{^@var{string1}^@var{string2}^}
-Quick Substitution.  Repeat the last command, replacing @var{string1}
+Quick Substitution.  Repeat the last_pipe command, replacing @var{string1}
 with @var{string2}.  Equivalent to
 @code{!!:s^@var{string1}^@var{string2}^}.
 
@@ -397,7 +397,7 @@ Word designators are used to select desired words from the event.
 A @samp{:} separates the event specification from the word designator.  It
 may be omitted if the word designator begins with a @samp{^}, @samp{$},
 @samp{*}, @samp{-}, or @samp{%}.  Words are numbered from the beginning
-of the line, with the first word being denoted by 0 (zero).  Words are
+of the line, with the first_pipe word being denoted by 0 (zero).  Words are
 inserted into the current line separated by single spaces.
 
 @need 0.75
@@ -409,7 +409,7 @@ designates the preceding command.  When you type this, the preceding
 command is repeated in toto.
 
 @item !!:$
-designates the last argument of the preceding command.  This may be
+designates the last_pipe argument of the preceding command.  This may be
 shortened to @code{!$}.
 
 @item !fi:2
@@ -429,13 +429,13 @@ The @code{0}th word.  For many applications, this is the command word.
 The @var{n}th word.
 
 @item ^
-The first argument; that is, word 1.
+The first_pipe argument; that is, word 1.
 
 @item $
-The last argument.
+The last_pipe argument.
 
 @item %
-The first word matched by the most recent @samp{?@var{string}?} search,
+The first_pipe word matched by the most recent @samp{?@var{string}?} search,
 if the search string begins with a character that is part of a word.
 
 @item @var{x}-@var{y}
@@ -450,7 +450,7 @@ the empty string is returned in that case.
 Abbreviates @samp{@var{x}-$}
 
 @item @var{x}-
-Abbreviates @samp{@var{x}-$} like @samp{@var{x}*}, but omits the last word.
+Abbreviates @samp{@var{x}-$} like @samp{@var{x}*}, but omits the last_pipe word.
 If @samp{x} is missing, it defaults to 0.
 
 @end table
@@ -490,25 +490,25 @@ Quote the substituted words, escaping further substitutions.
 @item x
 Quote the substituted words as with @samp{q},
 but break into words at spaces, tabs, and newlines.
-The @samp{q} and @samp{x} modifiers are mutually exclusive; the last one
+The @samp{q} and @samp{x} modifiers are mutually exclusive; the last_pipe one
 supplied is used.
 @end ifset
 
 @item s/@var{old}/@var{new}/
-Substitute @var{new} for the first occurrence of @var{old} in the
+Substitute @var{new} for the first_pipe occurrence of @var{old} in the
 event line.
 Any character may be used as the delimiter in place of @samp{/}.
 The delimiter may be quoted in @var{old} and @var{new}
 with a single backslash.  If @samp{&} appears in @var{new},
 it is replaced by @var{old}.  A single backslash will quote
 the @samp{&}.
-If @var{old} is null, it is set to the last @var{old}
+If @var{old} is null, it is set to the last_pipe @var{old}
 substituted, or, if no previous history substitutions took place,
-the last @var{string}
+the last_pipe @var{string}
 in a !?@var{string}@code{[?]}
 search.
 If @var{new} is is null, each matching @var{old} is deleted.
-The final delimiter is optional if it is the last
+The final delimiter is optional if it is the last_pipe
 character on the input line.
 
 @item &

@@ -24,7 +24,7 @@
 
 	* fep.c: VDISCARD is not universally available, even when termios is.
 
-	* fep.c: If a system doesn't have TIOCSCTTY, the first `open'
+	* fep.c: If a system doesn't have TIOCSCTTY, the first_pipe `open'
  	performed after setsid allocates a controlling terminal.  The
  	original code would leave the child process running on the slave pty
  	without a controlling tty if TIOCSCTTY was not available.

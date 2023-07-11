@@ -247,7 +247,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
               [1mvi[22m.
        [1memacs-mode-string (@)[0m
               If the [4mshow-mode-in-prompt[24m variable is enabled, this  string  is
-              displayed immediately before the last line of the primary prompt
+              displayed immediately before the last_pipe line of the primary prompt
               when emacs editing mode is active.  The value is expanded like a
               key  binding,  so the standard set of meta- and control prefixes
               and backslash escape sequences is available.  Use the \1 and  \2
@@ -375,13 +375,13 @@ READLINE(3)                Library Functions Manual                READLINE(3)
        [1mskip-completed-text (Off)[0m
               If  set  to [1mOn[22m, this alters the default completion behavior when
               inserting a single match into the line.  It's only  active  when
-              performing  completion  in  the  middle  of a word.  If enabled,
+              performing  completion  in  the  middle_pipe  of a word.  If enabled,
               readline does not insert characters  from  the  completion  that
               match  characters  after  point  in the word being completed, so
               portions of the word following the cursor are not duplicated.
        [1mvi-cmd-mode-string ((cmd))[0m
               If the [4mshow-mode-in-prompt[24m variable is enabled, this  string  is
-              displayed immediately before the last line of the primary prompt
+              displayed immediately before the last_pipe line of the primary prompt
               when vi editing mode is active and in command mode.   The  value
               is expanded like a key binding, so the standard set of meta- and
               control prefixes and backslash escape  sequences  is  available.
@@ -390,7 +390,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
               trol sequence into the mode string.
        [1mvi-ins-mode-string ((ins))[0m
               If  the  [4mshow-mode-in-prompt[24m variable is enabled, this string is
-              displayed immediately before the last line of the primary prompt
+              displayed immediately before the last_pipe line of the primary prompt
               when vi editing mode is active and in insertion mode.  The value
               is expanded like a key binding, so the standard set of meta- and
               control  prefixes  and  backslash escape sequences is available.
@@ -425,7 +425,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
                      key bindings, perhaps to bind the key sequences output by
                      the terminal's function keys.  The word on the right side
                      of  the [1m= [22mis tested against the full name of the terminal
-                     and the portion of the terminal name before the first  [1m-[22m.
+                     and the portion of the terminal name before the first_pipe  [1m-[22m.
                      This  allows  [4msun[24m  to match both [4msun[24m and [4msun-cmd[24m, for in-
                      stance.
 
@@ -504,7 +504,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
        sequence bound to a readline command will terminate the search and exe-
        cute  that  command.  For instance, a newline will terminate the search
        and accept the line, thereby executing the  command  from  the  history
-       list.  A movement command will terminate the search, make the last line
+       list.  A movement command will terminate the search, make the last_pipe line
        found the current line, and begin editing.
 
        Non-incremental searches read the entire search string before  starting
@@ -572,7 +572,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
               Fetch  the next command from the history list, moving forward in
               the list.
        [1mbeginning-of-history (M-<)[0m
-              Move to the first line in the history.
+              Move to the first_pipe line in the history.
        [1mend-of-history (M->)[0m
               Move to the end of the input history, i.e., the  line  currently
               being entered.
@@ -612,24 +612,24 @@ READLINE(3)                Library Functions Manual                READLINE(3)
               string  may match anywhere in a history line.  This is a non-in-
               cremental search.
        [1myank-nth-arg (M-C-y)[0m
-              Insert the first argument to the previous command  (usually  the
+              Insert the first_pipe argument to the previous command  (usually  the
               second word on the previous line) at point.  With an argument [4mn[24m,
               insert the [4mn[24mth word from the previous command (the words in  the
               previous  command  begin  with word 0).  A negative argument in-
               serts the [4mn[24mth word from the end of the previous  command.   Once
               the  argument [4mn[24m is computed, the argument is extracted as if the
               "![4mn[24m" history expansion had been specified.
-       [1myank-last-arg (M-., M-_)[0m
-              Insert the last argument to the previous command (the last  word
+       [1myank-last_pipe-arg (M-., M-_)[0m
+              Insert the last_pipe argument to the previous command (the last_pipe  word
               of the previous history entry).  With a numeric argument, behave
-              exactly like [1myank-nth-arg[22m.  Successive  calls  to  [1myank-last-arg[0m
-              move  back through the history list, inserting the last word (or
-              the word specified by the argument to the first  call)  of  each
+              exactly like [1myank-nth-arg[22m.  Successive  calls  to  [1myank-last_pipe-arg[0m
+              move  back through the history list, inserting the last_pipe word (or
+              the word specified by the argument to the first_pipe  call)  of  each
               line in turn.  Any numeric argument supplied to these successive
               calls determines the direction to move through the  history.   A
               negative  argument  switches  the  direction through the history
               (back or forward).  The history expansion facilities are used to
-              extract  the last argument, as if the "!$" history expansion had
+              extract  the last_pipe argument, as if the "!$" history expansion had
               been specified.
        [1moperate-and-get-next (C-o)[0m
               Accept the current line for return to the calling application as
@@ -670,7 +670,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
        [1mtranspose-words (M-t)[0m
               Drag the word before point past the  word  after  point,  moving
               point  over  that  word  as well.  If point is at the end of the
-              line, this transposes the last two words on the line.
+              line, this transposes the last_pipe two words on the line.
        [1mupcase-word (M-u)[0m
               Uppercase the current (or following) word.  With a negative  ar-
               gument, uppercase the previous word, but do not move point.
@@ -748,7 +748,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
               this command is immediately followed by a character that is nei-
               ther a digit or minus sign, the argument count for the next com-
               mand  is  multiplied  by  four.  The argument count is initially
-              one, so executing this function the first time makes  the  argu-
+              one, so executing this function the first_pipe time makes  the  argu-
               ment count four, a second time makes the argument count sixteen,
               and so on.
 
@@ -798,11 +798,11 @@ READLINE(3)                Library Functions Manual                READLINE(3)
        [1mend-kbd-macro (C-x ))[0m
               Stop saving the characters typed into the current keyboard macro
               and store the definition.
-       [1mcall-last-kbd-macro (C-x e)[0m
-              Re-execute  the last keyboard macro defined, by making the char-
+       [1mcall-last_pipe-kbd-macro (C-x e)[0m
+              Re-execute  the last_pipe keyboard macro defined, by making the char-
               acters in the macro appear as if typed at the keyboard.
-       [1mprint-last-kbd-macro ()[0m
-              Print the last keyboard macro defined in a format  suitable  for
+       [1mprint-last_pipe-kbd-macro ()[0m
+              Print the last_pipe keyboard macro defined in a format  suitable  for
               the [4minputrc[24m file.
 
    [1mMiscellaneous[0m
@@ -947,7 +947,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
              "M-&"  tilde-expand
              "M-*"  insert-completions
              "M--"  digit-argument
-             "M-."  yank-last-arg
+             "M-."  yank-last_pipe-arg
              "M-0"  digit-argument
              "M-1"  digit-argument
              "M-2"  digit-argument
@@ -976,7 +976,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
              "M-\"  delete-horizontal-space
              "M-~"  tilde-expand
              "M-C-?"  backward-kill-word
-             "M-_"  yank-last-arg
+             "M-_"  yank-last_pipe-arg
 
              Emacs Control-X bindings
 
@@ -986,7 +986,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
              "C-XC-X"  exchange-point-and-mark
              "C-X("  start-kbd-macro
              "C-X)"  end-kbd-macro
-             "C-XE"  call-last-kbd-macro
+             "C-XE"  call-last_pipe-kbd-macro
              "C-XC-?"  backward-kill-line
 
 
@@ -1065,7 +1065,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
              "X"  backward-delete-char
              "Y"  vi-yank-to
              "\"  vi-complete
-             "^"  vi-first-print
+             "^"  vi-first_pipe-print
              "_"  vi-yank-arg
              "`"  vi-goto-mark
              "a"  vi-append-mode
@@ -1109,7 +1109,7 @@ READLINE(3)                Library Functions Manual                READLINE(3)
        chet.ramey@case.edu
 
 [1mBUG REPORTS[0m
-       If you find a bug in [1mreadline, [22myou should report it.   But  first,  you
+       If you find a bug in [1mreadline, [22myou should report it.   But  first_pipe,  you
        should  make  sure  that it really is a bug, and that it appears in the
        latest version of the [1mreadline [22mlibrary that you have.
 

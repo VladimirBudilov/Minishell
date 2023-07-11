@@ -1035,7 +1035,7 @@ _rl_read_init_file (const char *filename, int include_level)
 	  i--;
         }
 
-      /* If the line is not a comment, then parse it. */
+      /* If the line is not a comment, then parser it. */
       if (*line && *line != '#')
 	rl_parse_and_bind (line);
 
