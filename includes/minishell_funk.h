@@ -38,13 +38,13 @@ void			execute_redir(t_array_list *tokens, t_shell *shell);
 void			clean_all(t_shell *shell);
 void			free_env(t_array_list *tokens);
 int				command_func3(t_parser_token **token_key, t_array_list \
-		*parser_tokens, t_shell *shell, char **envp);
+		*parser_tokens, t_shell *shell);
 void			command_func2(t_parser_token **token_key, t_array_list \
-		*parser_tokens, t_shell *shell, char **envp);
-void			command_func(t_shell *shell, char **envp);
+		*parser_tokens, t_shell *shell);
+void			command_func(t_shell *shell);
 void			execute_builtin(t_array_list *token_array, \
 		t_shell *shell, int i);
-void			ex_func(t_array_list *line, t_shell *shell, char **envp);
+void			ex_func(t_array_list *line, t_shell *shell);
 t_hashmap		*init_hashmap(void);
 void			free_pipe_array(t_array_list *pipe_array);
 void			execute_hashmap(char **array, t_hashmap *hashmap);

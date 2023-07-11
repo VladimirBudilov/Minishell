@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 				execute_pipes(shell);
 		}
 		else
-			command_func(shell, envp);
+			command_func(shell);
 		clean_array(shell);
 	}
 }
